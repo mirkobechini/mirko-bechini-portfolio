@@ -1,0 +1,37 @@
+/* #region Global styles and resets */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f0f0;
+    color: white;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+/* #endregion Global styles and resets */
+
+/* #region Layout and structure */
+.den-container {
+    padding: 20px;
+    max-width: 1700px;
+    max-height: 590px;
+    aspect-ratio: 27/10;
+    margin: 0 auto;
+
+    background-image: url("./assets/den.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+/* #endregion Layout and structure */
