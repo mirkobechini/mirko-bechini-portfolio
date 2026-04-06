@@ -108,7 +108,8 @@ Apri il browser su `http://localhost:5173` (o la porta indicata dal progetto).
 ### In sviluppo
 - [x] Integrazione di React Router
 - [x] Creazione del layout principale
-- [x ] Header e Footer
+- [x] Header e Footer
+- [ ] Pagina Home
 - [ ] Pagina "About me"
 - [ ] Pagina "Progetti"
 - [ ] Pagina "Competenze"
