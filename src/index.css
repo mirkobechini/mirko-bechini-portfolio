@@ -9,7 +9,7 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f0f0f0;
-    color: white;
+    color: #f00;
 }
 a {
     color: inherit;
@@ -19,19 +19,96 @@ img {
     max-width: 100%;
     height: auto;
 }
+
+main {
+    max-width: 100%;
+    margin: 0 auto;
+}
 /* #endregion Global styles and resets */
 
 /* #region Layout and structure */
 .den-container {
     padding: 20px;
-    max-width: 1700px;
-    max-height: 590px;
     aspect-ratio: 27/10;
+    min-width: 800px;
     margin: 0 auto;
 
-    background-image: url("./assets/den.png");
+    background-image: url("./assets/images/den.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
 }
 /* #endregion Layout and structure */
+
+/* #region Sprite styling */
+.sprite {
+  width: 170px;  /* Cambia questa misura */
+  height: auto;   /* Mantiene le proporzioni */
+  display: block;
+}
+
+/* #endregion Sprite styling */
+
+/* #region Projects page styling */
+.projects-intro {
+    margin-bottom: 20px;
+    font-size: 1.2em;
+    color: #333;
+}
+.projects-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+.project-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 15px;
+    width: 300px;
+    transition: transform 0.2s;
+}
+.project-card:hover {
+    transform: translateY(-5px);
+}
+.project-card h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+.project-card p {
+    margin-bottom: 10px;
+    color: #555;
+}
+.project-card .technologies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+.project-card .technologies span {
+    background-color: #eee;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 0.9em;
+}
+.load-more {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+/* #endregion Projects page styling */
+
+/* #region Footer styling */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #333;
+    color: #fff;
+}
+/* #endregion Footer styling */
