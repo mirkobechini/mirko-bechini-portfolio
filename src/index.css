@@ -104,6 +104,75 @@ main {
 }
 /* #endregion Projects page styling */
 
+/* #region Skills page styling */
+.skills-section {
+    margin-bottom: 30px;
+}
+.skills-section h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.skills-list span {
+    background-color: #eee;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 0.9em;
+}
+/* #endregion Skills page styling */
+/* #region Certification page styling */
+
+.certification-page {
+    padding: 20px;
+}
+.certification-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.certification-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 15px;
+    width: 300px;
+    margin-bottom: 20px;
+}
+.certification-card h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+.certification-card p {
+    margin-bottom: 10px;
+    color: #555;
+}
+.certification-card a {
+    color: #007bff;
+    text-decoration: none;
+}
+.certification-card a:hover {
+    text-decoration: underline;
+}
+.certification-card .skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+.certification-card .skills span {
+    background-color: #eee;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 0.9em;
+}
+/* #endregion Certification page styling */
+
+
 /* #region Footer styling */
 footer {
     text-align: center;

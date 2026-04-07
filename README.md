@@ -112,7 +112,7 @@ Apri il browser su `http://localhost:5173` (o la porta indicata dal progetto).
 - [x] Pagina Home
 - [ ] Pagina "About me"
 - [x] Pagina "Progetti"
-- [ ] Pagina "Competenze"
+- [x] Pagina "Competenze"
 - [ ] Pagina "Esperienze"
 - [ ] Pagina "Formazione"
 - [ ] Pagina "Contatti"
