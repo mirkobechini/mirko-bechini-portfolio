@@ -1,14 +1,13 @@
-import { Link } from "react-router-dom";
+import Sprite from "../components/ui/Sprite";
+import spriteData from "../data/spriteData";
 
 export default function HomePage() {
 
     return (
-        <div className="den-container">
-            {/* Sprite statico Scimmia */}
-            <Link to="/aboutme">
-               {/* <img src="./assets/sprite-scimmia-statica.png" alt="About me" />*/}
-                <p>Mirko</p>
-            </Link>
+        <div className="den-container" style={{ position: "relative" }}>
+            {spriteData.map((sprite) => (
+                <Sprite key={sprite.id} sprite={sprite} />
+            ))}
         </div>
     )
 }
