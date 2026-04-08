@@ -30,7 +30,7 @@
 | :--- | :--- |
 | **Frontend** | ![React](https://img.shields.io/badge/-React-61DAFB?logo=react&logoColor=white&style=flat-square) ![Vite](https://img.shields.io/badge/-Vite-646CFF?logo=vite&logoColor=white&style=flat-square) ![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?logo=javascript&logoColor=black&style=flat-square) |
 | **Markup & Styling** | ![HTML5](https://img.shields.io/badge/-HTML5-E34F26?logo=html5&logoColor=white&style=flat-square) ![CSS3](https://img.shields.io/badge/-CSS3-1572B6?logo=css3&logoColor=white&style=flat-square) |
-| **Strumenti** | ![Git](https://img.shields.io/badge/-Git-F05032?logo=git&logoColor=white&style=flat-square) |
+| **Strumenti** | ![Git](https://img.shields.io/badge/-Git-F05032?logo=git&logoColor=white&style=flat-square) Gemini|
 
 ### Frameworks e Librerie
 - **React Router**: Navigazione fluida tra le sezioni del portfolio.
@@ -110,7 +110,7 @@ Apri il browser su `http://localhost:5173` (o la porta indicata dal progetto).
 - [x] Creazione del layout principale
 - [x] Header e Footer
 - [ ] Struttura pagina Home
-- [ ] Css pagina home
+- [] Css pagina home
 - [ ] Pagina "About me"
 - [ ] Pagina "Progetti"
 - [ ] Pagina "Competenze"

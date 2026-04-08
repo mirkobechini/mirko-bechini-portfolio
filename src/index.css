@@ -1,23 +1,8 @@
 /* #region Global styles and resets */
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f0f0f0;
-  color: #f00;
-}
-a {
-  color: inherit;
-  text-decoration: none;
-}
-img {
-  max-width: 100%;
-  height: auto;
 }
 
 main {
@@ -26,10 +11,19 @@ main {
 }
 /* #endregion Global styles and resets */
 
+/* #region Debug */
+* {
+  border: 2px solid red;
+  color: red;
+}
+/* #endregion Debug */
+
 /* #region Home */
-.den-wrapper {
-  width: 100vw;
+
+/* #region Den background styling */
+.den-container {
   height: 100vh;
+  width: 100vw;
   overflow-x: auto;
   overflow-y: hidden;
   background-color: #1a1a1a;
@@ -44,37 +38,76 @@ main {
   user-select: none;
 }
 
-.den-wrapper::-webkit-scrollbar {
+.den-container::-webkit-scrollbar {
   display: none;
 }
 
-.den-wrapper:active {
+.den-container:active {
   cursor: grabbing;
 }
 
-.den-image {
-  width: calc(100vh * (1568 / 454));
+.den-wrapper {
   height: 100vh;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.den-image {
+  width: auto;
+  height: 100%;
   display: block;
   max-width: none;
   /* Grab cursor */
   pointer-events: none;
   -webkit-user-drag: none;
 }
+/* #endregion Den background styling */
+
+/*#region sprite*/
+
+.sprite {
+  position: absolute;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  aspect-ratio: 1;
+  z-index: 10;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 0.2s ease;
+
+  /* background */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  border: none;
+}
+
+.sprite:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  /* Un filtro opzionale per farli risaltare */
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+
+  
+}
+
+.desk { top: 70%; left: 26%; width: 18%; background-image: url('./assets/sprites/desk.png'); }
+.painting { top: 32%; left: 36%; width: 6%; background-image: url('./assets/sprites/painting.png');}
+.monkey { top: 60%; left: 53%; width: 11%; background-image: url('./assets/sprites/monkey.png');}
+.parrot { top: 33%; left: 65%; width: 6%; background-image: url('./assets/sprites/parrot.png');}
+.library { top: 65%; left: 77%; width: 16%; background-image: url('./assets/sprites/book.png');}
+
+/* #endregion sprite */
 
 /* #endregion Home */
 
 /* #region Layout and structure */
 /* #endregion Layout and structure */
-
-/* #region Sprite styling */
-.sprite {
-  width: 170px; /* Cambia questa misura */
-  height: auto; /* Mantiene le proporzioni */
-  display: block;
-}
-
-/* #endregion Sprite styling */
 
 /* #region Projects page styling */
 .projects-intro {
