@@ -4,6 +4,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+div, section, main, body {
+    background-repeat: no-repeat !important;
+}
 
 main {
   max-width: 100%;
@@ -114,6 +117,7 @@ main {
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(4px);
+  cursor: default;
 }
 .game-modal {
   background-color: #3e2723;;
@@ -123,6 +127,7 @@ main {
   position: relative;
   max-width: 600px;
   width: 90%;
+  cursor: default;
 
   box-shadow: 
     0 0 0 4px #1a1a1a, /* Effetto "outline" esterno */
@@ -169,11 +174,6 @@ main {
   border: none;
   font-size: 1.5em;
   cursor: pointer;
-  margin-bottom: 1rem;
-  position: absolute;
-  top: 11%;
-  right: 2%;
-  transform: translate(-50%, -50%);
   color: #efebe9;
 }
 
@@ -193,13 +193,14 @@ main {
   text-shadow: 2px 2px 0 #1b5e20;
   text-align: center;
   font-size: 1.5rem;
-  margin-bottom: 1rem;
 }
 
 .theme-monkey .modal-content {
   font-size: 1.1rem;
   line-height: 1.6;
   color: #c8e6c9;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    line-height: 1.5;
 }
 .theme-monkey .game-btn {
   background-color: #1b5e20;
@@ -213,6 +214,19 @@ main {
   background-color: #2e7d32;
   box-shadow: 0 0 8px rgba(165, 214, 167, 0.6);
 }
+
+.theme-monkey .modal-sprite {
+  position: absolute;
+  width: 40%;
+  height: auto;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  -webkit-user-drag: none;
+  cursor: default;
+  top: 100%;
+  left: 19.5%;
+}
+
 /* --- Animazioni --- */
 @keyframes modalJumpIn {
   0% { transform: scale(0.5); opacity: 0; }

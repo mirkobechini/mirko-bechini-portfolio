@@ -38,7 +38,7 @@ export default function HomePage() {
 
     function handleMovement(event) {
         const container = scrollRef.current;
-        if (isHolding.current && container) {
+        if (isHolding.current && container && activeSection === null) {
             const x = event.clientX - container.offsetLeft;
             const walk = (x - startX.current) * 2; // Velocità di scorrimento
 
@@ -84,11 +84,12 @@ export default function HomePage() {
                             <button className='close-x' onClick={closeModal}>×</button>
                         </div>
                         <div className="modal-content">
-                            <p>{activeSection.content}</p>
+                            {activeSection.content}
                         </div>
                         <div className="modal-footer">
                             <button className='game-btn' onClick={closeModal}>CONTINUA</button>
                         </div>
+                        <img className="modal-sprite" src={activeSection.picture} alt={`${activeSection.theme} modal sprite`} />
                     </div>
                 </div>
             )}
