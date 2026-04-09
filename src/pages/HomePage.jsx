@@ -78,7 +78,7 @@ export default function HomePage() {
             </div>
             {activeSection && (
                 <div className="modal-overlay" onClick={closeModal}>
-                    <div className="game-modal" onClick={(e) => e.stopPropagation()}>
+                    <div className={`game-modal theme-${activeSection.theme}`} onClick={(e) => e.stopPropagation()}>
                         <div className="modal-header">
                             <h2>{activeSection.title}</h2>
                             <button className='close-x' onClick={closeModal}>×</button>

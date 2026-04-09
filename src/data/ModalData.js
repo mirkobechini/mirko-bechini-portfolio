@@ -1,33 +1,33 @@
 const MODAL_DATA = [
     {
         id: 1,
-        title: 'Chi Sono',
+        title: 'Ciao sono Mirko',
         content: 'lorem',
-        theme: "jungle"
+        theme: "monkey"
     },
     {
         id: 2,
         title: 'Formazione & Competenze',
         content: 'lorem',
-        theme: "wooden"
+        theme: "library"
     },
     {
         id: 3,
         title: 'Esperienze & Progetti',
         content: 'lorem',
-        theme: "jungle"
+        theme: "desk"
     },
     {
         id: 4,
         title: 'Certificazioni',
         content: 'lorem',
-        theme: "jungle"
+        theme: "painting"
     },
     {
         id: 5,
         title: 'Contatti',
         content: 'lorem',
-        theme: "jungle"
+        theme: "parrot"
     },
 ];
 

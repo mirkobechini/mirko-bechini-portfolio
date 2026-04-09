@@ -125,7 +125,7 @@ main {
   width: 90%;
 
   box-shadow: 
-    0 0 0 4px #212121, /* Effetto "outline" esterno */
+    0 0 0 4px #1a1a1a, /* Effetto "outline" esterno */
     inset 0 0 15px rgba(0,0,0,0.5);
 
     color: #efebe9;
@@ -176,142 +176,87 @@ main {
   transform: translate(-50%, -50%);
   color: #efebe9;
 }
+
+/* #region Modal themes */
+
+/* #region Monkey theme */
+.theme-monkey {
+  background-color: #2e7d32; /* Verde foresta */
+  border-color: #1b5e20;
+  color: #e8f5e9;
+
+  animation: modalJumpIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.theme-monkey .modal-header h2 {
+  color: #ffeb3b;
+  text-shadow: 2px 2px 0 #1b5e20;
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.theme-monkey .modal-content {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #c8e6c9;
+}
+.theme-monkey .game-btn {
+  background-color: #1b5e20;
+  color: #e8f5e9;
+
+  font-family: inherit;
+  transition: all 0.1s;
+}
+
+.theme-monkey .game-btn:hover {
+  background-color: #2e7d32;
+  box-shadow: 0 0 8px rgba(165, 214, 167, 0.6);
+}
+/* --- Animazioni --- */
+@keyframes modalJumpIn {
+  0% { transform: scale(0.5); opacity: 0; }
+  70% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+
+/* #endregion Monkey theme */
+/* #region Painting theme */
+.theme-painting {
+  background-color: #4a148c; /* Viola intenso */
+  border-color: #7b1fa2;
+  color: #f3e5f5;
+}
+/* #endregion Painting theme */
+
+/* #region Desk theme */
+.theme-desk {
+  background-color: #1b5e20;
+  border-color: #4caf50;
+  color: #e8f5e9;
+
+}
+
+/* #endregion Desk theme */
+
+/* #region Library theme */
+.theme-library {
+  background-color: #5d4037; /* Marrone legno */
+  border-color: #3e2723;
+  color: #efebe9;
+}
+/* #endregion Library theme */
+/* #region Parrot theme */
+.theme-parrot {
+  background-color: #b71c1c;
+  border-color: #f44336;
+  color: #ffebee;
+}
+/* #endregion Parrot theme */
+/* #endregion Modal themes */
+
 /* #endregion Modal styling */
 
 
 /* #endregion Home */
-
-/* #region Layout and structure */
-/* #endregion Layout and structure */
-
-/* #region Projects page styling */
-.projects-intro {
-  margin-bottom: 20px;
-  font-size: 1.2em;
-  color: #333;
-}
-.projects-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-.project-card {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  padding: 15px;
-  width: 300px;
-  transition: transform 0.2s;
-}
-.project-card:hover {
-  transform: translateY(-5px);
-}
-.project-card h2 {
-  font-size: 1.5em;
-  margin-bottom: 10px;
-}
-.project-card p {
-  margin-bottom: 10px;
-  color: #555;
-}
-.project-card .technologies {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-}
-.project-card .technologies span {
-  background-color: #eee;
-  border-radius: 4px;
-  padding: 2px 6px;
-  font-size: 0.9em;
-}
-.load-more {
-  display: block;
-  margin: 20px auto;
-  padding: 10px 20px;
-  font-size: 1em;
-  background-color: #333;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-/* #endregion Projects page styling */
-
-/* #region Skills page styling */
-.skills-section {
-  margin-bottom: 30px;
-}
-.skills-section h2 {
-  font-size: 1.5em;
-  margin-bottom: 15px;
-}
-.skills-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-.skills-list span {
-  background-color: #eee;
-  border-radius: 4px;
-  padding: 5px 10px;
-  font-size: 0.9em;
-}
-/* #endregion Skills page styling */
-/* #region Certification page styling */
-
-.certification-page {
-  padding: 20px;
-}
-.certification-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-
-.certification-card {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  padding: 15px;
-  width: 300px;
-  margin-bottom: 20px;
-}
-.certification-card h2 {
-  font-size: 1.5em;
-  margin-bottom: 10px;
-}
-.certification-card p {
-  margin-bottom: 10px;
-  color: #555;
-}
-.certification-card a {
-  color: #007bff;
-  text-decoration: none;
-}
-.certification-card a:hover {
-  text-decoration: underline;
-}
-.certification-card .skills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-}
-.certification-card .skills span {
-  background-color: #eee;
-  border-radius: 4px;
-  padding: 2px 6px;
-  font-size: 0.9em;
-}
-/* #endregion Certification page styling */
-
-/* #region Footer styling */
-footer {
-  text-align: center;
-  padding: 20px 0;
-  background-color: #333;
-  color: #fff;
-}
-/* #endregion Footer styling */
