@@ -109,14 +109,15 @@ Apri il browser su `http://localhost:5173` (o la porta indicata dal progetto).
 - [x] Integrazione di React Router
 - [x] Creazione del layout principale
 - [x] Header e Footer
-- [ ] Struttura pagina Home
-- [] Css pagina home
-- [ ] Pagina "About me"
-- [ ] Pagina "Progetti"
-- [ ] Pagina "Competenze"
-- [ ] Pagina "Esperienze"
-- [ ] Pagina "Formazione"
-- [ ] Pagina "Contatti"
+- [x] Struttura pagina Home
+- [x] Css pagina home
+- [x] Modale base
+- [ ] Modale "About me"
+- [ ] Modale "Progetti"
+- [ ] Modale "Competenze"
+- [ ] Modale "Esperienze"
+- [ ] Modale "Formazione"
+- [ ] Modale "Contatti"
 
 ### Migliorie future
 - [ ] Styling e design con NES.css
