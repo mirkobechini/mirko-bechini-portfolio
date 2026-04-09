@@ -1,3 +1,6 @@
+import monkeyModal from '/assets/modals/monkey-modal.png';
+
+
 const MODAL_DATA = [
     {
         id: 1,
@@ -21,7 +24,7 @@ const MODAL_DATA = [
             </p>
         </>),
         theme: "monkey",
-        picture: "/assets/modals/monkey-modal.png"
+        picture: monkeyModal
     },
     {
         id: 2,

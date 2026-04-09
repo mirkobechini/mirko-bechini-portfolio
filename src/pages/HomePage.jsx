@@ -1,8 +1,16 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import denBackground from '../assets/images/den.png';
 import MODAL_DATA from '../data/ModalData';
 
 export default function HomePage() {
+
+    // Preload delle immagini dei modali
+    useEffect(() => {
+        MODAL_DATA.forEach((modal) => {
+            const img = new Image();
+            img.src = modal.picture;
+        });
+    }, []);
 
     // Ref per il container scrollabile
     const scrollRef = useRef(null);
