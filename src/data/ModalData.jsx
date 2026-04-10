@@ -4,12 +4,13 @@ import monkeyModal from '/assets/modals/monkey-modal.png';
 const MODAL_DATA = [
     {
         id: 1,
-        title: 'Ciao sono Mirko',
+        title: 'About Me',
         content: (<>
+        <h3 style={{ marginBottom: '1rem' }}>Ciao sono Mirko</h3>
             <p style={{ marginBottom: '1rem' }}>Un sviluppatore web che ha arricchito le proprie competenze in Informatica,
                 acquisite alle scuole superiori, conseguendo un Master in Web Development.</p>
             <p style={{ marginBottom: '1rem' }}>
-                Le mie esperienze passate mi hanno permesso di acquisire importanti soft skills,
+                Le esperienze passate mi hanno permesso di acquisire importanti soft skills,
                 come la capacità di lavorare in team, la gestione del tempo e la risoluzione di problemi
                 in contesti critici.
             </p>
@@ -29,7 +30,29 @@ const MODAL_DATA = [
     {
         id: 2,
         title: 'Formazione & Competenze',
-        content: 'lorem',
+        content: (
+            <>
+                <div className="book">
+                    <section className="page left-page">
+                        <h3>Competenze</h3>
+                        <ul>
+                            <li><strong>Frontend</strong> HTML5, CSS3, JavaScript</li>
+                            <li><strong>Backend</strong> Node.js, Express, PHP</li>
+                            <li><strong>Frameworks</strong> React, Laravel</li>
+                            <li><strong>Database</strong> MySQL</li>
+                            <li><strong>Version Control</strong> Git, GitHub</li>
+                        </ul>
+                    </section>
+                    <section className="page right-page">
+                        <h3>Formazione</h3>
+                        <ul>
+                            <li>Master in Web Development - Boolean Careers</li>
+                            <li>Diploma in Informatica - Istituto Tecnico Industriale</li>
+                        </ul>
+                    </section>
+                </div>
+            </>
+        ),
         theme: "library",
         picture: "/assets/modals/library-modal.png"
 
