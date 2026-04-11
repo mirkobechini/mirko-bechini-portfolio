@@ -36,11 +36,11 @@ const MODAL_DATA = [
                     <section className="page left-page">
                         <h3>Competenze</h3>
                         <ul>
-                            <li><strong>Frontend</strong> HTML5, CSS3, JavaScript</li>
-                            <li><strong>Backend</strong> Node.js, Express, PHP</li>
-                            <li><strong>Frameworks</strong> React, Laravel</li>
-                            <li><strong>Database</strong> MySQL</li>
-                            <li><strong>Version Control</strong> Git, GitHub</li>
+                            <li><strong>Frontend</strong>: HTML5, CSS3, JavaScript</li>
+                            <li><strong>Backend</strong>: Node.js, Express, PHP</li>
+                            <li><strong>Frameworks</strong>: React, Laravel</li>
+                            <li><strong>Database</strong>: MySQL</li>
+                            <li><strong>Version Control</strong>: Git, GitHub</li>
                         </ul>
                     </section>
                     <section className="page right-page">

@@ -5,12 +5,11 @@
   box-sizing: border-box;
 }
 div, section, main, body {
-    background-repeat: no-repeat !important;
+    background-repeat: no-repeat;
 }
 
 main {
   max-width: 100%;
-  margin: 0 auto;
 }
 /* #endregion Global styles and resets */
 
@@ -71,7 +70,6 @@ main {
 
 .sprite {
   position: absolute;
-  background: transparent;
   border: none;
   cursor: pointer;
   aspect-ratio: 1;
@@ -85,7 +83,6 @@ main {
   background-repeat: no-repeat;
   background-position: center;
   background-color: transparent;
-  border: none;
 }
 
 .sprite:hover {
@@ -159,6 +156,7 @@ main {
   cursor: pointer;
   text-transform: uppercase;
   font-weight: bold;
+  font-family: inherit;
   transition: all 0.1s;
 }
 
@@ -167,16 +165,17 @@ main {
   background: #4e342e;
 }
 
-.close-x {
-  background: none;
-  border: none;
-  font-size: 1.5em;
-  cursor: pointer;
-  color: #efebe9;
+.modal-sprite {
+  position: absolute;
+  width: 40%;
+  height: auto;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  -webkit-user-drag: none;
+  cursor: default;
 }
 
 /* #region Modal themes */
-
 /* #region Monkey theme */
 .theme-monkey {
   background-color: #2e7d32; /* Verde foresta */
@@ -195,17 +194,13 @@ main {
 
 .theme-monkey .modal-content {
   font-size: 1.1rem;
-  line-height: 1.6;
+  line-height: 1.5;
   color: #c8e6c9;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    line-height: 1.5;
 }
 .theme-monkey .game-btn {
   background-color: #1b5e20;
   color: #e8f5e9;
-
-  font-family: inherit;
-  transition: all 0.1s;
 }
 
 .theme-monkey .game-btn:hover {
@@ -214,13 +209,6 @@ main {
 }
 
 .theme-monkey .modal-sprite {
-  position: absolute;
-  width: 40%;
-  height: auto;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  -webkit-user-drag: none;
-  cursor: default;
   top: 100%;
   left: 19.5%;
 }
@@ -267,6 +255,7 @@ main {
   color: #3e2723;
   padding: 40px 60px;
 
+  perspective: 2000px;
   transform-origin: left center; 
   animation: bookOpen 0.6s ease-out forwards;
 }
@@ -276,10 +265,23 @@ main {
   display: flex;
   justify-content: center;
   gap: 20%;
+  width: 100%;
+  position: relative;
+  transform-style: preserve-3d;
 }
 
 .page{
+  flex: 1;
   width: 45%;
+  overflow-y: scroll;
+  padding: 30px;
+
+  position: relative;
+
+  /* Hide scrollbar for all browsers */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  scroll-snap-align: center;
 }
 
 .page h3{
@@ -293,7 +295,15 @@ main {
   padding-left: 20px;
 }
 
+.theme-library .game-btn {
+  background-color: #3e2723;
+  color: #e8f5e9;
+}
 
+.theme-library .game-btn:hover {
+  background-color: #5d4037;
+  box-shadow: 0 0 8px rgba(165, 214, 167, 0.6);
+}
 
 @keyframes bookOpen {
   0% {
@@ -304,6 +314,11 @@ main {
     transform: perspective(1000px) rotateY(0deg); /* Aperto di fronte */
     opacity: 1;
   }
+}
+
+.theme-library .modal-sprite {
+  top: 100%;
+  left: 26%;
 }
 /* #endregion Library theme */
 /* #region Parrot theme */
