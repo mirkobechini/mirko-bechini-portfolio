@@ -114,10 +114,8 @@ Apri il browser su `http://localhost:5173` (o la porta indicata dal progetto).
 - [x] Modale base
 - [x] Refactoring codice e ottimizzazione performance
 - [x] Modale "About me"
-- [ ] Modale "Progetti"
-- [ ] Modale "Competenze"
-- [ ] Modale "Esperienze"
-- [ ] Modale "Formazione"
+- [ ] Modale "Formazione & Competenze"
+- [ ] Modale "Esperienze & Progetti"
 - [ ] Modale "Contatti"
 
 ### Migliorie future
