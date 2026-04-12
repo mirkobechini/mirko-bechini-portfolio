@@ -6,7 +6,7 @@ const MODAL_DATA = [
         id: 1,
         title: 'About Me',
         content: (<>
-        <h3 style={{ marginBottom: '1rem' }}>Ciao sono Mirko</h3>
+            <h3 style={{ marginBottom: '1rem' }}>Ciao sono Mirko</h3>
             <p style={{ marginBottom: '1rem' }}>Un sviluppatore web che ha arricchito le proprie competenze in Informatica,
                 acquisite alle scuole superiori, conseguendo un Master in Web Development.</p>
             <p style={{ marginBottom: '1rem' }}>
@@ -74,7 +74,25 @@ const MODAL_DATA = [
     {
         id: 5,
         title: 'Contatti',
-        content: 'lorem',
+        content: (
+            <div className="contacts-container">
+                <p className="contact-intro">Il pappagallo è pronto a volare! Come vuoi contattarmi?</p>
+                <div className="contact-links">
+                    <a href="mailto:mirkobechini@gmail.com" className="contact-card mail">
+                        <span className="icon">✉️</span>
+                        <span className="label">Email</span>
+                    </a>
+                    <a href="https://linkedin.com/in/www.linkedin.com/in/mirko-bechini-892202252" target="_blank" className="contact-card linkedin">
+                        <span className="icon">🔗</span>
+                        <span className="label">LinkedIn</span>
+                    </a>
+                    <a href="https://github.com/mirkobechini" target="_blank" className="contact-card github">
+                        <span className="icon">💻</span>
+                        <span className="label">GitHub</span>
+                    </a>
+                </div>
+            </div>
+        ),
         theme: "parrot",
         picture: "/assets/modals/parrot-modal.png"
     },

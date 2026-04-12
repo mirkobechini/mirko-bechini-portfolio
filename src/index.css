@@ -282,6 +282,9 @@ main {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
   scroll-snap-align: center;
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .page h3{
@@ -323,9 +326,52 @@ main {
 /* #endregion Library theme */
 /* #region Parrot theme */
 .theme-parrot {
-  background-color: #b71c1c;
-  border-color: #f44336;
-  color: #ffebee;
+  background-color: #fff9c4;
+  border: 4px dashed #f4511e;
+  color: #3e2723;
+  
+  animation: parrotFlyIn 0.5s ease-out forwards;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.contact-card {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background: #ffffff;
+  border: 2px solid #3e2723;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 4px 4px 0px #3e2723; /* Ombra netta retro */
+}
+
+.contact-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #f4511e;
+}
+
+.contact-card .icon {
+  font-size: 1.5rem;
+  margin-right: 15px;
+}
+
+/* Animazione Volo */
+@keyframes parrotFlyIn {
+  0% {
+    transform: translateX(100%) rotate(10deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) rotate(0deg);
+    opacity: 1;
+  }
 }
 /* #endregion Parrot theme */
 /* #endregion Modal themes */
