@@ -67,35 +67,50 @@ const MODAL_DATA = [
     {
         id: 4,
         title: 'Certificazioni',
-        content: 'lorem',
-        theme: "painting",
-        picture: "/assets/modals/painting-modal.png"
-    },
-    {
-        id: 5,
-        title: 'Contatti',
         content: (
-            <div className="contacts-container">
-                <p className="contact-intro">Il pappagallo è pronto a volare! Come vuoi contattarmi?</p>
-                <div className="contact-links">
-                    <a href="mailto:mirkobechini@gmail.com" className="contact-card mail">
-                        <span className="icon">✉️</span>
-                        <span className="label">Email</span>
-                    </a>
-                    <a href="https://linkedin.com/in/www.linkedin.com/in/mirko-bechini-892202252" target="_blank" className="contact-card linkedin">
-                        <span className="icon">🔗</span>
-                        <span className="label">LinkedIn</span>
-                    </a>
-                    <a href="https://github.com/mirkobechini" target="_blank" className="contact-card github">
-                        <span className="icon">💻</span>
-                        <span className="label">GitHub</span>
-                    </a>
+            <div className="gallery-container">
+                <div className="certificate-item">
+                    <div className="frame">
+                        <img src="/assets/certs/cert-web-dev.jpg" alt="Certificato Web Dev" />
+                    </div>
+                    <p>Fullstack Web Development - 2026</p>
+                </div>
+                <div className="certificate-item">
+                    <div className="frame">
+                        <img src="/assets/certs/cert-react.jpg" alt="Certificato React" />
+                    </div>
+                    <p>Mastering React & Vite</p>
                 </div>
             </div>
         ),
-        theme: "parrot",
-        picture: "/assets/modals/parrot-modal.png"
+    theme: "painting",
+    picture: "/assets/modals/painting-modal.png"
     },
+{
+    id: 5,
+        title: 'Contatti',
+            content: (
+                <div className="contacts-container">
+                    <p className="contact-intro">Il pappagallo è pronto a volare! Come vuoi contattarmi?</p>
+                    <div className="contact-links">
+                        <a href="mailto:mirkobechini@gmail.com" className="contact-card mail">
+                            <span className="icon">✉️</span>
+                            <span className="label">Email</span>
+                        </a>
+                        <a href="https://linkedin.com/in/www.linkedin.com/in/mirko-bechini-892202252" target="_blank" className="contact-card linkedin">
+                            <span className="icon">🔗</span>
+                            <span className="label">LinkedIn</span>
+                        </a>
+                        <a href="https://github.com/mirkobechini" target="_blank" className="contact-card github">
+                            <span className="icon">💻</span>
+                            <span className="label">GitHub</span>
+                        </a>
+                    </div>
+                </div>
+            ),
+                theme: "parrot",
+                    picture: "/assets/modals/parrot-modal.png"
+},
 ];
 
 export default MODAL_DATA;

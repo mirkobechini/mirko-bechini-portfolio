@@ -223,10 +223,57 @@ main {
 
 /* #endregion Monkey theme */
 /* #region Painting theme */
+
 .theme-painting {
-  background-color: #4a148c; /* Viola intenso */
-  border-color: #7b1fa2;
-  color: #f3e5f5;
+  background: #2c1e14; /* Legno scuro tipo museo */
+  border: 15px solid #d4af37; /* Bordo color Oro */
+  border-image: linear-gradient(to bottom, #d4af37, #f7e083, #d4af37) 1;
+  box-shadow: 0 0 50px rgba(0,0,0,0.8), inset 0 0 20px rgba(0,0,0,0.5);
+  
+  /* Animazione: Zoom in morbido */
+  animation: galleryZoom 0.4s ease-out forwards;
+}
+
+.gallery-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+.certificate-item {
+  text-align: center;
+  color: #f5f5f5;
+}
+
+.frame {
+  border: 8px solid #5d4037; /* Cornice interna in legno */
+  background: white;
+  padding: 5px;
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+  transition: transform 0.3s;
+}
+
+.frame:hover {
+  transform: scale(1.05); /* Effetto "avvicinamento" al passaggio del mouse */
+}
+
+.frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Animazione Zoom */
+@keyframes galleryZoom {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 /* #endregion Painting theme */
 
