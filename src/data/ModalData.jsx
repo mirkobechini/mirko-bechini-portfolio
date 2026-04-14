@@ -33,7 +33,7 @@ const MODAL_DATA = [
         content: (
             <>
                 <div className="book">
-                    <section className="page left-page">
+                    <section className="page">
                         <h3>Competenze</h3>
                         <ul>
                             <li><strong>Frontend</strong>: HTML5, CSS3, JavaScript</li>
@@ -43,7 +43,7 @@ const MODAL_DATA = [
                             <li><strong>Version Control</strong>: Git, GitHub</li>
                         </ul>
                     </section>
-                    <section className="page right-page">
+                    <section className="page">
                         <h3>Formazione</h3>
                         <ul>
                             <li>Master in Web Development - Boolean Careers</li>
@@ -73,13 +73,19 @@ const MODAL_DATA = [
                     <div className="frame">
                         <img src="/assets/certs/cert-web-dev.jpg" alt="Certificato Web Dev" />
                     </div>
-                    <p>Fullstack Web Development - 2026</p>
+                    <p>Master Web Development - specializzazione in PHP & Laravel @ Boolean</p>
                 </div>
                 <div className="certificate-item">
                     <div className="frame">
                         <img src="/assets/certs/cert-react.jpg" alt="Certificato React" />
                     </div>
-                    <p>Mastering React & Vite</p>
+                    <p>Corso online React @ Scrimba</p>
+                </div>
+                <div className="certificate-item">
+                    <div className="frame">
+                        <img src="/assets/certs/cert-typescript.jpg" alt="Certificato Typescript" />
+                    </div>
+                    <p>Corso online Typescript @ Scrimba</p>
                 </div>
             </div>
         ),
