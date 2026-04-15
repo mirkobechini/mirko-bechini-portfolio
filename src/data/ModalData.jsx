@@ -60,38 +60,56 @@ const MODAL_DATA = [
     {
         id: 3,
         title: 'Esperienze & Progetti',
-        content: 'lorem',
-        theme: "desk",
-        picture: "/assets/modals/desk-modal.png"
-    },
-    {
-        id: 4,
-        title: 'Certificazioni',
         content: (
-            <div className="gallery-container">
-                <div className="certificate-item">
-                    <div className="frame">
-                        <img src="/assets/certs/cert-web-dev.jpg" alt="Certificato Web Dev" />
-                    </div>
-                    <p>Master Web Development - specializzazione in PHP & Laravel @ Boolean</p>
+            <div className="desk-container">
+                <div className="project-blueprint">
+                    <div className="blueprint-header">Progetti personali</div>
+                    <h4>Nome App</h4>
+                    <p>Un'applicazione per gestire la tana dei programmatori.</p>
+                    <div className="tech-stack">#React #Vite #CSS3</div>
+                    <a href="#" className="view-btn">Apri Documentazione</a>
                 </div>
-                <div className="certificate-item">
-                    <div className="frame">
-                        <img src="/assets/certs/cert-react.jpg" alt="Certificato React" />
-                    </div>
-                    <p>Corso online React @ Scrimba</p>
-                </div>
-                <div className="certificate-item">
-                    <div className="frame">
-                        <img src="/assets/certs/cert-typescript.jpg" alt="Certificato Typescript" />
-                    </div>
-                    <p>Corso online Typescript @ Scrimba</p>
+
+                <div className="project-blueprint alternate">
+                    <div className="blueprint-header">PROGETTO #02</div>
+                    <h4>E-Commerce Pixel</h4>
+                    <p>Shop online con grafica 8-bit e gestione carrello.</p>
+                    <div className="tech-stack">#NodeJS #MongoDB</div>
+                    <a href="#" className="view-btn">Guarda Demo</a>
                 </div>
             </div>
         ),
-    theme: "painting",
-    picture: "/assets/modals/painting-modal.png"
+    theme: "desk",
+    picture: "/assets/modals/desk-modal.png"
     },
+{
+    id: 4,
+        title: 'Certificazioni',
+            content: (
+                <div className="gallery-container">
+                    <div className="certificate-item">
+                        <div className="frame">
+                            <img src="/assets/certs/cert-web-dev.jpg" alt="Certificato Web Dev" />
+                        </div>
+                        <p>Master Web Development - specializzazione in PHP & Laravel @ Boolean</p>
+                    </div>
+                    <div className="certificate-item">
+                        <div className="frame">
+                            <img src="/assets/certs/cert-react.jpg" alt="Certificato React" />
+                        </div>
+                        <p>Corso online React @ Scrimba</p>
+                    </div>
+                    <div className="certificate-item">
+                        <div className="frame">
+                            <img src="/assets/certs/cert-typescript.jpg" alt="Certificato Typescript" />
+                        </div>
+                        <p>Corso online Typescript @ Scrimba</p>
+                    </div>
+                </div>
+            ),
+                theme: "painting",
+                    picture: "/assets/modals/painting-modal.png"
+},
 {
     id: 5,
         title: 'Contatti',

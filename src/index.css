@@ -279,10 +279,74 @@ main {
 
 /* #region Desk theme */
 .theme-desk {
-  background-color: #1b5e20;
-  border-color: #4caf50;
-  color: #e8f5e9;
+  background: #3e2723; /* Legno scuro della scrivania */
+  background-image: radial-gradient(#4e342e 1px, transparent 1px);
+  background-size: 20px 20px; /* Effetto trama del legno o tappetino da taglio */
+  border: 10px solid #2d1b15;
+  box-shadow: inset 0 0 100px rgba(0,0,0,0.5);
+  
+  /* Animazione: i fogli scivolano sul tavolo */
+  animation: deskSlideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
 
+.desk-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 10px;
+}
+
+.project-blueprint {
+  background: #e3f2fd; /* Carta azzurrina tipica dei blueprint */
+  color: #0d47a1;
+  padding: 15px;
+  width: 45%;
+  border-left: 5px solid #1565c0;
+  transform: rotate(-2deg); /* Leggera rotazione per l'effetto "fogli sparsi" */
+  transition: transform 0.3s, z-index 0s;
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+}
+
+.project-blueprint.alternate {
+  background: #fff9c4; /* Un altro foglio tipo post-it o carta riciclata */
+  color: #f57f17;
+  border-left-color: #fbc02d;
+  transform: rotate(3deg);
+}
+
+.project-blueprint:hover {
+  transform: rotate(0deg) scale(1.05);
+  z-index: 10;
+  cursor: pointer;
+}
+
+.blueprint-header {
+  font-size: 0.7rem;
+  font-weight: bold;
+  opacity: 0.6;
+  border-bottom: 1px dashed;
+  margin-bottom: 10px;
+}
+
+.view-btn {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-decoration: underline;
+  color: inherit;
+}
+
+/* Animazione Slide In */
+@keyframes deskSlideIn {
+  0% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 /* #endregion Desk theme */
