@@ -296,19 +296,70 @@ main {
   padding: 10px;
 }
 
+/* #region Folder styles */
+.folders-grid {
+  display: flex;
+  flex-wrap: wrap;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 30px;
+  padding: 20px;
+}
+
+.folder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.folder:hover {
+  transform: scale(1.1);
+}
+
+.folder-icon {
+  font-size: 3rem;
+  position: relative;
+  filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.3));
+}
+
+.folder span {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-align: center;
+  color: #fff;
+  text-shadow: 1px 1px 2px black;
+}
+
+
+.back-btn {
+  background: #d84315;
+  color: white;
+  border: none;
+  padding: 5px 15px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: 3px 3px 0px #000;
+}
+/* #endregion Folder styles */
+
+
+/* #region Project styles */
 .project-blueprint {
-  background: #e3f2fd; /* Carta azzurrina tipica dei blueprint */
+  background: #e3f2fd;
   color: #0d47a1;
   padding: 15px;
   width: 45%;
   border-left: 5px solid #1565c0;
-  transform: rotate(-2deg); /* Leggera rotazione per l'effetto "fogli sparsi" */
+  transform: rotate(-2deg); 
   transition: transform 0.3s, z-index 0s;
   box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
 }
 
 .project-blueprint.alternate {
-  background: #fff9c4; /* Un altro foglio tipo post-it o carta riciclata */
+  background: #fff9c4;
   color: #f57f17;
   border-left-color: #fbc02d;
   transform: rotate(3deg);
@@ -336,6 +387,14 @@ main {
   text-decoration: underline;
   color: inherit;
 }
+
+.projects-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* #endregion Project styles */
 
 /* Animazione Slide In */
 @keyframes deskSlideIn {

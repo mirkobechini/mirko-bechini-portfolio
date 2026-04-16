@@ -116,8 +116,9 @@ Apri il browser su `http://localhost:5173` (o la porta indicata dal progetto).
 - [x] Modale "About me"
 - [x] Modale "Formazione & Competenze"
 - [ ] Modale "Esperienze & Progetti"
-- [ ] Modale "Contatti"
+- [x] Modale "Contatti"
 - [ ] Aggiunta contenuti e immagini
+- [ ] Refactoring codice e ottimizzazione performance
 
 ### Migliorie future
 - [ ] Css bordi laterali x migliorare esperienza utente
