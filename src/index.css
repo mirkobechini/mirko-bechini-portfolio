@@ -121,7 +121,7 @@ main {
   border: 4px solid #8d6e63;
   border-radius: 8px;
   position: relative;
-  max-width: 600px;
+  max-width: 800px;
   width: 90%;
   cursor: default;
 
@@ -274,6 +274,12 @@ main {
     transform: scale(1);
     opacity: 1;
   }
+}
+
+.theme-painting .modal-sprite {
+  top: 100%;
+  left: -5%;
+  width: 30%;
 }
 /* #endregion Painting theme */
 
