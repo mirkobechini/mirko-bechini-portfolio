@@ -300,7 +300,6 @@ main {
 .folders-grid {
   display: flex;
   flex-wrap: wrap;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 30px;
   padding: 20px;
 }
@@ -406,6 +405,11 @@ main {
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+.theme-desk .modal-sprite {
+  top: 100%;
+  left: 2%;
 }
 
 /* #endregion Desk theme */
