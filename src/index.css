@@ -428,7 +428,7 @@ main {
   background-position: center;
 
   width: 80vw;
-  max-width: 800px;
+  max-width: 900px;
   aspect-ratio: 1.64/1;
   border: none; 
   box-shadow: 0 15px 30px rgba(0,0,0,0.7);

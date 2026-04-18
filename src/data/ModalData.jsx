@@ -50,9 +50,11 @@ const MODAL_DATA = [
                         <ul>
                             <li><strong>Frontend</strong>: HTML5, CSS3, JavaScript</li>
                             <li><strong>Backend</strong>: Node.js, Express, PHP</li>
-                            <li><strong>Frameworks</strong>: React, Laravel</li>
+                            <li><strong>Libraries</strong>: React, Axios</li>
+                            <li><strong>Frameworks</strong>: React Router, Bootstrap, Laravel, Express</li>
                             <li><strong>Database</strong>: MySQL</li>
                             <li><strong>Version Control</strong>: Git, GitHub</li>
+                            <li><strong>Tools</strong>: Blade, Vite, Postman, Figma</li>
                         </ul>
                     </section>
                     <section className="page">
