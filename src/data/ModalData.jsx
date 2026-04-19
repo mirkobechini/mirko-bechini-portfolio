@@ -49,7 +49,7 @@ const MODAL_DATA = [
                         <h3>Competenze</h3>
                         <ul>
                             <li><strong>Frontend</strong>: HTML5, CSS3, JavaScript</li>
-                            <li><strong>Backend</strong>: Node.js, Express, PHP</li>
+                            <li><strong>Backend</strong>: Node.js, PHP</li>
                             <li><strong>Libraries</strong>: React, Axios</li>
                             <li><strong>Frameworks</strong>: React Router, Bootstrap, Laravel, Express</li>
                             <li><strong>Database</strong>: MySQL</li>
