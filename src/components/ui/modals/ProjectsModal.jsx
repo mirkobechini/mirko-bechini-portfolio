@@ -1,28 +1,33 @@
 import styles from '../modalsCss/ProjectsModal.module.css';
+import { useEffect, useState } from 'react';
 
 export default function ProjectsModal() {
-    let currentFolder = null;
+    const [currentFolder, setCurrentFolder] = useState(null);
     
-    function setCurrentFolder(folder) {
-        currentFolder = folder;
-        // Trigger re-render if using a framework like React
+    useEffect(() => {
+
+    }, [currentFolder]);
+
+
+    function handleSetCurrentFolder(folder) {
+        setCurrentFolder(folder);
     }
-    
+
     function goBack() {
-        currentFolder = null;
-        // Trigger re-render if using a framework like React
+        setCurrentFolder(null);
     }
 
 
     return (
         <div className={styles.deskContainer}>
             {!currentFolder ? (
+                //TODO: Inserire dei label? in alto per filtrare i progetti (frontend,backend,fullstack), (aziende), (personali)
                 <div className={styles.foldersGrid}>
-                    <div className={styles.folder} onClick={() => setCurrentFolder('personali')}>
+                    <div className={styles.folder} onClick={() => handleSetCurrentFolder('personali')}>
                         <div className={styles.folderIcon}>📂</div> {/* Icona cartella generica, sostituire con icona? */}
                         <span>Progetti Personali</span>
                     </div>
-                    <div className={styles.folder} onClick={() => setCurrentFolder('aziendaX')}>
+                    <div className={styles.folder} onClick={() => handleSetCurrentFolder('aziendaX')}>
                         <div className={styles.folderIcon}>📁</div>
                         <span>Esperienza Azienda X</span>
                     </div>
