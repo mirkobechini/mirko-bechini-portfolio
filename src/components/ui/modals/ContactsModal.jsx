@@ -1,0 +1,23 @@
+import styles from '../modalsCss/ContactsModal.module.css';
+
+export default function ContactsModal() {
+    return (
+        <div className={styles.contactsContainer}>
+            <p className={styles.contactIntro}>Il pappagallo è pronto a volare! Come vuoi contattarmi?</p>
+            <div className={styles.contactLinks}>
+                <a href="mailto:mirkobechini@gmail.com" className={`${styles.contactCard} ${styles.mail}`}>
+                    <span className={styles.icon}>✉️</span>
+                    <span className={styles.label}>Email</span>
+                </a>
+                <a href="https://linkedin.com/in/www.linkedin.com/in/mirko-bechini-892202252" target="_blank" className={`${styles.contactCard} ${styles.linkedin}`}>
+                    <span className={styles.icon}>🔗</span>
+                    <span className={styles.label}>LinkedIn</span>
+                </a>
+                <a href="https://github.com/mirkobechini" target="_blank" className={`${styles.contactCard} ${styles.github}`}>
+                    <span className={styles.icon}>💻</span>
+                    <span className={styles.label}>GitHub</span>
+                </a>
+            </div>
+        </div>
+    );
+}

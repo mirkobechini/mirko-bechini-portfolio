@@ -1,0 +1,28 @@
+.contactLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.contactCard {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background: #ffffff;
+  border: 2px solid #3e2723;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 4px 4px 0px #3e2723; /* Ombra netta retro */
+}
+
+.contactCard:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #f4511e;
+}
+
+.contactCard .icon {
+  font-size: 1.5rem;
+  margin-right: 15px;
+}

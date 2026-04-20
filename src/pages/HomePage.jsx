@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import denBackground from '../assets/images/den.png';
 import MODAL_DATA from '../data/ModalData';
+import BaseModal from '../components/ui/modals/BaseModal';
 
 export default function HomePage() {
 
@@ -84,22 +85,7 @@ export default function HomePage() {
                 <button className='sprite parrot' aria-label="Sezione Contatti" title='Contacts' onClick={() => openModal(5)}></button>
                 <button className='sprite painting' aria-label="Sezione Certificazioni" title='Certifications' onClick={() => openModal(4)}></button>
             </div>
-            {activeSection && (
-                <div className="modal-overlay" onClick={closeModal}>
-                    <div className={`game-modal theme-${activeSection.theme}`} onClick={(e) => e.stopPropagation()}>
-                        <div className="modal-header">
-                            <h2>{activeSection.title}</h2>
-                        </div>
-                        <div className="modal-content">
-                            {activeSection.content}
-                        </div>
-                        <div className="modal-footer">
-                            <button className='game-btn' onClick={closeModal}>CONTINUA</button>
-                        </div>
-                        <img className="modal-sprite" src={activeSection.picture} alt={`${activeSection.theme} modal sprite`} />
-                    </div>
-                </div>
-            )}
+            {activeSection && (<BaseModal variant={activeSection} closeModal={closeModal} />)}
         </div>
 
     )

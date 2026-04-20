@@ -115,10 +115,10 @@ Apri il browser su `http://localhost:5173` (o la porta indicata dal progetto).
 - [x] Refactoring codice e ottimizzazione performance
 - [x] Modale "About me"
 - [x] Modale "Formazione & Competenze"
-- [ ] Modale "Esperienze & Progetti"
+- [x] Modale "Esperienze & Progetti"
 - [x] Modale "Contatti"
-- [ ] Aggiunta contenuti e immagini
 - [ ] Refactoring codice e ottimizzazione performance
+- [ ] Aggiunta contenuti e immagini
 
 ### Migliorie future
 - [ ] Css bordi laterali x migliorare esperienza utente

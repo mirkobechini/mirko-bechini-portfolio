@@ -1,0 +1,29 @@
+.galleryContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+.certificateItem {
+  text-align: center;
+  color: #f5f5f5;
+}
+
+.frame {
+  border: 8px solid #5d4037; /* Cornice interna in legno */
+  background: white;
+  padding: 5px;
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+  transition: transform 0.3s;
+}
+
+.frame:hover {
+  transform: scale(1.05); /* Effetto "avvicinamento" al passaggio del mouse */
+}
+
+.frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+}

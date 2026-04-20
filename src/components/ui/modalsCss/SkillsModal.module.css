@@ -1,0 +1,36 @@
+.book {
+  display: flex;
+  justify-content: center;
+  gap: 20%;
+  width: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.page{
+  flex: 1;
+  width: 45%;
+  overflow-y: scroll;
+  padding: 30px;
+
+  position: relative;
+
+  /* Hide scrollbar for all browsers */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  scroll-snap-align: center;
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.page h3{
+  border-bottom: 2px solid #8d6e63;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+.page ul {
+  list-style-type: '👉 ';
+  padding-left: 20px;
+}
