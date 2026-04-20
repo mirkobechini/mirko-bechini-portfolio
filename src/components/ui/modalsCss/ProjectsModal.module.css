@@ -51,6 +51,9 @@
   font-family: inherit;
   box-shadow: 3px 3px 0px #000;
 }
+.backBtn:hover {
+  background: #ff5722;
+}
 /* #endregion Folder styles */
 
 
@@ -94,6 +97,9 @@
   font-weight: bold;
   text-decoration: underline;
   color: inherit;
+}
+.viewBtn:hover {
+  color: #1565c0;
 }
 
 .projectsGrid {

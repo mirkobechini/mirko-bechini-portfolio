@@ -7,8 +7,6 @@ import CertificationsModal from '../components/ui/modals/CertificationsModal';
 import ContactsModal from '../components/ui/modals/ContactsModal';
 
 
-
-
 const MODAL_DATA = [
     {
         id: 1,

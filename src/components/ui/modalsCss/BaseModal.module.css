@@ -56,6 +56,10 @@
   font-family: inherit;
   transition: all 0.1s;
 }
+.gameBtn:hover {
+  background: #8d6e63;
+  box-shadow: 0 0 8px rgba(165, 214, 167, 0.6);
+}
 
 .gameBtn:active {
   transform: translateY(2px);
