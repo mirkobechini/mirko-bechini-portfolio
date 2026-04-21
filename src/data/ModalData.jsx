@@ -1,4 +1,8 @@
 import monkeyModal from '/assets/modals/monkey-modal.png';
+import libraryModal from '/assets/modals/library-modal.png';
+import deskModal from '/assets/modals/desk-modal.png';
+import paintingModal from '/assets/modals/painting-modal.png';
+//import parrotModal from '/assets/modals/parrot-modal.png';
 
 import AboutMeModal from '../components/ui/modals/AboutMeModal';
 import SkillsModal from '../components/ui/modals/SkillsModal';
@@ -20,7 +24,7 @@ const MODAL_DATA = [
         title: 'Formazione & Competenze',
         content: (<SkillsModal />),
         theme: "library",
-        picture: "/assets/modals/library-modal.png"
+        picture: libraryModal
 
     },
     {
@@ -28,21 +32,21 @@ const MODAL_DATA = [
         title: 'Esperienze & Progetti',
         content: (<ProjectsModal />),
         theme: "desk",
-        picture: "/assets/modals/desk-modal.png"
+        picture: deskModal
     },
     {
         id: 4,
         title: 'Certificazioni',
         content: (<CertificationsModal />),
         theme: "painting",
-        picture: "/assets/modals/painting-modal.png"
+        picture: paintingModal
     },
     {
         id: 5,
         title: 'Contatti',
         content: (<ContactsModal />),
         theme: "parrot",
-        picture: "/assets/modals/parrot-modal.png"
+        //picture: parrotModal
     },
 ];
 
