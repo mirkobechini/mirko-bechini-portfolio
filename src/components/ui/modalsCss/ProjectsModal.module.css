@@ -62,7 +62,6 @@
   background: #e3f2fd;
   color: #0d47a1;
   padding: 15px;
-  width: 45%;
   border-left: 5px solid #1565c0;
   transform: rotate(-2deg); 
   transition: transform 0.3s, z-index 0s;

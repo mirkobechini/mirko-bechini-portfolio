@@ -1,10 +1,12 @@
 import styles from '../modalsCss/ProjectsModal.module.css';
 import { useEffect, useState } from 'react';
+import projectData from '../../../data/projectData';
 
 export default function ProjectsModal() {
     const [currentFolder, setCurrentFolder] = useState(null);
-    
+
     useEffect(() => {
+
 
     }, [currentFolder]);
 
@@ -23,46 +25,30 @@ export default function ProjectsModal() {
             {!currentFolder ? (
                 //TODO: Inserire dei label? in alto per filtrare i progetti (frontend,backend,fullstack), (aziende), (personali)
                 <div className={styles.foldersGrid}>
-                    <div className={styles.folder} onClick={() => handleSetCurrentFolder('personali')}>
-                        <div className={styles.folderIcon}>📂</div> {/* Icona cartella generica, sostituire con icona? */}
-                        <span>Progetti Personali</span>
-                    </div>
-                    <div className={styles.folder} onClick={() => handleSetCurrentFolder('aziendaX')}>
-                        <div className={styles.folderIcon}>📁</div>
-                        <span>Esperienza Azienda X</span>
-                    </div>
+                    {projectData.map(project => (
+
+                        <div className={styles.folder} onClick={() => handleSetCurrentFolder(project.customer)}>
+                            <div className={styles.folderIcon}>📂</div> {/* Icona cartella generica, sostituire con icona? */}
+                            <span>{project.customer}</span>
+                        </div>
+                    ))}
                 </div>
             ) : (
                 <div className={styles.projectsView}>
                     <button className={styles.backBtn} onClick={goBack}>⬅ Torna alla Scrivania</button>
                     <div className={styles.projectsGrid}>
-                        <div className={styles.projectBlueprint}>
-                            <div className={styles.blueprintHeader}>Progetti personali</div>
-                            <h4>Nome App</h4>
-                            <p>Un'applicazione per gestire la tana dei programmatori.</p>
-                            <div className={styles.techStack}>#React #Vite #CSS3</div>
+                        {projectData.filter(project => project.customer === currentFolder).map((project, index) => (
 
-                            <a href="#" className={styles.viewBtn}>Apri Documentazione</a>
-                            <a href="#" className={styles.viewBtn}>Vai al sito</a>
-                        </div>
-                        <div className={styles.projectBlueprint}>
-                            <div className={styles.blueprintHeader}>Progetti personali</div>
-                            <h4>Nome App</h4>
-                            <p>Un'applicazione per gestire la tana dei programmatori.</p>
-                            <div className={styles.techStack}>#React #Vite #CSS3</div>
+                            <div className={`${styles.projectBlueprint} ${index % 2 === 0 ? "" : styles.alternate}`} key={project.id}>
+                                <div className={styles.blueprintHeader}></div>
+                                <h4>{project.title}</h4>
+                                <p>{project.description}</p>
+                                <div className={styles.techStack}>{project.technologies.map(tech => `#${tech} `)}</div>
 
-                            <a href="#" className={styles.viewBtn}>Apri Documentazione</a>
-                            <a href="#" className={styles.viewBtn}>Vai al sito</a>
-                        </div>
-                        <div className={styles.projectBlueprint}>
-                            <div className={styles.blueprintHeader}>Progetti personali</div>
-                            <h4>Nome App</h4>
-                            <p>Un'applicazione per gestire la tana dei programmatori.</p>
-                            <div className={styles.techStack}>#React #Vite #CSS3</div>
-
-                            <a href="#" className={styles.viewBtn}>Apri Documentazione</a>
-                            <a href="#" className={styles.viewBtn}>Vai al sito</a>
-                        </div>
+                                <a href={project.repo} className={styles.viewBtn}>Apri Documentazione</a>
+                                <a href={project.demo} className={styles.viewBtn}>Vai al sito</a>
+                            </div>
+                        ))}
                     </div>
                 </div>
             )}

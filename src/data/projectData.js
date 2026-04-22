@@ -4,7 +4,7 @@ const spriteData = [
         title: 'Project 1',
         description: 'Description for Project 1',
         preview: 'https://via.placeholder.com/300x200',
-        customer: 'Customer 1',
+        customer: 'boolean',
         technologies: ['React', 'Node.js', 'MongoDB'],
         repo: '#',
         demo: "#"
@@ -14,7 +14,7 @@ const spriteData = [
         title: 'Project 2',
         description: 'Description for Project 2',
         preview: 'https://via.placeholder.com/300x200',
-        customer: 'Customer 2',
+        customer: 'personali',
         technologies: ['Vue', 'Firebase'], //tecnologie categorizzate in frontend e backend ed hanno codice colore
         repo: '#',
         demo: "#"
@@ -24,7 +24,7 @@ const spriteData = [
         title: 'Project 3',
         description: 'Description for Project 3',
         preview: 'https://via.placeholder.com/300x200',
-        customer: 'Customer 3',
+        customer: 'personali',
         technologies: ['Angular', 'Express', 'MySQL'],
         repo: '#',
         demo: "#"
