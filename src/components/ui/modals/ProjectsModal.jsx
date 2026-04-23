@@ -31,7 +31,7 @@ export default function ProjectsModal() {
                 //TODO: Inserire dei label? in alto per filtrare i progetti (frontend,backend,fullstack), (aziende), (personali)
                 <div className={styles.foldersGrid}>
                     {Object.keys(groupedProjects).map(category => (                        
-                        <div className={styles.folder} onClick={() => handleSetCurrentFolder(category)}>
+                        <div className={styles.folder} onClick={() => handleSetCurrentFolder(category)} key={category}>
                             <div className={styles.folderIcon}>📂</div> {/* Icona cartella generica, sostituire con icona? */}
                             <span>{category}</span>
                         </div>
