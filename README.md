@@ -78,9 +78,11 @@ Apri il browser su `http://localhost:5173` (o la porta indicata dal progetto).
 ```text
 .
 ├── public/
+│   ├── assets/
+│   │   ├── images/
+│   │   ├── modals/
 ├── src/
 │   ├── api/
-│   ├── assets/
 │   ├── components/
 │   │   ├── layout/
 │   │   └── ui/

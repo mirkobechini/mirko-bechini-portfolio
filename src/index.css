@@ -93,11 +93,11 @@ main {
   
 }
 
-.desk { top: 70%; left: 26%; width: 18%; background-image: url('./assets/sprites/desk.png'); }
-.painting { top: 32%; left: 36%; width: 6%; background-image: url('./assets/sprites/painting.png');}
-.monkey { top: 60%; left: 53%; width: 11%; background-image: url('./assets/sprites/monkey.png');}
-.parrot { top: 33%; left: 65%; width: 6%; background-image: url('./assets/sprites/parrot.png');}
-.library { top: 65%; left: 77%; width: 16%; background-image: url('./assets/sprites/book.png');}
+.desk { top: 70%; left: 26%; width: 18%; background-image: url('/assets/sprites/desk.png'); }
+.painting { top: 32%; left: 36%; width: 6%; background-image: url('/assets/sprites/painting.png');}
+.monkey { top: 60%; left: 53%; width: 11%; background-image: url('/assets/sprites/monkey.png');}
+.parrot { top: 33%; left: 65%; width: 6%; background-image: url('/assets/sprites/parrot.png');}
+.library { top: 65%; left: 77%; width: 16%; background-image: url('/assets/sprites/book.png');}
 
 /* #endregion sprite */
 
