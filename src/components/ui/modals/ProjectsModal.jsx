@@ -1,21 +1,19 @@
 import styles from '../modalsCss/ProjectsModal.module.css';
-import { useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 import projectData from '../../../data/projectData';
 
 export default function ProjectsModal() {
     const [currentFolder, setCurrentFolder] = useState(null);
-    const [groupedProjects, setGroupedProjects] = useState({});
 
-    useEffect(() => {
-        const grouped = projectData.reduce((customers, project) => {
-            if (!customers[project.customer]) {
-                customers[project.customer] = [];
+    const groupedProjects = useMemo(() => {
+        return projectData.reduce((categories, project) => {
+            if (!categories[project.category]) {
+                categories[project.category] = [];
             }
-            customers[project.customer].push(project);
-            return customers;
+            categories[project.category].push(project);
+            return categories;
         }, {});
-        setGroupedProjects(grouped);
-    }, [currentFolder]);
+    }, []);
 
 
     function handleSetCurrentFolder(folder) {
@@ -32,10 +30,10 @@ export default function ProjectsModal() {
             {!currentFolder ? (
                 //TODO: Inserire dei label? in alto per filtrare i progetti (frontend,backend,fullstack), (aziende), (personali)
                 <div className={styles.foldersGrid}>
-                    {Object.keys(groupedProjects).map(customer => (                        
-                        <div className={styles.folder} onClick={() => handleSetCurrentFolder(customer)}>
+                    {Object.keys(groupedProjects).map(category => (                        
+                        <div className={styles.folder} onClick={() => handleSetCurrentFolder(category)}>
                             <div className={styles.folderIcon}>📂</div> {/* Icona cartella generica, sostituire con icona? */}
-                            <span>{customer}</span>
+                            <span>{category}</span>
                         </div>
                     ))}
                 </div>
@@ -43,7 +41,7 @@ export default function ProjectsModal() {
                 <div className={styles.projectsView}>
                     <button className={styles.backBtn} onClick={goBack}>⬅ Torna alla Scrivania</button>
                     <div className={styles.projectsGrid}>
-                        {projectData.filter(project => project.customer === currentFolder).map((project, index) => (
+                        {projectData.filter(project => project.category === currentFolder).map((project, index) => (
 
                             <div className={`${styles.projectBlueprint} ${index % 2 === 0 ? "" : styles.alternate}`} key={project.id}>
                                 <div className={styles.blueprintHeader}></div>
