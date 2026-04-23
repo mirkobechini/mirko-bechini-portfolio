@@ -17,16 +17,10 @@ export default function BaseModal({ variant, closeModal }) {
 
     return (
         <div className={styles.modalOverlay} onClick={closeModal}>
-            <div
-                role="dialog"
-                aria-modal="true"
-                aria-labelledby="modal-title"
-                className={`${styles.gameModal} ${styles[`theme-${variant.theme}`]}`}
-                onClick={(e) => e.stopPropagation()}
-            >
-                <div className={styles.modalHeader}>
-                    <h2 id="modal-title">{variant.title}</h2>
-                </div>
+            <div className={styles.modalHeader}>
+                <h2 id="modal-title">{variant.title}</h2>
+            </div>
+            <div role="dialog" aria-modal="true" aria-labelledby="modal-title" className={`${styles.gameModal} ${styles[`theme-${variant.theme}`]}`} onClick={(e) => e.stopPropagation()}>
                 <div className={styles.modalContent}>
                     {variant.content}
                 </div>
