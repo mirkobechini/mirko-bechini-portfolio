@@ -2,7 +2,7 @@ import monkeyModal from '/assets/modals/monkey-modal.png';
 import libraryModal from '/assets/modals/library-modal.png';
 import deskModal from '/assets/modals/desk-modal.png';
 import paintingModal from '/assets/modals/painting-modal.png';
-//import parrotModal from '/assets/modals/parrot-modal.png';
+import parrotModal from '/assets/modals/parrot-modal.png';
 
 import AboutMeModal from '../components/ui/modals/AboutMeModal';
 import SkillsModal from '../components/ui/modals/SkillsModal';
@@ -46,7 +46,7 @@ const MODAL_DATA = [
         title: 'Contatti',
         content: (<ContactsModal />),
         theme: "parrot",
-        //picture: parrotModal
+        picture: parrotModal
     },
 ];
 
