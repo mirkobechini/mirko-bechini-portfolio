@@ -16,7 +16,7 @@ export default function HomePage() {
     // Ref per il container scrollabile
     const scrollRef = useRef(null);
 
-    function centerBackground(event) {
+    function centerBackground() {
         const container = scrollRef.current;
         if (container) {
             const scrollCenter = (container.scrollWidth - container.clientWidth) / 2;
@@ -85,7 +85,7 @@ export default function HomePage() {
                 <button className='sprite parrot' aria-label="Sezione Contatti" title='Contacts' onClick={() => openModal(5)}></button>
                 <button className='sprite painting' aria-label="Sezione Certificazioni" title='Certifications' onClick={() => openModal(4)}></button>
             </div>
-            {activeSection && (<BaseModal variant={activeSection} closeModal={closeModal} />)}
+            {activeSection && (<BaseModal variant={activeSection} closeModal={closeModal} role="dialog" />)}
         </div>
 
     )

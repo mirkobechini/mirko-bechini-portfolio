@@ -13,7 +13,7 @@ export default function CertificationsModal() {
                         <div className={styles.frame}>
                             <img src={cert.preview} alt={cert.title} />
                         </div>
-                        <p>{cert.title} @ <a className="" href={cert.url} >{cert.organization}</a></p>
+                        <p>{cert.title} @ <a className="" href={cert.organizationUrl} target="_blank" rel="noopener noreferrer">{cert.organization}</a></p>
                     </div>
                 ))
             }

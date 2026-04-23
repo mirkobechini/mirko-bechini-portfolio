@@ -9,11 +9,11 @@ export default function ContactsModal() {
                     <span className={styles.icon}>✉️</span>
                     <span className={styles.label}>Email</span>
                 </a>
-                <a href="https://www.linkedin.com/in/mirko-bechini-892202252/" target="_blank" className={`${styles.contactCard} ${styles.linkedin}`}>
+                <a href="https://www.linkedin.com/in/mirko-bechini-892202252/" target="_blank"  rel="noopener noreferrer" className={`${styles.contactCard} ${styles.linkedin}`}>
                     <span className={styles.icon}>🔗</span>
                     <span className={styles.label}>LinkedIn</span>
                 </a>
-                <a href="https://github.com/mirkobechini" target="_blank" className={`${styles.contactCard} ${styles.github}`}>
+                <a href="https://github.com/mirkobechini" target="_blank"  rel="noopener noreferrer" className={`${styles.contactCard} ${styles.github}`}>
                     <span className={styles.icon}>💻</span>
                     <span className={styles.label}>GitHub</span>
                 </a>

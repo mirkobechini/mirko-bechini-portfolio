@@ -190,7 +190,7 @@
 
 /* #region Library theme */
 .theme-library {
-  background-image: url('./assets/modals/book-modal-bg.png');
+  background-image: url('/assets/modals/book-modal-bg.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
