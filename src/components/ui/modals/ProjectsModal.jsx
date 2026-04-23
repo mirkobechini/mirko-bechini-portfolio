@@ -4,10 +4,17 @@ import projectData from '../../../data/projectData';
 
 export default function ProjectsModal() {
     const [currentFolder, setCurrentFolder] = useState(null);
+    const [groupedProjects, setGroupedProjects] = useState({});
 
     useEffect(() => {
-
-
+        const grouped = projectData.reduce((customers, project) => {
+            if (!customers[project.customer]) {
+                customers[project.customer] = [];
+            }
+            customers[project.customer].push(project);
+            return customers;
+        }, {});
+        setGroupedProjects(grouped);
     }, [currentFolder]);
 
 
@@ -25,11 +32,10 @@ export default function ProjectsModal() {
             {!currentFolder ? (
                 //TODO: Inserire dei label? in alto per filtrare i progetti (frontend,backend,fullstack), (aziende), (personali)
                 <div className={styles.foldersGrid}>
-                    {projectData.map(project => (
-
-                        <div className={styles.folder} onClick={() => handleSetCurrentFolder(project.customer)}>
+                    {Object.keys(groupedProjects).map(customer => (                        
+                        <div className={styles.folder} onClick={() => handleSetCurrentFolder(customer)}>
                             <div className={styles.folderIcon}>📂</div> {/* Icona cartella generica, sostituire con icona? */}
-                            <span>{project.customer}</span>
+                            <span>{customer}</span>
                         </div>
                     ))}
                 </div>
