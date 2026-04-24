@@ -30,7 +30,7 @@ export default function ProjectsModal() {
             {!currentFolder ? (
                 //TODO: Inserire dei label? in alto per filtrare i progetti (frontend,backend,fullstack), (aziende), (personali)
                 <div className={styles.foldersGrid}>
-                    {Object.keys(groupedProjects).map(category => (                        
+                    {Object.keys(groupedProjects).map(category => (
                         <div className={styles.folder} onClick={() => handleSetCurrentFolder(category)} key={category}>
                             <div className={styles.folderIcon}>📂</div> {/* Icona cartella generica, sostituire con icona? */}
                             <span>{category}</span>
@@ -45,12 +45,13 @@ export default function ProjectsModal() {
 
                             <div className={`${styles.projectBlueprint} ${index % 2 === 0 ? "" : styles.alternate}`} key={project.id}>
                                 <div className={styles.blueprintHeader}></div>
-                                <h4>{project.title}</h4>
+                                <h4 className={styles.projectTitle}>{project.title}</h4>
                                 <p>{project.description}</p>
                                 <div className={styles.techStack}>{project.technologies.map(tech => `#${tech} `)}</div>
-
-                                <a href={project.repo} className={styles.viewBtn}>Apri Documentazione</a>
-                                <a href={project.demo} className={styles.viewBtn}>Vai al sito</a>
+                                <div className={styles.linksGroup}>
+                                   {project.repo !== "#" && <a href={project.repo} className={styles.viewBtn}>Apri Documentazione</a>}
+                                   {project.demo !== "#" && <a href={project.demo} className={styles.viewBtn}>Vai al sito</a>}
+                                </div>
                             </div>
                         ))}
                     </div>
