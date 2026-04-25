@@ -119,8 +119,8 @@ Apri il browser su `http://localhost:5173` (o la porta indicata dal progetto).
 - [x] Modale "Formazione & Competenze"
 - [x] Modale "Esperienze & Progetti"
 - [x] Modale "Contatti"
-- [ ] Refactoring codice e ottimizzazione performance
-- [ ] Aggiunta contenuti e immagini
+- [x] Refactoring codice e ottimizzazione performance
+- [x] Aggiunta contenuti e immagini
 
 ### Migliorie future
 - [ ] Css bordi laterali x migliorare esperienza utente
@@ -128,7 +128,7 @@ Apri il browser su `http://localhost:5173` (o la porta indicata dal progetto).
 - [ ] Loader per migliorare l'esperienza utente
 - [ ] Dark mode
 - [ ] Miglioramento accessibilità (A11y)
-- [ ] Animazioni e transizioni
+- [x] Animazioni e transizioni
 - [ ] Responsive design
 - [ ] Integrazione API esterna
 
