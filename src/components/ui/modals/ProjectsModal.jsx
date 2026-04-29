@@ -5,15 +5,31 @@ import projectData from '../../../data/projectData';
 export default function ProjectsModal() {
     const [currentFolder, setCurrentFolder] = useState(null);
 
-    const groupedProjects = useMemo(() => {
-        return projectData.reduce((categories, project) => {
-            if (!categories[project.category]) {
-                categories[project.category] = [];
+    const [filterType, setFilterType] = useState(null);
+    const [filterCompany, setFilterCompany] = useState(null);
+
+
+    const filteredProjects = useMemo(() => {
+        return projectData.filter(project => {
+            if (filterType && project.type !== filterType) {
+                return false;
             }
-            categories[project.category].push(project);
-            return categories;
+            if (filterCompany && project.company !== filterCompany) {
+                return false;
+            }
+            return true;
+        });
+    }, [filterType, filterCompany]);
+
+    const groupedProjects = useMemo(() => {
+        return filteredProjects.reduce((companies, project) => {
+            if (!companies[project.company]) {
+                companies[project.company] = [];
+            }
+            companies[project.company].push(project);
+            return companies;
         }, {});
-    }, []);
+    }, [filteredProjects]);
 
 
     function handleSetCurrentFolder(folder) {
@@ -27,32 +43,35 @@ export default function ProjectsModal() {
 
     return (
         <div className={styles.deskContainer}>
+            <div className={styles.filterContainer}>
+                <fieldset className={styles.filterFieldset}>
+                    <legend className={styles.filterLabel}>Filtra per tipologia:</legend>
+                    <input type='radio' id='frontend' name='filterType' value='frontend' checked={filterType === 'frontend'} onChange={e => setFilterType(e.target.value)} />
+                    <label htmlFor='frontend'>Frontend</label>
+                    <input type='radio' id='backend' name='filterType' value='backend' checked={filterType === 'backend'} onChange={e => setFilterType(e.target.value)} />
+                    <label htmlFor='backend'>Backend</label>
+                    <input type='radio' id='fullstack' name='filterType' value='fullstack' checked={filterType === 'fullstack'} onChange={e => setFilterType(e.target.value)} />
+                    <label htmlFor='fullstack'>Fullstack</label>
+                </fieldset>
+                {!currentFolder && (
+                    <fieldset className={styles.filterFieldset}>
+                        <legend className={styles.filterLabel}>Filtra per azienda:</legend>
+                        <input type='radio' id='boolean' name='filterCompany' value='boolean' checked={filterCompany === 'boolean'} onChange={e => setFilterCompany(e.target.value)} />
+                        <label htmlFor='boolean'>Boolean</label>
+                        <input type='radio' id='personal' name='filterCompany' value='personal' checked={filterCompany === 'personal'} onChange={e => setFilterCompany(e.target.value)} />
+                        <label htmlFor='personal'>Personali</label>
+                    </fieldset>
+                )}
+                <button onClick={() => { setFilterType(null); setFilterCompany(null); }}>Reset Filters</button>
+            </div>
             {!currentFolder ? (
                 <>
-                    <div className={styles.filterContainer}>
-                            {/* Filtri da implementare in futuro, al momento non funzionano */}
-                        <fieldset className={styles.filterFieldset}>
-                            <legend className={styles.filterLabel}>Filtra per tipologia:</legend>
-                            <input type='radio' id='frontend' name='filter' value='frontend' />
-                            <label htmlFor='frontend'>Frontend</label>
-                            <input type='radio' id='backend' name='filter' value='backend' />
-                            <label htmlFor='backend'>Backend</label>
-                            <input type='radio' id='fullstack' name='filter' value='fullstack' />
-                            <label htmlFor='fullstack'>Fullstack</label>
-                        </fieldset>
-                        <fieldset className={styles.filterFieldset}>
-                            <legend className={styles.filterLabel}>Filtra per azienda:</legend>
-                            <input type='radio' id='boolean' name='filter' value='boolean' />
-                            <label htmlFor='boolean'>Boolean</label>
-                            <input type='radio' id='personal' name='filter' value='personal' />
-                            <label htmlFor='personal'>Personali</label>
-                        </fieldset>
-                    </div>
+
                     <div className={styles.foldersGrid}>
-                        {Object.keys(groupedProjects).map(category => (
-                            <div className={styles.folder} onClick={() => handleSetCurrentFolder(category)} key={category}>
+                        {Object.keys(groupedProjects).map(company => (
+                            <div className={styles.folder} onClick={() => handleSetCurrentFolder(company)} key={company}>
                                 <div className={styles.folderIcon}>📂</div> {/* Icona cartella generica, sostituire con icona? */}
-                                <span>{category}</span>
+                                <span>{company}</span>
                             </div>
                         ))}
                     </div>
@@ -61,7 +80,7 @@ export default function ProjectsModal() {
                 <div className={styles.projectsView}>
                     <button className={styles.backBtn} onClick={goBack}>⬅ Torna alla Scrivania</button>
                     <div className={styles.projectsGrid}>
-                        {projectData.filter(project => project.category === currentFolder).map((project, index) => (
+                        {filteredProjects.filter(project => project.company === currentFolder).map((project, index) => (
 
                             <div className={`${styles.projectBlueprint} ${index % 2 === 0 ? "" : styles.alternate}`} key={project.id}>
                                 <div className={styles.blueprintHeader}></div>
