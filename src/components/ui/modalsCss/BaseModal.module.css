@@ -159,10 +159,11 @@
 
 /* #region Desk theme */
 .theme-desk {
-  background: #3e2723; /* Legno scuro della scrivania */
+  
+  border: 5px solid #4b2c1e;
+  background-color: #1A2426;
   background-image: radial-gradient(#4e342e 1px, transparent 1px);
   background-size: 20px 20px; /* Effetto trama del legno o tappetino da taglio */
-  border: 10px solid #2d1b15;
   box-shadow: inset 0 0 100px rgba(0,0,0,0.5);
   
   /* Animazione: i fogli scivolano sul tavolo */
