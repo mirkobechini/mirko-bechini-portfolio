@@ -1,6 +1,7 @@
 import styles from '../modalsCss/ProjectsModal.module.css';
 import { useMemo, useState } from 'react';
 import projectData from '../../../data/projectData';
+import resetButtonIcon from '../../../../public/assets/images/reset_button.png';
 
 export default function ProjectsModal() {
 
@@ -39,7 +40,7 @@ export default function ProjectsModal() {
                     <input type='radio' className={styles.visuallyHidden} id='frontend' name='filterType' value='frontend' checked={filterType === 'frontend'} onChange={e => setFilterType(e.target.value)} />
                     <label htmlFor='frontend' className={filterType === 'frontend' ? styles.selectedFilter : ''}>Frontend</label>
                     <input type='radio' className={styles.visuallyHidden} id='backend' name='filterType' value='backend' checked={filterType === 'backend'} onChange={e => setFilterType(e.target.value)} />
-                    <label htmlFor='backend' className= {filterType === 'backend' ? styles.selectedFilter : ''}> Backend</label>
+                    <label htmlFor='backend' className={filterType === 'backend' ? styles.selectedFilter : ''}> Backend</label>
                     <input type='radio' className={styles.visuallyHidden} id='fullstack' name='filterType' value='fullstack' checked={filterType === 'fullstack'} onChange={e => setFilterType(e.target.value)} />
                     <label htmlFor='fullstack' className={filterType === 'fullstack' ? styles.selectedFilter : ''}>Fullstack</label>
                 </fieldset>
@@ -50,8 +51,10 @@ export default function ProjectsModal() {
                     <input type='radio' className={styles.visuallyHidden} id='personal' name='filterCompany' value='personal' checked={filterCompany === 'personal'} onChange={e => setFilterCompany(e.target.value)} />
                     <label htmlFor='personal' className={filterCompany === 'personal' ? styles.selectedFilter : ''}>Personali</label>
                 </fieldset>
-
-                <button onClick={() => { setFilterType(null); setFilterCompany(null); }}>Reset Filters</button>
+                <button className={styles.resetButtonContainer} onClick={() => { setFilterType(null); setFilterCompany(null); }} type="button">
+                    <img src={resetButtonIcon} alt="Reset Filters" />
+                    <span className={styles.resetText}>RESET</span>
+                </button>
             </div>
             <div className={styles.projectsView}>
                 <div className={styles.projectsGrid}>
