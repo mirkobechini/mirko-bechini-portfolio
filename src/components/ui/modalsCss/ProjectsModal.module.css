@@ -8,23 +8,24 @@
 
 .filterContainer {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 10px;
   margin-bottom: 20px;
   width: 100%;
+  
 }
 
 .filterFieldset {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
-  border-top: 5px solid;
-  border-bottom: 5px solid;
-  border-left: 15px solid;
-  border-right: 15px solid;
-  border-color: #7d4e32;
   border-radius: 15px;
-  padding: 0.1rem;
-  background-color: #4b2c1e;
+  padding: 0.5rem 1.5rem;
+  
+  background-image: url('../../../../public/assets/images/projectModal/filterFieldset.png');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .filterFieldset label {
@@ -34,8 +35,7 @@
   box-shadow:
     inset -4px -4px 0px #4b2c1e,
     inset 4px 4px 0px #a67351; /* Effetto 3D Pixel */
-
-    padding: 0.5rem;
+  padding: 0.5rem;
 }
 
 .filterFieldset label:hover {
