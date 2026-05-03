@@ -53,7 +53,7 @@ export default function ProjectsModal() {
                 </fieldset>
                 <button className={styles.resetButtonContainer} onClick={() => { setFilterType(null); setFilterCompany(null); }} type="button">
                     <img src={resetButtonIcon} alt="Reset Filters" />
-                    <span className={styles.resetText}>RESET</span>
+                    <span className={styles.resetText}>Reset Filter</span>
                 </button>
             </div>
             <div className={styles.projectsView}>

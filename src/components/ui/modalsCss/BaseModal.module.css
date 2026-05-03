@@ -189,6 +189,12 @@
   left: 2%;
 }
 
+.theme-desk .gameBtn {
+  background-color: #4b2c1e;
+  color: #e8f5e9;
+  border: 1px solid #ffffff;
+}
+
 /* #endregion Desk theme */
 
 /* #region Library theme */
