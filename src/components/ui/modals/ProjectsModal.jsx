@@ -1,7 +1,8 @@
 import styles from '../modalsCss/ProjectsModal.module.css';
 import { useMemo, useState } from 'react';
 import projectData from '../../../data/projectData';
-import resetButtonIcon from '../../../../public/assets/images/projectModal/reset_button.png';
+
+const resetButtonIcon = '/assets/images/projectModal/reset_button.png';
 
 export default function ProjectsModal() {
 
