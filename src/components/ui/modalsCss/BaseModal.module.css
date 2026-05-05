@@ -190,9 +190,23 @@
 }
 
 .theme-desk .gameBtn {
-  background-color: #4b2c1e;
-  color: #e8f5e9;
-  border: 1px solid #ffffff;
+  border-image-source: url("assets/images/projectModal/woodButton.png");
+  border-image-slice: 10 15 fill;
+  border-image-width: 5px 8px;
+  border-width: 8px 12px;
+  border-style: solid;
+  
+  padding: 10px 25px;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  font-family: inherit;
+  image-rendering: pixelated;
+}
+.theme-desk .gameBtn:hover {
+  transform: scale(1.05);
 }
 
 /* #endregion Desk theme */
