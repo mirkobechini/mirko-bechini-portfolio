@@ -35,6 +35,9 @@
   width: max-content;
 }
 
+
+
+
 /* TODO: riguardare*/
 @media (max-width: 480px) {
   .filterWrapper {
@@ -55,6 +58,7 @@
 
   padding: 6px 14px;
   font-size: 0.9rem;
+  white-space: nowrap;
   width: auto;
   min-width: 85px;
 
@@ -65,6 +69,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
   transition: transform 0.1s ease;
 }
 
@@ -77,6 +82,14 @@
   top: -75%;
   left: 2%;
   display: block;
+}
+
+.icon{
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
 }
 
 .selectedFilter {
@@ -116,6 +129,7 @@
 
 .resetText {
   position: absolute;
+  color: #7e915f;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

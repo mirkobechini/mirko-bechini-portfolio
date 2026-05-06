@@ -184,6 +184,12 @@
   }
 }
 
+.modalTitle {
+  color: #e8c879;
+  text-shadow: 2px 2px 0 #4b2c1e;
+  text-align: center;
+}
+
 .theme-desk .modalSprite {
   top: 100%;
   left: 2%;
