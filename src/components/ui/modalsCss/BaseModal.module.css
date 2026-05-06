@@ -13,6 +13,8 @@
   align-items: center;
   backdrop-filter: blur(4px);
   cursor: default;
+  
+
 }
 .gameModal {
   padding: 1.25rem;
@@ -22,6 +24,8 @@
   max-width: 800px;
   width: 90%;
   cursor: default;
+  
+  max-height: 75vh;
 
   box-shadow: 
     0 0 0 4px #1a1a1a, /* Effetto "outline" esterno */
@@ -39,6 +43,7 @@
 }
 .modalContent {
   margin-bottom: 1.25rem;
+  
 }
 
 .modalFooter {
@@ -184,9 +189,11 @@
   }
 }
 
-.modalTitle {
+.theme-desk .modalTitle {
   color: #e8c879;
-  text-shadow: 2px 2px 0 #4b2c1e;
+  text-shadow: 
+    3px 3px 0px #000,
+    -1px -1px 0px #4a2f1b;
   text-align: center;
 }
 

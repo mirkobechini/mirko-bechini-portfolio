@@ -40,7 +40,6 @@ export default function ProjectsModal() {
         <div className={styles.deskContainer}>
             <div className={styles.filterContainer}>
                 <fieldset className={styles.filterWrapper}>
-                    <span className={styles.filterLabel}>Filtra per tipologia:</span>
                     <input type='radio' className={styles.visuallyHidden} id='frontend' name='filterType' value='frontend' checked={filterType === 'frontend'} onChange={e => setFilterType(e.target.value)} />
                     <label htmlFor='frontend' className={styles.buttonLabel + ' ' + (filterType === 'frontend' ? styles.selectedFilter : '')}> <img className={styles.icon} src={frontendIcon} alt="Frontend" /> Frontend</label>
                     <input type='radio' className={styles.visuallyHidden} id='backend' name='filterType' value='backend' checked={filterType === 'backend'} onChange={e => setFilterType(e.target.value)} />
@@ -49,7 +48,6 @@ export default function ProjectsModal() {
                     <label htmlFor='fullstack' className={styles.buttonLabel + ' ' + (filterType === 'fullstack' ? styles.selectedFilter : '')}> <img className={styles.icon} src={fullstackIcon} alt="Fullstack" /> Fullstack</label>
                 </fieldset>
                 <fieldset className={styles.filterWrapper}>
-                    <span className={styles.filterLabel}>Filtra per azienda:</span>
                     <input type='radio' className={styles.visuallyHidden} id='boolean' name='filterCompany' value='boolean' checked={filterCompany === 'boolean'} onChange={e => setFilterCompany(e.target.value)} />
                     <label htmlFor='boolean' className={styles.buttonLabel + ' ' + (filterCompany === 'boolean' ? styles.selectedFilter : '')}> <img className={styles.icon} src={folderIcon} alt="Boolean" /> Boolean</label>
                     <input type='radio' className={styles.visuallyHidden} id='personal' name='filterCompany' value='personal' checked={filterCompany === 'personal'} onChange={e => setFilterCompany(e.target.value)} />
