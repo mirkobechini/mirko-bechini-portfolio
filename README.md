@@ -7,7 +7,7 @@
 
 > Portfoglio personale interattivo con stile retrò, costruito con React e NES.css.
 
-<!--![Banner o Screenshot]()-->
+![Banner o Screenshot](./readmeAssets/preview.png)
 
 ---
 
@@ -26,7 +26,7 @@
 ## 🌍 Demo
 
 - Live: In arrivo...
-- Video/GIF: In arrivo...
+- Video/GIF: (./readmeAssets/preview-gif.gif)
 
 ---
 
