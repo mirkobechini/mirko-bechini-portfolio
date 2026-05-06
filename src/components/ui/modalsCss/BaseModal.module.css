@@ -43,12 +43,13 @@
 }
 .modalContent {
   margin-bottom: 1.25rem;
-  
+  height: 90%;
 }
 
 .modalFooter {
   display: flex;
   justify-content: flex-end;
+  position: sticky;
 }
 
 .gameBtn {
@@ -198,8 +199,8 @@
 }
 
 .theme-desk .modalSprite {
-  top: 100%;
-  left: 2%;
+  top: 90%;
+  left: -5%;
 }
 
 .theme-desk .gameBtn {

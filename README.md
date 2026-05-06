@@ -126,7 +126,7 @@ Apri il browser su `http://localhost:5173` (o la porta indicata dal progetto).
 
 ### Migliorie future
 - [ ] Css bordi laterali x migliorare esperienza utente
-- [ ] Styling e design con NES.css
+- [x] Styling e design con NES.css
 - [ ] Loader per migliorare l'esperienza utente
 - [ ] Dark mode
 - [ ] Miglioramento accessibilità (A11y)

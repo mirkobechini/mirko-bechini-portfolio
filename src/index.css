@@ -3,13 +3,17 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
 }
 div, section, main, body {
     background-repeat: no-repeat;
+    
 }
 
+      
 main {
   max-width: 100%;
+  font-size: 0.8rem;
 }
 /* #endregion Global styles and resets */
 
