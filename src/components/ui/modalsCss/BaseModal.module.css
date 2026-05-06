@@ -81,7 +81,7 @@
 
 
 /* #region Monkey theme */
-.theme-monkey {
+.theme-monkey .gameModal {
   background-color: #2e7d32; /* Verde foresta */
   border-color: #1b5e20;
   color: #e8f5e9;
@@ -128,7 +128,7 @@
 /* #endregion Monkey theme */
 /* #region Painting theme */
 
-.theme-painting {
+.theme-painting .gameModal {
   background: #2c1e14; /* Legno scuro tipo museo */
   border: 15px solid #d4af37; /* Bordo color Oro */
   border-image: linear-gradient(to bottom, #d4af37, #f7e083, #d4af37) 1;
@@ -158,7 +158,7 @@
 /* #endregion Painting theme */
 
 /* #region Desk theme */
-.theme-desk {
+.theme-desk .gameModal{
   
   border: 5px solid #4b2c1e;
   background-color: #1A2426;
@@ -218,7 +218,7 @@
 /* #endregion Desk theme */
 
 /* #region Library theme */
-.theme-library {
+.theme-library .gameModal{
   background-image: url('/assets/modals/book-modal-bg.png');
   background-repeat: no-repeat;
   background-size: cover;
@@ -264,7 +264,7 @@
 }
 /* #endregion Library theme */
 /* #region Parrot theme */
-.theme-parrot {
+.theme-parrot .gameModal{
   background-color: #fff9c4;
   border: 4px dashed #f4511e;
   color: #3e2723;
