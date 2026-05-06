@@ -38,21 +38,24 @@ export default function ProjectsModal() {
 
     return (
         <div className={styles.deskContainer}>
+            {/*TODO: filter container hidden?*/}
             <div className={styles.filterContainer}>
-                <fieldset className={styles.filterWrapper}>
-                    <input type='radio' className={styles.visuallyHidden} id='frontend' name='filterType' value='frontend' checked={filterType === 'frontend'} onChange={e => setFilterType(e.target.value)} />
-                    <label htmlFor='frontend' className={styles.buttonLabel + ' ' + (filterType === 'frontend' ? styles.selectedFilter : '')}> <img className={styles.icon} src={frontendIcon} alt="Frontend" /> Frontend</label>
-                    <input type='radio' className={styles.visuallyHidden} id='backend' name='filterType' value='backend' checked={filterType === 'backend'} onChange={e => setFilterType(e.target.value)} />
-                    <label htmlFor='backend' className={styles.buttonLabel + ' ' + (filterType === 'backend' ? styles.selectedFilter : '')}> <img className={styles.icon} src={backendIcon} alt="Backend" /> Backend</label>
-                    <input type='radio' className={styles.visuallyHidden} id='fullstack' name='filterType' value='fullstack' checked={filterType === 'fullstack'} onChange={e => setFilterType(e.target.value)} />
-                    <label htmlFor='fullstack' className={styles.buttonLabel + ' ' + (filterType === 'fullstack' ? styles.selectedFilter : '')}> <img className={styles.icon} src={fullstackIcon} alt="Fullstack" /> Fullstack</label>
-                </fieldset>
-                <fieldset className={styles.filterWrapper}>
-                    <input type='radio' className={styles.visuallyHidden} id='boolean' name='filterCompany' value='boolean' checked={filterCompany === 'boolean'} onChange={e => setFilterCompany(e.target.value)} />
-                    <label htmlFor='boolean' className={styles.buttonLabel + ' ' + (filterCompany === 'boolean' ? styles.selectedFilter : '')}> <img className={styles.icon} src={folderIcon} alt="Boolean" /> Boolean</label>
-                    <input type='radio' className={styles.visuallyHidden} id='personal' name='filterCompany' value='personal' checked={filterCompany === 'personal'} onChange={e => setFilterCompany(e.target.value)} />
-                    <label htmlFor='personal' className={styles.buttonLabel + ' ' + (filterCompany === 'personal' ? styles.selectedFilter : '')}> <img className={styles.icon} src={folderIcon} alt="Personali" /> Personali</label>
-                </fieldset>
+                <div className={styles.filterGroup}>
+                    <fieldset className={styles.filterWrapper}>
+                        <input type='radio' className={styles.visuallyHidden} id='frontend' name='filterType' value='frontend' checked={filterType === 'frontend'} onChange={e => setFilterType(e.target.value)} />
+                        <label htmlFor='frontend' className={styles.buttonLabel + ' ' + (filterType === 'frontend' ? styles.selectedFilter : '')}> <img className={styles.icon} src={frontendIcon} alt="Frontend" /> Frontend</label>
+                        <input type='radio' className={styles.visuallyHidden} id='backend' name='filterType' value='backend' checked={filterType === 'backend'} onChange={e => setFilterType(e.target.value)} />
+                        <label htmlFor='backend' className={styles.buttonLabel + ' ' + (filterType === 'backend' ? styles.selectedFilter : '')}> <img className={styles.icon} src={backendIcon} alt="Backend" /> Backend</label>
+                        <input type='radio' className={styles.visuallyHidden} id='fullstack' name='filterType' value='fullstack' checked={filterType === 'fullstack'} onChange={e => setFilterType(e.target.value)} />
+                        <label htmlFor='fullstack' className={styles.buttonLabel + ' ' + (filterType === 'fullstack' ? styles.selectedFilter : '')}> <img className={styles.icon} src={fullstackIcon} alt="Fullstack" /> Fullstack</label>
+                    </fieldset>
+                    <fieldset className={styles.filterWrapper}>
+                        <input type='radio' className={styles.visuallyHidden} id='boolean' name='filterCompany' value='boolean' checked={filterCompany === 'boolean'} onChange={e => setFilterCompany(e.target.value)} />
+                        <label htmlFor='boolean' className={styles.buttonLabel + ' ' + (filterCompany === 'boolean' ? styles.selectedFilter : '')}> <img className={styles.icon} src={folderIcon} alt="Boolean" /> Boolean</label>
+                        <input type='radio' className={styles.visuallyHidden} id='personal' name='filterCompany' value='personal' checked={filterCompany === 'personal'} onChange={e => setFilterCompany(e.target.value)} />
+                        <label htmlFor='personal' className={styles.buttonLabel + ' ' + (filterCompany === 'personal' ? styles.selectedFilter : '')}> <img className={styles.icon} src={folderIcon} alt="Personali" /> Personali</label>
+                    </fieldset>
+                </div>
                 <button className={styles.resetButtonContainer} onClick={() => { setFilterType(null); setFilterCompany(null); }} type="button">
                     <img src={resetButtonIcon} alt="Reset Filters" />
                     <span className={styles.resetText}>Reset Filter</span>
