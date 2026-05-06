@@ -144,7 +144,7 @@ Apri il browser su `http://localhost:5173` (o la porta indicata dal progetto).
 - [x] Animazioni e transizioni
 
 ### Migliorie future
-- [ ] CSS bordi laterali per migliorare l'esperienza utente
+- [x] CSS bordi laterali per migliorare l'esperienza utente
 - [ ] Loader per migliorare l'esperienza utente
 - [ ] Dark mode
 - [ ] Miglioramento accessibilità (A11y)

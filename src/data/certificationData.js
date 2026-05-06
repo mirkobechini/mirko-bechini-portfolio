@@ -20,7 +20,7 @@ const certificationData = [
     {
         id: 3,
         title: 'Certification 3',
-        preview: 'https://via.placeholder.com/300x200',
+        preview: '/assets/certifications/certificato_react_scrimba.png',
         link: '#',
         organization: 'Ente 3',
         organizationUrl: '#',

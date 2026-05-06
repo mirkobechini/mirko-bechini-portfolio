@@ -26,6 +26,35 @@ main {
 
 /* #region Home */
 
+/* #region Start*/
+/* Animazione del lampeggio */
+@keyframes blinkGuide {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.5; }
+}
+
+.scrollGuideLeft, .scrollGuideRight {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 50px;
+  z-index: 999;
+  pointer-events: none; /* Importante: non deve bloccare il drag del mouse! */
+  animation: blinkGuide 2s ease-in-out infinite;
+}
+
+.scrollGuideLeft {
+  left: 0;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.5), transparent);
+}
+
+.scrollGuideRight {
+  right: 0;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0.5), transparent);
+}
+
+/* #endregion Start*/
+
 /* #region Den background styling */
 .den-container {
   height: 100vh;

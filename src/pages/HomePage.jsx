@@ -5,6 +5,8 @@ import BaseModal from '../components/ui/modals/BaseModal';
 
 export default function HomePage() {
 
+
+    const [hasMoved, setHasMoved] = useState(false);
     // Preload delle immagini dei modali
     useEffect(() => {
         MODAL_DATA.forEach((modal) => {
@@ -32,6 +34,7 @@ export default function HomePage() {
     const scrollLeft = useRef(0);
 
     function handleGrab(event) {
+        setHasMoved(true);
         const container = scrollRef.current;
         if (container) { // Verifica se il pulsante sinistro del mouse è premuto
             isHolding.current = true;
@@ -75,6 +78,12 @@ export default function HomePage() {
 
     return (
         <div className="den-container" ref={scrollRef} onMouseDown={handleGrab} onMouseLeave={handleLeave} onMouseUp={handleLeave} onMouseMove={handleMovement}>
+            {(!hasMoved &&
+                <>
+                    <div className="scrollGuideLeft"></div>
+                    <div className="scrollGuideRight"></div>
+                </>
+            )}
             <div className="den-wrapper">
 
                 <img className="den-image" src={denBackground} onLoad={centerBackground} alt="Monkey Den" draggable="false" />
@@ -86,7 +95,7 @@ export default function HomePage() {
                 <button className='sprite painting' aria-label="Sezione Certificazioni" title='Certifications' onClick={() => openModal(4)}></button>
             </div>
             {activeSection && (<BaseModal variant={activeSection} closeModal={closeModal} role="dialog" />)}
-        </div>
+        </div >
 
     )
 }

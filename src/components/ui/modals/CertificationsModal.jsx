@@ -9,7 +9,7 @@ export default function CertificationsModal() {
             {
                 certificationData.map(cert => (
 
-                    <div className={styles.certificateItem}>
+                    <div className={styles.certificateItem} key={cert.id}>
                         <div className={styles.frame}>
                             <img src={cert.preview} alt={cert.title} />
                         </div>
