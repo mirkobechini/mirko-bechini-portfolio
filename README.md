@@ -2,8 +2,7 @@
 
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white&style=flat-square)](https://react.dev)
 [![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white&style=flat-square)](https://vitejs.dev)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
-[![Last Commit](https://img.shields.io/github/last-commit/mirkobechini/mirko-bechini-portfolio?style=flat-square)](https://github.com/mirkobechini/mirko-bechini-portfolio/commits)
+[![Last Commit](https://img.shields.io/github/last-commit/mirkobechini/mirko-bechini-portfolio/main?style=flat-square)](https://github.com/mirkobechini/mirko-bechini-portfolio/commits)
 
 > Portfoglio personale interattivo con stile retrò, costruito con React e NES.css.
 
@@ -26,17 +25,16 @@
 ## 🌍 Demo
 
 - Live: In arrivo...
-- Video/GIF: (./readmeAssets/preview-gif.gif)
+![Preview GIF](./readmeAssets/preview-gif.gif)
 
 ---
 
 ## 🌟 Caratteristiche principali
 
 - **About me**: sezione introduttiva su di me.
-- **Progetti**: showcase dei progetti sviluppati.
-- **Competenze**: elenco delle competenze tecniche e linguistiche.
-- **Esperienze**: timeline delle esperienze lavorative.
-- **Formazione**: sezione dedicata a corsi e certificazioni.
+- **Esperienze & Progetti**: showcase dei progetti sviluppati e delle esperienze lavorative.
+- **Formazione & Competenze**: elenco delle competenze tecniche e corsi di formazione.
+- **Certificazioni**: sezione dedicata alle certificazioni ottenute.
 - **Contatti**: modulo di contatto o link ai social media.
 
 ---
