@@ -98,6 +98,7 @@ Apri il browser su `http://localhost:5173` (o la porta indicata dal progetto).
 │   │   ├── images/
 │   │   ├── modals/
 │   │   ├── sprites/
+├── readmeAssets/
 ├── src/
 │   ├── api/
 │   ├── components/
