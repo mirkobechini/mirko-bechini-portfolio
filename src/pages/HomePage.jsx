@@ -15,6 +15,8 @@ export default function HomePage() {
         });
     }, []);
 
+    
+
     // Ref per il container scrollabile
     const scrollRef = useRef(null);
 
@@ -32,9 +34,13 @@ export default function HomePage() {
     const isDragging = useRef(false);
     const startX = useRef(0);
     const scrollLeft = useRef(0);
+    const dragRaf = useRef(null);
+    const pendingClientX = useRef(0);
 
     function handleGrab(event) {
-        setHasMoved(true);
+        if (!hasMoved) {
+            setHasMoved(true);
+        }
         const container = scrollRef.current;
         if (container) { // Verifica se il pulsante sinistro del mouse è premuto
             isHolding.current = true;
@@ -46,22 +52,43 @@ export default function HomePage() {
 
     function handleLeave() {
         isHolding.current = false;
+        if (dragRaf.current) {
+            cancelAnimationFrame(dragRaf.current);
+            dragRaf.current = null;
+        }
     }
 
     function handleMovement(event) {
         const container = scrollRef.current;
-        if (isHolding.current && container && activeSection === null) {
-            const x = event.clientX - container.offsetLeft;
-            const walk = (x - startX.current) * 2; // Velocità di scorrimento
+        if (!isHolding.current || !container || activeSection !== null) return;
 
-            if (Math.abs(x - startX.current) > 5) { // Se il movimento è significativo, consideralo come dragging
+        // Salvo solo l'ultimo input del mouse
+        pendingClientX.current = event.clientX;
+
+        // Se un frame è già schedulato, non ne pianifico un altro
+        if (dragRaf.current) return;
+
+        dragRaf.current = requestAnimationFrame(() => {
+            const x = pendingClientX.current - container.offsetLeft;
+            const walk = (x - startX.current) * 2;
+
+            if (Math.abs(x - startX.current) > 5) {
                 isDragging.current = true;
             }
 
             container.scrollLeft = scrollLeft.current - walk;
-
-        }
+            dragRaf.current = null;
+        });
     }
+
+    // Cleanup per cancellare eventuali animazioni frame pendenti quando il componente viene smontato
+    useEffect(() => {
+        return () => {
+            if (dragRaf.current) {
+                cancelAnimationFrame(dragRaf.current);
+            }
+        };
+    }, []);
 
     //Modals
     const [activeSection, setActiveSection] = useState(null);

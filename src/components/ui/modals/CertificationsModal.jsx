@@ -11,7 +11,7 @@ export default function CertificationsModal() {
 
                     <div className={styles.certificateItem} key={cert.id}>
                         <div className={styles.frame}>
-                            <img src={cert.preview} alt={cert.title} />
+                            <img src={cert.preview} alt={cert.title} loading="lazy" decoding="async"/> {/* Ottimizzazione del caricamento dell'immagine */}
                         </div>
                         <p>{cert.title} @ <a className="" href={cert.organizationUrl} target="_blank" rel="noopener noreferrer">{cert.organization}</a></p>
                     </div>

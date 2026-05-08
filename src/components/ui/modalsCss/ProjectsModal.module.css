@@ -221,6 +221,8 @@
     transform 0.3s,
     z-index 0s;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+
+  contain: layout paint;/*Per ottimizzare le prestazioni del rendering*/
 }
 
 .projectBlueprint.alternate {
@@ -284,6 +286,7 @@
 
 .projectsView{
   overflow-y: auto;
+  overscroll-behavior: contain; /*ottimizzazione del comportamento di scorrimento*/
 }
 
 

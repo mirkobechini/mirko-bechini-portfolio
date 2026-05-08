@@ -11,7 +11,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(2px);
   cursor: default;
   
 
@@ -204,7 +204,7 @@
 }
 
 .theme-desk .gameBtn {
-  border-image-source: url("assets/images/projectModal/woodButton.png");
+  border-image-source: url("/assets/images/projectModal/woodButton.png");
   border-image-slice: 10 15 fill;
   border-image-width: 5px 8px;
   border-width: 8px 12px;
