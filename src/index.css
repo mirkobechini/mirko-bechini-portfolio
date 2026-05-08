@@ -3,8 +3,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  
 }
+
+*:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
 div, section, main, body {
     background-repeat: no-repeat;
     
