@@ -1,5 +1,6 @@
 import styles from '../modalsCss/SkillsModal.module.css';
 import skillsData from '../../../data/skillsData';
+import educationData from '../../../data/educationData';
 
 export default function SkillsModal() {
     return (
@@ -8,18 +9,28 @@ export default function SkillsModal() {
                 <h3>Competenze</h3>
                 <div className={styles.skillsList}>
                     {skillsData.map(skill => (
-                        <div className={`${styles.skillContainer} nes-container is-rounded is-centered`} key={skill.id} style={{ color: skill.color }}>
-                            <i className={`nes-icon is-small`}>{skill.icon}</i> 
+                        <div className={`${styles.skillCard} nes-container is-rounded is-centered`} key={skill.id} style={{ color: skill.color }}>
+                            <i className={`nes-icon is-medium`}>{skill.icon}</i> 
                         </div>
                     ))}
                 </div>
             </section>
             <section className={styles.page}>
                 <h3>Formazione</h3>
-                <ul>
-                    <li>Master in Web Development - Boolean Careers</li>
-                    <li>Diploma in Informatica - Istituto Tecnico Industriale</li>
-                </ul>
+                <div className={styles.educationList}>
+                    {educationData.map(education => (
+                        <section className={styles.educationCard} key={education.id}>
+                            <span className={styles.educationPeriod}>{education.period}</span>
+                            <h5 className={styles.educationTitle}>{education.course} - {education.organization}</h5>
+                            <p className={styles.educationDescription}>{education.description}</p>
+                            <div className={styles.educationSkills}>
+                                {education.skills.map((skill, index) => (
+                                    <span key={index} className={styles.educationSkill}>{skill}</span>
+                                ))}
+                            </div>
+                        </section>
+                    ))}
+                </div>
             </section>
         </div>
     );

@@ -15,6 +15,8 @@ export default function BaseModal({ variant, closeModal }) {
         return () => document.removeEventListener('keydown', handleKeyDown);
     }, [closeModal]);
 
+    //TODO: every modal should have same width and height modifying the css and not the component, maybe add a prop for custom sizes if needed in the future
+
     return (
         <div className={`${styles.modalOverlay} ${styles[`theme-${variant.theme}`]}`} onClick={closeModal}>
             <div className={styles.modalHeader}>
