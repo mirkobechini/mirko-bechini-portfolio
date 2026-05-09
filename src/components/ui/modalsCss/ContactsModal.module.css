@@ -1,3 +1,13 @@
+.contactsContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.contactIntro {
+  margin: 0;
+}
+
 .contactLinks {
   display: flex;
   flex-direction: column;
@@ -13,7 +23,9 @@
   border: 2px solid #3e2723;
   text-decoration: none;
   color: inherit;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
   box-shadow: 4px 4px 0px #3e2723; /* Ombra netta retro */
 }
 
@@ -26,6 +38,23 @@
   font-size: 1.5rem;
   margin-right: 15px;
 }
-.contactCard .sprite{
+
+.label {
+  font-weight: 700;
+}
+
+.mail {
+  border-color: #ef6c00;
+}
+
+.linkedin {
+  border-color: #1565c0;
+}
+
+.github {
+  border-color: #263238;
+}
+
+.contactCard .sprite {
   top: 100%;
 }
