@@ -232,8 +232,6 @@
   background-size: cover;
   background-position: center;
 
-  width: 80vw;
-  max-width: 900px;
   aspect-ratio: 1.64/1;
   border: none; 
   box-shadow: 0 15px 30px rgba(0,0,0,0.7);
@@ -245,12 +243,12 @@
   animation: bookOpen 0.6s ease-out forwards;
 }
 
-.theme-library .game-btn {
+.theme-library .gameBtn {
   background-color: #3e2723;
   color: #e8f5e9;
 }
 
-.theme-library .game-btn:hover {
+.theme-library .gameBtn:hover {
   background-color: #5d4037;
   box-shadow: 0 0 8px rgba(165, 214, 167, 0.6);
 }
