@@ -1,13 +1,33 @@
 .book {
   display: flex;
   justify-content: center;
-  gap: 20%;
+  gap: 15%;
   width: 100%;
+  height: 100%;
   position: relative;
   transform-style: preserve-3d;
 }
 
-.page{
+.skillContainer {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.skillsList {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  
+}
+
+.page {
   flex: 1;
   width: 45%;
   overflow-y: scroll;
@@ -24,13 +44,13 @@
   -webkit-backface-visibility: hidden;
 }
 
-.page h3{
+.page h3 {
   border-bottom: 2px solid #8d6e63;
   padding-bottom: 5px;
   margin-bottom: 15px;
   text-align: center;
 }
 .page ul {
-  list-style-type: '👉 ';
+  list-style-type: "👉 ";
   padding-left: 20px;
 }
