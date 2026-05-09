@@ -125,7 +125,7 @@ Apri il browser su `http://localhost:5173` (o la porta indicata dal progetto).
 
 ## 🗺️ Roadmap
 
-### In sviluppo
+### Completato
 - [x] Integrazione di React Router
 - [x] Creazione del layout principale
 - [x] Header e Footer
@@ -141,9 +141,16 @@ Apri il browser su `http://localhost:5173` (o la porta indicata dal progetto).
 - [x] Aggiunta contenuti e immagini
 - [x] Styling e design con NES.css
 - [x] Animazioni e transizioni
+- [x] Aggiunta funzionalità di filtro per progetti
+- [x] CSS bordi laterali per migliorare l'esperienza utente
+
+### In sviluppo
+- [] Restyle modale "Esperienze & Progetti"
+- [] Restyle modale "Formazione & Competenze"
+- [] Restyle modale "Contatti"
+- [] Restyle modale "About me"
 
 ### Migliorie future
-- [x] CSS bordi laterali per migliorare l'esperienza utente
 - [ ] Loader per migliorare l'esperienza utente
 - [ ] Dark mode
 - [ ] Miglioramento accessibilità (A11y)
