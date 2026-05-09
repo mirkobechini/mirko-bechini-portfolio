@@ -26,6 +26,15 @@ const educationData = [
         organizationUrl: '#',
         period: '01/2023 - 06/2023',
         skills: ['Angular', 'Express', 'MySQL'],
+    },
+    {
+        id: 4,
+        course: 'Certification 4',
+        certificate: '/assets/certifications/certificato_react_scrimba.png',
+        organization: 'Ente 4',
+        organizationUrl: '#',
+        period: '01/2022 - 12/2022',
+        skills: ['Vue.js', 'Node.js', 'MongoDB'],
     }
 ];
 
