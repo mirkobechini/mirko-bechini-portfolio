@@ -1,8 +1,9 @@
 import styles from '../modalsCss/SkillsModal.module.css';
 import skillsData from '../../../data/skillsData';
 import educationData from '../../../data/educationData';
+import { memo } from 'react';
 
-export default function SkillsModal() {
+const SkillsModal = memo(function SkillsModal() {
     return (
         <div className={styles.book}>
             <section className={styles.page}>
@@ -34,4 +35,6 @@ export default function SkillsModal() {
             </section>
         </div>
     );
-}
+});
+
+export default SkillsModal;

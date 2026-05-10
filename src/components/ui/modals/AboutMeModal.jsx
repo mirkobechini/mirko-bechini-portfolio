@@ -1,4 +1,6 @@
-export default function AboutMeModal() {
+import { memo } from 'react';
+
+const AboutMeModal = memo(function AboutMeModal() {
     return (
         <>
             <h3 style={{ marginBottom: '1rem' }}>Ciao sono Mirko</h3>
@@ -20,4 +22,6 @@ export default function AboutMeModal() {
             </p>
         </>
     );
-}
+});
+
+export default AboutMeModal;

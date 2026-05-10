@@ -1,5 +1,5 @@
 import styles from '../modalsCss/ProjectsModal.module.css';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, memo } from 'react';
 import projectData from '../../../data/projectData';
 const frontendIcon = '/assets/images/projectModal/frontend-icon.png';
 const backendIcon = '/assets/images/projectModal/backend-icon.png';
@@ -7,7 +7,7 @@ const fullstackIcon = '/assets/images/projectModal/fullstack-icon.png';
 const folderIcon = '/assets/images/projectModal/folder-icon.png';
 const resetButtonIcon = '/assets/images/projectModal/reset_button.png';
 
-export default function ProjectsModal() {
+const ProjectsModal = memo(function ProjectsModal() {
 
     const [filterType, setFilterType] = useState(null);
     const [filterCompany, setFilterCompany] = useState(null);
@@ -80,4 +80,6 @@ export default function ProjectsModal() {
             </div>
         </div>
     );
-}
+});
+
+export default ProjectsModal;
