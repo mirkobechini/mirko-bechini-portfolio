@@ -13,7 +13,12 @@
   flex-wrap: wrap;
   gap: 5px;
   contain: layout style paint;
+  padding: 2%;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
+
 .skillCard {
   width: 64px;
   height: 64px;
@@ -22,6 +27,13 @@
   align-items: center;
   justify-content: center;
   contain: content;
+}
+
+.skillCard:hover {
+  transform: scale(1.1);
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+
 }
 
 .skillCard img {
@@ -105,4 +117,12 @@
   padding-bottom: 5px;
   margin-bottom: 15px;
   text-align: center;
+}
+
+.skillsPage {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  gap: 10px;
 }
