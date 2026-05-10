@@ -2,7 +2,7 @@ const skillsData = [
     {
         id: 1,
         skill: 'HTML',
-        icon: 'H',
+        icon: '/assets/skills/html.png',
         category: 'Mark-up',
         details: '#',
         color: '#E34F26',
@@ -10,7 +10,7 @@ const skillsData = [
     {
         id: 2,
         skill: 'CSS',
-        icon: 'C',
+        icon: '/assets/skills/css.png',
         category: 'Mark-up',
         details: '#',
         color: '#1572B6',
@@ -18,7 +18,7 @@ const skillsData = [
     {
         id: 3,
         skill: 'JavaScript',
-        icon: 'Js',
+        icon: '/assets/skills/javascript.png',
         category: 'Frontend',
         details: '#',
         color: '#F7DF1E',
@@ -26,7 +26,7 @@ const skillsData = [
     {
         id: 4,
         skill: 'React',
-        icon: 'R',
+        icon: '/assets/skills/react.png',
         category: 'Library',
         details: '#',
         color: '#61DAFB',
@@ -34,7 +34,7 @@ const skillsData = [
     {
         id: 5,
         skill: 'Node.js',
-        icon: 'N',
+        icon: '/assets/skills/nodejs.png',
         category: 'Backend',
         details: '#',
         color: '#339933',
@@ -42,7 +42,7 @@ const skillsData = [
     {
         id: 6,
         skill: 'Express',
-        icon: 'E',
+        icon: '/assets/skills/express.png',
         category: 'Framework',
         details: '#',
         color: '#000000',
@@ -50,7 +50,7 @@ const skillsData = [
     {
         id: 7,
         skill: 'MySQL',
-        icon: 'M',
+        icon: '/assets/skills/mysql.png',
         category: 'Database',
         details: '#',
         color: '#4479A1',
@@ -58,7 +58,7 @@ const skillsData = [
     {
         id: 8,
         skill: 'PHP',
-        icon: 'P',
+        icon: '/assets/skills/php.png',
         category: 'Backend',
         details: '#',
         color: '#777BB4',
@@ -66,7 +66,7 @@ const skillsData = [
     {
         id: 9,
         skill: 'Laravel',
-        icon: 'L',
+        icon: '/assets/skills/laravel.png',
         category: 'Framework',
         details: '#',
         color: '#FF2D20',
@@ -74,7 +74,7 @@ const skillsData = [
     {
         id: 10,
         skill: 'Git',
-        icon: 'G',
+        icon: '/assets/skills/git.png',
         category: 'Version Control',
         details: '#',
         color: '#F05032',

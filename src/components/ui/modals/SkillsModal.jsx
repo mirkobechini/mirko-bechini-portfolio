@@ -9,8 +9,8 @@ export default function SkillsModal() {
                 <h3>Competenze</h3>
                 <div className={styles.skillsList}>
                     {skillsData.map(skill => (
-                        <div className={`${styles.skillCard} nes-container is-rounded is-centered`} key={skill.id} style={{ color: skill.color }}>
-                            <i className={`nes-icon is-medium`}>{skill.icon}</i> 
+                        <div className={`${styles.skillCard} nes-container is-rounded`} key={skill.id} style={{ color: skill.color }}>
+                            <img className={`nes-icon is-medium`} src={skill.icon} alt={skill.skill} />
                         </div>
                     ))}
                 </div>

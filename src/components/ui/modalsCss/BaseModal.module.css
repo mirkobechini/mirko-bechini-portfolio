@@ -157,8 +157,8 @@
 }
 
 .theme-painting .modalSprite {
-  top: 100%;
-  left: -5%;
+  top: 95%;
+  left: -11%;
   width: 30%;
 }
 /* #endregion Painting theme */
@@ -243,7 +243,6 @@
   padding: 40px 60px;
 
   height: auto;
-  flex: 1;
 
   perspective: 2000px;
   transform-origin: left center; 
