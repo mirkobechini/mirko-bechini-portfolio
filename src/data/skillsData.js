@@ -34,7 +34,7 @@ const skillsData = [
     {
         id: 5,
         skill: 'Node.js',
-        icon: '/assets/skills/nodejs.png',
+        icon: '/assets/skills/node.png',
         category: 'Backend',
         details: '#',
         color: '#339933',
