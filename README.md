@@ -149,9 +149,11 @@ Apri il browser su `http://localhost:5173` (o la porta indicata dal progetto).
 - [] Restyle modale "Formazione & Competenze"
 - [] Restyle modale "Contatti"
 - [] Restyle modale "About me"
+- [] Ottimizzazione codice e performance
 
 ### Migliorie future
 - [ ] Loader per migliorare l'esperienza utente
+- [ ] Migliora animazioni e transizioni
 - [ ] Dark mode
 - [ ] Miglioramento accessibilità (A11y)
 - [ ] Responsive design

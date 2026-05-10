@@ -78,6 +78,38 @@ const skillsData = [
         category: 'Version Control',
         details: '#',
         color: '#F05032',
+    },
+    {
+        id: 11,
+        skill: 'GitHub',
+        icon: '/assets/skills/github.png',
+        category: 'Version Control',
+        details: '#',
+        color: '#181717',
+    },
+    {
+        id: 12,
+        skill: 'VS Code',
+        icon: '/assets/skills/vscode.png',
+        category: 'IDE',
+        details: '#',
+        color: '#007ACC',
+    },
+    {
+        id: 13,
+        skill: 'Vite',
+        icon: '/assets/skills/vite.png',
+        category: 'Build Tool',
+        details: '#',
+        color: '#646CFF',
+    },
+    {
+        id: 14,
+        skill: 'Postman',
+        icon: '/assets/skills/postman.png',
+        category: 'API Testing',
+        details: '#',
+        color: '#FF6C37',
     }
 ];
 
