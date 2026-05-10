@@ -11,15 +11,16 @@ const SkillsModal = memo(function SkillsModal() {
 
     const handleClick = (skill) => {
         setCurrentSkill(skill);
+        /*TODO: add page switch sound*/
     };
 
     return (
         <div className={styles.book}>
             <section className={styles.page}>
-                <h3>Competenze</h3>
+                <h3 style={{ position: 'relative' }}>Competenze { currentSkill !== null && <span className={styles.btnHome} onClick={()=> handleClick(null)}>home</span>}</h3> 
                 <div className={styles.skillsList}>
                     {skillsData.map(skill => (
-                        <div className={`${styles.skillCard} nes-container is-rounded`} key={skill.id} style={{ color: skill.color }}>
+                        <div className={`${styles.skillCard} nes-container is-rounded ${currentSkill === skill ? "is-dark" : ""}`} key={skill.id} style={{ color: skill.color }}>
                             <img className={`nes-icon is-medium`} src={skill.icon} alt={skill.skill} onClick={() => handleClick(skill)}/>
                         </div>
                     ))}
@@ -44,9 +45,13 @@ const SkillsModal = memo(function SkillsModal() {
                     </div>
                 </section>
             ) : (
-                <section className={styles.page}>
+                <section className={`${styles.page} ${styles.skillPage}`}>
                     <h3>{currentSkill.skill}</h3>
                     <p>{currentSkill.description}</p>
+                    Progetti correlati:
+                    <ul>
+                        progetti correlati da inserire
+                    </ul>
                 </section>
             )}
         </div>
