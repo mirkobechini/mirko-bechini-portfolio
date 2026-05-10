@@ -1,5 +1,11 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, Suspense } from 'react';
 import styles from '../modalsCss/BaseModal.module.css';
+
+const LoadingFallback = () => (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+        <p>Caricamento...</p>
+    </div>
+);
 
 export default function BaseModal({ variant, closeModal }) {
     const closeBtnRef = useRef(null);
@@ -15,6 +21,8 @@ export default function BaseModal({ variant, closeModal }) {
         return () => document.removeEventListener('keydown', handleKeyDown);
     }, [closeModal]);
 
+    const Component = variant.component;
+
     //TODO: every modal should have same width and height modifying the css and not the component, maybe add a prop for custom sizes if needed in the future
 
     return (
@@ -24,7 +32,9 @@ export default function BaseModal({ variant, closeModal }) {
             </div>
             <div role="dialog" aria-modal="true" aria-labelledby="modal-title" className={`${styles.gameModal}`} onClick={(e) => e.stopPropagation()}>
                 <div className={styles.modalContent}>
-                    {variant.content}
+                    <Suspense fallback={<LoadingFallback />}>
+                        <Component />
+                    </Suspense>
                 </div>
                 <div className={styles.modalFooter}>
                     <button ref={closeBtnRef} className={styles.gameBtn} onClick={closeModal}>CONTINUA</button>
