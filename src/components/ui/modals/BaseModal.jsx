@@ -32,7 +32,7 @@ export default function BaseModal({ variant, closeModal }) {
             </div>
             <div role="dialog" aria-modal="true" aria-labelledby="modal-title" className={`${styles.gameModal}`} onClick={(e) => e.stopPropagation()}>
                 <div className={styles.modalContent}>
-                    <Suspense fallback={<LoadingFallback />}>
+                    <Suspense key={variant.id} fallback={<LoadingFallback />}>
                         <Component />
                     </Suspense>
                 </div>
