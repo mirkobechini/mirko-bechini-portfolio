@@ -17,11 +17,11 @@ const SkillsModal = memo(function SkillsModal() {
     return (
         <div className={styles.book}>
             <section className={styles.page}>
-                <h3 style={{ position: 'relative' }}>Competenze { currentSkill !== null && <span className={styles.btnHome} onClick={()=> handleClick(null)}>home</span>}</h3> 
+                <h3 style={{ position: 'relative' }}>Competenze {currentSkill !== null && <span className={styles.btnHome} onClick={() => handleClick(null)}>home</span>}</h3>
                 <div className={styles.skillsList}>
                     {skillsData.map(skill => (
                         <div className={`${styles.skillCard} nes-container is-rounded ${currentSkill === skill ? "is-dark" : ""}`} key={skill.id} style={{ color: skill.color }}>
-                            <img className={`nes-icon is-medium`} src={skill.icon} alt={skill.skill} onClick={() => handleClick(skill)}/>
+                            <img className={`nes-icon is-medium`} src={skill.icon} alt={skill.skill} onClick={() => handleClick(skill)} />
                         </div>
                     ))}
                 </div>
@@ -48,10 +48,18 @@ const SkillsModal = memo(function SkillsModal() {
                 <section className={`${styles.page} ${styles.skillPage}`}>
                     <h3>{currentSkill.skill}</h3>
                     <p>{currentSkill.description}</p>
-                    Progetti correlati:
-                    <ul>
-                        progetti correlati da inserire
-                    </ul>
+                    <section className={styles.functionality}>
+                        <h4>Funzionalita conosciute:</h4>
+                        <ul>
+                            funzionalita da inserire
+                        </ul>
+                    </section>
+                    <section className={styles.relatedProjects}>
+                        <h4>Progetti correlati:</h4>
+                        <ul>
+                            progetti correlati da inserire
+                        </ul>
+                    </section>
                 </section>
             )}
         </div>
