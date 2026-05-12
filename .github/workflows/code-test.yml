@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
       
       - name: Emulate Installation
-        runn: |
+        run: |
           echo "Emulating installation process..."
           # Simulate installation steps here
           sleep 2
