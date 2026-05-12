@@ -6,10 +6,6 @@ on:
   pull_request:
     branches: ["main"]
 
-# Questa riga risolve l'avviso di Node.js 24 per tutto il workflow
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 jobs:
   technical-test:
     runs-on: ubuntu-latest
@@ -17,6 +13,11 @@ jobs:
     steps:
       - name: Download code
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
 
       - name: Install dependencies
         run: npm install
@@ -32,7 +33,7 @@ jobs:
         uses: lycheeverse/lychee-action@v1.9.0
         with:
           # Scansiona tutti i file .html
-          args: --verbose --no-progress --offline"**/*.html"
+          args: --verbose --no-progress --offline "**/*.html"
 
       # Controlla la qualità del codice CSS, JavaScript, HTML, ecc.
       - name: Super-Linter
