@@ -23,17 +23,13 @@ main {
 }
 
 /* #endregion Global styles and resets */
-/* #region Debug
-* {
-  border: 2px solid red;
-  color: red;
-}
 
- #endregion Debug */
 /* #region Home */
-/* #region Start*/
+
+/* #region Start */
+
 /* Animazione del lampeggio */
-@keyframes blinkGuide {
+@keyframes blink-guide {
   0%,
   100% {
     opacity: 0;
@@ -52,7 +48,7 @@ main {
   width: 50px;
   z-index: 999;
   pointer-events: none; /* Importante: non deve bloccare il drag del mouse! */
-  animation: blinkGuide 2s ease-in-out infinite;
+  animation: blink-guide 2s ease-in-out infinite;
 }
 
 .scrollGuideLeft {
@@ -66,6 +62,7 @@ main {
 }
 
 /* #endregion Start */
+
 /* #region Den background styling */
 .den-container {
   height: 100vh;
@@ -73,10 +70,12 @@ main {
   overflow-x: auto;
   overflow-y: hidden;
   background-color: #1a1a1a;
+
   /* Hide scrollbar for all browsers */
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
   scroll-snap-align: center;
+
   /* Grab cursor */
   cursor: grab;
   user-select: none;
@@ -102,12 +101,14 @@ main {
   height: 100%;
   display: block;
   max-width: none;
+
   /* Grab cursor */
   pointer-events: none;
   -webkit-user-drag: none;
 }
 
 /* #endregion Den background styling */
+
 /* #region sprite */
 .sprite {
   position: absolute;
@@ -118,6 +119,7 @@ main {
   padding: 0;
   transform: translate(-50%, -50%) scale(1);
   transition: transform 0.2s ease;
+
   /* background */
   background-size: contain;
   background-repeat: no-repeat;
@@ -127,6 +129,7 @@ main {
 
 .sprite:hover {
   transform: translate(-50%, -50%) scale(1.1);
+
   /* Un filtro opzionale per farli risaltare */
   filter: drop-shadow(0 0 8px rgb(255 255 255 / 50%));
 }
@@ -167,4 +170,5 @@ main {
 }
 
 /* #endregion sprite */
+
 /* #endregion Home */

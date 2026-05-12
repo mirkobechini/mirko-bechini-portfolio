@@ -84,7 +84,6 @@
   height: 24px;
   object-fit: contain;
   image-rendering: pixelated;
-  image-rendering: crisp-edges;
 }
 
 .selected-filter {
@@ -110,7 +109,6 @@
   display: block;
   font-family: inherit;
   image-rendering: pixelated;
-  image-rendering: crisp-edges;
 }
 
 .reset-button-container:hover {
@@ -152,6 +150,7 @@
 }
 
 /* #endregion Filter styles */
+
 /* #region Folder styles */
 .folders-grid {
   display: flex;
@@ -203,6 +202,7 @@
 }
 
 /* #endregion Folder styles */
+
 /* #region Project styles */
 .project-blueprint {
   background: #e3f2fd;
@@ -215,6 +215,7 @@
     transform 0.3s,
     z-index 0;
   box-shadow: 5px 5px 15px rgb(0 0 0 / 30%);
+
   contain: layout paint; /* Per ottimizzare le prestazioni del rendering */
 }
 
@@ -286,6 +287,7 @@
 }
 
 /* #endregion Project styles */
+
 /* #region Scrollbar styles */
 ::-webkit-scrollbar {
   width: 16px;
@@ -298,6 +300,7 @@
 
 ::-webkit-scrollbar-thumb {
   background-color: #e76e05;
+
   /* Creiamo l'effetto scalino pixelato con un bordo doppio */
   border: 4px solid #212529;
   box-shadow: inset -4px -4px 0 0 #8a4303; /* Ombra interna per dare profondità */

@@ -87,12 +87,13 @@
 }
 
 /* #endregion Commons */
+
 /* #region Monkey theme */
 .theme-monkey .game-modal {
   background-color: #2e7d32; /* Verde foresta */
   border-color: #1b5e20;
   color: #e8f5e9;
-  animation: modalJumpIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: modal-jump-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .theme-monkey .modal-header h2 {
@@ -114,103 +115,6 @@
   color: #e8f5e9;
 }
 
-.theme-monkey .game-btn:hover {
-  background-color: #2e7d32;
-  box-shadow: 0 0 8px rgb(165 214 167 / 60%);
-}
-
-.theme-monkey .modal-sprite {
-  top: 100%;
-  left: 19.5%;
-}
-
-/* --- Animazioni --- */
-@keyframes modalJumpIn {
-  0% {
-    transform: scale(0.5);
-    opacity: 0;
-}
-
-  70% {
-    transform: scale(1.1);
-}
-
-  100% {
-    transform: scale(1);
-    opacity: 1;
-}
-}
-
-/* #endregion Monkey theme */
-/* #region Painting theme */
-.theme-painting .game-modal {
-  background: #2c1e14; /* Legno scuro tipo museo */
-  border: 15px solid #d4af37; /* Bordo color Oro */
-  border-image: linear-gradient(to bottom, #d4af37, #f7e083, #d4af37) 1;
-  box-shadow:
-    0 0 50px rgb(0 0 0 / 80%),
-    inset 0 0 20px rgb(0 0 0 / 50%);
-  /* Animazione: Zoom in morbido */
-  animation: galleryZoom 0.4s ease-out forwards;
-}
-
-/* Animazione Zoom */
-@keyframes galleryZoom {
-  0% {
-    transform: scale(0.5);
-    opacity: 0;
-}
-
-  100% {
-    transform: scale(1);
-    opacity: 1;
-}
-}
-
-.theme-painting .modal-sprite {
-  top: 95%;
-  left: -11%;
-  width: 30%;
-}
-
-/* #endregion Painting theme */
-/* #region Desk theme */
-.theme-desk .game-modal {
-  border: 5px solid #4b2c1e;
-  background-color: #1a2426;
-  background-image: radial-gradient(#4e342e 1px, transparent 1px);
-  background-size: 20px 20px; /* Effetto trama del legno o tappetino da taglio */
-  box-shadow: inset 0 0 100px rgb(0 0 0 / 50%);
-  /* Animazione: i fogli scivolano sul tavolo */
-  animation: deskSlideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-}
-
-/* Animazione Slide In */
-@keyframes deskSlideIn {
-  0% {
-    transform: translateY(100px);
-    opacity: 0;
-}
-
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-}
-}
-
-.theme-desk .modal-title {
-  color: #e8c879;
-  text-shadow:
-    3px 3px 0 #000,
-    -1px -1px 0 #4a2f1b;
-  text-align: center;
-}
-
-.theme-desk .modal-sprite {
-  top: 90%;
-  left: -5%;
-}
-
 .theme-desk .game-btn {
   border-image-source: url("/assets/images/projectModal/woodButton.png");
   border-image-slice: 10 15 fill;
@@ -227,16 +131,122 @@
   image-rendering: pixelated;
 }
 
+.theme-library .game-btn {
+  background-color: #3e2723;
+  color: #e8f5e9;
+}
+
+.theme-monkey .game-btn:hover {
+  background-color: #2e7d32;
+  box-shadow: 0 0 8px rgb(165 214 167 / 60%);
+}
+
+.theme-monkey .modal-sprite {
+  top: 100%;
+  left: 19.5%;
+}
+
+/* --- Animazioni --- */
+@keyframes modal-jump-in {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  70% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* #endregion Monkey theme */
+
+/* #region Painting theme */
+.theme-painting .game-modal {
+  background: #2c1e14; /* Legno scuro tipo museo */
+  border: 15px solid #d4af37; /* Bordo color Oro */
+  border-image: linear-gradient(to bottom, #d4af37, #f7e083, #d4af37) 1;
+  box-shadow:
+    0 0 50px rgb(0 0 0 / 80%),
+    inset 0 0 20px rgb(0 0 0 / 50%);
+
+  /* Animazione: Zoom in morbido */
+  animation: galleryZoom 0.4s ease-out forwards;
+}
+
+/* Animazione Zoom */
+@keyframes gallery-zoom {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.theme-painting .modal-sprite {
+  top: 95%;
+  left: -11%;
+  width: 30%;
+}
+
+/* #endregion Painting theme */
+
+/* #region Desk theme */
+.theme-desk .game-modal {
+  border: 5px solid #4b2c1e;
+  background-color: #1a2426;
+  background-image: radial-gradient(#4e342e 1px, transparent 1px);
+  background-size: 20px 20px; /* Effetto trama del legno o tappetino da taglio */
+  box-shadow: inset 0 0 100px rgb(0 0 0 / 50%);
+
+  /* Animazione: i fogli scivolano sul tavolo */
+  animation: deskSlideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Animazione Slide In */
+@keyframes desk-slide-in {
+  0% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.theme-desk .modal-title {
+  color: #e8c879;
+  text-shadow:
+    3px 3px 0 #000,
+    -1px -1px 0 #4a2f1b;
+  text-align: center;
+}
+
+.theme-desk .modal-sprite {
+  top: 90%;
+  left: -5%;
+}
+
 .theme-desk .game-btn:hover {
   transform: scale(1.05);
 }
 
 /* #endregion Desk theme */
+
 /* #region Library theme */
 .theme-library .game-modal {
   background-image: url("/assets/modals/book-modal-bg.png");
   background-repeat: no-repeat;
-  background-size: cover;
   background-position: center;
   background-size: 100% 100%;
   width: 90%;
@@ -250,12 +260,7 @@
   height: 80vh;
   perspective: 2000px;
   transform-origin: left center;
-  animation: bookOpen 0.6s ease-out forwards;
-}
-
-.theme-library .game-btn {
-  background-color: #3e2723;
-  color: #e8f5e9;
+  animation: book-open 0.6s ease-out forwards;
 }
 
 .theme-library .game-btn:hover {
@@ -263,16 +268,16 @@
   box-shadow: 0 0 8px rgb(165 214 167 / 60%);
 }
 
-@keyframes bookOpen {
+@keyframes book-open {
   0% {
     transform: perspective(1000px) rotateY(-90deg); /* Chiuso di taglio */
     opacity: 0;
-}
+  }
 
   100% {
     transform: perspective(1000px) rotateY(0); /* Aperto di fronte */
     opacity: 1;
-}
+  }
 }
 
 .theme-library .modal-sprite {
@@ -281,25 +286,26 @@
 }
 
 /* #endregion Library theme */
+
 /* #region Parrot theme */
 .theme-parrot .game-modal {
   background-color: #fff9c4;
   border: 4px dashed #f4511e;
   color: #3e2723;
-  animation: parrotFlyIn 0.5s ease-out forwards;
+  animation: parrot-fly-in 0.5s ease-out forwards;
 }
 
 /* Animazione Volo */
-@keyframes parrotFlyIn {
+@keyframes parrot-fly-in {
   0% {
     transform: translateX(100%) rotate(10deg);
     opacity: 0;
-}
+  }
 
   100% {
     transform: translateX(0) rotate(0);
     opacity: 1;
-}
+  }
 }
 
 /* #endregion Parrot theme */
