@@ -1,0 +1,22 @@
+name: Verification Tests
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  technical-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download code
+        uses: actions/checkout@v4
+      
+      - name: Emulate Installation
+        runn: |
+          echo "Emulating installation process..."
+          # Simulate installation steps here
+          sleep 2
+          echo "Installation complete."
