@@ -122,6 +122,7 @@
 
   overflow-y: auto;
   overflow-x: hidden;
+  backface-visibility: hidden;
 }
 
 .page h3 {
