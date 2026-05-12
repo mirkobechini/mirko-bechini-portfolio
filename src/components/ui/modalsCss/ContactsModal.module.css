@@ -26,12 +26,12 @@
   transition:
     transform 0.2s,
     box-shadow 0.2s;
-  box-shadow: 4px 4px 0px #3e2723; /* Ombra netta retro */
+  box-shadow: 4px 4px 0 #3e2723; /* Ombra netta retro */
 }
 
 .contact-card:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px #f4511e;
+  box-shadow: 6px 6px 0 #f4511e;
 }
 
 .contact-card .icon {

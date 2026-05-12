@@ -33,7 +33,6 @@
   transform: scale(1.1);
   transition: transform 0.2s ease-in-out;
   cursor: pointer;
-
 }
 
 .btn-home {
@@ -62,7 +61,6 @@
   min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
-
   /* Hide scrollbar for all browsers */
   /* TODO: styling scrollbar */
   -ms-overflow-style: none; /* IE and Edge */
@@ -70,13 +68,13 @@
   scroll-snap-align: center;
   contain: layout style paint;
 }
-/*TODO: fix gamebtn disappear*/
 
+/*TODO: fix gamebtn disappear*/
 .education-card {
   background-color: #f5f5f5;
   padding: 10px;
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
 }
 
 .education-title {
@@ -117,9 +115,7 @@
   flex-direction: column;
   min-height: 0;
   padding: 15px;
-
   position: relative;
-
   overflow-y: auto;
   overflow-x: hidden;
   backface-visibility: hidden;
@@ -136,7 +132,6 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-
   gap: 10px;
 }
 

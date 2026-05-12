@@ -6,39 +6,46 @@
 }
 
 *:focus {
-    outline: none !important;
-    box-shadow: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
-div, section, main, body {
-    background-repeat: no-repeat;
-    
+div,
+section,
+main,
+body {
+  background-repeat: no-repeat;
 }
 
-      
 main {
   max-width: 100%;
   font-size: 0.8rem;
 }
-/* #endregion Global styles and resets */
 
-/* #region Debug 
+/* #endregion Global styles and resets */
+/* #region Debug
 * {
   border: 2px solid red;
   color: red;
 }
+
  #endregion Debug */
-
 /* #region Home */
-
 /* #region Start*/
 /* Animazione del lampeggio */
 @keyframes blinkGuide {
-  0%, 100% { opacity: 0; }
-  50% { opacity: 0.5; }
+  0%,
+  100% {
+    opacity: 0;
 }
 
-.scrollGuideLeft, .scrollGuideRight {
+  50% {
+    opacity: 0.5;
+}
+}
+
+.scrollGuideLeft,
+.scrollGuideRight {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -50,16 +57,15 @@ main {
 
 .scrollGuideLeft {
   left: 0;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0.5), transparent);
+  background: linear-gradient(to right, rgb(255 255 255 / 50%), transparent);
 }
 
 .scrollGuideRight {
   right: 0;
-  background: linear-gradient(to left, rgba(255, 255, 255, 0.5), transparent);
+  background: linear-gradient(to left, rgb(255 255 255 / 50%), transparent);
 }
 
 /* #endregion Start*/
-
 /* #region Den background styling */
 .den-container {
   height: 100vh;
@@ -67,12 +73,10 @@ main {
   overflow-x: auto;
   overflow-y: hidden;
   background-color: #1a1a1a;
-
   /* Hide scrollbar for all browsers */
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
   scroll-snap-align: center;
-
   /* Grab cursor */
   cursor: grab;
   user-select: none;
@@ -102,10 +106,9 @@ main {
   pointer-events: none;
   -webkit-user-drag: none;
 }
+
 /* #endregion Den background styling */
-
 /*#region sprite*/
-
 .sprite {
   position: absolute;
   border: none;
@@ -115,7 +118,6 @@ main {
   padding: 0;
   transform: translate(-50%, -50%) scale(1);
   transition: transform 0.2s ease;
-
   /* background */
   background-size: contain;
   background-repeat: no-repeat;
@@ -126,18 +128,43 @@ main {
 .sprite:hover {
   transform: translate(-50%, -50%) scale(1.1);
   /* Un filtro opzionale per farli risaltare */
-  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
-
-  
+  filter: drop-shadow(0 0 8px rgb(255 255 255 / 50%));
 }
 
-.desk { top: 70%; left: 26%; width: 18%; background-image: url('/assets/sprites/desk.png'); }
-.painting { top: 32%; left: 36%; width: 6%; background-image: url('/assets/sprites/painting.png');}
-.monkey { top: 60%; left: 53%; width: 11%; background-image: url('/assets/sprites/monkey.png');}
-.parrot { top: 33%; left: 65%; width: 6%; background-image: url('/assets/sprites/parrot.png');}
-.library { top: 65%; left: 77%; width: 16%; background-image: url('/assets/sprites/book.png');}
+.desk {
+  top: 70%;
+  left: 26%;
+  width: 18%;
+  background-image: url("/assets/sprites/desk.png");
+}
+
+.painting {
+  top: 32%;
+  left: 36%;
+  width: 6%;
+  background-image: url("/assets/sprites/painting.png");
+}
+
+.monkey {
+  top: 60%;
+  left: 53%;
+  width: 11%;
+  background-image: url("/assets/sprites/monkey.png");
+}
+
+.parrot {
+  top: 33%;
+  left: 65%;
+  width: 6%;
+  background-image: url("/assets/sprites/parrot.png");
+}
+
+.library {
+  top: 65%;
+  left: 77%;
+  width: 16%;
+  background-image: url("/assets/sprites/book.png");
+}
 
 /* #endregion sprite */
-
-
 /* #endregion Home */
