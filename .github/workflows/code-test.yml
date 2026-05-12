@@ -20,3 +20,25 @@ jobs:
           # Simulate installation steps here
           sleep 2
           echo "Installation complete."
+      
+      - name: Check for Broken Links
+        uses: lycheeverse/lychee-action@v1.9.0
+        with:
+          # Scansiona tutti i file .html
+          args: --verbose --no-progress "**/*.html"
+
+      # Controlla la qualità del codice CSS, JavaScript, HTML, ecc.
+      - name: Super-Linter
+        uses: github/super-linter@v5
+        env:
+          VALIDATE_ALL_CODEBASE: true
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Controlla le performance e l'accessibilità del sito con Lighthouse
+      - name: Lighthouse Audit
+        uses: treosh/lighthouse-ci-action@v11
+        with:
+          urls: |
+            index.html
+          uploadArtifacts: true # Ti permette di scaricare il report finale
