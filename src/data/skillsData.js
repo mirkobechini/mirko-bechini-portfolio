@@ -110,6 +110,30 @@ const skillsData = [
         category: 'API Testing',
         details: '#',
         color: '#FF6C37',
+    },
+    {
+        id: 15,
+        skill: 'Copilot',
+        icon: '/assets/skills/copilot.png',
+        category: 'AI Tool',
+        details: '#',
+        color: '#00BFFF',
+    },
+    {
+        id: 16,
+        skill: 'Gemini',
+        icon: '/assets/skills/gemini.png',
+        category: 'AI Tool',
+        details: '#',
+        color: '#FFD700',
+    },
+    {
+        id: 17,
+        skill: 'Typescript',
+        icon: '/assets/skills/typescript.png',
+        category: 'Programming Language',
+        details: '#',
+        color: '#3178C6',
     }
 ];
 
