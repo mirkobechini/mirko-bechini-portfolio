@@ -17,10 +17,10 @@ const SkillsModal = memo(function SkillsModal() {
     return (
         <div className={styles.book}>
             <section className={styles.page}>
-                <h3 style={{ position: 'relative' }}>Competenze {currentSkill != null && <span className={styles.btnHome} onClick={() => handleClick(null)}>home</span>}</h3>
-                <div className={styles.skillsList}>
+                <h3 style={{ position: 'relative' }}>Competenze {currentSkill != null && <span className={styles['btn-home']} onClick={() => handleClick(null)}>home</span>}</h3>
+                <div className={styles['skills-list']}>
                     {skillsData.map(skill => (
-                        <div className={`${styles.skillCard} nes-container is-rounded ${currentSkill === skill ? "is-dark" : ""}`} key={skill.id} style={{ color: skill.color }}>
+                        <div className={`${styles['skill-card']} nes-container is-rounded ${currentSkill === skill ? "is-dark" : ""}`} key={skill.id} style={{ color: skill.color }}>
                             <img className={`nes-icon is-medium`} src={skill.icon} alt={skill.skill} onClick={() => handleClick(skill)} />
                         </div>
                     ))}
@@ -29,15 +29,15 @@ const SkillsModal = memo(function SkillsModal() {
             {currentSkill === null ? (
                 <section className={styles.page}>
                     <h3>Formazione</h3>
-                    <div className={styles.educationList}>
+                    <div className={styles['education-list']}>
                         {educationData.map(education => (
-                            <section className={styles.educationCard} key={education.id}>
-                                <span className={styles.educationPeriod}>{education.period}</span>
-                                <h5 className={styles.educationTitle}>{education.course} - {education.organization}</h5>
-                                <p className={styles.educationDescription}>{education.description}</p>
-                                <div className={styles.educationSkills}>
+                            <section className={styles['education-card']} key={education.id}>
+                                <span className={styles['education-period']}>{education.period}</span>
+                                <h5 className={styles['education-title']}>{education.course} - {education.organization}</h5>
+                                <p className={styles['education-description']}>{education.description}</p>
+                                <div className={styles['education-skills']}>
                                     {education.skills.map((skill, index) => (
-                                        <span key={index} className={styles.educationSkill}>{skill}</span>
+                                        <span key={index} className={styles['education-skill']}>{skill}</span>
                                     ))}
                                 </div>
                             </section>
@@ -45,7 +45,7 @@ const SkillsModal = memo(function SkillsModal() {
                     </div>
                 </section>
             ) : (
-                <section className={`${styles.page} ${styles.skillPage}`}>
+                <section className={`${styles.page} ${styles['skills-page']}`}>
                     <h3>{currentSkill.skill}</h3>
                     <p>{currentSkill.description}</p>
                     <section className={styles.functionality}>
@@ -54,7 +54,7 @@ const SkillsModal = memo(function SkillsModal() {
                             funzionalita da inserire
                         </ul>
                     </section>
-                    <section className={styles.relatedProjects}>
+                    <section className={styles['related-projects']}>
                         <h4>Progetti correlati:</h4>
                         <ul>
                             progetti correlati da inserire

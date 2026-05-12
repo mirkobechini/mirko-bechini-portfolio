@@ -1,5 +1,5 @@
 /* #region Commons */
-.modalOverlay {
+.modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -13,7 +13,7 @@
   align-items: center;
   cursor: default;
 }
-.gameModal {
+.game-modal {
   padding: 1.25rem;
   border: 4px solid #8d6e63;
   border-radius: 8px;
@@ -32,7 +32,7 @@
   
 }
 
-.modalHeader {
+.modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -40,21 +40,21 @@
 
   margin-bottom: 1.25rem;
 }
-.modalContent {
+.modal-content {
   margin-bottom: 1.25rem;
   flex: 1;
   min-height: 0;
   overflow-y: auto;
 }
 
-.modalFooter {
+.modal-footer {
   display: flex;
   justify-content: flex-end;
   position: sticky;
   backface-visibility: hidden;
 }
 
-.gameBtn {
+.game-btn {
   padding: 0.5rem 1rem;
   background: #6d4c41;
   color: #efebe9;
@@ -66,17 +66,17 @@
   font-family: inherit;
   transition: all 0.1s;
 }
-.gameBtn:hover {
+.game-btn:hover {
   background: #8d6e63;
   box-shadow: 0 0 8px rgba(165, 214, 167, 0.6);
 }
 
-.gameBtn:active {
+.game-btn:active {
   transform: translateY(2px);
   background: #4e342e;
 }
 
-.modalSprite {
+.modal-sprite {
   position: absolute;
   width: 40%;
   height: auto;
@@ -88,7 +88,7 @@
 /* #endregion Commons */
 
 /* #region Monkey theme */
-.theme-monkey .gameModal {
+.theme-monkey .game-modal {
   background-color: #2e7d32; /* Verde foresta */
   border-color: #1b5e20;
   color: #e8f5e9;
@@ -96,30 +96,30 @@
   animation: modalJumpIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.theme-monkey .modalHeader h2 {
+.theme-monkey .modal-header h2 {
   color: #ffeb3b;
   text-shadow: 2px 2px 0 #1b5e20;
   text-align: center;
   font-size: 1.5rem;
 }
 
-.theme-monkey .modalContent {
+.theme-monkey .modal-content {
   font-size: 1.1rem;
   line-height: 1.5;
   color: #c8e6c9;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
-.theme-monkey .gameBtn {
+.theme-monkey .game-btn {
   background-color: #1b5e20;
   color: #e8f5e9;
 }
 
-.theme-monkey .gameBtn:hover {
+.theme-monkey .game-btn:hover {
   background-color: #2e7d32;
   box-shadow: 0 0 8px rgba(165, 214, 167, 0.6);
 }
 
-.theme-monkey .modalSprite {
+.theme-monkey .modal-sprite {
   top: 100%;
   left: 19.5%;
 }
@@ -142,7 +142,7 @@
 /* #endregion Monkey theme */
 /* #region Painting theme */
 
-.theme-painting .gameModal {
+.theme-painting .game-modal {
   background: #2c1e14; /* Legno scuro tipo museo */
   border: 15px solid #d4af37; /* Bordo color Oro */
   border-image: linear-gradient(to bottom, #d4af37, #f7e083, #d4af37) 1;
@@ -166,7 +166,7 @@
   }
 }
 
-.theme-painting .modalSprite {
+.theme-painting .modal-sprite {
   top: 95%;
   left: -11%;
   width: 30%;
@@ -174,7 +174,7 @@
 /* #endregion Painting theme */
 
 /* #region Desk theme */
-.theme-desk .gameModal {
+.theme-desk .game-modal {
   border: 5px solid #4b2c1e;
   background-color: #1a2426;
   background-image: radial-gradient(#4e342e 1px, transparent 1px);
@@ -197,7 +197,7 @@
   }
 }
 
-.theme-desk .modalTitle {
+.theme-desk .modal-title {
   color: #e8c879;
   text-shadow:
     3px 3px 0px #000,
@@ -205,12 +205,12 @@
   text-align: center;
 }
 
-.theme-desk .modalSprite {
+.theme-desk .modal-sprite {
   top: 90%;
   left: -5%;
 }
 
-.theme-desk .gameBtn {
+.theme-desk .game-btn {
   border-image-source: url("/assets/images/projectModal/woodButton.png");
   border-image-slice: 10 15 fill;
   border-image-width: 5px 8px;
@@ -226,14 +226,14 @@
   font-family: inherit;
   image-rendering: pixelated;
 }
-.theme-desk .gameBtn:hover {
+.theme-desk .game-btn:hover {
   transform: scale(1.05);
 }
 
 /* #endregion Desk theme */
 
 /* #region Library theme */
-.theme-library .gameModal {
+.theme-library .game-modal {
   background-image: url("/assets/modals/book-modal-bg.png");
   background-repeat: no-repeat;
   background-size: cover;
@@ -257,12 +257,12 @@
   animation: bookOpen 0.6s ease-out forwards;
 }
 
-.theme-library .gameBtn {
+.theme-library .game-btn {
   background-color: #3e2723;
   color: #e8f5e9;
 }
 
-.theme-library .gameBtn:hover {
+.theme-library .game-btn:hover {
   background-color: #5d4037;
   box-shadow: 0 0 8px rgba(165, 214, 167, 0.6);
 }
@@ -278,13 +278,13 @@
   }
 }
 
-.theme-library .modalSprite {
+.theme-library .modal-sprite {
   top: 100%;
   left: 26%;
 }
 /* #endregion Library theme */
 /* #region Parrot theme */
-.theme-parrot .gameModal {
+.theme-parrot .game-modal {
   background-color: #fff9c4;
   border: 4px dashed #f4511e;
   color: #3e2723;

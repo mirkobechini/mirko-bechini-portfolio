@@ -5,12 +5,12 @@ import { memo } from 'react';
 const CertificationsModal = memo(function CertificationsModal() {
 
     return (
-        <div className={styles.galleryContainer}>
+        <div className={styles['gallery-container']}>
 
             {
                 certificationData.map(cert => (
 
-                    <div className={styles.certificateItem} key={cert.id}>
+                    <div className={styles['certificate-item']} key={cert.id}>
                         <div className={styles.frame}>
                             <img src={cert.preview} alt={cert.title} loading="lazy" decoding="async" /> {/* Ottimizzazione del caricamento dell'immagine */}
                         </div>

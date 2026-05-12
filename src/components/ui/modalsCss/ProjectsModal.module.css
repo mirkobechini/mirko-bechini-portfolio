@@ -1,11 +1,11 @@
-.deskContainer {
+.desk-container {
   display: flex;
   flex-direction: column;
   gap: 5px;
   height: 100%;
 }
 /* #region Filter styles */
-.filterContainer {
+.filter-container {
   display: flex;
   align-items: center;
   gap: 2rem;
@@ -13,14 +13,14 @@
   width: 100%;
 }
 
-.filterGroup {
+.filter-group {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
 }
 
-.filterWrapper {
+.filter-wrapper {
   position: relative;
   border-image-source: url("/assets/images/projectModal/woodWrapper.png");
   border-image-slice: 28 35 fill;
@@ -42,7 +42,7 @@
 
 /* TODO: riguardare*/
 @media (max-width: 480px) {
-  .filterWrapper {
+  .filter-wrapper {
     /* Scaliamo mantenendo il rapporto: il lato è sempre circa il doppio della parte alta */
     border-image-width: 8px 18px 6px 18px;
     border-width: 8px 18px 6px 18px;
@@ -50,7 +50,7 @@
   }
 }
 
-.buttonLabel {
+.button-label {
   border-image-source: url("/assets/images/projectModal/woodButton.png");
   border-image-slice: 10 15 fill;
   border-image-width: 5px 8px;
@@ -74,11 +74,11 @@
   transition: transform 0.1s ease;
 }
 
-.buttonLabel:hover {
+.button-label:hover {
   transform: scale(1.05);
 }
 
-.filterLabel {
+.filter-label {
   position: absolute;
   top: -75%;
   left: 2%;
@@ -93,11 +93,11 @@
   image-rendering: crisp-edges;
 }
 
-.selectedFilter {
+.selected-filter {
   border-image-source: url("/assets/images/projectModal/woodButtonSelected.png");
 }
 
-.resetButtonContainer {
+.reset-button-container {
   position: relative;
   line-height: 0;
   width: 30%;
@@ -110,7 +110,7 @@
   transition: transform 0.1s ease;
 }
 
-.resetButtonContainer img {
+.reset-button-container img {
   width: 100%;
   height: auto;
   display: block;
@@ -120,15 +120,15 @@
   image-rendering: crisp-edges;
 }
 
-.resetButtonContainer:hover {
+.reset-button-container:hover {
   transform: scale(1.05);
 }
 
-.resetButtonContainer:active {
+.reset-button-container:active {
   transform: scale(0.95);
 }
 
-.resetText {
+.reset-text {
   width: 100%;
   position: absolute;
   color: #7e915f;
@@ -147,7 +147,7 @@
 }
 
 /* hide radio*/
-.visuallyHidden {
+.visually-hidden {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -161,7 +161,7 @@
 /* #endregion Filter styles */
 
 /* #region Folder styles */
-.foldersGrid {
+.folders-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
@@ -180,7 +180,7 @@
   transform: scale(1.1);
 }
 
-.folderIcon {
+.folder-icon {
   font-size: 3rem;
   position: relative;
   filter: drop-shadow(3px 3px 0px rgba(0, 0, 0, 0.3));
@@ -195,7 +195,7 @@
   text-shadow: 1px 1px 2px black;
 }
 
-.backBtn {
+.back-btn {
   background: #d84315;
   color: white;
   border: none;
@@ -205,13 +205,13 @@
   font-family: inherit;
   box-shadow: 3px 3px 0px #000;
 }
-.backBtn:hover {
+.back-btn:hover {
   background: #ff5722;
 }
 /* #endregion Folder styles */
 
 /* #region Project styles */
-.projectBlueprint {
+.project-blueprint {
   background: #e3f2fd;
   color: #0d47a1;
   padding: 15px;
@@ -226,20 +226,20 @@
   contain: layout paint;/*Per ottimizzare le prestazioni del rendering*/
 }
 
-.projectBlueprint.alternate {
+.project-blueprint.alternate {
   background: #fff9c4;
   color: #f57f17;
   border-left-color: #fbc02d;
   transform: rotate(3deg);
 }
 
-.projectBlueprint:hover {
+.project-blueprint:hover {
   transform: rotate(0deg) scale(1.05);
   z-index: 10;
   cursor: pointer;
 }
 
-.blueprintHeader {
+.blueprint-header {
   font-size: 0.7rem;
   font-weight: bold;
   opacity: 0.6;
@@ -247,7 +247,7 @@
   margin-bottom: 10px;
 }
 
-.viewBtn {
+.view-btn {
   display: inline-block;
   margin-top: 10px;
   font-size: 0.8rem;
@@ -255,11 +255,11 @@
   text-decoration: underline;
   color: inherit;
 }
-.viewBtn:hover {
+.view-btn:hover {
   color: #1565c0;
 }
 
-.projectsGrid {
+.projects-grid {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
@@ -267,25 +267,25 @@
   margin: 10px;
 }
 
-.linksGroup {
+.links-group {
   display: flex;
   gap: 10px;
   margin-top: 15px;
 }
 
-.projectTitle {
+.project-title {
   margin-top: 0;
   font-size: 1.5rem;
   margin-bottom: 10px;
 }
 
-.techStack {
+.tech-stack {
   margin-top: 10px;
   font-size: 1rem;
   color: #555;
 }
 
-.projectsView{
+.projects-view{
   overflow-y: auto;
   overscroll-behavior: contain; /*ottimizzazione del comportamento di scorrimento*/
   scrollbar-gutter: stable; 

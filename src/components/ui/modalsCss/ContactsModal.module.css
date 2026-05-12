@@ -1,21 +1,21 @@
-.contactsContainer {
+.contacts-container {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
-.contactIntro {
+.contact-intro {
   margin: 0;
 }
 
-.contactLinks {
+.contact-links {
   display: flex;
   flex-direction: column;
   gap: 15px;
   margin-top: 20px;
 }
 
-.contactCard {
+.contact-card {
   display: flex;
   align-items: center;
   padding: 15px;
@@ -29,12 +29,12 @@
   box-shadow: 4px 4px 0px #3e2723; /* Ombra netta retro */
 }
 
-.contactCard:hover {
+.contact-card:hover {
   transform: translate(-2px, -2px);
   box-shadow: 6px 6px 0px #f4511e;
 }
 
-.contactCard .icon {
+.contact-card .icon {
   font-size: 1.5rem;
   margin-right: 15px;
 }
@@ -55,6 +55,6 @@
   border-color: #263238;
 }
 
-.contactCard .sprite {
+.contact-card .sprite {
   top: 100%;
 }
