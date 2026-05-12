@@ -37,11 +37,11 @@ main {
   0%,
   100% {
     opacity: 0;
-}
+  }
 
   50% {
     opacity: 0.5;
-}
+  }
 }
 
 .scrollGuideLeft,
@@ -65,7 +65,7 @@ main {
   background: linear-gradient(to left, rgb(255 255 255 / 50%), transparent);
 }
 
-/* #endregion Start*/
+/* #endregion Start */
 /* #region Den background styling */
 .den-container {
   height: 100vh;
@@ -108,7 +108,7 @@ main {
 }
 
 /* #endregion Den background styling */
-/*#region sprite*/
+/* #region sprite */
 .sprite {
   position: absolute;
   border: none;

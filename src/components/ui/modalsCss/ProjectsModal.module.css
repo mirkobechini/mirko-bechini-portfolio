@@ -28,24 +28,24 @@
   border-image-width: 14px 18px 18px 18px;
   border-image-repeat: stretch;
   border-style: solid;
-  border-width: 14px 18px 12px 18px;
+  border-width: 14px 18px 12px;
   image-rendering: pixelated;
   box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
-  padding: 5px 12px 5px 12px;
+  padding: 5px 12px;
   width: 100%;
 }
 
-/* TODO: riguardare*/
+/* TODO: riguardare */
 @media (max-width: 480px) {
   .filter-wrapper {
     /* Scaliamo mantenendo il rapporto: il lato è sempre circa il doppio della parte alta */
     border-image-width: 8px 18px 6px 18px;
-    border-width: 8px 18px 6px 18px;
+    border-width: 8px 18px 6px;
     padding: 5px;
-}
+  }
 }
 
 .button-label {
@@ -138,7 +138,7 @@
   pointer-events: none;
 }
 
-/* hide radio*/
+/* hide radio */
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -215,7 +215,7 @@
     transform 0.3s,
     z-index 0;
   box-shadow: 5px 5px 15px rgb(0 0 0 / 30%);
-  contain: layout paint; /*Per ottimizzare le prestazioni del rendering*/
+  contain: layout paint; /* Per ottimizzare le prestazioni del rendering */
 }
 
 .project-blueprint.alternate {
@@ -280,7 +280,7 @@
 
 .projects-view {
   overflow-y: auto;
-  overscroll-behavior: contain; /*ottimizzazione del comportamento di scorrimento*/
+  overscroll-behavior: contain; /* ottimizzazione del comportamento di scorrimento */
   scrollbar-gutter: stable;
   -webkit-overflow-scrolling: touch;
 }
