@@ -49,5 +49,5 @@ jobs:
         uses: treosh/lighthouse-ci-action@v11
         with:
           urls: |
-            index.html
+            http://127.0.0.1:5173
           uploadArtifacts: true # Ti permette di scaricare il report finale
