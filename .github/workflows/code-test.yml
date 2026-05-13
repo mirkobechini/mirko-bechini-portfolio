@@ -22,18 +22,18 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '24'
+          node-version: "24"
 
       - name: Install dependencies
         run: npm install
-      
+
       - name: Emulate Installation
         run: |
           echo "Emulating installation process..."
           # Simulate installation steps here
           sleep 2
           echo "Installation complete."
-      
+
       - name: Check for Broken Links
         uses: lycheeverse/lychee-action@v1.9.0
         with:
@@ -44,10 +44,19 @@ jobs:
       - name: Run ESLint
         run: npm run lint
 
+      - name: Build app
+        run: npm run build
+
+      - name: Start preview server
+        run: npm run preview -- --host 127.0.0.1 --port 4173 &
+
+      - name: Wait for preview server
+        run: npx wait-on http://127.0.0.1:4173
+
       # Controlla le performance e l'accessibilità del sito con Lighthouse
       - name: Lighthouse Audit
         uses: treosh/lighthouse-ci-action@v11
         with:
           urls: |
-            http://127.0.0.1:5173
+            http://127.0.0.1:4173
           uploadArtifacts: true # Ti permette di scaricare il report finale
