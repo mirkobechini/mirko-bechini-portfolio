@@ -39,7 +39,7 @@
 }
 
 /* TODO: riguardare */
-@media (max-width: 480px) {
+@media (width <= 480px) {
   .filter-wrapper {
     /* Scaliamo mantenendo il rapporto: il lato è sempre circa il doppio della parte alta */
     border-image-width: 8px 18px 6px 18px;
@@ -215,7 +215,6 @@
     transform 0.3s,
     z-index 0;
   box-shadow: 5px 5px 15px rgb(0 0 0 / 30%);
-
   contain: layout paint; /* Per ottimizzare le prestazioni del rendering */
 }
 

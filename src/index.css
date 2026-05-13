@@ -40,8 +40,8 @@ main {
   }
 }
 
-.scrollGuideLeft,
-.scrollGuideRight {
+.scroll-guide-left,
+.scroll-guide-right {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -51,12 +51,12 @@ main {
   animation: blink-guide 2s ease-in-out infinite;
 }
 
-.scrollGuideLeft {
+.scroll-guide-left {
   left: 0;
   background: linear-gradient(to right, rgb(255 255 255 / 50%), transparent);
 }
 
-.scrollGuideRight {
+.scroll-guide-right {
   right: 0;
   background: linear-gradient(to left, rgb(255 255 255 / 50%), transparent);
 }

@@ -107,8 +107,8 @@ export default function HomePage() {
         <div className="den-container" ref={scrollRef} onMouseDown={handleGrab} onMouseLeave={handleLeave} onMouseUp={handleLeave} onMouseMove={handleMovement}>
             {(!hasMoved &&
                 <>
-                    <div className="scrollGuideLeft"></div>
-                    <div className="scrollGuideRight"></div>
+                    <div className="scroll-guide-left"></div>
+                    <div className="scroll-guide-right"></div>
                 </>
             )}
             <div className="den-wrapper">
