@@ -130,7 +130,7 @@ Apri il browser su `http://localhost:5173` (o la porta indicata dal progetto).
 - [x] Creazione del layout principale
 - [x] Header e Footer
 - [x] Struttura pagina Home
-- [x] Css pagina home
+- [x] CSS pagina home
 - [x] Modale base
 - [x] Refactoring codice e ottimizzazione performance
 - [x] Modale "About me"

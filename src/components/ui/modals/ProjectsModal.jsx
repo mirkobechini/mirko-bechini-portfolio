@@ -25,7 +25,7 @@ const ProjectsModal = memo(function ProjectsModal() {
         });
     }, [filterType, filterCompany]);
 
-    const groupedProjects = useMemo(() => {
+    /*const groupedProjects = useMemo(() => {
         return filteredProjects.reduce((companies, project) => {
             if (!companies[project.company]) {
                 companies[project.company] = [];
@@ -33,7 +33,7 @@ const ProjectsModal = memo(function ProjectsModal() {
             companies[project.company].push(project);
             return companies;
         }, {});
-    }, [filteredProjects]);
+    }, [filteredProjects]);*/
 
 
     return (
