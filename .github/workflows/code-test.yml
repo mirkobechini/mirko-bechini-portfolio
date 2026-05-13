@@ -40,13 +40,9 @@ jobs:
           # Scansiona tutti i file .html
           args: --verbose --no-progress --offline "**/*.html"
 
-      # Controlla la qualità del codice CSS, JavaScript, HTML, ecc.
-      - name: Super-Linter
-        uses: github/super-linter/slim@v5
-        env:
-          VALIDATE_ALL_CODEBASE: true
-          DEFAULT_BRANCH: main
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # Controlla la qualità del codice CSS, JavaScript, HTML, ecc. (variante superlinter)
+      - name: Run ESLint
+        run: npm run lint
 
       # Controlla le performance e l'accessibilità del sito con Lighthouse
       - name: Lighthouse Audit
