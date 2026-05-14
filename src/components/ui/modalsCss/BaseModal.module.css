@@ -90,9 +90,15 @@
 
 /* #region Monkey theme */
 .theme-monkey .game-modal {
-  background-color: #2e7d32; /* Verde foresta */
-  border-color: #1b5e20;
-  color: #e8f5e9;
+  border-width: 40px 40px;
+  border-style: solid;
+  border-color: transparent;
+  border-image-source: url('/assets/modals/monkey-modal-bg.png');
+  border-image-slice: 147 143 fill;
+  border-image-repeat: repeat;
+  border-image-width: 147px 143px;
+  padding: 20px;
+  image-rendering: pixelated;
   animation: modal-jump-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -106,33 +112,12 @@
 .theme-monkey .modal-content {
   font-size: 1.1rem;
   line-height: 1.5;
-  color: #c8e6c9;
+  color: #000;
   text-shadow: 1px 1px 2px rgb(0 0 0 / 50%);
 }
 
 .theme-monkey .game-btn {
   background-color: #1b5e20;
-  color: #e8f5e9;
-}
-
-.theme-desk .game-btn {
-  border-image-source: url("/assets/images/projectModal/woodButton.png");
-  border-image-slice: 10 15 fill;
-  border-image-width: 5px 8px;
-  border-width: 8px 12px;
-  border-style: solid;
-  padding: 10px 25px;
-  color: white;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  cursor: pointer;
-  font-family: inherit;
-  image-rendering: pixelated;
-}
-
-.theme-library .game-btn {
-  background-color: #3e2723;
   color: #e8f5e9;
 }
 
@@ -237,6 +222,22 @@
   left: -5%;
 }
 
+.theme-desk .game-btn {
+  border-image-source: url("/assets/images/projectModal/woodButton.png");
+  border-image-slice: 10 15 fill;
+  border-image-width: 5px 8px;
+  border-width: 8px 12px;
+  border-style: solid;
+  padding: 10px 25px;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  font-family: inherit;
+  image-rendering: pixelated;
+}
+
 .theme-desk .game-btn:hover {
   transform: scale(1.05);
 }
@@ -261,6 +262,11 @@
   perspective: 2000px;
   transform-origin: left center;
   animation: book-open 0.6s ease-out forwards;
+}
+
+.theme-library .game-btn {
+  background-color: #3e2723;
+  color: #e8f5e9;
 }
 
 .theme-library .game-btn:hover {

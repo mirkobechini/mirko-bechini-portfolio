@@ -92,30 +92,38 @@ Apri il browser su `http://localhost:5173` (o la porta indicata dal progetto).
 
 ```text
 .
+├── .github/
+│   └── workflows/
+│       └── code-test.yml
+├── .vscode/
+│   └── settings.json
 ├── public/
 │   ├── assets/
 │   │   ├── certifications/
 │   │   ├── images/
+│   │   │   └── projectModal/
 │   │   ├── modals/
+│   │   ├── skills/
 │   │   ├── sprites/
+├── dist/
+│   └── assets/
 ├── readmeAssets/
 ├── src/
-│   ├── api/
 │   ├── components/
 │   │   ├── layout/
 │   │   └── ui/
+│   │       ├── modals/
+│   │       └── modalsCss/
 │   ├── context/
 │   ├── data/
-│   ├── hooks/
 │   ├── pages/
-│   ├── redux/
-│   ├── services/
-│   ├── utils/
 │   ├── App.jsx
 │   ├── index.css
 │   └── main.jsx
+├── .gitignore
 ├── eslint.config.js
 ├── index.html
+├── package-lock.json
 ├── package.json
 ├── vite.config.js
 └── README.md
