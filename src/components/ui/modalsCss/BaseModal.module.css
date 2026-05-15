@@ -40,22 +40,19 @@
 }
 
 .modal-content {
+  padding-bottom: 1.5rem;
   margin-bottom: 1.25rem;
   flex: 1;
   min-height: 0;
   overflow-y: auto;
 }
 
-.modal-footer {
-  display: flex;
-  justify-content: flex-end;
-  position: sticky;
-  backface-visibility: hidden;
-}
-
 .game-btn {
-  padding: 0.5rem 1rem;
-  background: #6d4c41;
+  width: fit-content;
+  position: absolute;
+  bottom: 0.25rem;
+  right: 1rem;
+  background: transparent;
   color: #efebe9;
   border: none;
   border-radius: 4px;
@@ -67,13 +64,11 @@
 }
 
 .game-btn:hover {
-  background: #8d6e63;
-  box-shadow: 0 0 8px rgb(165 214 167 / 60%);
+  transform: scale(1.2);
 }
 
 .game-btn:active {
   transform: translateY(2px);
-  background: #4e342e;
 }
 
 .modal-sprite {
@@ -117,13 +112,19 @@
 }
 
 .theme-monkey .game-btn {
-  background-color: #1b5e20;
-  color: #e8f5e9;
-}
-
-.theme-monkey .game-btn:hover {
-  background-color: #2e7d32;
-  box-shadow: 0 0 8px rgb(165 214 167 / 60%);
+  border-width: 20px 80px;
+  border-style: solid;
+  border-color: transparent;
+  border-image-source: url('/assets/modals/monkey-modal-gamebtn.png');
+  border-image-slice: 140 303 fill;
+  border-image-width: 1;
+  border-image-repeat: repeat;
+  image-rendering: pixelated;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  min-width: 100px;
 }
 
 .theme-monkey .modal-sprite {

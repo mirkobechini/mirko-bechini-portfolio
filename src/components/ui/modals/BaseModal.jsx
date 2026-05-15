@@ -36,9 +36,7 @@ export default function BaseModal({ variant, closeModal }) {
                         <Component />
                     </Suspense>
                 </div>
-                <div className={styles['modal-footer']}>
-                    <button ref={closeBtnRef} className={styles['game-btn']} onClick={closeModal}>CONTINUA</button>
-                </div>
+                <button ref={closeBtnRef} className={styles['game-btn']} onClick={closeModal}>CONTINUA</button>
                 <img className={styles['modal-sprite']} src={variant.picture} alt={`${variant.theme} modal sprite`} />
             </div>
         </div>
