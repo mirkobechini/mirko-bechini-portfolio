@@ -1,6 +1,9 @@
+/* #region About Me sprite */
 .bottom-sprite {
   position: absolute;
+
   width: 15%;
   bottom: -10%;
   left: 2%;
 }
+/* #endregion About Me sprite */

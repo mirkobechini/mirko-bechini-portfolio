@@ -1,6 +1,8 @@
+/* #region Contacts layout */
 .contacts-container {
   display: flex;
   flex-direction: column;
+
   height: 100%;
 }
 
@@ -11,38 +13,49 @@
 .contact-links {
   display: flex;
   flex-direction: column;
+
   gap: 15px;
   margin-top: 20px;
 }
+/* #endregion Contacts layout */
 
+/* #region Contact cards */
 .contact-card {
   display: flex;
   align-items: center;
+
   padding: 15px;
+
+  color: inherit;
+  text-decoration: none;
+
   background: #fff;
   border: 2px solid #3e2723;
-  text-decoration: none;
-  color: inherit;
+  box-shadow: 4px 4px 0 #3e2723; /* Ombra netta retro */
+
   transition:
     transform 0.2s,
     box-shadow 0.2s;
-  box-shadow: 4px 4px 0 #3e2723; /* Ombra netta retro */
 }
 
 .contact-card:hover {
+  /* Micro offset per effetto "carta" che si solleva */
   transform: translate(-2px, -2px);
   box-shadow: 6px 6px 0 #f4511e;
 }
 
 .contact-card .icon {
-  font-size: 1.5rem;
   margin-right: 15px;
+
+  font-size: 1.5rem;
 }
 
 .label {
   font-weight: 700;
 }
+/* #endregion Contact cards */
 
+/* #region Contact variants */
 .mail {
   border-color: #ef6c00;
 }
@@ -54,7 +67,4 @@
 .github {
   border-color: #263238;
 }
-
-.contact-card .sprite {
-  top: 100%;
-}
+/* #endregion Contact variants */

@@ -1,41 +1,51 @@
 .desk-container {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+
   height: 100%;
+  gap: 5px;
 }
 
 /* #region Filter styles */
+/* Contenitore esterno area filtri (prima fascia del modale) */
 .filter-container {
   display: flex;
   align-items: center;
+
+  width: 100%;
   gap: 2rem;
   margin-bottom: 10px;
-  width: 100%;
 }
 
+/* Stack verticale dei blocchi filtro */
 .filter-group {
   display: flex;
-  flex-direction: column;
   align-items: flex-start;
+  flex-direction: column;
+
   gap: 10px;
 }
 
+/* Wrapper grafico in stile "cornice legno" per i pulsanti filtro */
 .filter-wrapper {
   position: relative;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  width: 100%;
+  gap: 5px;
+  padding: 5px 12px;
+
+  border-style: solid;
+  border-width: 14px 18px 12px;
   border-image-source: url("/assets/modals/projects/woodWrapper.png");
   border-image-slice: 28 35 fill;
   border-image-width: 14px 18px 18px 18px;
   border-image-repeat: stretch;
-  border-style: solid;
-  border-width: 14px 18px 12px;
+
   image-rendering: pixelated;
-  box-sizing: border-box;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  padding: 5px 12px;
-  width: 100%;
 }
 
 /* TODO: riguardare */
@@ -49,22 +59,27 @@
 }
 
 .button-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: auto;
+  min-width: 85px;
+  gap: 8px;
+  padding: 6px 14px;
+
+  font-weight: bold;
+  text-align: center;
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  border-width: 5px 8px;
   border-image-source: url("/assets/modals/projects/woodButton.png");
   border-image-slice: 10 15 fill;
   border-image-width: 5px 8px;
   border-image-repeat: stretch;
-  border-width: 5px 8px;
-  padding: 6px 14px;
-  white-space: nowrap;
-  width: auto;
-  min-width: 85px;
-  font-weight: bold;
-  text-align: center;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+
   transition: transform 0.1s ease;
 }
 
@@ -72,41 +87,67 @@
   transform: scale(1.05);
 }
 
+.visually-hidden {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+
+  overflow: hidden;
+  white-space: nowrap;
+
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* Label opzionale per intestare il gruppo di filtri */
 .filter-label {
   position: absolute;
   top: -75%;
   left: 2%;
+
   display: block;
 }
 
 .icon {
   width: 24px;
   height: 24px;
+
   object-fit: contain;
   image-rendering: pixelated;
 }
 
 .selected-filter {
+  /* Stato attivo: texture alternativa */
   border-image-source: url("/assets/modals/projects/woodButtonSelected.png");
 }
 
+/* Pulsante reset con immagine + testo sovrapposto */
 .reset-button-container {
   position: relative;
-  line-height: 0;
+
   width: 30%;
   height: auto;
+  padding: 0;
+  line-height: 0;
+
+  font-family: inherit;
+
+  cursor: pointer;
   background: none;
   border: none;
-  padding: 0;
-  font-family: inherit;
-  cursor: pointer;
+
   transition: transform 0.1s ease;
 }
 
 .reset-button-container img {
+  display: block;
+
   width: 100%;
   height: auto;
-  display: block;
+
   font-family: inherit;
   image-rendering: pixelated;
 }
@@ -120,8 +161,14 @@
 }
 
 .reset-text {
-  width: 100%;
   position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 100%;
+  transform: translate(-50%, -50%);
+
+  font-size: larger;
   color: #7e915f;
   text-shadow:
     -1px -1px 0 #000,
@@ -129,40 +176,129 @@
     -1px 1px 0 #000,
     1px 1px 0 #000,
     2px 2px 0 #000;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: larger;
-  pointer-events: none;
-}
 
-/* hide radio */
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+  pointer-events: none;
 }
 
 /* #endregion Filter styles */
 
+/* #region Project styles */
+/* Area scrollabile con tutti i blueprint */
+.projects-view {
+  overflow-y: auto;
+  overscroll-behavior: contain; /* ottimizzazione del comportamento di scorrimento */
+
+  scrollbar-gutter: stable;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Griglia/flow delle card progetto */
+.projects-grid {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  margin: 10px;
+  gap: 20px;
+}
+
+/* Card progetto base */
+.project-blueprint {
+  max-width: 45%;
+  padding: 15px;
+
+  color: #0d47a1;
+  background: #e3f2fd;
+  border-left: 5px solid #1565c0;
+
+  box-shadow: 5px 5px 15px rgb(0 0 0 / 30%);
+  transform: rotate(-2deg);
+  transition:
+    transform 0.3s,
+    z-index 0;
+
+  contain: layout paint; /* Per ottimizzare le prestazioni del rendering */
+}
+
+/* Variante alternata per spezzare il ritmo visivo */
+.project-blueprint.alternate {
+  color: #f57f17;
+  background: #fff9c4;
+  border-left-color: #fbc02d;
+
+  transform: rotate(3deg);
+}
+
+.project-blueprint:hover {
+  z-index: 10;
+
+  cursor: pointer;
+  transform: rotate(0) scale(1.05);
+}
+
+.blueprint-header {
+  margin-bottom: 10px;
+
+  font-size: 0.7rem;
+  font-weight: bold;
+  opacity: 0.6;
+
+  border-bottom: 1px dashed;
+}
+
+.project-title {
+  margin-top: 0;
+  margin-bottom: 10px;
+
+  font-size: 1.5rem;
+}
+
+.tech-stack {
+  margin-top: 10px;
+
+  font-size: 1rem;
+  color: #555;
+}
+
+.links-group {
+  display: flex;
+
+  margin-top: 15px;
+  gap: 10px;
+}
+
+.view-btn {
+  display: inline-block;
+
+  margin-top: 10px;
+
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: inherit;
+  text-decoration: underline;
+}
+
+.view-btn:hover {
+  color: #1565c0;
+}
+
+/* #endregion Project styles */
+
 /* #region Folder styles */
+/* Sezione legacy a cartelle (attualmente non primaria) */
 .folders-grid {
   display: flex;
   flex-wrap: wrap;
+
   gap: 30px;
   padding: 20px;
 }
 
 .folder {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
+
   cursor: pointer;
   transition: transform 0.2s;
 }
@@ -172,28 +308,35 @@
 }
 
 .folder-icon {
-  font-size: 3rem;
   position: relative;
+
+  font-size: 3rem;
+
   filter: drop-shadow(3px 3px 0 rgb(0 0 0 / 30%));
 }
 
 .folder span {
   margin-top: 10px;
-  font-weight: bold;
+
   font-size: 0.9rem;
-  text-align: center;
+  font-weight: bold;
   color: #fff;
+  text-align: center;
+
   text-shadow: 1px 1px 2px black;
 }
 
 .back-btn {
-  background: #d84315;
-  color: white;
-  border: none;
-  padding: 5px 15px;
   margin-bottom: 20px;
-  cursor: pointer;
+  padding: 5px 15px;
+
   font-family: inherit;
+  color: white;
+
+  cursor: pointer;
+  background: #d84315;
+  border: none;
+
   box-shadow: 3px 3px 0 #000;
 }
 
@@ -202,90 +345,6 @@
 }
 
 /* #endregion Folder styles */
-
-/* #region Project styles */
-.project-blueprint {
-  background: #e3f2fd;
-  color: #0d47a1;
-  padding: 15px;
-  max-width: 45%;
-  border-left: 5px solid #1565c0;
-  transform: rotate(-2deg);
-  transition:
-    transform 0.3s,
-    z-index 0;
-  box-shadow: 5px 5px 15px rgb(0 0 0 / 30%);
-  contain: layout paint; /* Per ottimizzare le prestazioni del rendering */
-}
-
-.project-blueprint.alternate {
-  background: #fff9c4;
-  color: #f57f17;
-  border-left-color: #fbc02d;
-  transform: rotate(3deg);
-}
-
-.project-blueprint:hover {
-  transform: rotate(0) scale(1.05);
-  z-index: 10;
-  cursor: pointer;
-}
-
-.blueprint-header {
-  font-size: 0.7rem;
-  font-weight: bold;
-  opacity: 0.6;
-  border-bottom: 1px dashed;
-  margin-bottom: 10px;
-}
-
-.view-btn {
-  display: inline-block;
-  margin-top: 10px;
-  font-size: 0.8rem;
-  font-weight: bold;
-  text-decoration: underline;
-  color: inherit;
-}
-
-.view-btn:hover {
-  color: #1565c0;
-}
-
-.projects-grid {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  align-items: center;
-  margin: 10px;
-}
-
-.links-group {
-  display: flex;
-  gap: 10px;
-  margin-top: 15px;
-}
-
-.project-title {
-  margin-top: 0;
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-}
-
-.tech-stack {
-  margin-top: 10px;
-  font-size: 1rem;
-  color: #555;
-}
-
-.projects-view {
-  overflow-y: auto;
-  overscroll-behavior: contain; /* ottimizzazione del comportamento di scorrimento */
-  scrollbar-gutter: stable;
-  -webkit-overflow-scrolling: touch;
-}
-
-/* #endregion Project styles */
 
 /* #region Scrollbar styles */
 ::-webkit-scrollbar {

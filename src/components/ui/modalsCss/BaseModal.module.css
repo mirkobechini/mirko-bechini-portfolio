@@ -1,42 +1,52 @@
 /* #region Commons */
 .modal-overlay {
   position: fixed;
+  z-index: 100;
+
   top: 0;
   left: 0;
+
   width: 100%;
   height: 100%;
-  z-index: 100;
-  background-color: rgb(0 0 0 / 50%);
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  background-color: rgb(0 0 0 / 50%);
   cursor: default;
 }
 
 .game-modal {
-  padding: 1.25rem;
-  border: 4px solid #8d6e63;
-  border-radius: 8px;
   position: relative;
-  max-width: 1000px;
-  width: 90%;
-  cursor: default;
+
   display: flex;
   flex-direction: column;
+
+  width: 90%;
+  max-width: 1000px;
   max-height: 75vh;
+  padding: 1.25rem;
+
+  color: #efebe9;
+  cursor: default;
+
+  border: 4px solid #8d6e63;
+  border-radius: 8px;
   box-shadow:
     0 0 0 4px #1a1a1a,
     /* Effetto "outline" esterno */ inset 0 0 15px rgb(0 0 0 / 50%);
-  color: #efebe9;
 }
 
 .modal-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  color: #efebe9;
+  justify-content: space-between;
+
   margin-bottom: 1.25rem;
+
+  color: #efebe9;
 }
 
 .modal-title {
@@ -44,26 +54,34 @@
 }
 
 .modal-content {
-  padding-bottom: 1.5rem;
-  margin-bottom: 1.25rem;
   flex: 1;
+
   min-height: 0;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.5rem;
+
   overflow-y: auto;
 }
 
 .game-btn {
-  width: fit-content;
   position: absolute;
+
   bottom: 0.25rem;
   right: 1rem;
-  background: transparent;
+
+  width: fit-content;
+
+  font-family: inherit;
+  font-weight: bold;
+  text-transform: uppercase;
+
   color: #efebe9;
+
+  cursor: pointer;
+  background: transparent;
   border: none;
   border-radius: 4px;
-  cursor: pointer;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-family: inherit;
+
   transition: all 0.1s;
 }
 
@@ -77,26 +95,32 @@
 
 .modal-sprite {
   position: absolute;
+
   width: 40%;
   height: auto;
+
   transform: translate(-50%, -50%);
+
   pointer-events: none;
-  -webkit-user-drag: none;
   cursor: default;
+  -webkit-user-drag: none;
 }
 
 /* #endregion Commons */
 
 /* #region Monkey theme */
 .theme-monkey .game-modal {
+  padding: 20px;
+
   border-width: 40px 40px;
   border-style: solid;
   border-color: transparent;
+
   border-image-source: url("/assets/modals/about-me/monkey-modal-bg.png");
   border-image-slice: 147 143 fill;
-  border-image-repeat: repeat;
   border-image-width: 147px 143px;
-  padding: 20px;
+  border-image-repeat: repeat;
+
   image-rendering: pixelated;
   animation: modal-jump-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -111,25 +135,31 @@
 .theme-monkey .modal-content {
   font-size: 1.1rem;
   line-height: 1.5;
+
   color: #000;
   text-shadow: 1px 1px 2px rgb(0 0 0 / 50%);
 }
 
 .theme-monkey .game-btn {
-  border-width: 20px 40px;
-  border-style: solid;
-  border-color: transparent;
-  border-image-source: url("/assets/modals/about-me/monkey-modal-gamebtn.png");
-  border-image-slice: 120 307 135 302 fill;
-  border-image-repeat: repeat;
-  image-rendering: pixelated;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.35rem 0.75rem 0.25rem;
-  max-width: fit-content;
-  bottom: -5%;
+
   right: -4%;
+  bottom: -5%;
+
+  max-width: fit-content;
+  padding: 0.35rem 0.75rem 0.25rem;
+
+  border-width: 20px 40px;
+  border-style: solid;
+  border-color: transparent;
+
+  border-image-source: url("/assets/modals/about-me/monkey-modal-gamebtn.png");
+  border-image-slice: 120 307 135 302 fill;
+  border-image-repeat: repeat;
+
+  image-rendering: pixelated;
 }
 
 .theme-monkey .modal-sprite {
@@ -158,9 +188,10 @@
 
 /* #region Painting theme */
 .theme-painting .game-modal {
-  background: #2c1e14; /* Legno scuro tipo museo */
   border: 15px solid #d4af37; /* Bordo color Oro */
   border-image: linear-gradient(to bottom, #d4af37, #f7e083, #d4af37) 1;
+
+  background: #2c1e14; /* Legno scuro tipo museo */
   box-shadow:
     0 0 50px rgb(0 0 0 / 80%),
     inset 0 0 20px rgb(0 0 0 / 50%);
@@ -192,10 +223,11 @@
 
 /* #region Desk theme */
 .theme-desk .game-modal {
-  border: 5px solid #4b2c1e;
   background-color: #1a2426;
   background-image: radial-gradient(#4e342e 1px, transparent 1px);
   background-size: 20px 20px; /* Effetto trama del legno o tappetino da taglio */
+
+  border: 5px solid #4b2c1e;
   box-shadow: inset 0 0 100px rgb(0 0 0 / 50%);
 
   /* Animazione: i fogli scivolano sul tavolo */
@@ -229,18 +261,22 @@
 }
 
 .theme-desk .game-btn {
+  padding: 10px 25px;
+
+  font-family: inherit;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: white;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  border-style: solid;
+  border-width: 8px 12px;
   border-image-source: url("/assets/modals/projects/woodButton.png");
   border-image-slice: 10 15 fill;
   border-image-width: 5px 8px;
-  border-width: 8px 12px;
-  border-style: solid;
-  padding: 10px 25px;
-  color: white;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  cursor: pointer;
-  font-family: inherit;
+
   image-rendering: pixelated;
 }
 
@@ -252,19 +288,22 @@
 
 /* #region Library theme */
 .theme-library .game-modal {
-  background-image: url("/assets/modals/skills/modal/book-modal-bg.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100% 100%;
   width: 90%;
-  max-width: 1000px;
+  height: 80vh;
   min-height: 500px;
+  max-width: 1000px;
   max-height: 600px;
+  padding: 40px 60px;
+
+  color: #3e2723;
+
+  background-image: url("/assets/modals/skills/modal/book-modal-bg.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   border: none;
   box-shadow: 0 15px 30px rgb(0 0 0 / 70%);
-  color: #3e2723;
-  padding: 40px 60px;
-  height: 80vh;
+
   perspective: 2000px;
   transform-origin: left center;
   animation: book-open 0.6s ease-out forwards;
@@ -301,9 +340,11 @@
 
 /* #region Parrot theme */
 .theme-parrot .game-modal {
+  color: #3e2723;
+
   background-color: #fff9c4;
   border: 4px dashed #f4511e;
-  color: #3e2723;
+
   animation: parrot-fly-in 0.5s ease-out forwards;
 }
 
@@ -320,4 +361,12 @@
   }
 }
 
+/* #region Legacy sprite hook */
+.theme-parrot .modal-sprite {
+  /* Manteniamo questo hook per eventuali sprite futuri nelle card */
+  position: absolute;
+  top: 100%;
+  left: 10%;
+}
+/* #endregion Legacy sprite hook */
 /* #endregion Parrot theme */
