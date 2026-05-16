@@ -1,5 +1,5 @@
-const skillsData = [
 const ASSETS = import.meta.env.VITE_ASSETS_PATH;
+const skillsData = [
 {
     id: 1,
         skill: 'HTML',

@@ -1,5 +1,5 @@
-const certificationData = [
 const ASSETS = import.meta.env.VITE_ASSETS_PATH;
+const certificationData = [
 {
     id: 1,
         title: 'Master web development part-time specializzazione PHP e Laravel',

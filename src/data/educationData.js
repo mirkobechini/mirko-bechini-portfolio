@@ -1,5 +1,5 @@
-const educationData = [
 const ASSETS = import.meta.env.VITE_ASSETS_PATH;
+const educationData = [
 {
     id: 1,
         course: 'Web development part-time specializzazione PHP e Laravel',
