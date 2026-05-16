@@ -1,5 +1,6 @@
 /* React & Libraries */
 import { useEffect, useRef, useState } from 'react';
+import { DRAG_SENSITIVITY, DRAG_THRESHOLD } from '../data/uiConstants';
 
 export const useDragScroll = (scrollRef, isDragDisabled) => {
     // State
@@ -57,9 +58,9 @@ export const useDragScroll = (scrollRef, isDragDisabled) => {
 
         dragRaf.current = requestAnimationFrame(() => {
             const x = pendingClientX.current - container.offsetLeft;
-            const walk = (x - startX.current) * 2;
+            const walk = (x - startX.current) * DRAG_SENSITIVITY;
 
-            if (Math.abs(x - startX.current) > 5) {
+            if (Math.abs(x - startX.current) > DRAG_THRESHOLD) {
                 isDragging.current = true;
             }
 

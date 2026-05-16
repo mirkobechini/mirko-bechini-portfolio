@@ -10,6 +10,7 @@ import GlobalContext from '../context/GlobalContext';
 
 /* Data & Constants */
 import MODAL_DATA from '../data/ModalData';
+import { MODAL_IDS } from '../data/uiConstants';
 
 /* Assets */
 import denBackground from '/assets/backgrounds/den.png';
@@ -42,7 +43,10 @@ export default function HomePage() {
 
     const openModal = (id) => {
         if (!isDragging.current) {
-            setActiveSection(MODAL_DATA.find(modal => modal.id === id));
+            const selectedModal = MODAL_DATA.find(modal => modal.id === id);
+            if (selectedModal) {
+                setActiveSection(selectedModal);
+            }
         }
     };
 
@@ -58,11 +62,11 @@ export default function HomePage() {
 
                 <img className="den-image" src={denBackground} onLoad={centerBackground} alt="Monkey Den" draggable="false" />
 
-                <button className='sprite monkey' aria-label="Sezione Chi Sono" title='About me' onClick={() => openModal(1)}></button>
-                <button className='sprite library' aria-label="Sezione Formazione & Competenze" title='Formation & Skills' onClick={() => openModal(2)}></button>
-                <button className='sprite desk' aria-label="Sezione Esperienze & Progetti" title='Experiences & Projects' onClick={() => openModal(3)}></button>
-                <button className='sprite parrot' aria-label="Sezione Contatti" title='Contacts' onClick={() => openModal(5)}></button>
-                <button className='sprite painting' aria-label="Sezione Certificazioni" title='Certifications' onClick={() => openModal(4)}></button>
+                <button className='sprite monkey' aria-label="Sezione Chi Sono" title='About me' onClick={() => openModal(MODAL_IDS.ABOUT_ME)}></button>
+                <button className='sprite library' aria-label="Sezione Formazione & Competenze" title='Formation & Skills' onClick={() => openModal(MODAL_IDS.SKILLS)}></button>
+                <button className='sprite desk' aria-label="Sezione Esperienze & Progetti" title='Experiences & Projects' onClick={() => openModal(MODAL_IDS.PROJECTS)}></button>
+                <button className='sprite parrot' aria-label="Sezione Contatti" title='Contacts' onClick={() => openModal(MODAL_IDS.CONTACTS)}></button>
+                <button className='sprite painting' aria-label="Sezione Certificazioni" title='Certifications' onClick={() => openModal(MODAL_IDS.CERTIFICATIONS)}></button>
             </div>
             {activeSection && (<BaseModal variant={activeSection} closeModal={closeModal} role="dialog" />)}
         </div >
