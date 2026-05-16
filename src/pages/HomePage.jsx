@@ -23,7 +23,7 @@ export default function HomePage() {
     const { activeSection, setActiveSection } = useContext(GlobalContext);
 
     // Custom hooks
-    const { hasMoved, handleGrab, handleLeave, handleMovement, centerBackground, isDragging } =
+    const { hasMoved, handleGrab, handleLeave, handleMovement, handleTouchStart, handleTouchMove, centerBackground, isDragging } =
         useDragScroll(scrollRef, activeSection !== null);
 
     // Effects
@@ -51,7 +51,7 @@ export default function HomePage() {
     };
 
     return (
-        <div className="den-container" ref={scrollRef} onMouseDown={handleGrab} onMouseLeave={handleLeave} onMouseUp={handleLeave} onMouseMove={handleMovement}>
+        <div className="den-container" ref={scrollRef} onMouseDown={handleGrab} onMouseLeave={handleLeave} onMouseUp={handleLeave} onMouseMove={handleMovement} onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleLeave}>
             {(!hasMoved &&
                 <>
                     <div className="scroll-guide-left"></div>
