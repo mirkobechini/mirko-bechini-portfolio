@@ -2,107 +2,39 @@ import { useEffect, useRef, useState } from 'react';
 import denBackground from '/assets/backgrounds/den.png';
 import MODAL_DATA from '../data/ModalData';
 import BaseModal from '../components/ui/modals/BaseModal';
+import { useDragScroll } from '../hooks/useDragScroll';
 
 export default function HomePage() {
+  // Refs
+  const scrollRef = useRef(null);
 
+  // State
+  const [activeSection, setActiveSection] = useState(null);
 
-    const [hasMoved, setHasMoved] = useState(false);
+  // Custom hooks
+  const { hasMoved, handleGrab, handleLeave, handleMovement, centerBackground, isDragging } =
+    useDragScroll(scrollRef, activeSection !== null);
+
+  // Effects
+  useEffect(() => {
     // Preload delle immagini dei modali
-    useEffect(() => {
-        MODAL_DATA.forEach((modal) => {
-            if (!modal.sprite) return;
-            const img = new Image();
-            img.src = modal.sprite;
-        });
-    }, []);
+    MODAL_DATA.forEach((modal) => {
+      if (!modal.sprite) return;
+      const img = new Image();
+      img.src = modal.sprite;
+    });
+  }, []);
 
+  // Handlers
+  const closeModal = () => {
+    setActiveSection(null);
+  };
 
-
-    // Ref per il container scrollabile
-    const scrollRef = useRef(null);
-
-    function centerBackground() {
-        const container = scrollRef.current;
-        if (container) {
-            const scrollCenter = (container.scrollWidth - container.clientWidth) / 2;
-            container.scrollLeft = scrollCenter;
-        }
+  const openModal = (id) => {
+    if (!isDragging.current) {
+      setActiveSection(MODAL_DATA.find(modal => modal.id === id));
     }
-
-    //Drag and scroll
-    //TODO: mappare onTouchStart, onTouchMove e onTouchEnd per mobile
-    const isHolding = useRef(false);
-    const isDragging = useRef(false);
-    const startX = useRef(0);
-    const scrollLeft = useRef(0);
-    const dragRaf = useRef(null);
-    const pendingClientX = useRef(0);
-
-    function handleGrab(event) {
-        if (!hasMoved) {
-            setHasMoved(true);
-        }
-        const container = scrollRef.current;
-        if (container) { // Verifica se il pulsante sinistro del mouse è premuto
-            isHolding.current = true;
-            isDragging.current = false;
-            startX.current = event.clientX - container.offsetLeft;
-            scrollLeft.current = container.scrollLeft;
-        }
-    }
-
-    function handleLeave() {
-        isHolding.current = false;
-        if (dragRaf.current) {
-            cancelAnimationFrame(dragRaf.current);
-            dragRaf.current = null;
-        }
-    }
-
-    function handleMovement(event) {
-        const container = scrollRef.current;
-        if (!isHolding.current || !container || activeSection !== null) return;
-
-        // Salvo solo l'ultimo input del mouse
-        pendingClientX.current = event.clientX;
-
-        // Se un frame è già schedulato, non ne pianifico un altro
-        if (dragRaf.current) return;
-
-        dragRaf.current = requestAnimationFrame(() => {
-            const x = pendingClientX.current - container.offsetLeft;
-            const walk = (x - startX.current) * 2;
-
-            if (Math.abs(x - startX.current) > 5) {
-                isDragging.current = true;
-            }
-
-            container.scrollLeft = scrollLeft.current - walk;
-            dragRaf.current = null;
-        });
-    }
-
-    // Cleanup per cancellare eventuali animazioni frame pendenti quando il componente viene smontato
-    useEffect(() => {
-        return () => {
-            if (dragRaf.current) {
-                cancelAnimationFrame(dragRaf.current);
-            }
-        };
-    }, []);
-
-    //Modals
-    const [activeSection, setActiveSection] = useState(null);
-
-    const closeModal = () => {
-        setActiveSection(null);
-    }
-
-    const openModal = (id) => {
-        if (!isDragging.current) {
-            setActiveSection(MODAL_DATA.find(modal => modal.id === id));
-        }
-    }
+  };
 
     return (
         <div className="den-container" ref={scrollRef} onMouseDown={handleGrab} onMouseLeave={handleLeave} onMouseUp={handleLeave} onMouseMove={handleMovement}>
