@@ -2,6 +2,7 @@ import styles from '../modalsCss/ProjectsModal.module.css';
 import { useMemo, useState, memo } from 'react';
 import projectData from '../../../data/projectData';
 import { getAssetPath } from '../../../utils/assets';
+import { isValidLink } from '../../../utils/links';
 
 const frontendIcon = getAssetPath('/modals/projects/frontend-icon.png');
 const backendIcon = getAssetPath('/modals/projects/backend-icon.png');
@@ -73,8 +74,8 @@ const ProjectsModal = memo(function ProjectsModal() {
                             <p>{project.description}</p>
                             <div className={styles['tech-stack']}>{project.technologies.map(tech => `#${tech} `)}</div>
                             <div className={styles['links-group']}>
-                                {project.repo !== "#" && <a href={project.repo} className={styles['view-btn']}>Apri Documentazione</a>}
-                                {project.demo !== "#" && <a href={project.demo} className={styles['view-btn']}>Vai al sito</a>}
+                                {isValidLink(project.repo) && <a href={project.repo} className={styles['view-btn']}>Apri Documentazione</a>}
+                                {isValidLink(project.demo) && <a href={project.demo} className={styles['view-btn']}>Vai al sito</a>}
                             </div>
                         </div>
                     ))}
