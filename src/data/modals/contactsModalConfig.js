@@ -1,5 +1,6 @@
-const ASSETS = import.meta.env.VITE_ASSETS_PATH;
-const parrotModal = ASSETS + '/modals/contacts/parrot-modal.png';
+import { getAssetPath } from '../../utils/assets';
+
+const parrotModal = getAssetPath('/modals/contacts/parrot-modal.png');
 
 const contactsModalConfig = {
     id: 5,

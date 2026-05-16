@@ -9,6 +9,7 @@ import { useDragScroll } from '../hooks/useDragScroll';
 import GlobalContext from '../context/GlobalContext';
 
 /* Utils */
+import { getAssetPath } from '../utils/assets';
 import { preloadImages } from '../utils/preloadImages';
 
 /* Data & Constants */
@@ -16,7 +17,7 @@ import MODAL_DATA from '../data/ModalData';
 import { MODAL_IDS } from '../data/uiConstants';
 
 /* Assets */
-const denBackground = import.meta.env.VITE_ASSETS_PATH + '/backgrounds/den.png';
+const denBackground = getAssetPath('/backgrounds/den.png');
 
 export default function HomePage() {
     // Refs

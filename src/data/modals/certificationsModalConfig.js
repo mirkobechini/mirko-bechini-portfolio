@@ -1,5 +1,6 @@
-const ASSETS = import.meta.env.VITE_ASSETS_PATH;
-const paintingModal = ASSETS + '/modals/certifications/painting-modal.png';
+import { getAssetPath } from '../../utils/assets';
+
+const paintingModal = getAssetPath('/modals/certifications/painting-modal.png');
 
 const certificationsModalConfig = {
     id: 4,

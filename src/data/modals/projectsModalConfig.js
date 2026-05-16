@@ -1,5 +1,6 @@
-const ASSETS = import.meta.env.VITE_ASSETS_PATH;
-const deskModal = ASSETS + '/modals/projects/desk-modal.png';
+import { getAssetPath } from '../../utils/assets';
+
+const deskModal = getAssetPath('/modals/projects/desk-modal.png');
 
 const projectsModalConfig = {
     id: 3,

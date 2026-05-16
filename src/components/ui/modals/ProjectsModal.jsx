@@ -1,12 +1,13 @@
 import styles from '../modalsCss/ProjectsModal.module.css';
 import { useMemo, useState, memo } from 'react';
 import projectData from '../../../data/projectData';
-const assets = import.meta.env.VITE_ASSETS_PATH + '/modals/projects/';
-const frontendIcon = assets + 'frontend-icon.png';
-const backendIcon = assets + 'backend-icon.png';
-const fullstackIcon = assets + 'fullstack-icon.png';
-const folderIcon = assets + 'folder-icon.png';
-const resetButtonIcon = assets + 'reset_button.png';
+import { getAssetPath } from '../../../utils/assets';
+
+const frontendIcon = getAssetPath('/modals/projects/frontend-icon.png');
+const backendIcon = getAssetPath('/modals/projects/backend-icon.png');
+const fullstackIcon = getAssetPath('/modals/projects/fullstack-icon.png');
+const folderIcon = getAssetPath('/modals/projects/folder-icon.png');
+const resetButtonIcon = getAssetPath('/modals/projects/reset_button.png');
 
 const ProjectsModal = memo(function ProjectsModal() {
 
