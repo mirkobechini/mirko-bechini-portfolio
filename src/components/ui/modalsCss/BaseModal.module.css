@@ -322,6 +322,8 @@
 .theme-library .game-btn {
   background-color: #3e2723;
   color: #e8f5e9;
+  bottom: 5%;
+  right: 7%;
 }
 
 .theme-library .game-btn:hover {
