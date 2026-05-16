@@ -1,4 +1,5 @@
-import paintingModal from '/assets/modals/certifications/painting-modal.png';
+const ASSETS = import.meta.env.VITE_ASSETS_PATH;
+const paintingModal = ASSETS + '/modals/certifications/painting-modal.png';
 
 const certificationsModalConfig = {
     id: 4,

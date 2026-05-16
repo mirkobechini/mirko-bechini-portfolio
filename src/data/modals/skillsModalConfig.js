@@ -1,4 +1,5 @@
-import libraryModal from '/assets/modals/skills/modal/library-modal.png';
+const ASSETS = import.meta.env.VITE_ASSETS_PATH;
+const libraryModal = ASSETS + '/modals/skills/modal/library-modal.png';
 
 const skillsModalConfig = {
     id: 2,

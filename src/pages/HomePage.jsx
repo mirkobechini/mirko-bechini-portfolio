@@ -13,7 +13,7 @@ import MODAL_DATA from '../data/ModalData';
 import { MODAL_IDS } from '../data/uiConstants';
 
 /* Assets */
-import denBackground from '/assets/backgrounds/den.png';
+const denBackground = import.meta.env.VITE_ASSETS_PATH + '/backgrounds/den.png';
 
 export default function HomePage() {
     // Refs
