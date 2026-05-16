@@ -112,19 +112,20 @@
 }
 
 .theme-monkey .game-btn {
-  border-width: 20px 80px;
+  border-width: 20px 40px;
   border-style: solid;
   border-color: transparent;
   border-image-source: url('/assets/modals/monkey-modal-gamebtn.png');
-  border-image-slice: 140 303 fill;
-  border-image-width: 1;
+  border-image-slice: 120 307 135 302 fill;
   border-image-repeat: repeat;
   image-rendering: pixelated;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 20px;
-  min-width: 100px;
+  padding: 0.35rem 0.75rem 0.25rem;
+  max-width: fit-content;
+  bottom: -5%;
+  right: -4%;
 }
 
 .theme-monkey .modal-sprite {

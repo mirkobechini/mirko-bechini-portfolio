@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import styles from '../modalsCss/AboutMeModal.module.css';
 
 const AboutMeModal = memo(function AboutMeModal() {
     return (
@@ -20,6 +21,7 @@ const AboutMeModal = memo(function AboutMeModal() {
                 Mi piace leggere i manga, guardare gli anime e allenarmi in palestra, tutte attività
                 che mi aiutano ad affrontare le sfide quotidiane con grinta e perseveranza.
             </p>
+            <img src="/assets/images/aboutmeModal/bottom-sprite.png" alt="bottom sprite" className={styles['bottom-sprite']} />
         </>
     );
 });
