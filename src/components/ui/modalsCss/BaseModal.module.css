@@ -252,7 +252,7 @@
 
 /* #region Library theme */
 .theme-library .game-modal {
-  background-image: url("/assets/skills/modal/book-modal-bg.png");
+  background-image: url("/assets/modals/skills/modal/book-modal-bg.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;

@@ -2,7 +2,7 @@ const skillsData = [
     {
         id: 1,
         skill: 'HTML',
-        icon: '/assets/skills/icons/html.png',
+        icon: '/assets/modals/skills/icons/html.png',
         category: 'Mark-up',
         details: '#',
         color: '#E34F26',
@@ -10,7 +10,7 @@ const skillsData = [
     {
         id: 2,
         skill: 'CSS',
-        icon: '/assets/skills/icons/css.png',
+        icon: '/assets/modals/skills/icons/css.png',
         category: 'Mark-up',
         details: '#',
         color: '#1572B6',
@@ -18,7 +18,7 @@ const skillsData = [
     {
         id: 3,
         skill: 'JavaScript',
-        icon: '/assets/skills/icons/javascript.png',
+        icon: '/assets/modals/skills/icons/javascript.png',
         category: 'Frontend',
         details: '#',
         color: '#F7DF1E',
@@ -26,7 +26,7 @@ const skillsData = [
     {
         id: 4,
         skill: 'React',
-        icon: '/assets/skills/icons/react.png',
+        icon: '/assets/modals/skills/icons/react.png',
         category: 'Library',
         details: '#',
         color: '#61DAFB',
@@ -34,7 +34,7 @@ const skillsData = [
     {
         id: 5,
         skill: 'Node.js',
-        icon: '/assets/skills/icons/node.png',
+        icon: '/assets/modals/skills/icons/node.png',
         category: 'Backend',
         details: '#',
         color: '#339933',
@@ -42,7 +42,7 @@ const skillsData = [
     {
         id: 6,
         skill: 'Express',
-        icon: '/assets/skills/icons/express.png',
+        icon: '/assets/modals/skills/icons/express.png',
         category: 'Framework',
         details: '#',
         color: '#000000',
@@ -50,7 +50,7 @@ const skillsData = [
     {
         id: 7,
         skill: 'MySQL',
-        icon: '/assets/skills/icons/mysql.png',
+        icon: '/assets/modals/skills/icons/mysql.png',
         category: 'Database',
         details: '#',
         color: '#4479A1',
@@ -58,7 +58,7 @@ const skillsData = [
     {
         id: 8,
         skill: 'PHP',
-        icon: '/assets/skills/icons/php.png',
+        icon: '/assets/modals/skills/icons/php.png',
         category: 'Backend',
         details: '#',
         color: '#777BB4',
@@ -66,7 +66,7 @@ const skillsData = [
     {
         id: 9,
         skill: 'Laravel',
-        icon: '/assets/skills/icons/laravel.png',
+        icon: '/assets/modals/skills/icons/laravel.png',
         category: 'Framework',
         details: '#',
         color: '#FF2D20',
@@ -74,7 +74,7 @@ const skillsData = [
     {
         id: 10,
         skill: 'Git',
-        icon: '/assets/skills/icons/git.png',
+        icon: '/assets/modals/skills/icons/git.png',
         category: 'Version Control',
         details: '#',
         color: '#F05032',
@@ -82,7 +82,7 @@ const skillsData = [
     {
         id: 11,
         skill: 'GitHub',
-        icon: '/assets/skills/icons/github.png',
+        icon: '/assets/modals/skills/icons/github.png',
         category: 'Version Control',
         details: '#',
         color: '#181717',
@@ -90,7 +90,7 @@ const skillsData = [
     {
         id: 12,
         skill: 'VS Code',
-        icon: '/assets/skills/icons/vscode.png',
+        icon: '/assets/modals/skills/icons/vscode.png',
         category: 'IDE',
         details: '#',
         color: '#007ACC',
@@ -98,7 +98,7 @@ const skillsData = [
     {
         id: 13,
         skill: 'Vite',
-        icon: '/assets/skills/icons/vite.png',
+        icon: '/assets/modals/skills/icons/vite.png',
         category: 'Build Tool',
         details: '#',
         color: '#646CFF',
@@ -106,7 +106,7 @@ const skillsData = [
     {
         id: 14,
         skill: 'Postman',
-        icon: '/assets/skills/icons/postman.png',
+        icon: '/assets/modals/skills/icons/postman.png',
         category: 'API Testing',
         details: '#',
         color: '#FF6C37',
@@ -114,7 +114,7 @@ const skillsData = [
     {
         id: 15,
         skill: 'Copilot',
-        icon: '/assets/skills/icons/copilot.png',
+        icon: '/assets/modals/skills/icons/copilot.png',
         category: 'AI Tool',
         details: '#',
         color: '#00BFFF',
@@ -122,7 +122,7 @@ const skillsData = [
     {
         id: 16,
         skill: 'Gemini',
-        icon: '/assets/skills/icons/gemini.png',
+        icon: '/assets/modals/skills/icons/gemini.png',
         category: 'AI Tool',
         details: '#',
         color: '#FFD700',
@@ -130,7 +130,7 @@ const skillsData = [
     {
         id: 17,
         skill: 'Typescript',
-        icon: '/assets/skills/icons/typescript.png',
+        icon: '/assets/modals/skills/icons/typescript.png',
         category: 'Programming Language',
         details: '#',
         color: '#3178C6',
