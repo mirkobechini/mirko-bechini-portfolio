@@ -10,8 +10,9 @@ export default function HomePage() {
     // Preload delle immagini dei modali
     useEffect(() => {
         MODAL_DATA.forEach((modal) => {
+            if (!modal.sprite) return;
             const img = new Image();
-            img.src = modal.picture;
+            img.src = modal.sprite;
         });
     }, []);
 
