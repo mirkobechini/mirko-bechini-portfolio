@@ -1,40 +1,50 @@
-import { useEffect, useRef, useState } from 'react';
-import denBackground from '/assets/backgrounds/den.png';
-import MODAL_DATA from '../data/ModalData';
+/* React & Libraries */
+import { useContext, useEffect, useRef } from 'react';
+
+/* Components */
 import BaseModal from '../components/ui/modals/BaseModal';
+
+/* Hooks & Context */
 import { useDragScroll } from '../hooks/useDragScroll';
+import GlobalContext from '../context/GlobalContext';
+
+/* Data & Constants */
+import MODAL_DATA from '../data/ModalData';
+
+/* Assets */
+import denBackground from '/assets/backgrounds/den.png';
 
 export default function HomePage() {
-  // Refs
-  const scrollRef = useRef(null);
+    // Refs
+    const scrollRef = useRef(null);
 
-  // State
-  const [activeSection, setActiveSection] = useState(null);
+    // State
+    const { activeSection, setActiveSection } = useContext(GlobalContext);
 
-  // Custom hooks
-  const { hasMoved, handleGrab, handleLeave, handleMovement, centerBackground, isDragging } =
-    useDragScroll(scrollRef, activeSection !== null);
+    // Custom hooks
+    const { hasMoved, handleGrab, handleLeave, handleMovement, centerBackground, isDragging } =
+        useDragScroll(scrollRef, activeSection !== null);
 
-  // Effects
-  useEffect(() => {
-    // Preload delle immagini dei modali
-    MODAL_DATA.forEach((modal) => {
-      if (!modal.sprite) return;
-      const img = new Image();
-      img.src = modal.sprite;
-    });
-  }, []);
+    // Effects
+    useEffect(() => {
+        // Preload delle immagini dei modali
+        MODAL_DATA.forEach((modal) => {
+            if (!modal.sprite) return;
+            const img = new Image();
+            img.src = modal.sprite;
+        });
+    }, []);
 
-  // Handlers
-  const closeModal = () => {
-    setActiveSection(null);
-  };
+    // Handlers
+    const closeModal = () => {
+        setActiveSection(null);
+    };
 
-  const openModal = (id) => {
-    if (!isDragging.current) {
-      setActiveSection(MODAL_DATA.find(modal => modal.id === id));
-    }
-  };
+    const openModal = (id) => {
+        if (!isDragging.current) {
+            setActiveSection(MODAL_DATA.find(modal => modal.id === id));
+        }
+    };
 
     return (
         <div className="den-container" ref={scrollRef} onMouseDown={handleGrab} onMouseLeave={handleLeave} onMouseUp={handleLeave} onMouseMove={handleMovement}>
