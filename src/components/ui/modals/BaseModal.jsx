@@ -1,4 +1,5 @@
 import { useEffect, useRef, Suspense } from 'react';
+import ModalErrorBoundary from './ModalErrorBoundary';
 import styles from '../modalsCss/BaseModal.module.css';
 
 const LoadingFallback = () => (
@@ -32,9 +33,11 @@ export default function BaseModal({ variant, closeModal }) {
             </div>
             <div role="dialog" aria-modal="true" aria-labelledby="modal-title" className={styles['game-modal']} onClick={(e) => e.stopPropagation()}>
                 <div className={styles['modal-content']}>
-                    <Suspense key={variant.id} fallback={<LoadingFallback />}>
-                        <Component />
-                    </Suspense>
+                    <ModalErrorBoundary key={variant.id}>
+                        <Suspense fallback={<LoadingFallback />}>
+                            <Component />
+                        </Suspense>
+                    </ModalErrorBoundary>
                 </div>
                 <button ref={closeBtnRef} className={styles['game-btn']} onClick={closeModal}>CONTINUA</button>
                 {variant.sprite && (
