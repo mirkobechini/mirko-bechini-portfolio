@@ -182,3 +182,57 @@
   margin-top: 12px;
 }
 /* #endregion Skill detail sections */
+
+/* #region Skills theme slots */
+:global([data-modal-theme="library"] [data-modal-slot="modal"]) {
+  --modal-width: 90%;
+  --modal-height: 80vh;
+  --modal-min-height: 500px;
+  --modal-max-width: 1000px;
+  --modal-max-height: 600px;
+  --modal-padding: 40px 60px;
+
+  color: #3e2723;
+
+  background-image: url("/assets/modals/skills/modal/book-modal-bg.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  border: none;
+  box-shadow: 0 15px 30px rgb(0 0 0 / 70%);
+
+  perspective: 2000px;
+  transform-origin: left center;
+  animation: book-open 0.6s ease-out forwards;
+}
+
+:global([data-modal-theme="library"] [data-modal-slot="button"]) {
+  right: 7%;
+  bottom: 5%;
+
+  color: #e8f5e9;
+  background-color: #3e2723;
+}
+
+:global([data-modal-theme="library"] [data-modal-slot="button"]:hover) {
+  background-color: #5d4037;
+  box-shadow: 0 0 8px rgb(165 214 167 / 60%);
+}
+
+:global([data-modal-theme="library"] [data-modal-slot="sprite"]) {
+  top: 100%;
+  left: 26%;
+}
+
+@keyframes book-open {
+  0% {
+    transform: perspective(1000px) rotateY(-90deg);
+    opacity: 0;
+  }
+
+  100% {
+    transform: perspective(1000px) rotateY(0);
+    opacity: 1;
+  }
+}
+/* #endregion Skills theme slots */

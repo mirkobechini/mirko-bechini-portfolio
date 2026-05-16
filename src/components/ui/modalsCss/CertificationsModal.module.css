@@ -42,3 +42,35 @@
   height: auto;
 }
 /* #endregion Gallery items */
+
+/* #region Certifications theme slots */
+:global([data-modal-theme="painting"] [data-modal-slot="modal"]) {
+  border: 15px solid #d4af37;
+  border-image: linear-gradient(to bottom, #d4af37, #f7e083, #d4af37) 1;
+
+  background: #2c1e14;
+  box-shadow:
+    0 0 50px rgb(0 0 0 / 80%),
+    inset 0 0 20px rgb(0 0 0 / 50%);
+
+  animation: galleryZoom 0.4s ease-out forwards;
+}
+
+:global([data-modal-theme="painting"] [data-modal-slot="sprite"]) {
+  top: 95%;
+  left: -11%;
+  width: 30%;
+}
+
+@keyframes gallery-zoom {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+/* #endregion Certifications theme slots */

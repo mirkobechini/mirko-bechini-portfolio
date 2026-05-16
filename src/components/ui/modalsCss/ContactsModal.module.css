@@ -68,3 +68,32 @@
   border-color: #263238;
 }
 /* #endregion Contact variants */
+
+/* #region Contacts theme slots */
+:global([data-modal-theme="parrot"] [data-modal-slot="modal"]) {
+  color: #3e2723;
+
+  background-color: #fff9c4;
+  border: 4px dashed #f4511e;
+
+  animation: parrot-fly-in 0.5s ease-out forwards;
+}
+
+:global([data-modal-theme="parrot"] [data-modal-slot="sprite"]) {
+  position: absolute;
+  top: 100%;
+  left: 10%;
+}
+
+@keyframes parrot-fly-in {
+  0% {
+    transform: translateX(100%) rotate(10deg);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0) rotate(0);
+    opacity: 1;
+  }
+}
+/* #endregion Contacts theme slots */

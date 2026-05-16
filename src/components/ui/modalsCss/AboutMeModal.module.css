@@ -15,3 +15,94 @@
   left: 2%;
 }
 /* #endregion About Me sprite */
+
+/* #region About Me theme slots */
+:global([data-modal-theme="monkey"] [data-modal-slot="modal"]) {
+  padding: 20px;
+
+  border-width: 40px 40px;
+  border-style: solid;
+  border-color: transparent;
+
+  border-image-source: url("/assets/modals/about-me/monkey-modal-bg.png");
+  border-image-slice: 147 143 fill;
+  border-image-width: 147px 143px;
+  border-image-repeat: repeat;
+
+  image-rendering: pixelated;
+  animation: modal-jump-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+:global([data-modal-theme="monkey"] [data-modal-slot="title"]) {
+  position: absolute;
+  z-index: 10;
+  top: 20.5%;
+  left: 50%;
+
+  padding: 0.5rem 1rem;
+
+  border-width: 10px 60px;
+  border-style: solid;
+  border-color: transparent;
+
+  border-image-source: url("/assets/modals/about-me/title-bg.png");
+  border-image-slice: 24 108 35 103 fill;
+  border-image-repeat: repeat;
+
+  image-rendering: pixelated;
+  text-align: center;
+  font-size: 1.5rem;
+  transform: translate(-50%, -50%);
+}
+
+:global([data-modal-theme="monkey"] [data-modal-slot="content"]) {
+  font-size: 1.1rem;
+  line-height: 1.5;
+
+  color: #000;
+  text-shadow: 1px 1px 2px rgb(0 0 0 / 50%);
+}
+
+:global([data-modal-theme="monkey"] [data-modal-slot="button"]) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  right: -3%;
+  bottom: -2.5%;
+
+  max-width: fit-content;
+  padding: 0.35rem 0.75rem 0.25rem;
+
+  border-width: 20px 40px;
+  border-style: solid;
+  border-color: transparent;
+
+  border-image-source: url("/assets/modals/about-me/monkey-modal-gamebtn.png");
+  border-image-slice: 120 307 135 302 fill;
+  border-image-repeat: repeat;
+
+  image-rendering: pixelated;
+}
+
+:global([data-modal-theme="monkey"] [data-modal-slot="sprite"]) {
+  top: 100%;
+  left: 19.5%;
+}
+
+@keyframes modal-jump-in {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  70% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+/* #endregion About Me theme slots */
