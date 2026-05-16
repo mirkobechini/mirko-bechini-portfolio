@@ -8,6 +8,9 @@ import BaseModal from '../components/ui/modals/BaseModal';
 import { useDragScroll } from '../hooks/useDragScroll';
 import GlobalContext from '../context/GlobalContext';
 
+/* Utils */
+import { preloadImages } from '../utils/preloadImages';
+
 /* Data & Constants */
 import MODAL_DATA from '../data/ModalData';
 import { MODAL_IDS } from '../data/uiConstants';
@@ -28,12 +31,7 @@ export default function HomePage() {
 
     // Effects
     useEffect(() => {
-        // Preload delle immagini dei modali
-        MODAL_DATA.forEach((modal) => {
-            if (!modal.sprite) return;
-            const img = new Image();
-            img.src = modal.sprite;
-        });
+        preloadImages(MODAL_DATA.map((modal) => modal.sprite));
     }, []);
 
     // Handlers
