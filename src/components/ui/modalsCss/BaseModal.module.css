@@ -32,11 +32,6 @@
   color: #efebe9;
   cursor: default;
 
-  border: 4px solid #8d6e63;
-  border-radius: 8px;
-  box-shadow:
-    0 0 0 4px #1a1a1a,
-    /* Effetto "outline" esterno */ inset 0 0 15px rgb(0 0 0 / 50%);
 }
 
 .modal-header {
@@ -125,11 +120,26 @@
   animation: modal-jump-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.theme-monkey .modal-header h2 {
-  color: #ffeb3b;
-  text-shadow: 2px 2px 0 #1b5e20;
+.theme-monkey .modal-title {
+  padding: 0.5rem 1rem;
+
+  border-width: 10px 60px;
+  border-style: solid;
+  border-color: transparent;
+
+  border-image-source: url("/assets/modals/about-me/title-bg.png");
+  border-image-slice: 24 108 35 103 fill;
+  border-image-repeat: repeat;
+
+  image-rendering: pixelated;
   text-align: center;
   font-size: 1.5rem;
+
+  position: absolute;
+  z-index: 10;
+  top: 20.5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .theme-monkey .modal-content {
@@ -145,8 +155,8 @@
   align-items: center;
   justify-content: center;
 
-  right: -4%;
-  bottom: -5%;
+  right: -3%;
+  bottom: -2.5%;
 
   max-width: fit-content;
   padding: 0.35rem 0.75rem 0.25rem;

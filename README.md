@@ -92,22 +92,22 @@ Apri il browser su `http://localhost:5173` (o la porta indicata dal progetto).
 
 ```text
 .
-├── .github/
-│   └── workflows/
-│       └── code-test.yml
-├── .vscode/
-│   └── settings.json
 ├── public/
 │   ├── assets/
-│   │   ├── certifications/
-│   │   ├── images/
-│   │   │   └── projectModal/
+│   │   ├── backgrounds/
+│   │   │   └── den.png
 │   │   ├── modals/
-│   │   ├── skills/
-│   │   ├── sprites/
-├── dist/
-│   └── assets/
+│   │   │   ├── about-me/
+│   │   │   ├── certifications/
+│   │   │   ├── contacts/
+│   │   │   ├── projects/
+│   │   │   └── skills/
+│   │   │       ├── icons/
+│   │   │       └── modal/
+│   │   └── sprites/
 ├── readmeAssets/
+│   ├── preview-gif.gif
+│   └── preview.png
 ├── src/
 │   ├── components/
 │   │   ├── layout/
@@ -116,6 +116,12 @@ Apri il browser su `http://localhost:5173` (o la porta indicata dal progetto).
 │   │       └── modalsCss/
 │   ├── context/
 │   ├── data/
+│   │   ├── modals/
+│   │   ├── certificationData.js
+│   │   ├── educationData.js
+│   │   ├── ModalData.jsx
+│   │   ├── projectData.js
+│   │   └── skillsData.js
 │   ├── pages/
 │   ├── App.jsx
 │   ├── index.css
@@ -153,16 +159,16 @@ Apri il browser su `http://localhost:5173` (o la porta indicata dal progetto).
 - [x] CSS bordi laterali per migliorare l'esperienza utente
 
 ### In sviluppo
-- [] Restyle modale "Esperienze & Progetti"
-- [] Restyle modale "Formazione & Competenze"
-- [] Restyle modale "Contatti"
-- [] Restyle modale "About me"
-- [] Ottimizzazione codice e performance
+- [ ] Restyle modale "Esperienze & Progetti"
+- [ ] Restyle modale "Formazione & Competenze"
+- [ ] Restyle modale "Contatti"
+- [x] Restyle modale "About me"
+- [ ] Ottimizzazione codice e performance
 
 ### Migliorie future
 - [ ] Loader per migliorare l'esperienza utente
 - [ ] Migliora animazioni e transizioni
-- [ ] Dark mode
+- [ ] Minor restyle
 - [ ] Miglioramento accessibilità (A11y)
 - [ ] Responsive design
 - [ ] Integrazione API esterna

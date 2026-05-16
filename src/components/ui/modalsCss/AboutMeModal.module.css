@@ -1,8 +1,16 @@
 /* #region About Me sprite */
+.top-left-angle {
+  position: absolute;
+
+  width: 30%;
+  top: -11.5%;
+  left: -4.5%;
+}
+
 .bottom-sprite {
   position: absolute;
 
-  width: 15%;
+  width: 20%;
   bottom: -10%;
   left: 2%;
 }
