@@ -2,9 +2,9 @@
 .top-left-angle {
   position: absolute;
 
-  width: 30%;
-  top: -11.5%;
-  left: -4.5%;
+  width: 35%;
+  top: -13.5%;
+  left: -4.4%;
 }
 
 .bottom-sprite {
@@ -18,7 +18,7 @@
 
 /* #region About Me theme slots */
 :global([data-modal-theme="monkey"] [data-modal-slot="modal"]) {
-  padding: 20px;
+  padding: 27px 20px;
 
   border-width: 40px 40px;
   border-style: solid;
