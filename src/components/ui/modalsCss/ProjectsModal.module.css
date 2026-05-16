@@ -23,7 +23,7 @@
 
 .filter-wrapper {
   position: relative;
-  border-image-source: url("/assets/images/projectModal/woodWrapper.png");
+  border-image-source: url("/assets/modals/projects/woodWrapper.png");
   border-image-slice: 28 35 fill;
   border-image-width: 14px 18px 18px 18px;
   border-image-repeat: stretch;
@@ -49,7 +49,7 @@
 }
 
 .button-label {
-  border-image-source: url("/assets/images/projectModal/woodButton.png");
+  border-image-source: url("/assets/modals/projects/woodButton.png");
   border-image-slice: 10 15 fill;
   border-image-width: 5px 8px;
   border-image-repeat: stretch;
@@ -87,7 +87,7 @@
 }
 
 .selected-filter {
-  border-image-source: url("/assets/images/projectModal/woodButtonSelected.png");
+  border-image-source: url("/assets/modals/projects/woodButtonSelected.png");
 }
 
 .reset-button-container {

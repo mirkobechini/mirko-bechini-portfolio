@@ -1,4 +1,4 @@
-import deskModal from '/assets/modals/desk-modal.png';
+import deskModal from '/assets/modals/projects/desk-modal.png';
 
 const projectsModalConfig = {
     id: 3,

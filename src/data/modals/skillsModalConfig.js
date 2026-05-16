@@ -1,4 +1,4 @@
-import libraryModal from '/assets/modals/library-modal.png';
+import libraryModal from '/assets/skills/modal/library-modal.png';
 
 const skillsModalConfig = {
     id: 2,

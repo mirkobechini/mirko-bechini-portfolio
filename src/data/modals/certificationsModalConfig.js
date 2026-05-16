@@ -1,4 +1,4 @@
-import paintingModal from '/assets/modals/painting-modal.png';
+import paintingModal from '/assets/modals/certifications/painting-modal.png';
 
 const certificationsModalConfig = {
     id: 4,

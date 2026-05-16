@@ -92,7 +92,7 @@
   border-width: 40px 40px;
   border-style: solid;
   border-color: transparent;
-  border-image-source: url('/assets/modals/monkey-modal-bg.png');
+  border-image-source: url("/assets/modals/about-me/monkey-modal-bg.png");
   border-image-slice: 147 143 fill;
   border-image-repeat: repeat;
   border-image-width: 147px 143px;
@@ -119,7 +119,7 @@
   border-width: 20px 40px;
   border-style: solid;
   border-color: transparent;
-  border-image-source: url('/assets/modals/monkey-modal-gamebtn.png');
+  border-image-source: url("/assets/modals/about-me/monkey-modal-gamebtn.png");
   border-image-slice: 120 307 135 302 fill;
   border-image-repeat: repeat;
   image-rendering: pixelated;
@@ -229,7 +229,7 @@
 }
 
 .theme-desk .game-btn {
-  border-image-source: url("/assets/images/projectModal/woodButton.png");
+  border-image-source: url("/assets/modals/projects/woodButton.png");
   border-image-slice: 10 15 fill;
   border-image-width: 5px 8px;
   border-width: 8px 12px;
@@ -252,7 +252,7 @@
 
 /* #region Library theme */
 .theme-library .game-modal {
-  background-image: url("/assets/modals/book-modal-bg.png");
+  background-image: url("/assets/skills/modal/book-modal-bg.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;

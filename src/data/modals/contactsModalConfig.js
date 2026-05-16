@@ -1,4 +1,4 @@
-import parrotModal from '/assets/modals/parrot-modal.png';
+import parrotModal from '/assets/modals/contacts/parrot-modal.png';
 
 const contactsModalConfig = {
     id: 5,

@@ -1,11 +1,11 @@
 import styles from '../modalsCss/ProjectsModal.module.css';
 import { useMemo, useState, memo } from 'react';
 import projectData from '../../../data/projectData';
-const frontendIcon = '/assets/images/projectModal/frontend-icon.png';
-const backendIcon = '/assets/images/projectModal/backend-icon.png';
-const fullstackIcon = '/assets/images/projectModal/fullstack-icon.png';
-const folderIcon = '/assets/images/projectModal/folder-icon.png';
-const resetButtonIcon = '/assets/images/projectModal/reset_button.png';
+const frontendIcon = '/assets/modals/projects/frontend-icon.png';
+const backendIcon = '/assets/modals/projects/backend-icon.png';
+const fullstackIcon = '/assets/modals/projects/fullstack-icon.png';
+const folderIcon = '/assets/modals/projects/folder-icon.png';
+const resetButtonIcon = '/assets/modals/projects/reset_button.png';
 
 const ProjectsModal = memo(function ProjectsModal() {
 
