@@ -79,6 +79,7 @@
   border-radius: 4px;
 
   transition: all 0.1s;
+  backface-visibility: hidden;
 }
 
 .game-btn:hover {
