@@ -20,7 +20,6 @@
 
 .game-modal {
   position: relative;
-  isolation: isolate;
 
   display: flex;
   flex-direction: column;
@@ -34,7 +33,6 @@
 
   color: #efebe9;
   cursor: default;
-  overflow: visible;
 }
 
 .modal-header {
@@ -53,15 +51,12 @@
 
 .modal-content {
   flex: 1;
-  position: relative;
-  z-index: 1;
 
   min-height: 0;
   margin-bottom: var(--space-xl);
   padding-bottom: var(--space-2xl);
 
   overflow-y: auto;
-  scrollbar-width: thin;
   scrollbar-color: #e76e05 #212529;
 }
 
