@@ -56,13 +56,15 @@
 }
 
 .skills-list {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  justify-items: center;
+  align-content: start;
+  --skills-gap: clamp(0.25rem, 0.8vw, 0.5rem);
 
   min-height: 0;
   padding: clamp(0.5rem, 2vw, 1rem);
-  gap: clamp(0.25rem, 0.8vw, 0.5rem);
+  gap: var(--skills-gap);
 
   overflow-x: hidden;
   overflow-y: auto;
@@ -76,9 +78,11 @@
   align-items: center;
   justify-content: center;
 
-  width: clamp(2.75rem, 6vw, 4rem);
-  height: clamp(2.75rem, 6vw, 4rem);
+  width: 100%;
+  max-width: 3.75rem;
+  aspect-ratio: 1;
   padding: 0 !important;
+  box-sizing: border-box;
 
   contain: content;
 }

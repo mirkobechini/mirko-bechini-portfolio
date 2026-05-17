@@ -112,8 +112,8 @@
 }
 
 .icon {
-  width: clamp(1.25rem, 2.5vw, 1.5rem);
-  height: clamp(1.25rem, 2.5vw, 1.5rem);
+  width: var(--icon-sm);
+  height: var(--icon-sm);
 
   object-fit: contain;
   image-rendering: pixelated;
@@ -168,7 +168,7 @@
   width: 100%;
   transform: translate(-50%, -50%);
 
-  font-size: larger;
+  font-size: var(--text-md);
   color: #7e915f;
   text-shadow:
     -1px -1px 0 #000,
@@ -239,7 +239,7 @@
 .blueprint-header {
   margin-bottom: var(--space-sm);
 
-  font-size: 0.7rem;
+  font-size: var(--text-xs);
   font-weight: bold;
   opacity: 0.6;
 
@@ -250,13 +250,13 @@
   margin-top: 0;
   margin-bottom: var(--space-sm);
 
-  font-size: 1.5rem;
+  font-size: var(--text-xl);
 }
 
 .tech-stack {
   margin-top: var(--space-sm);
 
-  font-size: 1rem;
+  font-size: var(--text-md);
   color: #555;
 }
 
@@ -334,7 +334,7 @@
 
   margin-top: var(--space-sm);
 
-  font-size: 0.8rem;
+  font-size: var(--text-sm);
   font-weight: bold;
   color: inherit;
   text-decoration: underline;
@@ -372,7 +372,7 @@
 .folder-icon {
   position: relative;
 
-  font-size: 3rem;
+  font-size: var(--icon-lg);
 
   filter: drop-shadow(0.1875rem 0.1875rem 0 rgb(0 0 0 / 30%));
 }
@@ -380,7 +380,7 @@
 .folder span {
   margin-top: var(--space-sm);
 
-  font-size: 0.9rem;
+  font-size: var(--text-md);
   font-weight: bold;
   color: #fff;
   text-align: center;

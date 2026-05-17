@@ -47,7 +47,7 @@
 .contact-card .icon {
   margin-right: var(--space-lg);
 
-  font-size: 1.5rem;
+  font-size: var(--icon-md);
 }
 
 .label {

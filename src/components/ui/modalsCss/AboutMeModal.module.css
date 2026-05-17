@@ -36,7 +36,7 @@
 :global([data-modal-theme="monkey"] [data-modal-slot="title"]) {
   position: absolute;
   z-index: 10;
-  top: 20.5%;
+  top: 14%;
   left: 50%;
 
   padding: 0.5rem 1rem;
@@ -51,12 +51,12 @@
 
   image-rendering: pixelated;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: var(--text-xl);
   transform: translate(-50%, -50%);
 }
 
 :global([data-modal-theme="monkey"] [data-modal-slot="content"]) {
-  font-size: 1.1rem;
+  font-size: var(--text-lg);
   line-height: 1.5;
 
   color: #000;
