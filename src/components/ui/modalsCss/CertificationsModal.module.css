@@ -5,8 +5,8 @@
   grid-template-columns: repeat(2, 1fr);
 
   height: 100%;
-  gap: 20px;
-  padding: 20px;
+  gap: var(--space-xl);
+  padding: var(--space-xl);
 
   overflow-y: auto;
 }
@@ -22,11 +22,11 @@
 
 .frame {
   background: white;
-  border: 8px solid #5d4037; /* Cornice interna in legno */
+  border: 0.5rem solid #5d4037; /* Cornice interna in legno */
 
-  padding: 5px;
+  padding: var(--space-2xs);
 
-  box-shadow: 5px 5px 15px rgb(0 0 0 / 50%);
+  box-shadow: 0.3125rem 0.3125rem 0.9375rem rgb(0 0 0 / 50%);
   transition: transform 0.3s;
 }
 
@@ -45,13 +45,13 @@
 
 /* #region Certifications theme slots */
 :global([data-modal-theme="painting"] [data-modal-slot="modal"]) {
-  border: 15px solid #d4af37;
+  border: 0.9375rem solid #d4af37;
   border-image: linear-gradient(to bottom, #d4af37, #f7e083, #d4af37) 1;
 
   background: #2c1e14;
   box-shadow:
-    0 0 50px rgb(0 0 0 / 80%),
-    inset 0 0 20px rgb(0 0 0 / 50%);
+    0 0 3.125rem rgb(0 0 0 / 80%),
+    inset 0 0 1.25rem rgb(0 0 0 / 50%);
 
   animation: galleryZoom 0.4s ease-out forwards;
 }

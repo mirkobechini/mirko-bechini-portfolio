@@ -18,7 +18,7 @@
 
 /* #region About Me theme slots */
 :global([data-modal-theme="monkey"] [data-modal-slot="modal"]) {
-  padding: 27px 20px;
+  padding: clamp(1rem, 2.8vw, 1.6875rem) clamp(0.875rem, 2.2vw, 1.25rem);
 
   border-width: 40px 40px;
   border-style: solid;
