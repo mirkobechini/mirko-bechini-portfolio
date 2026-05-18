@@ -13,6 +13,7 @@
 .contact-links {
   display: flex;
   flex-direction: column;
+  text-decoration: none !important;
 
   gap: var(--space-lg);
   margin-top: var(--space-xl);
@@ -27,7 +28,7 @@
   padding: var(--space-lg);
 
   color: inherit;
-  text-decoration: none;
+  text-decoration: none !important;
 
   background: #fff;
   border: 0.125rem solid #3e2723;

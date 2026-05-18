@@ -11,6 +11,8 @@
 .filter-container {
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 
   width: 100%;
   gap: 2rem;
@@ -132,6 +134,7 @@
   height: auto;
   padding: 0;
   line-height: 0;
+  
 
   font-family: inherit;
 
