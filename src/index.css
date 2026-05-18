@@ -161,7 +161,7 @@ main {
 .sprite-tag {
   position: absolute;
   
-  bottom: 115%; 
+  bottom: 100%; 
   left: 50%;
 
   transform: translate(-50%, 50%) scale(1);
@@ -192,11 +192,21 @@ main {
   background-image: url("/assets/sprites/desk.png");
 }
 
+.desk .sprite-tag {
+  bottom: 95%;
+  left: 35%;
+}
+
 .painting {
   top: 32%;
   left: 36%;
   width: 6%;
   background-image: url("/assets/sprites/painting.png");
+}
+
+.painting .sprite-tag {
+  bottom: 110%;
+  left: 50%;
 }
 
 .monkey {
@@ -206,6 +216,11 @@ main {
   background-image: url("/assets/sprites/monkey.png");
 }
 
+.monkey .sprite-tag {
+  bottom: 110%;
+  left: 45%;
+}
+
 .parrot {
   top: 33%;
   left: 65%;
@@ -213,11 +228,21 @@ main {
   background-image: url("/assets/sprites/parrot.png");
 }
 
+.parrot .sprite-tag {
+  bottom: 115%;
+  left: 45%;
+}
+
 .library {
   top: 65%;
   left: 77%;
   width: 16%;
   background-image: url("/assets/sprites/book.png");
+}
+
+.library .sprite-tag {
+  bottom: 105%;
+  left: 55%;
 }
 
 /* #endregion sprite */

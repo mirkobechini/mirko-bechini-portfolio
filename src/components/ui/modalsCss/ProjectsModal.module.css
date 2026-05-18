@@ -6,6 +6,11 @@
   gap: var(--space-2xs);
 }
 
+.sprite-tag {
+  bottom: 115%; 
+  left: 50%;
+}
+
 /* #region Filter styles */
 /* Contenitore esterno area filtri (prima fascia del modale) */
 .filter-container {
