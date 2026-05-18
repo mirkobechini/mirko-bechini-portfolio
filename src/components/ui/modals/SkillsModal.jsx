@@ -20,7 +20,7 @@ const SkillsModal = memo(function SkillsModal() {
                 <h3 style={{ position: 'relative' }}>Competenze {currentSkill != null && <span className={styles['btn-home']} onClick={() => handleClick(null)}>home</span>}</h3>
                 <div className={styles['skills-list']}>
                     {skillsData.map(skill => (
-                        <div className={`${styles['skill-card']} nes-container is-rounded ${currentSkill === skill ? "is-dark" : ""}`} key={skill.id} style={{ color: skill.color }}>
+                        <div className={`${styles['skill-card']} nes-container is-rounded ${currentSkill === skill ? styles['selected-skill'] : ""}`} key={skill.id} style={{ color: skill.color }}>
                             <img className={`nes-icon is-medium`} src={skill.icon} alt={skill.skill} onClick={() => handleClick(skill)} />
                         </div>
                     ))}

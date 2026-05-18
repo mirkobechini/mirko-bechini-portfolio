@@ -101,6 +101,10 @@
   will-change: auto;
 }
 
+.selected-skill {
+  background-color: #fff;
+}
+
 .skills-page {
   display: flex;
   flex-wrap: wrap;
