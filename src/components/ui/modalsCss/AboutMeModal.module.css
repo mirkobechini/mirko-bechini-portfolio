@@ -59,8 +59,50 @@
   font-size: var(--text-lg);
   line-height: 1.5;
 
+  padding-right: 1rem;
+  overflow-y: auto;
   color: #000;
   text-shadow: 1px 1px 2px rgb(0 0 0 / 50%);
+
+  scrollbar-color: auto !important;
+}
+
+:global([data-modal-theme="monkey"] [data-modal-slot="content"])::-webkit-scrollbar {
+  width: 1.5rem !important;
+}
+
+:global([data-modal-theme="monkey"] [data-modal-slot="content"])::-webkit-scrollbar-track {
+  background-image: url("/assets/modals/about-me/scrollbar-track.png") !important;
+  background-repeat: repeat-y !important;
+  background-position: center !important;
+  background-color: transparent !important;
+  background-size: 0.75rem 100% !important;
+  border: none !important;
+
+  border-top: 25px solid transparent !important;
+  border-bottom: 25px solid transparent !important;
+  background-clip: padding-box !important;
+}
+
+:global([data-modal-theme="monkey"] [data-modal-slot="content"])::-webkit-scrollbar-thumb {
+  background-image: url("/assets/modals/about-me/scrollbar-thumb.png") !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-color: transparent !important;
+  background-size: contain !important;
+
+  min-height: 50px !important;
+  max-height: 50px !important;
+
+  border: none !important;
+  box-shadow: none !important;
+
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+:global([data-modal-theme="monkey"] .modal-content[data-modal-slot="content"])::-webkit-scrollbar-button {
+  display: none !important;
 }
 
 :global([data-modal-theme="monkey"] [data-modal-slot="button"]) {
