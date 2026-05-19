@@ -204,6 +204,7 @@
   background-image: url("/assets/modals/skills/modal/book-modal-bg.png");
   background-position: center;
   background-repeat: no-repeat;
+  /*TODO: use border-image for better scaling*/
   background-size: 100% 100%;
   border: none;
   box-shadow: 0 0.9375rem 1.875rem rgb(0 0 0 / 70%);
