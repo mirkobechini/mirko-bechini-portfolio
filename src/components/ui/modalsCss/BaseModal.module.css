@@ -54,7 +54,7 @@
 
   min-height: 0;
   margin-bottom: var(--space-xl);
-  padding-bottom: var(--space-2xl);
+  padding-bottom: var(--space-xl);
 
   overflow-y: auto;
   scrollbar-color: #e76e05 #212529;

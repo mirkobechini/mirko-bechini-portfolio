@@ -197,19 +197,18 @@
   --modal-min-height: clamp(20rem, 60vh, 31.25rem);
   --modal-max-width: 62.5rem;
   --modal-max-height: 37.5rem;
-  --modal-padding: clamp(1rem, 3vw, 2.5rem) clamp(1rem, 5vw, 3.75rem);
+  --modal-padding: clamp(0.2rem, 3vw, 1.2rem) clamp(0.6rem, 3vw, 1.6rem);
 
   color: #3e2723;
 
-  background-image: url("/assets/modals/skills/modal/book-modal-bg.png");
-  background-position: center;
-  background-repeat: no-repeat;
-  /*TODO: use border-image for better scaling*/
-  background-size: 100% 100%;
-  border: none;
-  box-shadow: 0 0.9375rem 1.875rem rgb(0 0 0 / 70%);
+  border-width: 20px 20px;
+  border-style: solid;
+  border-color: transparent;
 
-  perspective: 125rem;
+  border-image-source: url("/assets/modals/skills/modal/book-modal-bg.png");
+  border-image-slice: 35 62 fill;
+  border-image-width: 35px 62px;
+  border-image-repeat: repeat;
   transform-origin: left center;
   animation: book-open 0.6s ease-out forwards;
 }
