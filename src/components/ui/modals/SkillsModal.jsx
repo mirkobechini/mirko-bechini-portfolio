@@ -16,8 +16,9 @@ const SkillsModal = memo(function SkillsModal() {
 
     return (
         <div className={styles.book}>
+            {currentSkill != null && <span className={styles['btn-home']} onClick={() => handleClick(null)}>Home</span>}
             <section className={styles.page}>
-                <h3 style={{ position: 'relative' }}>Competenze {currentSkill != null && <span className={styles['btn-home']} onClick={() => handleClick(null)}>home</span>}</h3>
+                <h3 style={{ position: 'relative' }}>Competenze </h3>
                 <div className={styles['skills-list']}>
                     {skillsData.map(skill => (
                         <div className={`${styles['skill-card']} nes-container is-rounded ${currentSkill === skill ? styles['selected-skill'] : ""}`} key={skill.id} style={{ color: skill.color }}>
