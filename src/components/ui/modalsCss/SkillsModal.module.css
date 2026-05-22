@@ -68,7 +68,6 @@
   cursor: pointer;
   image-rendering: pixelated;
 
-  /* TODO: styling for home button hover and active states */
 }
 
 .btn-home:hover {
@@ -97,6 +96,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  appearance: none;
 
   width: 100%;
   max-width: 3.75rem;
@@ -104,13 +104,20 @@
   padding: 0 !important;
   box-sizing: border-box;
 
+  color: inherit;
+  font: inherit;
+
+  background: transparent;
+  border: none;
+  outline: none;
+  transition: transform 0.2s ease-in-out;
+
   contain: content;
 }
 
 .skill-card:hover {
   cursor: pointer;
   transform: scale(1.1);
-  transition: transform 0.2s ease-in-out;
 }
 
 .skill-card img {
@@ -234,9 +241,10 @@
 }
 
 :global([data-modal-theme="library"] [data-modal-slot="button"]) {
-  right: 7%;
-  bottom: 5%;
+  right: 5%;
+  bottom: 3%;
 
+  padding: 1rem 2rem;
   color: #e8f5e9;
   background-color: #3e2723;
 }
