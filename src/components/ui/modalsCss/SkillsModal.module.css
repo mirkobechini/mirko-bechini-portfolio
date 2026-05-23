@@ -42,7 +42,7 @@
 .btn-home {
   position: absolute;
   top: -4%;
-  left: 45.2%;
+  left: 46.3%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -118,6 +118,11 @@
 .skill-card:hover {
   cursor: pointer;
   transform: scale(1.1);
+}
+
+.skill-card:focus-visible {
+  outline: 0.125rem solid currentColor;
+  outline-offset: 0.125rem;
 }
 
 .skill-card img {
@@ -234,7 +239,7 @@
 
   border-image-source: url("/assets/modals/skills/modal/book-modal-bg.png");
   border-image-slice: 35 62 fill;
-  border-image-width: 35px 62px;
+  border-image-width: 35px 52px 35px 62px;
   border-image-repeat: repeat;
   transform-origin: left center;
   animation: book-open 0.6s ease-out forwards;
