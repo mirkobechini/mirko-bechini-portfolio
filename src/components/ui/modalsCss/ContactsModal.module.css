@@ -13,6 +13,7 @@
 .contact-links {
   display: flex;
   flex-direction: column;
+  align-items: center;
   text-decoration: none !important;
 
   gap: var(--space-lg);
@@ -24,6 +25,7 @@
 .contact-card {
   display: flex;
   align-items: center;
+  width: 95%;
 
   padding: var(--space-lg);
 
@@ -39,10 +41,11 @@
     box-shadow 0.2s;
 }
 
-.contact-card:hover {
+.contact-card:is(:hover, :focus, :focus-visible) {
   /* Micro offset per effetto "carta" che si solleva */
+  outline: none;
   transform: translate(-0.125rem, -0.125rem);
-  box-shadow: 0.375rem 0.375rem 0 #f4511e;
+  box-shadow: 0.375rem 0.375rem 0 #f4511e !important;
 }
 
 .contact-card .icon {
@@ -84,6 +87,12 @@
   position: absolute;
   top: 100%;
   left: 10%;
+}
+
+:global([data-modal-theme="parrot"] [data-modal-slot="button"]) {
+  padding: 0.5rem 1rem;
+  color: #e8f5e9;
+  background-color: #3e2723;
 }
 
 @keyframes parrot-fly-in {
