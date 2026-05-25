@@ -16,6 +16,7 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
     const educationData = currentProfile.educationData ?? [];
     const formationFocus = currentProfile.formationFocus ?? [];
     const formationRoadmap = currentProfile.formationRoadmap ?? [];
+    const profileSprite = currentProfile.modalSprite ?? null;
     const isSkillsProfile = currentProfile.id === 'skills';
     const isFormationProfile = currentProfile.id === 'formation';
     const profileVariantClass = isFormationProfile ? styles['book-formation'] : styles['book-skills'];
@@ -31,6 +32,15 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
 
     const handleSkillClick = (skill) => {
         setCurrentSkill(skill);
+    };
+
+    const handleHomeClick = () => {
+        if (isSkillsProfile && currentSkill != null) {
+            setCurrentSkill(null);
+            return;
+        }
+
+        onBackToBookshelf?.();
     };
 
     useEffect(() => {
@@ -115,14 +125,17 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
 
     return (
         <div className={`${styles.book} ${profileVariantClass}`}>
-            {onBackToBookshelf && (
-                <button type="button" className={`nes-btn ${styles['btn-back-bookshelf']}`} onClick={onBackToBookshelf}>
-                    Torna alla libreria
-                </button>
+            {profileSprite && (
+                <img
+                    className={styles['profile-sprite']}
+                    src={profileSprite}
+                    alt=""
+                    aria-hidden="true"
+                />
             )}
 
-            {currentSkill != null && isSkillsProfile && (
-                <span className={styles['btn-home']} onClick={() => handleSkillClick(null)}>
+            {onBackToBookshelf && (
+                <span className={styles['btn-home']} onClick={handleHomeClick}>
                     Home
                 </span>
             )}
