@@ -14,11 +14,20 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
 
     const skillsData = currentProfile.skillsData ?? [];
     const educationData = currentProfile.educationData ?? [];
+    const formationFocus = currentProfile.formationFocus ?? [];
+    const formationRoadmap = currentProfile.formationRoadmap ?? [];
     const isSkillsProfile = currentProfile.id === 'skills';
     const isFormationProfile = currentProfile.id === 'formation';
+    const profileVariantClass = isFormationProfile ? styles['book-formation'] : styles['book-skills'];
 
     const [currentSkill, setCurrentSkill] = useState(null);
     const skillCardRefs = useRef([]);
+
+    const statusLabels = {
+        done: 'Completato',
+        inProgress: 'In corso',
+        next: 'Prossimo',
+    };
 
     const handleSkillClick = (skill) => {
         setCurrentSkill(skill);
@@ -105,7 +114,7 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
     }, [currentProfile.id]);
 
     return (
-        <div className={styles.book}>
+        <div className={`${styles.book} ${profileVariantClass}`}>
             {onBackToBookshelf && (
                 <button type="button" className={`nes-btn ${styles['btn-back-bookshelf']}`} onClick={onBackToBookshelf}>
                     Torna alla libreria
@@ -144,7 +153,7 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
 
             {isSkillsProfile && (currentSkill === null ? (
                 <section className={styles.page}>
-                    <h3>Dettagli skill</h3>
+                    <h3>{currentProfile.detailsTitle ?? 'Dettagli skill'}</h3>
                     <p>Seleziona una skill per visualizzare dettagli e contenuti correlati.</p>
                 </section>
             ) : (
@@ -177,7 +186,7 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
                                     <h5 className={styles['education-title']}>{education.course} - {education.organization}</h5>
                                     <p className={styles['education-description']}>{education.description}</p>
                                     <div className={styles['education-skills']}>
-                                        {education.skills.map((skill, index) => (
+                                        {(education.skills ?? []).map((skill, index) => (
                                             <span key={index} className={styles['education-skill']}>{skill}</span>
                                         ))}
                                     </div>
@@ -185,9 +194,42 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
                             ))}
                         </div>
                     </section>
-                    <section className={styles.page}>
-                        <h3>In aggiornamento</h3>
-                        <p>Questa sezione verra ampliata con nuovi contenuti dedicati al profilo formation.</p>
+                    <section className={`${styles.page} ${styles['formation-page']}`}>
+                        <h3>{currentProfile.detailsTitle ?? 'Percorso e prossimi step'}</h3>
+                        <section className={styles['formation-panel']}>
+                            <h4>Focus attuale</h4>
+                            <div className={styles['formation-cards']}>
+                                {formationFocus.map((item, index) => (
+                                    <article key={`focus-${index}`} className={styles['formation-card']}>
+                                        <header className={styles['formation-card-header']}>
+                                            <h5>{item.title}</h5>
+                                            <span className={`${styles['formation-status']} ${styles[`status-${item.status}`]}`}>
+                                                {statusLabels[item.status] ?? 'Info'}
+                                            </span>
+                                        </header>
+                                        <p>{item.description}</p>
+                                        {item.badge && <span className={styles['formation-badge']}>{item.badge}</span>}
+                                    </article>
+                                ))}
+                            </div>
+                        </section>
+                        <section className={styles['formation-panel']}>
+                            <h4>Roadmap</h4>
+                            <div className={styles['formation-cards']}>
+                                {formationRoadmap.map((item, index) => (
+                                    <article key={`roadmap-${index}`} className={styles['formation-card']}>
+                                        <header className={styles['formation-card-header']}>
+                                            <h5>{item.title}</h5>
+                                            <span className={`${styles['formation-status']} ${styles[`status-${item.status}`]}`}>
+                                                {statusLabels[item.status] ?? 'Info'}
+                                            </span>
+                                        </header>
+                                        <p>{item.description}</p>
+                                        {item.badge && <span className={styles['formation-badge']}>{item.badge}</span>}
+                                    </article>
+                                ))}
+                            </div>
+                        </section>
                     </section>
                 </>
             )}

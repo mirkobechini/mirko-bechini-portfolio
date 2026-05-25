@@ -10,6 +10,16 @@
   gap: 12%;
 }
 
+.book-skills {
+  --panel-bg: #f5f5f5;
+  --panel-border: rgb(141 110 99 / 35%);
+}
+
+.book-formation {
+  --panel-bg: #f1ede5;
+  --panel-border: rgb(110 84 62 / 45%);
+}
+
 /* Singola pagina del libro (sinistra/destra) */
 .page {
   display: flex;
@@ -75,7 +85,7 @@
 
 .btn-back-bookshelf {
   position: absolute;
-  top: clamp(0.25rem, 1vw, 0.75rem);
+  top: -15%;
   left: clamp(0.25rem, 1vw, 0.75rem);
   z-index: 3;
 }
@@ -175,8 +185,9 @@
 .education-card {
   padding: clamp(0.5rem, 1.2vw, 0.625rem);
 
-  background-color: #f5f5f5;
+  background-color: var(--panel-bg, #f5f5f5);
   border-radius: 0.3125rem;
+  border: 0.0625rem solid var(--panel-border, rgb(141 110 99 / 35%));
 
   box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 10%);
 }
@@ -226,6 +237,87 @@
 .related-projects {
   margin-top: 0.75rem;
 }
+
+.formation-page {
+  gap: 0.75rem;
+}
+
+.formation-panel {
+  padding: clamp(0.5rem, 1.1vw, 0.75rem);
+  background-color: var(--panel-bg, #f5f5f5);
+  border: 0.0625rem solid var(--panel-border, rgb(141 110 99 / 35%));
+  border-radius: 0.3125rem;
+}
+
+.formation-panel h4 {
+  margin: 0 0 0.5rem;
+  font-size: 0.875rem;
+}
+
+.formation-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formation-card {
+  padding: 0.5rem;
+  border: 0.0625rem solid var(--panel-border, rgb(141 110 99 / 35%));
+  border-radius: 0.25rem;
+  background-color: rgb(255 255 255 / 55%);
+}
+
+.formation-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.formation-card-header h5 {
+  margin: 0;
+  font-size: 0.8125rem;
+}
+
+.formation-card p {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+.formation-status {
+  padding: 0.125rem 0.375rem;
+  border-radius: 999px;
+  font-size: 0.625rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.status-done {
+  color: #0f5132;
+  background-color: #d1e7dd;
+}
+
+.status-inProgress {
+  color: #664d03;
+  background-color: #fff3cd;
+}
+
+.status-next {
+  color: #084298;
+  background-color: #cfe2ff;
+}
+
+.formation-badge {
+  display: inline-flex;
+  margin-top: 0.375rem;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  background-color: rgb(62 39 35 / 12%);
+  font-size: 0.625rem;
+  font-weight: 700;
+}
 /* #endregion Skill detail sections */
 
 /* #region Skills theme slots */
@@ -270,8 +362,8 @@
 }
 
 :global([data-modal-theme="library"] [data-modal-slot="sprite"]) {
-  top: 100%;
-  left: 26%;
+  top: 80%;
+  left: 6%;
 }
 
 @keyframes book-open {

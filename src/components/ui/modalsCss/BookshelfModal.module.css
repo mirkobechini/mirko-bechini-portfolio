@@ -1,25 +1,82 @@
 .bookshelf {
-    display: flex;
+  display: flex;
+  flex: 1;
+  width: 100%;
+  min-height: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(1rem, 4vw, 3rem);
+  padding: clamp(0.75rem, 2vw, 1.5rem);
 }
 
-:global([data-modal-theme="library"] [data-modal-slot="modal"]) {
-  --modal-width: 90%;
-  --modal-height: 80vh;
-  --modal-min-height: clamp(20rem, 60vh, 31.25rem);
-  --modal-max-width: 62.5rem;
-  --modal-max-height: 37.5rem;
-  --modal-padding: clamp(0.2rem, 3vw, 1.2rem) clamp(0.6rem, 3vw, 1.6rem);
+.book-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: clamp(4rem, 5vw, 5rem);
 
+  width: clamp(10rem, 24vw, 15rem);
+  min-width: 9rem;
+  padding: clamp(0.5rem, 1.5vw, 1rem);
+
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  transition:
+    transform 0.18s ease,
+    filter 0.18s ease;
+}
+
+.book-button:hover {
+  transform: translateY(-0.125rem) scale(1.04);
+  filter: brightness(1.06);
+}
+
+.book-button:focus-visible {
+  outline: 0.125rem solid #3e2723;
+  outline-offset: 0.1875rem;
+}
+
+.book-image {
+  width: 100%;
+  height: auto;
+  max-height: clamp(9rem, 30vh, 14rem);
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.book-label {
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.25rem;
   color: #3e2723;
+  font-size: clamp(0.72rem, 1vw, 0.9rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background-color: rgb(255 248 225 / 82%);
+}
 
+:global([data-modal-theme="library"] [data-modal-slot="modal"]):has(
+  .bookshelf
+) {
   border-width: 20px 20px;
   border-style: solid;
   border-color: transparent;
-
-  border-image-source: url("/assets/modals/skills/modal/books-container.png");
-  border-image-slice: 35 62 fill;
-  border-image-width: 35px 52px 35px 62px;
-  border-image-repeat: repeat;
-  transform-origin: left center;
-  animation: book-open 0.6s ease-out forwards;
+  border-image-source: url("/assets/modals/formation-skills/books-container.png");
+  border-image-slice: 120 112 fill;
+  border-image-width: 120px 112px 121px 113px;
+  border-image-repeat: stretch;
+  background: transparent;
 }
+
+:global([data-modal-theme="library"] [data-modal-slot="modal"]):has(.bookshelf)
+  :global([data-modal-slot="sprite"]) {
+  width: clamp(7.25rem, 20vw, 12rem);
+  top: 84%;
+  left: 10%;
+  transform: translate(-50%, -50%);
+}
+
+/* TODO: responsive bookshelf layout (mobile/tablet) will be handled at the end of the project. */

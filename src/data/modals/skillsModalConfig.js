@@ -1,13 +1,13 @@
 import { getAssetPath } from '../../utils/assets';
 
-const libraryModal = getAssetPath('/modals/skills/modal/library-modal.png');
+const bookshelfModal = getAssetPath('/modals/formation-skills/books-monkey.png');
 
 const skillsModalConfig = {
     id: 2,
     title: 'Formazione & Competenze',
     theme: 'library',
     componentKey: 'bookshelf',
-    sprite: libraryModal,
+    sprite: bookshelfModal,
 };
 
 export default skillsModalConfig;
