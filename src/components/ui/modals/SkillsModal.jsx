@@ -1,4 +1,4 @@
-import { memo, useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useMemo, useRef, useState } from 'react';
 import styles from '../modalsCss/SkillsModal.module.css';
 import defaultSkillsData from '../../../data/skillsData';
 
@@ -12,7 +12,7 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
         skillsData: defaultSkillsData,
     };
 
-    const skillsData = currentProfile.skillsData ?? [];
+    const skillsData = useMemo(() => currentProfile.skillsData ?? [], [currentProfile.skillsData]);
     const educationData = currentProfile.educationData ?? [];
     const formationFocus = currentProfile.formationFocus ?? [];
     const formationRoadmap = currentProfile.formationRoadmap ?? [];
@@ -118,10 +118,6 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
         document.addEventListener('keydown', handleKeyDown);
         return () => document.removeEventListener('keydown', handleKeyDown);
     }, [currentSkill, currentProfile.enableKeyboardNavigation, isSkillsProfile, skillsData]);
-
-    useEffect(() => {
-        setCurrentSkill(null);
-    }, [currentProfile.id]);
 
     return (
         <div className={`${styles.book} ${profileVariantClass}`} data-profile={currentProfile.id}>
