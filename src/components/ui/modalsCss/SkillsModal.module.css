@@ -67,11 +67,17 @@
   text-orientation: upright;
   cursor: pointer;
   image-rendering: pixelated;
-
 }
 
 .btn-home:hover {
   transform: scaleY(1.3) scaleX(1);
+}
+
+.btn-back-bookshelf {
+  position: absolute;
+  top: clamp(0.25rem, 1vw, 0.75rem);
+  left: clamp(0.25rem, 1vw, 0.75rem);
+  z-index: 3;
 }
 
 .skills-list {

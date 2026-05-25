@@ -64,7 +64,7 @@ export default function HomePage() {
                 <button className='sprite monkey' aria-label="Sezione Chi Sono" title='About me' onClick={() => openModal(MODAL_IDS.ABOUT_ME)}>
                     <div className="nes-container is-rounded sprite-tag">Chi Sono</div>
                 </button>
-                <button className='sprite library' aria-label="Sezione Formazione & Competenze" title='Formation & Skills' onClick={() => openModal(MODAL_IDS.SKILLS)}>
+                <button className='sprite library' aria-label="Sezione Formazione & Competenze" title='Formation & Skills' onClick={() => openModal(MODAL_IDS.BOOKSHELF)}>
                     <div className="nes-container is-rounded sprite-tag">Formazione & Competenze</div>
                 </button>
                 <button className='sprite desk' aria-label="Sezione Esperienze & Progetti" title='Experiences & Projects' onClick={() => openModal(MODAL_IDS.PROJECTS)}>

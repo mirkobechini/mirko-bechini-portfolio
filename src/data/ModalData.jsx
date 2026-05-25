@@ -7,14 +7,15 @@ import contactsModalConfig from './modals/contactsModalConfig';
 
 // Lazy load componenti modali
 const AboutMeModal = lazy(() => import('../components/ui/modals/AboutMeModal'));
-const SkillsModal = lazy(() => import('../components/ui/modals/SkillsModal'));
+const BookshelfModal = lazy(() => import('../components/ui/modals/BookshelfModal'));
 const ProjectsModal = lazy(() => import('../components/ui/modals/ProjectsModal'));
 const CertificationsModal = lazy(() => import('../components/ui/modals/CertificationsModal'));
 const ContactsModal = lazy(() => import('../components/ui/modals/ContactsModal'));
 
 const MODAL_COMPONENTS = {
     aboutMe: AboutMeModal,
-    skills: SkillsModal,
+    bookshelf: BookshelfModal,
+    skills: BookshelfModal,
     projects: ProjectsModal,
     certifications: CertificationsModal,
     contacts: ContactsModal,

@@ -6,7 +6,7 @@ const skillsModalConfig = {
     id: 2,
     title: 'Formazione & Competenze',
     theme: 'library',
-    componentKey: 'skills',
+    componentKey: 'bookshelf',
     sprite: libraryModal,
 };
 
