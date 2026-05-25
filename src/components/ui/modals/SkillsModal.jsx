@@ -124,7 +124,7 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
     }, [currentProfile.id]);
 
     return (
-        <div className={`${styles.book} ${profileVariantClass}`}>
+        <div className={`${styles.book} ${profileVariantClass}`} data-profile={currentProfile.id}>
             {profileSprite && (
                 <img
                     className={styles['profile-sprite']}

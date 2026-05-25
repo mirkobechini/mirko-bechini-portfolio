@@ -7,6 +7,8 @@
 
   width: 100%;
   height: 100%;
+  min-height: 0;
+  max-height: 100%;
   gap: 12%;
 }
 
@@ -15,7 +17,7 @@
   z-index: 3;
   width: clamp(13.25rem, 32vw, 18rem);
   height: auto;
-  top: 111%;
+  top: 95%;
   left: 16%;
   transform: translate(-50%, -50%);
   pointer-events: none;
@@ -30,6 +32,8 @@
 .book-formation {
   --panel-bg: #f1ede5;
   --panel-border: rgb(110 84 62 / 45%);
+  min-height: 0;
+  max-height: 100%;
 }
 
 /* Singola pagina del libro (sinistra/destra) */
@@ -48,6 +52,14 @@
   overflow-y: auto;
 
   backface-visibility: hidden;
+}
+
+.book-formation .page {
+  flex: 1 1 0;
+  height: 100%;
+  min-height: 0;
+  max-height: 100%;
+  overflow-y: auto;
 }
 
 .page h3 {
@@ -97,7 +109,7 @@
 }
 
 .book-formation .btn-home {
-  top: -1.9%;
+  top: -1%;
 }
 
 .skills-list {
@@ -366,6 +378,13 @@
   overflow: visible;
 }
 
+:global([data-modal-theme="library"] [data-modal-slot="content"]):has(
+    [data-profile="formation"]
+  ) {
+  overflow: auto;
+  /*TODO: fix overflow issue for formation profile */
+}
+
 :global([data-modal-theme="library"] [data-modal-slot="button"]:hover) {
   background-color: #5d4037;
   box-shadow: 0 0 0.5rem rgb(165 214 167 / 60%);
@@ -377,11 +396,7 @@
 }
 
 :global([data-modal-theme="library"] [data-modal-slot="modal"]):has(
-    .book-skills
-  )
-  :global([data-modal-slot="sprite"]),
-:global([data-modal-theme="library"] [data-modal-slot="modal"]):has(
-    .book-formation
+    [data-profile]
   )
   :global([data-modal-slot="sprite"]) {
   display: none;
