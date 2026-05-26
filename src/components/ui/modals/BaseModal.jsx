@@ -1,4 +1,4 @@
-import { useEffect, useRef, Suspense } from 'react';
+import { useEffect, useRef, useState, Suspense } from 'react';
 import ModalErrorBoundary from './ModalErrorBoundary';
 import styles from '../modalsCss/BaseModal.module.css';
 
@@ -10,6 +10,7 @@ const LoadingFallback = () => (
 
 export default function BaseModal({ variant, closeModal }) {
     const closeBtnRef = useRef(null);
+    const [spriteSrc, setSpriteSrc] = useState(variant.sprite ?? null);
 
     // Chiusura con tasto ESC + focus sul pulsante all'apertura
     useEffect(() => {
@@ -21,6 +22,11 @@ export default function BaseModal({ variant, closeModal }) {
         document.addEventListener('keydown', handleKeyDown);
         return () => document.removeEventListener('keydown', handleKeyDown);
     }, [closeModal]);
+
+    // Keep sprite in sync when switching to another modal variant.
+    useEffect(() => {
+        setSpriteSrc(variant.sprite ?? null);
+    }, [variant.id, variant.sprite]);
 
     const Component = variant.component;
 
@@ -35,13 +41,13 @@ export default function BaseModal({ variant, closeModal }) {
                 <div data-modal-slot="content" className={styles['modal-content']}>
                     <ModalErrorBoundary key={variant.id}>
                         <Suspense fallback={<LoadingFallback />}>
-                            <Component />
+                            <Component setModalSprite={setSpriteSrc} defaultModalSprite={variant.sprite ?? null} />
                         </Suspense>
                     </ModalErrorBoundary>
                 </div>
                 <button ref={closeBtnRef} data-modal-slot="button" className={styles['game-btn']} onClick={closeModal}>CONTINUA</button>
-                {variant.sprite && (
-                    <img data-modal-slot="sprite" className={styles['modal-sprite']} src={variant.sprite} alt={`${variant.theme} modal sprite`} />
+                {spriteSrc && (
+                    <img data-modal-slot="sprite" className={styles['modal-sprite']} src={spriteSrc} alt={`${variant.theme} modal sprite`} />
                 )}
             </div>
         </div>

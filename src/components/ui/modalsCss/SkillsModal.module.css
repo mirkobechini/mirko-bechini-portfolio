@@ -349,7 +349,7 @@
   --modal-min-height: clamp(20rem, 60vh, 31.25rem);
   --modal-max-width: 62.5rem;
   --modal-max-height: 37.5rem;
-  --modal-padding: clamp(0.2rem, 3vw, 1.2rem) clamp(0.6rem, 3vw, 1.6rem);
+  --modal-padding: clamp(0.2rem, 3vw, 1.2rem) clamp(1.2rem, 4.4vw, 2.5rem);
 
   color: #3e2723;
 
@@ -359,7 +359,7 @@
 
   border-image-source: url("/assets/modals/skills/modal/book-modal-bg.png");
   border-image-slice: 35 62 fill;
-  border-image-width: 35px 52px 35px 62px;
+  border-image-width: 35px 62px 35px 62px;
   border-image-repeat: repeat;
   transform-origin: left center;
   animation: book-open 0.6s ease-out forwards;
@@ -379,8 +379,8 @@
 }
 
 :global([data-modal-theme="library"] [data-modal-slot="content"]):has(
-    [data-profile="formation"]
-  ) {
+  [data-profile="formation"]
+) {
   overflow: auto;
   /*TODO: fix overflow issue for formation profile */
 }
@@ -391,15 +391,8 @@
 }
 
 :global([data-modal-theme="library"] [data-modal-slot="sprite"]) {
-  top: 80%;
-  left: 6%;
-}
-
-:global([data-modal-theme="library"] [data-modal-slot="modal"]):has(
-    [data-profile]
-  )
-  :global([data-modal-slot="sprite"]) {
-  display: none;
+  top: 103%;
+  left: 24%;
 }
 
 @keyframes book-open {

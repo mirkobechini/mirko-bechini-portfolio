@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import styles from '../modalsCss/BookshelfModal.module.css';
 import SkillsModal from './SkillsModal';
 import { BOOKSHELF_PROFILES } from '../../../data/modals/skillsProfiles';
@@ -7,7 +7,7 @@ import { getAssetPath } from '../../../utils/assets';
 const formationBook = getAssetPath('/modals/formation-skills/books-formation.png');
 const skillsBook = getAssetPath('/modals/formation-skills/books-skill.png');
 
-const BookshelfModal = memo(function BookshelfModal() {
+const BookshelfModal = memo(function BookshelfModal({ setModalSprite, defaultModalSprite }) {
 
     const [selectedProfile, setSelectedProfile] = useState(null);
 
@@ -20,6 +20,15 @@ const BookshelfModal = memo(function BookshelfModal() {
     }
 
     const activeProfile = selectedProfile == null ? null : BOOKSHELF_PROFILES[selectedProfile];
+
+    useEffect(() => {
+        if (selectedProfile == null) {
+            setModalSprite?.(defaultModalSprite ?? null);
+            return;
+        }
+
+        setModalSprite?.(activeProfile?.modalSprite ?? defaultModalSprite ?? null);
+    }, [activeProfile, defaultModalSprite, selectedProfile, setModalSprite]);
 
     return (
         <>

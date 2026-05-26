@@ -16,7 +16,6 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
     const educationData = currentProfile.educationData ?? [];
     const formationFocus = currentProfile.formationFocus ?? [];
     const formationRoadmap = currentProfile.formationRoadmap ?? [];
-    const profileSprite = currentProfile.modalSprite ?? null;
     const isSkillsProfile = currentProfile.id === 'skills';
     const isFormationProfile = currentProfile.id === 'formation';
     const profileVariantClass = isFormationProfile ? styles['book-formation'] : styles['book-skills'];
@@ -121,15 +120,6 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
 
     return (
         <div className={`${styles.book} ${profileVariantClass}`} data-profile={currentProfile.id}>
-            {profileSprite && (
-                <img
-                    className={styles['profile-sprite']}
-                    src={profileSprite}
-                    alt=""
-                    aria-hidden="true"
-                />
-            )}
-
             {onBackToBookshelf && (
                 <span className={styles['btn-home']} onClick={handleHomeClick}>
                     Home

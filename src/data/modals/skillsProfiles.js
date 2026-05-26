@@ -2,7 +2,8 @@ import skillsData from '../skillsData';
 import educationData from '../educationData';
 import { getAssetPath } from '../../utils/assets';
 
-const skillsModalSprite = getAssetPath('/modals/skills/modal/library-modal.png');
+const skillsProfileSprite = getAssetPath('/modals/skills/modal/library-modal.png');
+const formationProfileSprite = getAssetPath('/modals/skills/modal/library-modal.png');
 
 const BOOKSHELF_PROFILES = {
     skills: {
@@ -10,7 +11,7 @@ const BOOKSHELF_PROFILES = {
         title: 'Competenze',
         detailsTitle: 'Dettagli skill',
         enableKeyboardNavigation: true,
-        modalSprite: skillsModalSprite,
+        modalSprite: skillsProfileSprite,
         skillsData,
     },
     formation: {
@@ -18,7 +19,7 @@ const BOOKSHELF_PROFILES = {
         title: 'Formazione',
         detailsTitle: 'Percorso e prossimi step',
         enableKeyboardNavigation: false,
-        modalSprite: skillsModalSprite,
+        modalSprite: formationProfileSprite,
         educationData,
         formationFocus: [
             {
