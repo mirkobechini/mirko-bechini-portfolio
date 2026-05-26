@@ -23,11 +23,6 @@ export default function BaseModal({ variant, closeModal }) {
         return () => document.removeEventListener('keydown', handleKeyDown);
     }, [closeModal]);
 
-    // Keep sprite in sync when switching to another modal variant.
-    useEffect(() => {
-        setSpriteSrc(variant.sprite ?? null);
-    }, [variant.id, variant.sprite]);
-
     const Component = variant.component;
 
     // Le dimensioni del modale sono gestite in BaseModal.module.css.

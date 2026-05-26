@@ -77,7 +77,7 @@ export default function HomePage() {
                     <div className="nes-container is-rounded sprite-tag">Certificazioni</div>
                 </button>
             </div>
-            {activeSection && (<BaseModal variant={activeSection} closeModal={closeModal} role="dialog" />)}
+            {activeSection && (<BaseModal key={`${activeSection.id}-${activeSection.sprite ?? ''}`} variant={activeSection} closeModal={closeModal} role="dialog" />)}
         </div >
 
     )
