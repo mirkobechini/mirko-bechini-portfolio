@@ -11,7 +11,6 @@
   max-height: 100%;
   gap: 12%;
 
-  overflow: hidden;
 }
 
 .profile-sprite {
@@ -67,14 +66,13 @@
 .btn-home {
   position: absolute;
   top: -5%;
-  left: 50.5%;
+  left: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   transform-origin: top center;
   transition: transform 0.18s ease;
 
-  z-index: 2;
   width: clamp(4.75rem, 6vw, 6.75rem);
   aspect-ratio: 421 / 624;
   height: auto;

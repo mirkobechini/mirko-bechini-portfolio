@@ -34,11 +34,6 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
     };
 
     const handleHomeClick = () => {
-        if (isSkillsProfile && currentSkill != null) {
-            setCurrentSkill(null);
-            return;
-        }
-
         onBackToBookshelf?.();
     };
 

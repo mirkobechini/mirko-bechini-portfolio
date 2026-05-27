@@ -33,7 +33,7 @@ const BookshelfModal = memo(function BookshelfModal({ setModalSprite, defaultMod
     return (
         <>
             {selectedProfile === null ? (
-                <div className={styles.bookshelf}>
+                <div className={styles.bookshelf} data-library-view="bookshelf">
                     <button className={styles['book-button']}
                         onClick={() => handleBookSelection('formation')}
                         aria-label={`Apri libro della formazione`}>
@@ -48,7 +48,7 @@ const BookshelfModal = memo(function BookshelfModal({ setModalSprite, defaultMod
                     </button>
                 </div>
             ) : (
-                <div className={styles.book}>
+                <div className={styles.book} data-library-view="profile">
                     {activeProfile != null && (
                         <SkillsModal
                             profile={activeProfile}

@@ -61,6 +61,12 @@
 }
 
 :global([data-modal-theme="library"] [data-modal-slot="content"]) {
+  overflow: visible;
+}
+
+:global([data-modal-theme="library"] [data-modal-slot="content"]):has(
+    [data-library-view="bookshelf"]
+  ) {
   overflow: hidden;
 }
 
