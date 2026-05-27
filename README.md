@@ -192,7 +192,7 @@ I token globali sono definiti in [src/index.css](src/index.css) dentro `:root`:
 ### In sviluppo
 
 - [ ] Restyle modale "Esperienze & Progetti" (add experiences)
-- [ ] Restyle modale "Formazione & Competenze" (add 2 books)
+- [ ] Restyle modale "Formazione & Competenze" (add skills details)
 - [ ] Restyle modale "Contatti" (Change monkey sprite)
 - [x] Restyle modale "About me"
 - [ ] Navigazione da tastiera e miglioramento accessibilità (A11y)

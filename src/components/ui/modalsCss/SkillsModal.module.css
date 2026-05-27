@@ -10,6 +10,8 @@
   min-height: 0;
   max-height: 100%;
   gap: 12%;
+
+  overflow: hidden;
 }
 
 .profile-sprite {
@@ -32,8 +34,6 @@
 .book-formation {
   --panel-bg: #f1ede5;
   --panel-border: rgb(110 84 62 / 45%);
-  min-height: 0;
-  max-height: 100%;
 }
 
 /* Singola pagina del libro (sinistra/destra) */
@@ -41,25 +41,16 @@
   display: flex;
   flex: 1;
   flex-direction: column;
+  min-height: 0;
 
   position: relative;
 
   width: 45%;
-  min-height: 0;
   padding: clamp(0.625rem, 1.2vw, 0.9375rem);
 
-  overflow-x: hidden;
-  overflow-y: auto;
+
 
   backface-visibility: hidden;
-}
-
-.book-formation .page {
-  flex: 1 1 0;
-  height: 100%;
-  min-height: 0;
-  max-height: 100%;
-  overflow-y: auto;
 }
 
 .page h3 {
@@ -75,7 +66,7 @@
 /* #region Skills panel */
 .btn-home {
   position: absolute;
-  top: -4%;
+  top: -5%;
   left: 50.5%;
   display: flex;
   align-items: center;
@@ -83,6 +74,7 @@
   transform-origin: top center;
   transition: transform 0.18s ease;
 
+  z-index: 2;
   width: clamp(4.75rem, 6vw, 6.75rem);
   aspect-ratio: 421 / 624;
   height: auto;
@@ -108,12 +100,9 @@
   transform: translateX(-50%) scaleY(1.3) scaleX(1);
 }
 
-.book-formation .btn-home {
-  top: -1%;
-}
-
 .skills-list {
   display: grid;
+  flex: 1;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   justify-items: center;
   align-content: start;
@@ -125,8 +114,9 @@
 
   overflow-x: hidden;
   overflow-y: auto;
+  overscroll-behavior: contain;
 
-  contain: layout style paint;
+  contain: layout style;
 }
 
 /* Card icona skill: contenitore fisso per allineamento uniforme */
@@ -184,28 +174,41 @@
 /* #endregion Skills panel */
 
 /* #region Education panel */
+.education-page {
+  padding: clamp(0.5rem, 1vw, 0.75rem);
+}
+
+.education-page h3 {
+  margin-bottom: clamp(0.4rem, 0.9vw, 0.65rem);
+  padding-bottom: clamp(0.2rem, 0.45vw, 0.3rem);
+}
+
 .education-list {
   display: flex;
   flex: 1;
   flex-direction: column;
 
   min-height: 0;
-  gap: clamp(0.5rem, 1.2vw, 0.625rem);
+  gap: clamp(0.375rem, 1vw, 0.5rem);
+  padding-right: clamp(0.35rem, 0.8vw, 0.55rem);
 
-  overflow-x: hidden;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
 
-  /* Hide scrollbar for all browsers */
-
-  /* TODO: styling scrollbar */
-  -ms-overflow-style: none; /* IE and Edge */
-  contain: layout style paint;
+  -ms-overflow-style: auto;
+  contain: layout style;
   scroll-snap-align: center;
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: thin;
+}
+
+.skills-page,
+.formation-page {
+  overflow-y: auto;
 }
 
 .education-card {
-  padding: clamp(0.5rem, 1.2vw, 0.625rem);
+  padding: clamp(0.4rem, 0.95vw, 0.55rem);
 
   background-color: var(--panel-bg, #f5f5f5);
   border-radius: 0.3125rem;
@@ -372,17 +375,6 @@
   padding: 1rem 2rem;
   color: #e8f5e9;
   background-color: #3e2723;
-}
-
-:global([data-modal-theme="library"] [data-modal-slot="content"]) {
-  overflow: visible;
-}
-
-:global([data-modal-theme="library"] [data-modal-slot="content"]):has(
-  [data-profile="formation"]
-) {
-  overflow: auto;
-  /*TODO: fix overflow issue for formation profile */
 }
 
 :global([data-modal-theme="library"] [data-modal-slot="button"]:hover) {

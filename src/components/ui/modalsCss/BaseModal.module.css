@@ -60,6 +60,10 @@
   scrollbar-color: #e76e05 #212529;
 }
 
+:global([data-modal-theme="library"] [data-modal-slot="content"]) {
+  overflow: hidden;
+}
+
 .modal-content::-webkit-scrollbar {
   width: 1rem;
 }

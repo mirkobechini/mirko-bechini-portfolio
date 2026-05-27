@@ -176,7 +176,7 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
 
             {isFormationProfile && (
                 <>
-                    <section className={styles.page}>
+                    <section className={`${styles.page} ${styles['education-page']}`}>
                         <h3>{currentProfile.title}</h3>
                         <div className={styles['education-list']}>
                             {educationData.map((education) => (
