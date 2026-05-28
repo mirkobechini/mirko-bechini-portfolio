@@ -73,7 +73,7 @@
   transform-origin: top center;
   transition: transform 0.18s ease;
 
-  width: clamp(4.75rem, 6vw, 6.75rem);
+  width: clamp(4.75rem, 6vw, 5rem);
   aspect-ratio: 421 / 624;
   height: auto;
   padding: 0;
