@@ -4,7 +4,7 @@
 [![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white&style=flat-square)](https://vitejs.dev)
 [![Last Commit](https://img.shields.io/github/last-commit/mirkobechini/mirko-bechini-portfolio/main?style=flat-square)](https://github.com/mirkobechini/mirko-bechini-portfolio/commits)
 
-> Portfoglio personale interattivo con stile retrò, costruito con React e NES.css.
+> Portfolio personale interattivo con stile retrò, costruito con React, Vite e NES.css.
 
 ![Banner o Screenshot](./readmeAssets/preview.png)
 
@@ -31,11 +31,11 @@
 
 ## 🌟 Caratteristiche principali
 
-- **About me**: sezione introduttiva su di me.
-- **Esperienze & Progetti**: showcase dei progetti sviluppati e delle esperienze lavorative.
-- **Formazione & Competenze**: elenco delle competenze tecniche e corsi di formazione.
-- **Certificazioni**: sezione dedicata alle certificazioni ottenute.
-- **Contatti**: modulo di contatto o link ai social media.
+- **Home interattiva a scena unica**: navigazione tramite sprite cliccabili in un ambiente retrò.
+- **Modali tematiche**: sezioni dedicate a About Me, Formazione & Competenze, Esperienze & Progetti, Certificazioni e Contatti.
+- **Gestione stato globale**: apertura/chiusura modali via Context API.
+- **Preload immagini**: caricamento anticipato degli asset per migliorare la percezione di fluidità.
+- **Navigazione drag/touch**: esplorazione orizzontale della scena con mouse e dispositivi touch.
 
 ---
 
@@ -45,12 +45,13 @@
 | :------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Frontend**         | ![React](https://img.shields.io/badge/-React-61DAFB?logo=react&logoColor=white&style=flat-square) ![Vite](https://img.shields.io/badge/-Vite-646CFF?logo=vite&logoColor=white&style=flat-square) ![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?logo=javascript&logoColor=black&style=flat-square) |
 | **Markup & Styling** | ![HTML5](https://img.shields.io/badge/-HTML5-E34F26?logo=html5&logoColor=white&style=flat-square) ![CSS3](https://img.shields.io/badge/-CSS3-1572B6?logo=css3&logoColor=white&style=flat-square)                                                                                                                  |
-| **Strumenti**        | ![Git](https://img.shields.io/badge/-Git-F05032?logo=git&logoColor=white&style=flat-square) ![Google Gemini](https://img.shields.io/badge/-Gemini-4285F4?logo=google&logoColor=white&style=flat-square)                                                                                                           |
+| **Strumenti**        | ![Git](https://img.shields.io/badge/-Git-F05032?logo=git&logoColor=white&style=flat-square) ![ESLint](https://img.shields.io/badge/-ESLint-4B32C3?logo=eslint&logoColor=white&style=flat-square) ![Google Gemini](https://img.shields.io/badge/-Gemini-4285F4?logo=google&logoColor=white&style=flat-square) ![GitHub Copilot](https://img.shields.io/badge/-GitHub%20Copilot-181717?logo=githubcopilot&logoColor=white&style=flat-square) |
 
 ### Frameworks e Librerie
 
-- **React Router**: Navigazione fluida tra le sezioni del portfolio.
-- **NES.css**: Stile retrò per un look unico e accattivante.
+- **React Router DOM**: Gestione routing client-side.
+- **NES.css**: Stile retrò per UI e componenti.
+- **vite-plugin-image-optimizer**: Ottimizzazione immagini in fase di build.
 
 ---
 
@@ -80,8 +81,17 @@ npm install
 ### Avvio
 
 ```bash
-# Esempio Node
+# Avvio ambiente di sviluppo
 npm run dev
+
+# Lint del codice
+npm run lint
+
+# Build produzione
+npm run build
+
+# Anteprima build locale
+npm run preview
 
 ```
 
@@ -96,11 +106,11 @@ Apri il browser su `http://localhost:5173` (o la porta indicata dal progetto).
 ├── public/
 │   ├── assets/
 │   │   ├── backgrounds/
-│   │   │   └── den.png
 │   │   ├── modals/
 │   │   │   ├── about-me/
 │   │   │   ├── certifications/
 │   │   │   ├── contacts/
+│   │   │   ├── formation-skills/
 │   │   │   ├── projects/
 │   │   │   └── skills/
 │   │   │       ├── icons/
@@ -119,11 +129,15 @@ Apri il browser su `http://localhost:5173` (o la porta indicata dal progetto).
 │   ├── data/
 │   │   ├── modals/
 │   │   ├── certificationData.js
+│   │   ├── contactsData.js
 │   │   ├── educationData.js
 │   │   ├── ModalData.jsx
 │   │   ├── projectData.js
-│   │   └── skillsData.js
+│   │   ├── skillsData.js
+│   │   └── uiConstants.js
+│   ├── hooks/
 │   ├── pages/
+│   ├── utils/
 │   ├── App.jsx
 │   ├── index.css
 │   └── main.jsx
@@ -140,7 +154,7 @@ Apri il browser su `http://localhost:5173` (o la porta indicata dal progetto).
 
 ## 📐 Convenzioni CSS Responsive
 
-### Unita consigliate
+### Unità consigliate
 
 - `px`: da usare solo per dettagli pixel-art o bordi sprite che devono restare precisi.
 - `rem`: unita principale per spaziature e tipografia coerenti su tutto il progetto.
@@ -172,29 +186,24 @@ I token globali sono definiti in [src/index.css](src/index.css) dentro `:root`:
 ### Completato
 
 - [x] Integrazione di React Router
-- [x] Creazione del layout principale
-- [x] Header e Footer
-- [x] Struttura pagina Home
-- [x] CSS pagina home
-- [x] Modale base
-- [x] Refactoring codice e ottimizzazione performance
-- [x] Modale "About me"
+- [x] Struttura pagina Home con background interattivo
+- [x] Modale base e gestione apertura/chiusura sezioni
+- [x] Modale "About Me"
 - [x] Modale "Formazione & Competenze"
 - [x] Modale "Esperienze & Progetti"
+- [x] Modale "Certificazioni"
 - [x] Modale "Contatti"
-- [x] Refactoring codice e ottimizzazione performance
-- [x] Aggiunta contenuti e immagini
-- [x] Styling e design con NES.css
-- [x] Animazioni e transizioni
-- [x] Aggiunta funzionalità di filtro per progetti
-- [x] CSS bordi laterali per migliorare l'esperienza utente
+- [x] Gestione stato globale con Context
+- [x] Preload immagini principali
+- [x] Styling e design retrò con NES.css
+- [x] Gestione drag e touch della scena
 
 ### In sviluppo
 
 - [ ] Restyle modale "Esperienze & Progetti" (add experiences)
 - [ ] Restyle modale "Formazione & Competenze" (add skills details)
-- [ ] Restyle modale "Contatti" (Change monkey sprite)
-- [x] Restyle modale "About me"
+- [ ] Restyle modale "Contatti" (change sprite/theme)
+- [x] Restyle modale "About Me"
 - [ ] Navigazione da tastiera e miglioramento accessibilità (A11y)
 - [ ] Ottimizzazione codice e performance
 
@@ -202,8 +211,8 @@ I token globali sono definiti in [src/index.css](src/index.css) dentro `:root`:
 
 - [ ] Responsive design
 - [ ] Miglioramento accessibilità (A11y)
-- [ ] Migliora animazioni e transizioni
-- [ ] Minor restyle
+- [ ] Migliorare animazioni e transizioni
+- [ ] Refinement visuale generale
 - [ ] Integrazione API esterna
 - [ ] Loader per migliorare l'esperienza utente
 
