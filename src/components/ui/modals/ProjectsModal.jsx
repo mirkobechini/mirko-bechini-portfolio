@@ -72,7 +72,9 @@ const ProjectsModal = memo(function ProjectsModal() {
                             <div className={styles['blueprint-header']}></div>
                             <h4 className={styles['project-title']}>{project.title}</h4>
                             <p>{project.description}</p>
-                            <div className={styles['tech-stack']}>{project.technologies.map(tech => `#${tech} `)}</div>
+                            <div className={styles['tech-stack']}>
+                                {project.technologies.length > 0 ? `#${project.technologies.join(' #')}` : ''}
+                            </div>
                             <div className={styles['links-group']}>
                                 {isValidLink(project.repo) && <a href={project.repo} className={styles['view-btn']}>Apri Documentazione</a>}
                                 {isValidLink(project.demo) && <a href={project.demo} className={styles['view-btn']}>Vai al sito</a>}
