@@ -116,9 +116,9 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
     return (
         <div className={`${styles.book} ${profileVariantClass}`} data-profile={currentProfile.id}>
             {onBackToBookshelf && (
-                <span className={styles['btn-home']} onClick={handleHomeClick}>
+                <button type="button" className={styles['btn-home']} onClick={handleHomeClick} aria-label="Torna alla libreria">
                     Home
-                </span>
+                </button>
             )}
 
             {isSkillsProfile && (
