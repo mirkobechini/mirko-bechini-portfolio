@@ -26,9 +26,14 @@
   --radius-sm: 0.25rem;
 }
 
-*:focus {
-  outline: none !important;
-  box-shadow: none !important;
+*:focus-visible {
+  outline: 2px solid #ffe066;
+  outline-offset: 2px;
+}
+
+*:focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
 }
 
 div,
@@ -156,6 +161,13 @@ main {
 
   /* Un filtro opzionale per farli risaltare */
   filter: drop-shadow(0 0 0.5rem rgb(255 255 255 / 50%));
+}
+
+.sprite:focus-visible {
+  outline: none;
+  box-shadow: none;
+  transform: translate(-50%, -50%) scale(1.1);
+  filter: drop-shadow(0 0 0.7rem rgb(255 224 102 / 90%));
 }
 
 .sprite-tag {
