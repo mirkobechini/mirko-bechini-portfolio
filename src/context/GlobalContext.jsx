@@ -1,14 +1,18 @@
 /* React & Libraries */
-import { createContext, useState } from 'react';
+import { createContext, useMemo, useState } from 'react';
 
 
 const GlobalContext = createContext();
 
 export function GlobalContextProvider({ children }) {
     const [activeSection, setActiveSection] = useState(null);
+    const contextValue = useMemo(
+        () => ({ activeSection, setActiveSection }),
+        [activeSection]
+    );
 
     return (
-        <GlobalContext.Provider value={{ activeSection, setActiveSection }}>
+        <GlobalContext.Provider value={contextValue}>
             {children}
         </GlobalContext.Provider>
     );
