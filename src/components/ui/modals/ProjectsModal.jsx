@@ -53,10 +53,10 @@ const ProjectsModal = memo(function ProjectsModal() {
                         <label htmlFor='fullstack' className={`${styles['button-label']} ${filterType === 'fullstack' ? styles['selected-filter'] : ''}`}> <img className={styles.icon} src={fullstackIcon} alt="Fullstack" /> Fullstack</label>
                     </fieldset>
                     <fieldset className={styles['filter-wrapper']}>
-                        <input type='radio' className={styles['visually-hidden']} id='boolean' name='filterCompany' value='boolean' checked={filterCompany === 'boolean'} onChange={e => setFilterCompany(e.target.value)} />
-                        <label htmlFor='boolean' className={`${styles['button-label']} ${filterCompany === 'boolean' ? styles['selected-filter'] : ''}`}> <img className={styles.icon} src={folderIcon} alt="Boolean" /> Boolean</label>
-                        <input type='radio' className={styles['visually-hidden']} id='personal' name='filterCompany' value='personal' checked={filterCompany === 'personal'} onChange={e => setFilterCompany(e.target.value)} />
-                        <label htmlFor='personal' className={`${styles['button-label']} ${filterCompany === 'personal' ? styles['selected-filter'] : ''}`}> <img className={styles.icon} src={folderIcon} alt="Personali" /> Personali</label>
+                        <input type='radio' className={styles['visually-hidden']} id='boolean' name='filterCompany' value='Boolean' checked={filterCompany === 'Boolean'} onChange={e => setFilterCompany(e.target.value)} />
+                        <label htmlFor='boolean' className={`${styles['button-label']} ${filterCompany === 'Boolean' ? styles['selected-filter'] : ''}`}> <img className={styles.icon} src={folderIcon} alt="Boolean" /> Boolean</label>
+                        <input type='radio' className={styles['visually-hidden']} id='personal' name='filterCompany' value='Personal' checked={filterCompany === 'Personal'} onChange={e => setFilterCompany(e.target.value)} />
+                        <label htmlFor='personal' className={`${styles['button-label']} ${filterCompany === 'Personal' ? styles['selected-filter'] : ''}`}> <img className={styles.icon} src={folderIcon} alt="Personali" /> Personali</label>
                     </fieldset>
                 </div>
                 <button className={styles['reset-button-container']} onClick={() => { setFilterType(null); setFilterCompany(null); }} type="button">

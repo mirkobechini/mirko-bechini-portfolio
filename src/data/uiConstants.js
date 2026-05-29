@@ -3,7 +3,6 @@ const DRAG_THRESHOLD = 5;
 const MODAL_IDS = {
     ABOUT_ME: 1,
     BOOKSHELF: 2,
-    SKILLS: 2,
     PROJECTS: 3,
     CERTIFICATIONS: 4,
     CONTACTS: 5,

@@ -15,7 +15,6 @@ const ContactsModal = lazy(() => import('../components/ui/modals/ContactsModal')
 const MODAL_COMPONENTS = {
     aboutMe: AboutMeModal,
     bookshelf: BookshelfModal,
-    skills: BookshelfModal,
     projects: ProjectsModal,
     certifications: CertificationsModal,
     contacts: ContactsModal,

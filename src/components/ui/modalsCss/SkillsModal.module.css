@@ -10,7 +10,6 @@
   min-height: 0;
   max-height: 100%;
   gap: 12%;
-
 }
 
 .profile-sprite {
@@ -46,8 +45,6 @@
 
   width: 45%;
   padding: clamp(0.625rem, 1.2vw, 0.9375rem);
-
-
 
   backface-visibility: hidden;
 }

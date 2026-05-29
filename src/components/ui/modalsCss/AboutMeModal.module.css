@@ -67,11 +67,15 @@
   scrollbar-color: auto !important;
 }
 
-:global([data-modal-theme="monkey"] [data-modal-slot="content"])::-webkit-scrollbar {
+:global(
+  [data-modal-theme="monkey"] [data-modal-slot="content"]
+)::-webkit-scrollbar {
   width: 1.5rem !important;
 }
 
-:global([data-modal-theme="monkey"] [data-modal-slot="content"])::-webkit-scrollbar-track {
+:global(
+  [data-modal-theme="monkey"] [data-modal-slot="content"]
+)::-webkit-scrollbar-track {
   background-image: url("/assets/modals/about-me/scrollbar-track.png") !important;
   background-repeat: repeat-y !important;
   background-position: center !important;
@@ -84,7 +88,9 @@
   background-clip: padding-box !important;
 }
 
-:global([data-modal-theme="monkey"] [data-modal-slot="content"])::-webkit-scrollbar-thumb {
+:global(
+  [data-modal-theme="monkey"] [data-modal-slot="content"]
+)::-webkit-scrollbar-thumb {
   background-image: url("/assets/modals/about-me/scrollbar-thumb.png") !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
@@ -101,7 +107,9 @@
   image-rendering: crisp-edges;
 }
 
-:global([data-modal-theme="monkey"] .modal-content[data-modal-slot="content"])::-webkit-scrollbar-button {
+:global(
+  [data-modal-theme="monkey"] .modal-content[data-modal-slot="content"]
+)::-webkit-scrollbar-button {
   display: none !important;
 }
 
