@@ -1,5 +1,5 @@
 /* React & Libraries */
-import { useContext, useEffect, useRef } from 'react';
+import { useContext, useEffect, useMemo, useRef } from 'react';
 
 /* Components */
 import BaseModal from '../components/ui/modals/BaseModal';
@@ -35,6 +35,11 @@ export default function HomePage() {
         preloadImages(MODAL_DATA.map((modal) => modal.sprite));
     }, []);
 
+    const modalById = useMemo(
+        () => Object.fromEntries(MODAL_DATA.map((modal) => [modal.id, modal])),
+        []
+    );
+
     // Handlers
     const closeModal = () => {
         setActiveSection(null);
@@ -42,7 +47,7 @@ export default function HomePage() {
 
     const openModal = (id) => {
         if (!isDragging.current) {
-            const selectedModal = MODAL_DATA.find(modal => modal.id === id);
+            const selectedModal = modalById[id];
             if (selectedModal) {
                 setActiveSection(selectedModal);
             }
