@@ -4,8 +4,8 @@ import SkillsModal from './SkillsModal';
 import { BOOKSHELF_PROFILES } from '../../../data/modals/skillsProfiles';
 import { getAssetPath } from '../../../utils/assets';
 
-const formationBook = getAssetPath('/modals/formation-skills/books-formation.png');
-const skillsBook = getAssetPath('/modals/formation-skills/books-skill.png');
+const formationBook = getAssetPath('/modals/bookshelf/books-formation.png');
+const skillsBook = getAssetPath('/modals/bookshelf/books-skill.png');
 
 const BookshelfModal = memo(function BookshelfModal({ setModalSprite, defaultModalSprite }) {
 

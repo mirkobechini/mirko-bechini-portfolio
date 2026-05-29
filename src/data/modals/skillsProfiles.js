@@ -2,8 +2,8 @@ import skillsData from '../skillsData';
 import educationData from '../educationData';
 import { getAssetPath } from '../../utils/assets';
 
-const skillsProfileSprite = getAssetPath('/modals/skills/modal/library-modal.png');
-const formationProfileSprite = getAssetPath('/modals/skills/modal/library-modal.png');
+const skillsProfileSprite = getAssetPath('/modals/skills/ui/library-modal.png');
+const formationProfileSprite = getAssetPath('/modals/skills/ui/library-modal.png');
 
 const BOOKSHELF_PROFILES = {
     skills: {

@@ -105,16 +105,18 @@ Apri il browser su `http://localhost:5173` (o la porta indicata dal progetto).
 .
 ├── public/
 │   ├── assets/
+│   │   ├── _tmp-unused/
+│   │   │   └── 2026-05-29/
 │   │   ├── backgrounds/
 │   │   ├── modals/
 │   │   │   ├── about-me/
+│   │   │   ├── bookshelf/
 │   │   │   ├── certifications/
 │   │   │   ├── contacts/
-│   │   │   ├── formation-skills/
 │   │   │   ├── projects/
 │   │   │   └── skills/
 │   │   │       ├── icons/
-│   │   │       └── modal/
+│   │   │       └── ui/
 │   │   └── sprites/
 ├── readmeAssets/
 │   ├── preview-gif.gif

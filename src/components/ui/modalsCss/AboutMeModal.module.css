@@ -120,7 +120,7 @@
   border-style: solid;
   border-color: transparent;
 
-  border-image-source: url("/assets/modals/about-me/monkey-modal-gamebtn.png");
+  border-image-source: url("/assets/modals/about-me/monkey-modal-game-btn.png");
   border-image-slice: 120 307 135 302 fill;
   border-image-repeat: repeat;
 

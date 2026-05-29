@@ -8,7 +8,7 @@ const frontendIcon = getAssetPath('/modals/projects/frontend-icon.png');
 const backendIcon = getAssetPath('/modals/projects/backend-icon.png');
 const fullstackIcon = getAssetPath('/modals/projects/fullstack-icon.png');
 const folderIcon = getAssetPath('/modals/projects/folder-icon.png');
-const resetButtonIcon = getAssetPath('/modals/projects/reset_button.png');
+const resetButtonIcon = getAssetPath('/modals/projects/reset-button.png');
 
 const ProjectsModal = memo(function ProjectsModal() {
 
