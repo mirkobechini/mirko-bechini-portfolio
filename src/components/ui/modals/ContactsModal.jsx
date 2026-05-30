@@ -86,4 +86,6 @@ const ContactsModal = memo(function ContactsModal() {
     );
 });
 
+//TODO: add label for arrow functionality tutorial
+
 export default ContactsModal;
