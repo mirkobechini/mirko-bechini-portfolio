@@ -34,7 +34,7 @@
 
   background: transparent;
   border: 0;
-  cursor: pointer;
+  cursor: var(--cursor-nes-pointer);
   transition:
     transform 0.18s ease,
     filter 0.18s ease;

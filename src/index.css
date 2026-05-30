@@ -6,6 +6,21 @@
 }
 
 :root {
+  --cursor-nes-default:
+    url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABFklEQVRYR9WXURLDIAhE6/0PbSdOtUpcd1Gnpv1KGpTHBpCE1/cXq+vrMph7dGvXZTtpfW10DCA5jrH1H0Jhs5E0hnZdCR+vb5S8Nn8mQCeS9BdSalYJqMBjAGzq59xAESN7VFVUgV8AZB/dZBR7QTFDCqGquvUBVVoEtgIwpQRzmANSFHgWQKExHdIrPeuMvQNDarXe6nC/AutgV3JW+6bgqQLeV8FekRtgV+ToDKEKnACYKsfZjjkam7a0ZpYTytwmgainpC3HvwBocgKOxqRjehoR9DFKNFYtOwCGYCszobeCbl26N6yyQ6g8X/Wex/rBPsNEV6qAMaJPMynIHQCoSqS9JSMmwef51LflTgCRszU7DvAGiV6mHWfsaVUAAAAASUVORK5CYII="),
+    auto;
+  --cursor-nes-pointer:
+    url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC")
+      14 0,
+    pointer;
+  --cursor-nes-grab:
+    url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC")
+      14 0,
+    grab;
+  --cursor-nes-grabbing:
+    url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC")
+      14 0,
+    grabbing;
   --space-3xs: clamp(0.125rem, 0.1rem + 0.1vw, 0.1875rem);
   --space-2xs: clamp(0.25rem, 0.2rem + 0.25vw, 0.375rem);
   --space-xs: clamp(0.375rem, 0.32rem + 0.3vw, 0.625rem);
@@ -24,6 +39,31 @@
   --icon-md: clamp(1.5rem, 1.25rem + 1.2vw, 2rem);
   --icon-lg: clamp(2.25rem, 1.9rem + 1.8vw, 3rem);
   --radius-sm: 0.25rem;
+}
+
+html,
+body {
+  cursor: var(--cursor-nes-default);
+}
+
+a,
+button,
+label,
+summary,
+[role="button"],
+[type="button"],
+[type="submit"],
+[type="reset"],
+[type="radio"],
+[type="checkbox"] {
+  cursor: var(--cursor-nes-pointer) !important;
+}
+
+input,
+textarea,
+select,
+option {
+  cursor: var(--cursor-nes-pointer) !important;
 }
 
 *:focus-visible {
@@ -102,8 +142,8 @@ main {
   scrollbar-width: none; /* Firefox */
   scroll-snap-align: center;
 
-  /* Grab cursor */
-  cursor: grab;
+  /* NES cursor with drag fallback */
+  cursor: var(--cursor-nes-grab);
   user-select: none;
 }
 
@@ -112,7 +152,7 @@ main {
 }
 
 .den-container:active {
-  cursor: grabbing;
+  cursor: var(--cursor-nes-grabbing);
 }
 
 .den-wrapper {
@@ -139,7 +179,7 @@ main {
 .sprite {
   position: absolute;
   border: none;
-  cursor: pointer;
+  cursor: var(--cursor-nes-pointer);
   aspect-ratio: 1;
   z-index: 10;
   padding: 0;

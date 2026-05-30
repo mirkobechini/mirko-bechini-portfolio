@@ -81,7 +81,7 @@
   white-space: nowrap;
   font-size: clamp(0.8rem, 0.74rem + 0.25vw, 0.95rem);
 
-  cursor: pointer;
+  cursor: var(--cursor-nes-pointer);
 
   border-width: 5px 8px;
   border-image-source: url("/assets/modals/projects/wood-button.png");
@@ -144,7 +144,7 @@
 
   font-family: inherit;
 
-  cursor: pointer;
+  cursor: var(--cursor-nes-pointer);
   background: none;
   border: none;
 
@@ -228,6 +228,7 @@
   border-left: 0.3125rem solid #1565c0;
 
   box-shadow: 0.3125rem 0.3125rem 0.9375rem rgb(0 0 0 / 30%);
+  cursor: var(--cursor-nes-pointer);
   transform: rotate(-2deg);
   transition:
     transform 0.3s,
@@ -247,8 +248,6 @@
 
 .project-blueprint:hover {
   z-index: 10;
-
-  cursor: pointer;
   transform: rotate(0) scale(1.05);
 }
 
@@ -305,7 +304,7 @@
   color: white;
   text-transform: uppercase;
 
-  cursor: pointer;
+  cursor: var(--cursor-nes-pointer);
 
   border-style: solid;
   border-width: 8px 12px;
@@ -377,7 +376,7 @@
   align-items: center;
   flex-direction: column;
 
-  cursor: pointer;
+  cursor: var(--cursor-nes-pointer);
   transition: transform 0.2s;
 }
 
@@ -411,7 +410,7 @@
   font-family: inherit;
   color: white;
 
-  cursor: pointer;
+  cursor: var(--cursor-nes-pointer);
   background: #d84315;
   border: none;
 

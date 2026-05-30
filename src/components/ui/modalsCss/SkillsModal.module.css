@@ -87,7 +87,7 @@
   text-align: center;
   writing-mode: vertical-rl;
   text-orientation: upright;
-  cursor: pointer;
+  cursor: var(--cursor-nes-pointer);
   image-rendering: pixelated;
   transform: translateX(-50%);
 }
@@ -140,7 +140,7 @@
 }
 
 .skill-card:hover {
-  cursor: pointer;
+  cursor: var(--cursor-nes-pointer);
   transform: scale(1.1);
 }
 

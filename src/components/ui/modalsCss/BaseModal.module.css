@@ -15,7 +15,7 @@
   align-items: center;
 
   background-color: rgb(0 0 0 / 50%);
-  cursor: default;
+  cursor: var(--cursor-nes-default);
 }
 
 .game-modal {
@@ -32,7 +32,7 @@
   padding: var(--modal-padding, 1.25rem);
 
   color: #efebe9;
-  cursor: default;
+  cursor: var(--cursor-nes-default);
 }
 
 .modal-header {
@@ -104,7 +104,7 @@
 
   color: #efebe9;
 
-  cursor: pointer;
+  cursor: var(--cursor-nes-pointer);
   background: transparent;
   border: none;
   border-radius: var(--radius-sm);
@@ -137,7 +137,7 @@
   transform: translate(-50%, -50%);
 
   pointer-events: none;
-  cursor: default;
+  cursor: var(--cursor-nes-default);
   -webkit-user-drag: none;
   backface-visibility: hidden;
 }
