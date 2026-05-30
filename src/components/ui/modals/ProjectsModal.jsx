@@ -80,8 +80,8 @@ const ProjectsModal = memo(function ProjectsModal() {
                                 {project.technologies.length > 0 ? `#${project.technologies.join(' #')}` : ''}
                             </div>
                             <div className={styles['links-group']}>
-                                {isValidLink(project.repo) && <a href={project.repo} className={styles['view-btn']}>Apri Documentazione</a>}
-                                {isValidLink(project.demo) && <a href={project.demo} className={styles['view-btn']}>Vai al sito</a>}
+                                {isValidLink(project.repo) && <a href={project.repo} className={styles['view-btn']} target="_blank" rel="noopener noreferrer">Apri Documentazione</a>}
+                                {isValidLink(project.demo) && <a href={project.demo} className={styles['view-btn']} target="_blank" rel="noopener noreferrer">Vai al sito</a>}
                             </div>
                         </div>
                     ))}

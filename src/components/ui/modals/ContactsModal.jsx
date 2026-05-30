@@ -1,9 +1,10 @@
 import styles from '../modalsCss/ContactsModal.module.css';
 import { memo, useEffect, useRef, useState } from 'react';
 import contacts from '../../../data/contactsData';
+import { isExternalWebLink } from '../../../utils/links';
 
 const ContactsModal = memo(function ContactsModal() {
-    
+
 
     const [currentIndex, setCurrentIndex] = useState(-1);
     const contactRefs = useRef([]);
@@ -71,8 +72,8 @@ const ContactsModal = memo(function ContactsModal() {
                             contactRefs.current[index] = el;
                         }}
                         href={contact.href}
-                        target={contact.id === 'mail' ? undefined : '_blank'}
-                        rel={contact.id === 'mail' ? undefined : 'noopener noreferrer'}
+                        target={isExternalWebLink(contact.href) ? '_blank' : undefined}
+                        rel={isExternalWebLink(contact.href) ? 'noopener noreferrer' : undefined}
                         className={`${styles['contact-card']} ${styles[contact.variantClass]} ${currentIndex === index ? styles['selected-contact'] : ''}`}
                         aria-label={contact.ariaLabel}
                     >
