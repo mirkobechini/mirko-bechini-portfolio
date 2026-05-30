@@ -25,7 +25,7 @@
 .contact-card {
   display: flex;
   align-items: center;
-  width: 95%;
+  width: 80%;
 
   padding: var(--space-lg);
 
@@ -75,6 +75,9 @@
 
 /* #region Contacts theme slots */
 :global([data-modal-theme="parrot"] [data-modal-slot="modal"]) {
+  --modal-min-height: clamp(30rem, 72vh, 36rem);
+  --modal-max-height: 85vh;
+
   color: #3e2723;
 
   background-color: #fff9c4;
@@ -85,12 +88,12 @@
 
 :global([data-modal-theme="parrot"] [data-modal-slot="sprite"]) {
   position: absolute;
-  top: 100%;
-  left: 10%;
+  top: 90%;
+  left: 5%;
 }
 
 :global([data-modal-theme="parrot"] [data-modal-slot="button"]) {
-  padding: 0.5rem 1rem;
+  padding: 1rem 2rem;
   color: #e8f5e9;
   background-color: #3e2723;
 }
