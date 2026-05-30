@@ -65,8 +65,8 @@
 }
 
 :global([data-modal-theme="library"] [data-modal-slot="content"]):has(
-    [data-library-view="bookshelf"]
-  ) {
+  [data-library-view="bookshelf"]
+) {
   overflow: hidden;
 }
 
@@ -115,6 +115,12 @@
 
 .game-btn:hover {
   transform: scale(1.2);
+}
+
+.game-btn:focus-visible {
+  outline: none;
+  filter: drop-shadow(0 0 0.2rem rgb(255 224 102 / 90%))
+    drop-shadow(0 0 0.45rem rgb(255 224 102 / 75%));
 }
 
 .game-btn:active {
