@@ -20,17 +20,18 @@
   flex-wrap: wrap;
 
   width: 100%;
-  gap: 2rem;
-  margin-bottom: var(--space-sm);
+  gap: var(--space-lg);
+  margin-bottom: var(--space-3xs);
 }
 
 /* Stack verticale dei blocchi filtro */
 .filter-group {
   display: flex;
-  align-items: flex-start;
-  flex-direction: column;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
 
-  gap: var(--space-sm);
+  gap: var(--space-xs);
 }
 
 /* Wrapper grafico in stile "cornice legno" per i pulsanti filtro */
@@ -43,13 +44,13 @@
 
   width: 100%;
   gap: var(--space-2xs);
-  padding: var(--space-2xs) var(--space-md);
+  padding: var(--space-2xs) var(--space-sm) var(--space-3xs);
 
   border-style: solid;
-  border-width: 14px 18px 12px;
+  border-width: 12px 16px 10px;
   border-image-source: url("/assets/modals/projects/wood-wrapper.png");
   border-image-slice: 28 35 fill;
-  border-image-width: 14px 18px 18px 18px;
+  border-image-width: 12px 16px 14px 16px;
   border-image-repeat: stretch;
 
   image-rendering: pixelated;
@@ -61,7 +62,7 @@
     /* Scaliamo mantenendo il rapporto: il lato è sempre circa il doppio della parte alta */
     border-image-width: 8px 18px 6px 18px;
     border-width: 8px 18px 6px;
-    padding: var(--space-2xs);
+    padding: var(--space-xs) var(--space-2xs) var(--space-2xs);
   }
 }
 
@@ -71,13 +72,14 @@
   justify-content: center;
 
   width: auto;
-  min-width: 85px;
-  gap: var(--space-xs);
-  padding: var(--space-xs) var(--space-md);
+  min-width: 76px;
+  gap: var(--space-2xs);
+  padding: var(--space-2xs) var(--space-sm);
 
   font-weight: bold;
   text-align: center;
   white-space: nowrap;
+  font-size: clamp(0.8rem, 0.74rem + 0.25vw, 0.95rem);
 
   cursor: pointer;
 
@@ -119,8 +121,8 @@
 }
 
 .icon {
-  width: var(--icon-sm);
-  height: var(--icon-sm);
+  width: clamp(1.05rem, 1rem + 0.45vw, 1.35rem);
+  height: clamp(1.05rem, 1rem + 0.45vw, 1.35rem);
 
   object-fit: contain;
   image-rendering: pixelated;
@@ -135,7 +137,7 @@
 .reset-button-container {
   position: relative;
 
-  width: 30%;
+  width: clamp(8.75rem, 18vw, 10.5rem);
   height: auto;
   padding: 0;
   line-height: 0;
@@ -175,7 +177,7 @@
   width: 100%;
   transform: translate(-50%, -50%);
 
-  font-size: var(--text-md);
+  font-size: var(--text-sm);
   color: #7e915f;
   text-shadow:
     -1px -1px 0 #000,
@@ -185,6 +187,13 @@
     2px 2px 0 #000;
 
   pointer-events: none;
+}
+
+@media (width <= 900px) {
+  .filter-group {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
 
 /* #endregion Filter styles */

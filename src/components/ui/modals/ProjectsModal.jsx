@@ -61,7 +61,7 @@ const ProjectsModal = memo(function ProjectsModal() {
                 </div>
                 <button className={styles['reset-button-container']} onClick={() => { setFilterType(null); setFilterCompany(null); }} type="button">
                     <img src={resetButtonIcon} alt="Reset Filters" />
-                    <span className={styles['reset-text']}>Reset Filter</span>
+                    <span className={styles['reset-text']}>Reset</span>
                 </button>
             </div>
             <div className={styles['projects-view']}>
