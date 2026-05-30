@@ -27,8 +27,8 @@
 /* Stack verticale dei blocchi filtro */
 .filter-group {
   display: flex;
-  align-items: center;
-  flex-direction: row;
+  align-items: flex-start;
+  flex-direction: column;
   flex-wrap: nowrap;
 
   gap: var(--space-xs);

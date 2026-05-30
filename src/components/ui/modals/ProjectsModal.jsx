@@ -12,28 +12,28 @@ const resetButtonIcon = getAssetPath('/modals/projects/reset-button.png');
 
 const ProjectsModal = memo(function ProjectsModal() {
 
-    const [filterType, setFilterType] = useState(null);
-    const [filterCompany, setFilterCompany] = useState(null);
+    const [selectedTypeFilter, setSelectedTypeFilter] = useState('all');
+    const [selectedScopeFilter, setSelectedScopeFilter] = useState('all');
 
 
     const filteredProjects = useMemo(() => {
         return projectData.filter(project => {
-            if (filterType && project.type !== filterType) {
+            if (selectedTypeFilter !== 'all' && project.type !== selectedTypeFilter) {
                 return false;
             }
-            if (filterCompany && project.company !== filterCompany) {
+            if (selectedScopeFilter !== 'all' && project.projectScope !== selectedScopeFilter) {
                 return false;
             }
             return true;
         });
-    }, [filterType, filterCompany]);
+    }, [selectedTypeFilter, selectedScopeFilter]);
 
     /*const groupedProjects = useMemo(() => {
         return filteredProjects.reduce((companies, project) => {
-            if (!companies[project.company]) {
-                companies[project.company] = [];
+            if (!companies[project.projectScope]) {
+                companies[project.projectScope] = [];
             }
-            companies[project.company].push(project);
+            companies[project.projectScope].push(project);
             return companies;
         }, {});
     }, [filteredProjects]);*/
@@ -45,21 +45,25 @@ const ProjectsModal = memo(function ProjectsModal() {
             <div className={styles['filter-container']}>
                 <div className={styles['filter-group']}>
                     <fieldset className={styles['filter-wrapper']}>
-                        <input type='radio' className={styles['visually-hidden']} id='frontend' name='filterType' value='frontend' checked={filterType === 'frontend'} onChange={e => setFilterType(e.target.value)} />
-                        <label htmlFor='frontend' className={`${styles['button-label']} ${filterType === 'frontend' ? styles['selected-filter'] : ''}`}> <img className={styles.icon} src={frontendIcon} alt="Frontend" /> Frontend</label>
-                        <input type='radio' className={styles['visually-hidden']} id='backend' name='filterType' value='backend' checked={filterType === 'backend'} onChange={e => setFilterType(e.target.value)} />
-                        <label htmlFor='backend' className={`${styles['button-label']} ${filterType === 'backend' ? styles['selected-filter'] : ''}`}> <img className={styles.icon} src={backendIcon} alt="Backend" /> Backend</label>
-                        <input type='radio' className={styles['visually-hidden']} id='fullstack' name='filterType' value='fullstack' checked={filterType === 'fullstack'} onChange={e => setFilterType(e.target.value)} />
-                        <label htmlFor='fullstack' className={`${styles['button-label']} ${filterType === 'fullstack' ? styles['selected-filter'] : ''}`}> <img className={styles.icon} src={fullstackIcon} alt="Fullstack" /> Fullstack</label>
+                        <input type='radio' className={styles['visually-hidden']} id='all-types' name='projectTypeFilter' value='all' checked={selectedTypeFilter === 'all'} onChange={e => setSelectedTypeFilter(e.target.value)} />
+                        <label htmlFor='all-types' className={`${styles['button-label']} ${selectedTypeFilter === 'all' ? styles['selected-filter'] : ''}`}> <img className={styles.icon} src={folderIcon} alt="Tutti" /> Tutti</label>
+                        <input type='radio' className={styles['visually-hidden']} id='frontend' name='projectTypeFilter' value='frontend' checked={selectedTypeFilter === 'frontend'} onChange={e => setSelectedTypeFilter(e.target.value)} />
+                        <label htmlFor='frontend' className={`${styles['button-label']} ${selectedTypeFilter === 'frontend' ? styles['selected-filter'] : ''}`}> <img className={styles.icon} src={frontendIcon} alt="Frontend" /> Frontend</label>
+                        <input type='radio' className={styles['visually-hidden']} id='backend' name='projectTypeFilter' value='backend' checked={selectedTypeFilter === 'backend'} onChange={e => setSelectedTypeFilter(e.target.value)} />
+                        <label htmlFor='backend' className={`${styles['button-label']} ${selectedTypeFilter === 'backend' ? styles['selected-filter'] : ''}`}> <img className={styles.icon} src={backendIcon} alt="Backend" /> Backend</label>
+                        <input type='radio' className={styles['visually-hidden']} id='fullstack' name='projectTypeFilter' value='fullstack' checked={selectedTypeFilter === 'fullstack'} onChange={e => setSelectedTypeFilter(e.target.value)} />
+                        <label htmlFor='fullstack' className={`${styles['button-label']} ${selectedTypeFilter === 'fullstack' ? styles['selected-filter'] : ''}`}> <img className={styles.icon} src={fullstackIcon} alt="Fullstack" /> Fullstack</label>
                     </fieldset>
                     <fieldset className={styles['filter-wrapper']}>
-                        <input type='radio' className={styles['visually-hidden']} id='boolean' name='filterCompany' value='Boolean' checked={filterCompany === 'Boolean'} onChange={e => setFilterCompany(e.target.value)} />
-                        <label htmlFor='boolean' className={`${styles['button-label']} ${filterCompany === 'Boolean' ? styles['selected-filter'] : ''}`}> <img className={styles.icon} src={folderIcon} alt="Boolean" /> Boolean</label>
-                        <input type='radio' className={styles['visually-hidden']} id='personal' name='filterCompany' value='Personal' checked={filterCompany === 'Personal'} onChange={e => setFilterCompany(e.target.value)} />
-                        <label htmlFor='personal' className={`${styles['button-label']} ${filterCompany === 'Personal' ? styles['selected-filter'] : ''}`}> <img className={styles.icon} src={folderIcon} alt="Personali" /> Personali</label>
+                        <input type='radio' className={styles['visually-hidden']} id='all-projects' name='projectScopeFilter' value='all' checked={selectedScopeFilter === 'all'} onChange={e => setSelectedScopeFilter(e.target.value)} />
+                        <label htmlFor='all-projects' className={`${styles['button-label']} ${selectedScopeFilter === 'all' ? styles['selected-filter'] : ''}`}> <img className={styles.icon} src={folderIcon} alt="Tutti" /> Tutti</label>
+                        <input type='radio' className={styles['visually-hidden']} id='personal-projects' name='projectScopeFilter' value='personal' checked={selectedScopeFilter === 'personal'} onChange={e => setSelectedScopeFilter(e.target.value)} />
+                        <label htmlFor='personal-projects' className={`${styles['button-label']} ${selectedScopeFilter === 'personal' ? styles['selected-filter'] : ''}`}> <img className={styles.icon} src={folderIcon} alt="Personali" /> Personali</label>
+                        <input type='radio' className={styles['visually-hidden']} id='work-projects' name='projectScopeFilter' value='work' checked={selectedScopeFilter === 'work'} onChange={e => setSelectedScopeFilter(e.target.value)} />
+                        <label htmlFor='work-projects' className={`${styles['button-label']} ${selectedScopeFilter === 'work' ? styles['selected-filter'] : ''}`}> <img className={styles.icon} src={folderIcon} alt="Lavoro" /> Lavoro</label>
                     </fieldset>
                 </div>
-                <button className={styles['reset-button-container']} onClick={() => { setFilterType(null); setFilterCompany(null); }} type="button">
+                <button className={styles['reset-button-container']} onClick={() => { setSelectedTypeFilter('all'); setSelectedScopeFilter('all'); }} type="button">
                     <img src={resetButtonIcon} alt="Reset Filters" />
                     <span className={styles['reset-text']}>Reset</span>
                 </button>
