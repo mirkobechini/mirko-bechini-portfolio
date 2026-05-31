@@ -1,7 +1,7 @@
 import { memo, useEffect, useState } from 'react';
 import styles from '../modalsCss/BookshelfModal.module.css';
 import SkillsModal from './SkillsModal';
-import { BOOKSHELF_PROFILES } from '../../../data/modals/skillsProfiles';
+import { BOOKSHELF_PROFILES } from '../../../data/modals/bookshelfProfiles';
 import { getAssetPath } from '../../../utils/assets';
 
 const formationBook = getAssetPath('/modals/bookshelf/books-formation.png');
