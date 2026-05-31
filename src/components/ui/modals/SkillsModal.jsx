@@ -149,6 +149,7 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
                 <section className={styles.page}>
                     <h3>{currentProfile.detailsTitle ?? 'Dettagli skill'}</h3>
                     <p>Seleziona una skill per visualizzare dettagli e contenuti correlati.</p>
+                    <p>Utilizza ← ↑ → ↓ per selezionare/cambiare skill.</p>
                 </section>
             ) : (
                 <section className={`${styles.page} ${styles['skills-page']}`}>
