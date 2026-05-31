@@ -204,6 +204,25 @@
   scrollbar-width: thin;
 }
 
+.future-steps {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  min-height: 0;
+  gap: clamp(0.375rem, 1vw, 0.5rem);
+  padding-right: clamp(0.35rem, 0.8vw, 0.5rem);
+
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+
+  -ms-overflow-style: auto;
+  contain: layout style;
+  scroll-snap-align: center;
+  scrollbar-width: thin;
+}
+
 .skills-page,
 .formation-page {
   overflow-y: auto;

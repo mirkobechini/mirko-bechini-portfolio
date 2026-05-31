@@ -191,40 +191,42 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
                     </section>
                     <section className={`${styles.page} ${styles['formation-page']}`}>
                         <h3>{currentProfile.detailsTitle ?? 'Percorso e prossimi step'}</h3>
-                        <section className={styles['formation-panel']}>
-                            <h4>Focus attuale</h4>
-                            <div className={styles['formation-cards']}>
-                                {formationFocus.map((item, index) => (
-                                    <article key={`focus-${index}`} className={styles['formation-card']}>
-                                        <header className={styles['formation-card-header']}>
-                                            <h5>{item.title}</h5>
-                                            <span className={`${styles['formation-status']} ${styles[`status-${item.status}`]}`}>
-                                                {statusLabels[item.status] ?? 'Info'}
-                                            </span>
-                                        </header>
-                                        <p>{item.description}</p>
-                                        {item.badge && <span className={styles['formation-badge']}>{item.badge}</span>}
-                                    </article>
-                                ))}
-                            </div>
-                        </section>
-                        <section className={styles['formation-panel']}>
-                            <h4>Roadmap</h4>
-                            <div className={styles['formation-cards']}>
-                                {formationRoadmap.map((item, index) => (
-                                    <article key={`roadmap-${index}`} className={styles['formation-card']}>
-                                        <header className={styles['formation-card-header']}>
-                                            <h5>{item.title}</h5>
-                                            <span className={`${styles['formation-status']} ${styles[`status-${item.status}`]}`}>
-                                                {statusLabels[item.status] ?? 'Info'}
-                                            </span>
-                                        </header>
-                                        <p>{item.description}</p>
-                                        {item.badge && <span className={styles['formation-badge']}>{item.badge}</span>}
-                                    </article>
-                                ))}
-                            </div>
-                        </section>
+                        <div className={styles['future-steps']}>
+                            <section className={styles['formation-panel']}>
+                                <h4>Focus attuale</h4>
+                                <div className={styles['formation-cards']}>
+                                    {formationFocus.map((item, index) => (
+                                        <article key={`focus-${index}`} className={styles['formation-card']}>
+                                            <header className={styles['formation-card-header']}>
+                                                <h5>{item.title}</h5>
+                                                <span className={`${styles['formation-status']} ${styles[`status-${item.status}`]}`}>
+                                                    {statusLabels[item.status] ?? 'Info'}
+                                                </span>
+                                            </header>
+                                            <p>{item.description}</p>
+                                            {item.badge && <span className={styles['formation-badge']}>{item.badge}</span>}
+                                        </article>
+                                    ))}
+                                </div>
+                            </section>
+                            <section className={styles['formation-panel']}>
+                                <h4>Roadmap</h4>
+                                <div className={styles['formation-cards']}>
+                                    {formationRoadmap.map((item, index) => (
+                                        <article key={`roadmap-${index}`} className={styles['formation-card']}>
+                                            <header className={styles['formation-card-header']}>
+                                                <h5>{item.title}</h5>
+                                                <span className={`${styles['formation-status']} ${styles[`status-${item.status}`]}`}>
+                                                    {statusLabels[item.status] ?? 'Info'}
+                                                </span>
+                                            </header>
+                                            <p>{item.description}</p>
+                                            {item.badge && <span className={styles['formation-badge']}>{item.badge}</span>}
+                                        </article>
+                                    ))}
+                                </div>
+                            </section>
+                        </div>
                     </section>
                 </>
             )}
