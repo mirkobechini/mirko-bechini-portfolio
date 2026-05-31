@@ -48,7 +48,8 @@
 .book-button:focus-visible {
   outline: none;
   transform: translateY(-0.125rem) scale(1.04);
-  filter: drop-shadow(0 0 0.7rem rgb(255 224 102 / 90%));
+  filter: drop-shadow(0 0 0.125rem rgb(255 255 255 / 95%))
+    drop-shadow(0 0 0.5rem rgb(15 89 168 / 90%));
 }
 
 .book-image {
@@ -81,6 +82,12 @@
   border-image-width: 120px 112px 121px 113px;
   border-image-repeat: stretch;
   background: transparent;
+}
+
+:global([data-modal-theme="library"] [data-modal-slot="button"]:focus-visible) {
+  outline: none;
+  filter: drop-shadow(0 0 0.125rem rgb(255 255 255 / 95%))
+    drop-shadow(0 0 0.5rem rgb(15 89 168 / 90%));
 }
 
 :global([data-modal-theme="library"] [data-modal-slot="modal"]):has(.bookshelf)

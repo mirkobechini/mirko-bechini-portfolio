@@ -135,6 +135,12 @@
   image-rendering: pixelated;
 }
 
+:global([data-modal-theme="monkey"] [data-modal-slot="button"]:focus-visible) {
+  outline: none;
+  filter: drop-shadow(0 0 0.125rem rgb(255 255 255 / 95%))
+    drop-shadow(0 0 0.45rem rgb(12 86 148 / 90%));
+}
+
 :global([data-modal-theme="monkey"] [data-modal-slot="sprite"]) {
   top: 100%;
   left: 19.5%;

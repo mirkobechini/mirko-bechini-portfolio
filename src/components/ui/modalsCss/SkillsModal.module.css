@@ -99,7 +99,7 @@
 .btn-home:focus-visible {
   outline: none;
   filter: drop-shadow(0 0 0.125rem rgb(255 255 255 / 95%))
-    drop-shadow(0 0 0.35rem rgb(255 166 0 / 90%));
+    drop-shadow(0 0 0.45rem rgb(12 86 148 / 90%));
 }
 
 .skills-list {
@@ -207,6 +207,14 @@
 .skills-page,
 .formation-page {
   overflow-y: auto;
+}
+
+.skills-list:is(:focus, :focus-visible),
+.education-list:is(:focus, :focus-visible),
+.skills-page:is(:focus, :focus-visible),
+.formation-page:is(:focus, :focus-visible) {
+  outline: 0.125rem solid rgb(15 89 168 / 90%);
+  outline-offset: 0.125rem;
 }
 
 .education-card {
@@ -357,7 +365,6 @@
   --modal-padding: clamp(0.2rem, 3vw, 1.2rem) clamp(1.2rem, 4.4vw, 2.5rem);
 
   color: #3e2723;
-
   border-width: 20px 20px;
   border-style: solid;
   border-color: transparent;
@@ -368,6 +375,12 @@
   border-image-repeat: repeat;
   transform-origin: left center;
   animation: book-open 0.6s ease-out forwards;
+}
+
+:global([data-modal-theme="library"] [data-modal-slot="button"]:focus-visible) {
+  outline: none;
+  filter: drop-shadow(0 0 0.125rem rgb(255 255 255 / 95%))
+    drop-shadow(0 0 0.5rem rgb(15 89 168 / 90%));
 }
 
 :global([data-modal-theme="library"] [data-modal-slot="button"]) {
