@@ -201,9 +201,6 @@
 /* #region Project styles */
 /* Area scrollabile con tutti i blueprint */
 .projects-view {
-  overflow-y: auto;
-  overscroll-behavior: contain; /* ottimizzazione del comportamento di scorrimento */
-
   scrollbar-gutter: stable;
   -webkit-overflow-scrolling: touch;
 }

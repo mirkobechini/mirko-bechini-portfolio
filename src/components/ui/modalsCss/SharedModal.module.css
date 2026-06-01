@@ -19,6 +19,11 @@
   transform: translateY(-0.125rem) scale(1.04);
 }
 
+.scroll-y-contain {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
 :global([data-modal-slot="button"]:focus-visible) {
   outline: none;
   filter: drop-shadow(0 0 0.125rem rgb(255 255 255 / 95%))

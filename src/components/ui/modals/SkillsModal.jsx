@@ -1,5 +1,6 @@
 import { memo, useEffect, useMemo, useRef, useState } from 'react';
 import styles from '../modalsCss/SkillsModal.module.css';
+import sharedStyles from '../modalsCss/SharedModal.module.css';
 import defaultSkillsData from '../../../data/skillsData';
 
 const SKILL_COLUMNS = 4;
@@ -124,8 +125,8 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
             {isSkillsProfile && (
                 <section className={styles.page}>
                     <h3>{currentProfile.title}</h3>
-                    <div className={styles['page-content']} style={{ paddingRight: 0 }}>
-                        <div className={styles['skills-list']}>
+                    <div className={`${styles['page-content']} ${sharedStyles['scroll-y-contain']}`} style={{ paddingRight: 0 }}>
+                        <div className={`${styles['skills-list']} ${sharedStyles['scroll-y-contain']}`}>
                             {skillsData.map((skill, index) => (
                                 <button
                                     type="button"
@@ -156,7 +157,7 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
             ) : (
                 <section className={`${styles.page} ${styles['skills-page']}`}>
                     <h3>{currentSkill.skill}</h3>
-                    <div className={styles['page-content']}>
+                    <div className={`${styles['page-content']} ${sharedStyles['scroll-y-contain']}`}>
                         <section className={styles.functionality}>
                             <h4>Funzionalita conosciute:</h4>
                             <ul className={styles['functionality-list']}>
@@ -181,7 +182,7 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
                 <>
                     <section className={`${styles.page} ${styles['education-page']}`}>
                         <h3>{currentProfile.title}</h3>
-                        <div className={styles['page-content']}>
+                        <div className={`${styles['page-content']} ${sharedStyles['scroll-y-contain']}`}>
                                 {educationData.map((education) => (
                                     <section className={styles['education-card']} key={education.id}>
                                         <span className={styles['education-period']}>{education.period}</span>

@@ -1,5 +1,6 @@
 import styles from '../modalsCss/ProjectsModal.module.css';
 import { useMemo, useState, memo } from 'react';
+import sharedStyles from '../modalsCss/SharedModal.module.css';
 import projectData from '../../../data/projectData';
 import { getAssetPath } from '../../../utils/assets';
 import { isValidLink } from '../../../utils/links';
@@ -68,7 +69,7 @@ const ProjectsModal = memo(function ProjectsModal() {
                     <span className={styles['reset-text']}>Reset</span>
                 </button>
             </div>
-            <div className={styles['projects-view']}>
+            <div className={`${styles['projects-view']} ${sharedStyles['scroll-y-contain']}`}>
                 <div className={styles['projects-grid']}>
                     {filteredProjects.map((project, index) => (
 

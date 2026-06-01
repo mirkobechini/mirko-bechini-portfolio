@@ -115,8 +115,6 @@
   gap: var(--skills-gap);
 
   overflow-x: hidden;
-  overflow-y: auto;
-  overscroll-behavior: contain;
 
   contain: layout style;
 }
@@ -177,8 +175,6 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  overflow-y: auto;
-  overscroll-behavior: contain;
   scrollbar-gutter: stable;
 
   -ms-overflow-style: auto;
