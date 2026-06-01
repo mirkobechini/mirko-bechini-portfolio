@@ -1,5 +1,6 @@
 import { memo, useEffect, useState } from 'react';
 import styles from '../modalsCss/BookshelfModal.module.css';
+import sharedStyles from '../modalsCss/SharedModal.module.css';
 import SkillsModal from './SkillsModal';
 import { BOOKSHELF_PROFILES } from '../../../data/modals/bookshelfProfiles';
 import { getAssetPath } from '../../../utils/assets';
@@ -38,13 +39,13 @@ const BookshelfModal = memo(function BookshelfModal({ setModalSprite, defaultMod
                         onClick={() => handleBookSelection('formation')}
                         aria-label={`Apri libro della formazione`}>
                         <img className={styles['book-image']} src={formationBook} alt="" aria-hidden="true" />
-                        <span className={styles['book-label']}>Formazione</span>
+                        <span className={sharedStyles['button-label']}>Formazione</span>
                     </button>
                     <button className={styles['book-button']}
                         onClick={() => handleBookSelection('skills')}
                         aria-label={`Apri libro delle competenze`}>
                         <img className={styles['book-image']} src={skillsBook} alt="" aria-hidden="true" />
-                        <span className={styles['book-label']}>Competenze</span>
+                        <span className={sharedStyles['button-label']}>Competenze</span>
                     </button>
                 </div>
             ) : (

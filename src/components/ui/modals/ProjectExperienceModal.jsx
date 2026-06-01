@@ -1,5 +1,6 @@
 import { memo, useEffect, useState } from 'react';
 import styles from '../modalsCss/ProjectExperienceModal.module.css';
+import sharedStyles from '../modalsCss/SharedModal.module.css';
 import ProjectsModal from './ProjectsModal';
 import { getAssetPath } from '../../../utils/assets';
 
@@ -35,7 +36,7 @@ const ProjectExperienceModal = memo(function ProjectExperienceModal({ setModalSp
                             <span className={styles['button-image-frame']} aria-hidden="true">
                                 <img className={styles['button-image']} src={projectButton} alt="" aria-hidden="true" />
                             </span>
-                            <span className={styles['button-label']}>Progetti</span>
+                            <span className={sharedStyles['button-label']}>Progetti</span>
                         </button>
                     </div>
                     <div className={styles['button-container']}>
@@ -46,7 +47,7 @@ const ProjectExperienceModal = memo(function ProjectExperienceModal({ setModalSp
                             <span className={styles['button-image-frame']} aria-hidden="true">
                                 <img className={styles['button-image']} src={experienceButton} alt="" aria-hidden="true" />
                             </span>
-                            <span className={styles['button-label']}>Esperienze</span>
+                            <span className={sharedStyles['button-label']}>Esperienze</span>
                         </button>
                     </div>
                 </div>
