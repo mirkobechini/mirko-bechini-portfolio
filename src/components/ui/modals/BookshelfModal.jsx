@@ -35,13 +35,13 @@ const BookshelfModal = memo(function BookshelfModal({ setModalSprite, defaultMod
         <>
             {selectedProfile === null ? (
                 <div className={styles.bookshelf} data-library-view="bookshelf">
-                    <button className={styles['book-button']}
+                    <button className={`${styles['book-button']} ${sharedStyles['button-lift-hover']}`}
                         onClick={() => handleBookSelection('formation')}
                         aria-label={`Apri libro della formazione`}>
                         <img className={styles['book-image']} src={formationBook} alt="" aria-hidden="true" />
                         <span className={sharedStyles['button-label']}>Formazione</span>
                     </button>
-                    <button className={styles['book-button']}
+                    <button className={`${styles['book-button']} ${sharedStyles['button-lift-hover']}`}
                         onClick={() => handleBookSelection('skills')}
                         aria-label={`Apri libro delle competenze`}>
                         <img className={styles['book-image']} src={skillsBook} alt="" aria-hidden="true" />

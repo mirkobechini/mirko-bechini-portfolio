@@ -40,11 +40,6 @@
     filter 0.18s ease;
 }
 
-.book-button:hover {
-  transform: translateY(-0.125rem) scale(1.04);
-  filter: brightness(1.06);
-}
-
 .book-button:focus-visible {
   outline: none;
   transform: translateY(-0.125rem) scale(1.04);

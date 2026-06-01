@@ -9,6 +9,11 @@
   background-color: rgb(255 248 225 / 82%);
 }
 
+.button-lift-hover:hover {
+  transform: translateY(-0.125rem) scale(1.04);
+  filter: brightness(1.06);
+}
+
 :global([data-modal-slot="button"]:focus-visible) {
   outline: none;
   filter: drop-shadow(0 0 0.125rem rgb(255 255 255 / 95%))

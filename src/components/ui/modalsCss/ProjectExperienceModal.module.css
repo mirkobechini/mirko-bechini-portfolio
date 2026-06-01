@@ -48,11 +48,6 @@
     filter 0.18s ease;
 }
 
-.button-project-experience:hover {
-  transform: translateY(-0.125rem) scale(1.04);
-  filter: brightness(1.06);
-}
-
 .button-project-experience:focus-visible {
   outline: none;
   transform: translateY(-0.125rem) scale(1.04);
