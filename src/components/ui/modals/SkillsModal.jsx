@@ -123,24 +123,26 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
 
             {isSkillsProfile && (
                 <section className={styles.page}>
-                    <h3 style={{ position: 'relative' }}>{currentProfile.title}</h3>
-                    <div className={styles['skills-list']}>
-                        {skillsData.map((skill, index) => (
-                            <button
-                                type="button"
-                                ref={(el) => {
-                                    skillCardRefs.current[index] = el;
-                                }}
-                                className={`${styles['skill-card']} nes-container is-rounded ${currentSkill === skill ? styles['selected-skill'] : ''}`}
-                                key={skill.id}
-                                style={{ color: skill.color }}
-                                onClick={() => handleSkillClick(skill)}
-                                aria-label={`Apri dettagli skill ${skill.skill}`}
-                                aria-pressed={currentSkill?.id === skill.id}
-                            >
-                                <img className="nes-icon is-medium" src={skill.icon} alt="" aria-hidden="true" />
-                            </button>
-                        ))}
+                    <h3>{currentProfile.title}</h3>
+                    <div className={styles['page-content']} style={{ paddingRight: 0 }}>
+                        <div className={styles['skills-list']}>
+                            {skillsData.map((skill, index) => (
+                                <button
+                                    type="button"
+                                    ref={(el) => {
+                                        skillCardRefs.current[index] = el;
+                                    }}
+                                    className={`${styles['skill-card']} nes-container is-rounded ${currentSkill === skill ? styles['selected-skill'] : ''}`}
+                                    key={skill.id}
+                                    style={{ color: skill.color }}
+                                    onClick={() => handleSkillClick(skill)}
+                                    aria-label={`Apri dettagli skill ${skill.skill}`}
+                                    aria-pressed={currentSkill?.id === skill.id}
+                                >
+                                    <img className="nes-icon is-medium" src={skill.icon} alt="" aria-hidden="true" />
+                                </button>
+                            ))}
+                        </div>
                     </div>
                 </section>
             )}
@@ -154,19 +156,24 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
             ) : (
                 <section className={`${styles.page} ${styles['skills-page']}`}>
                     <h3>{currentSkill.skill}</h3>
-                    <p>{currentSkill.description}</p>
-                    <section className={styles.functionality}>
-                        <h4>Funzionalita conosciute:</h4>
-                        <ul>
-                            funzionalita da inserire
-                        </ul>
-                    </section>
-                    <section className={styles['related-projects']}>
-                        <h4>Progetti correlati:</h4>
-                        <ul>
-                            progetti correlati da inserire
-                        </ul>
-                    </section>
+                    <div className={styles['page-content']}>
+                        <section className={styles.functionality}>
+                            <h4>Funzionalita conosciute:</h4>
+                            <ul className={styles['functionality-list']}>
+                                {currentSkill.functions?.map((func, index) => (
+                                    <li key={index} className={styles['functionality-item']}>{func}</li>
+                                )) ?? <li className={styles['functionality-item']}>Funzionalità da inserire</li>}
+                            </ul>
+                        </section>
+                        <section className={styles['related-projects']}>
+                            <h4>Progetti correlati:</h4>
+                            <ul className={styles['related-projects-list']}>
+                                {currentSkill.relatedProjects?.map((project, index) => (
+                                    <li key={index} className={styles['related-projects-item']}>{project}</li>
+                                )) ?? <li className={styles['related-projects-item']}>Progetti da inserire</li>}
+                            </ul>
+                        </section>
+                    </div>
                 </section>
             ))}
 
@@ -174,24 +181,24 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
                 <>
                     <section className={`${styles.page} ${styles['education-page']}`}>
                         <h3>{currentProfile.title}</h3>
-                        <div className={styles['education-list']}>
-                            {educationData.map((education) => (
-                                <section className={styles['education-card']} key={education.id}>
-                                    <span className={styles['education-period']}>{education.period}</span>
-                                    <h5 className={styles['education-title']}>{education.course} - {education.organization}</h5>
-                                    <p className={styles['education-description']}>{education.description}</p>
-                                    <div className={styles['education-skills']}>
-                                        {(education.skills ?? []).map((skill, index) => (
-                                            <span key={index} className={styles['education-skill']}>{skill}</span>
-                                        ))}
-                                    </div>
-                                </section>
-                            ))}
+                        <div className={styles['page-content']}>
+                                {educationData.map((education) => (
+                                    <section className={styles['education-card']} key={education.id}>
+                                        <span className={styles['education-period']}>{education.period}</span>
+                                        <h5 className={styles['education-title']}>{education.course} - {education.organization}</h5>
+                                        <p className={styles['education-description']}>{education.description}</p>
+                                        <div className={styles['education-skills']}>
+                                            {(education.skills ?? []).map((skill, index) => (
+                                                <span key={index} className={styles['education-skill']}>{skill}</span>
+                                            ))}
+                                        </div>
+                                    </section>
+                                ))}
                         </div>
                     </section>
-                    <section className={`${styles.page} ${styles['formation-page']}`}>
+                    <section className={styles.page}>
                         <h3>{currentProfile.detailsTitle ?? 'Percorso e prossimi step'}</h3>
-                        <div className={styles['future-steps']}>
+                        <div className={styles['page-content']}>
                             <section className={styles['formation-panel']}>
                                 <h4>Focus attuale</h4>
                                 <div className={styles['formation-cards']}>
