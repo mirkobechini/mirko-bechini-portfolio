@@ -8,3 +8,9 @@
   letter-spacing: 0.04em;
   background-color: rgb(255 248 225 / 82%);
 }
+
+:global([data-modal-slot="button"]:focus-visible) {
+  outline: none;
+  filter: drop-shadow(0 0 0.125rem rgb(255 255 255 / 95%))
+    drop-shadow(0 0 0.5rem rgb(15 89 168 / 90%));
+}

@@ -121,8 +121,6 @@
   contain: layout style;
 }
 
-
-
 /* Card icona skill: contenitore fisso per allineamento uniforme */
 .skill-card {
   display: flex;
@@ -187,7 +185,7 @@
   contain: layout style;
   scroll-snap-align: center;
   scrollbar-width: thin;
-  
+
   min-height: 0;
   gap: clamp(0.375rem, 1vw, 0.5rem);
   padding-right: clamp(0.35rem, 0.8vw, 0.5rem);
@@ -225,7 +223,6 @@
   margin-bottom: clamp(0.4rem, 0.9vw, 0.65rem);
   padding-bottom: clamp(0.2rem, 0.45vw, 0.3rem);
 }
-
 
 .skills-page,
 .formation-page {
@@ -397,12 +394,6 @@
   border-image-repeat: repeat;
   transform-origin: left center;
   animation: book-open 0.6s ease-out forwards;
-}
-
-:global([data-modal-theme="library"] [data-modal-slot="button"]:focus-visible) {
-  outline: none;
-  filter: drop-shadow(0 0 0.125rem rgb(255 255 255 / 95%))
-    drop-shadow(0 0 0.5rem rgb(15 89 168 / 90%));
 }
 
 :global([data-modal-theme="library"] [data-modal-slot="button"]) {

@@ -73,12 +73,6 @@
   background: transparent;
 }
 
-:global([data-modal-theme="library"] [data-modal-slot="button"]:focus-visible) {
-  outline: none;
-  filter: drop-shadow(0 0 0.125rem rgb(255 255 255 / 95%))
-    drop-shadow(0 0 0.5rem rgb(15 89 168 / 90%));
-}
-
 :global([data-modal-theme="library"] [data-modal-slot="modal"]):has(.bookshelf)
   :global([data-modal-slot="sprite"]) {
   width: clamp(7.25rem, 20vw, 12rem);

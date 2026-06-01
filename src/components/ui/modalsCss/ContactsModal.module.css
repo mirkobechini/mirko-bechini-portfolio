@@ -98,12 +98,6 @@
   background-color: #3e2723;
 }
 
-:global([data-modal-theme="parrot"] [data-modal-slot="button"]:focus-visible) {
-  outline: none;
-  filter: drop-shadow(0 0 0.125rem rgb(255 255 255 / 95%))
-    drop-shadow(0 0 0.5rem rgb(15 89 168 / 90%));
-}
-
 @keyframes parrot-fly-in {
   0% {
     transform: translateX(100%) rotate(10deg);
