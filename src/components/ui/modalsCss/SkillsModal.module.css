@@ -194,7 +194,7 @@
 }
 
 .functionality-item {
-  margin-bottom: 0.25rem;
+  margin: 0.5rem 0;
   font-size: 0.75rem;
 }
 
@@ -205,7 +205,7 @@
 }
 
 .related-projects-item {
-  margin-bottom: 0.25rem;
+  margin: 0.5rem 0;
   font-size: 0.75rem;
 }
 /* #endregion Skills panel */
