@@ -42,7 +42,6 @@
 
 .book-button:focus-visible {
   outline: none;
-  transform: translateY(-0.125rem) scale(1.04);
   filter: drop-shadow(0 0 0.125rem rgb(255 255 255 / 95%))
     drop-shadow(0 0 0.5rem rgb(15 89 168 / 90%));
 }

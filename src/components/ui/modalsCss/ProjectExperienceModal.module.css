@@ -50,7 +50,6 @@
 
 .button-project-experience:focus-visible {
   outline: none;
-  transform: translateY(-0.125rem) scale(1.04);
   filter: drop-shadow(0 0 0.7rem rgb(255 224 102 / 90%));
 }
 

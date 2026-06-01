@@ -14,6 +14,11 @@
   filter: brightness(1.06);
 }
 
+.button-lift-motion:hover,
+.button-lift-motion:focus-visible {
+  transform: translateY(-0.125rem) scale(1.04);
+}
+
 :global([data-modal-slot="button"]:focus-visible) {
   outline: none;
   filter: drop-shadow(0 0 0.125rem rgb(255 255 255 / 95%))

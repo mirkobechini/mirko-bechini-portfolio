@@ -29,7 +29,7 @@ const ProjectExperienceModal = memo(function ProjectExperienceModal({ setModalSp
             {selectedView === null ? (
                 <div className={styles['project-experience-home']}>
                     <div className={styles['button-container']}>
-                        <button className={`${styles['button-project-experience']} ${sharedStyles['button-lift-hover']}`}
+                        <button className={`${styles['button-project-experience']} ${sharedStyles['button-lift-hover']} ${sharedStyles['button-lift-motion']}`}
                             type="button"
                             onClick={() => handleButtonSelection('projects')}
                             aria-label={`Apri i progetti`}>
@@ -40,7 +40,7 @@ const ProjectExperienceModal = memo(function ProjectExperienceModal({ setModalSp
                         </button>
                     </div>
                     <div className={styles['button-container']}>
-                        <button className={`${styles['button-project-experience']} ${sharedStyles['button-lift-hover']}`}
+                        <button className={`${styles['button-project-experience']} ${sharedStyles['button-lift-hover']} ${sharedStyles['button-lift-motion']}`}
                             type="button"
                             onClick={() => handleButtonSelection('experiences')}
                             aria-label={`Apri le esperienze`}>
