@@ -59,6 +59,7 @@ jobs:
         with:
           urls: |
             http://127.0.0.1:4173
+          configPath: './lighthouserc.json'
           uploadArtifacts: true # Ti permette di scaricare il report finale
 
       - name: Write job summary
