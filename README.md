@@ -199,21 +199,22 @@ I token globali sono definiti in [src/index.css](src/index.css) dentro `:root`:
 - [x] Preload immagini principali
 - [x] Styling e design retrò con NES.css
 - [x] Gestione drag e touch della scena
+- [x] Restyle modale "Formazione & Competenze"
+- [x] Restyle modale "Contatti"
+- [x] Restyle modale "About Me"
 
 ### In sviluppo
 
 - [ ] Restyle modale "Esperienze & Progetti" (add experiences)
-- [x] Restyle modale "Formazione & Competenze"
-- [x] Restyle modale "Contatti"
-- [x] Restyle modale "About Me"
 - [ ] Navigazione da tastiera
 - [ ] Ottimizzazione codice e performance
+- [ ] Riorganizzazione struttura cartelle e componenti
 
 ### Migliorie future
 
 - [ ] Responsive design
 - [ ] Miglioramento accessibilità (A11y)
-- [ ] Migliorare animazioni e transizioni
+- [ ] Aggiunta animazioni e transizioni
 - [ ] Refinement visuale generale
 - [ ] Integrazione API esterna
 - [ ] Loader per migliorare l'esperienza utente
