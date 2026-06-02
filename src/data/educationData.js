@@ -14,7 +14,7 @@ const educationData = [
     {
         id: 2,
         course: 'LEARN REACT',
-        certificate: getAssetPath('/modals/certifications/certificato-react-scrimba.png'),
+        certificate: getAssetPath('/modals/certifications/certificato-react-scrimba.webp'),
         organization: 'Scrimba',
         organizationUrl: 'https://scrimba.com/learn-react-c0e',
         period: '03/2026 - 03/2026',
@@ -23,7 +23,7 @@ const educationData = [
     {
         id: 3,
         course: 'LEARN TYPESCRIPT',
-        certificate: getAssetPath('/modals/certifications/certificato-typescript-scrimba.png'),
+        certificate: getAssetPath('/modals/certifications/certificato-typescript-scrimba.webp'),
         organization: 'Scrimba',
         organizationUrl: 'https://scrimba.com/learn-typescript',
         period: '03/2026 - current',

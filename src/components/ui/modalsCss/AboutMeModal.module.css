@@ -24,7 +24,7 @@
   border-style: solid;
   border-color: transparent;
 
-  border-image-source: url("/assets/modals/about-me/monkey-modal-bg.png");
+  border-image-source: url("/assets/modals/about-me/monkey-modal-bg.webp");
   border-image-slice: 147 143 fill;
   border-image-width: 147px 143px;
   border-image-repeat: repeat;
@@ -45,7 +45,7 @@
   border-style: solid;
   border-color: transparent;
 
-  border-image-source: url("/assets/modals/about-me/title-bg.png");
+  border-image-source: url("/assets/modals/about-me/title-bg.webp");
   border-image-slice: 24 108 35 103 fill;
   border-image-repeat: repeat;
 
@@ -76,7 +76,7 @@
 :global(
   [data-modal-theme="monkey"] [data-modal-slot="content"]
 )::-webkit-scrollbar-track {
-  background-image: url("/assets/modals/about-me/scrollbar-track.png") !important;
+  background-image: url("/assets/modals/about-me/scrollbar-track.webp") !important;
   background-repeat: repeat-y !important;
   background-position: center !important;
   background-color: transparent !important;
@@ -91,7 +91,7 @@
 :global(
   [data-modal-theme="monkey"] [data-modal-slot="content"]
 )::-webkit-scrollbar-thumb {
-  background-image: url("/assets/modals/about-me/scrollbar-thumb.png") !important;
+  background-image: url("/assets/modals/about-me/scrollbar-thumb.webp") !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
   background-color: transparent !important;
@@ -128,7 +128,7 @@
   border-style: solid;
   border-color: transparent;
 
-  border-image-source: url("/assets/modals/about-me/monkey-modal-game-btn.png");
+  border-image-source: url("/assets/modals/about-me/monkey-modal-game-btn.webp");
   border-image-slice: 120 307 135 302 fill;
   border-image-repeat: repeat;
 

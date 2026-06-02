@@ -1,6 +1,6 @@
 import { getAssetPath } from '../../utils/assets';
 
-const bookshelfModal = getAssetPath('/modals/bookshelf/books-monkey.png');
+const bookshelfModal = getAssetPath('/modals/bookshelf/books-monkey.webp');
 
 const skillsModalConfig = {
     id: 2,

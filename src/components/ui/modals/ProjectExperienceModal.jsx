@@ -4,8 +4,8 @@ import sharedStyles from '../modalsCss/SharedModal.module.css';
 import ProjectsModal from './ProjectsModal';
 import { getAssetPath } from '../../../utils/assets';
 
-const projectButton = getAssetPath('/modals/project-experience/button-project.png');
-const experienceButton = getAssetPath('/modals/project-experience/button-experience.png');
+const projectButton = getAssetPath('/modals/project-experience/button-project.webp');
+const experienceButton = getAssetPath('/modals/project-experience/button-experience.webp');
 
 const ProjectExperienceModal = memo(function ProjectExperienceModal({ setModalSprite, defaultModalSprite }) {
 

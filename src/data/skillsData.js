@@ -4,7 +4,7 @@ const skillsData = [
     {
         id: 1,
         skill: 'HTML',
-        icon: getAssetPath('/modals/skills/icons/html.png'),
+        icon: getAssetPath('/modals/skills/icons/html.webp'),
         category: 'Mark-up',
         color: '#E34F26',
         functions: [
@@ -20,7 +20,7 @@ const skillsData = [
     {
         id: 2,
         skill: 'CSS',
-        icon: getAssetPath('/modals/skills/icons/css.png'),
+        icon: getAssetPath('/modals/skills/icons/css.webp'),
         category: 'Mark-up',
         color: '#1572B6',
         functions: [
@@ -36,7 +36,7 @@ const skillsData = [
     {
         id: 3,
         skill: 'JavaScript',
-        icon: getAssetPath('/modals/skills/icons/javascript.png'),
+        icon: getAssetPath('/modals/skills/icons/javascript.webp'),
         category: 'Frontend',
         color: '#F7DF1E',
         functions: [
@@ -53,7 +53,7 @@ const skillsData = [
     {
         id: 4,
         skill: 'React',
-        icon: getAssetPath('/modals/skills/icons/react.png'),
+        icon: getAssetPath('/modals/skills/icons/react.webp'),
         category: 'Library',
         color: '#61DAFB',
         functions: [
@@ -71,21 +71,21 @@ const skillsData = [
     {
         id: 5,
         skill: 'Node.js',
-        icon: getAssetPath('/modals/skills/icons/node.png'),
+        icon: getAssetPath('/modals/skills/icons/node.webp'),
         category: 'Backend',
         color: '#339933',
     },
     {
         id: 6,
         skill: 'Express',
-        icon: getAssetPath('/modals/skills/icons/express.png'),
+        icon: getAssetPath('/modals/skills/icons/express.webp'),
         category: 'Framework',
         color: '#000',
     },
     {
         id: 7,
         skill: 'MySQL',
-        icon: getAssetPath('/modals/skills/icons/mysql.png'),
+        icon: getAssetPath('/modals/skills/icons/mysql.webp'),
         category: 'Database',
         color: '#4479A1',
         functions: [
@@ -101,7 +101,7 @@ const skillsData = [
     {
         id: 8,
         skill: 'PHP',
-        icon: getAssetPath('/modals/skills/icons/php.png'),
+        icon: getAssetPath('/modals/skills/icons/php.webp'),
         category: 'Backend',
         color: '#777BB4',
         functions: [
@@ -117,7 +117,7 @@ const skillsData = [
     {
         id: 9,
         skill: 'Laravel',
-        icon: getAssetPath('/modals/skills/icons/laravel.png'),
+        icon: getAssetPath('/modals/skills/icons/laravel.webp'),
         category: 'Framework',
         color: '#FF2D20',
         functions: [
@@ -139,7 +139,7 @@ const skillsData = [
     {
         id: 10,
         skill: 'Git',
-        icon: getAssetPath('/modals/skills/icons/git.png'),
+        icon: getAssetPath('/modals/skills/icons/git.webp'),
         category: 'Version Control',
         color: '#F05032',
         functions: [
@@ -153,7 +153,7 @@ const skillsData = [
     {
         id: 11,
         skill: 'GitHub',
-        icon: getAssetPath('/modals/skills/icons/github.png'),
+        icon: getAssetPath('/modals/skills/icons/github.webp'),
         category: 'Version Control',
         color: '#181717',
         functions: [
@@ -167,7 +167,7 @@ const skillsData = [
     {
         id: 12,
         skill: 'VS Code',
-        icon: getAssetPath('/modals/skills/icons/vscode.png'),
+        icon: getAssetPath('/modals/skills/icons/vscode.webp'),
         category: 'IDE',
         color: '#007ACC',
         functions: [
@@ -181,7 +181,7 @@ const skillsData = [
     {
         id: 13,
         skill: 'Vite',
-        icon: getAssetPath('/modals/skills/icons/vite.png'),
+        icon: getAssetPath('/modals/skills/icons/vite.webp'),
         category: 'Build Tool',
         color: '#646CFF',
         functions: [
@@ -196,7 +196,7 @@ const skillsData = [
     {
         id: 14,
         skill: 'Postman',
-        icon: getAssetPath('/modals/skills/icons/postman.png'),
+        icon: getAssetPath('/modals/skills/icons/postman.webp'),
         category: 'API Testing',
         color: '#FF6C37',
         functions: [
@@ -210,7 +210,7 @@ const skillsData = [
     {
         id: 15,
         skill: 'Copilot',
-        icon: getAssetPath('/modals/skills/icons/copilot.png'),
+        icon: getAssetPath('/modals/skills/icons/copilot.webp'),
         category: 'AI Tool',
         color: '#00BFFF',
         functions: [
@@ -225,7 +225,7 @@ const skillsData = [
     {
         id: 16,
         skill: 'Gemini',
-        icon: getAssetPath('/modals/skills/icons/gemini.png'),
+        icon: getAssetPath('/modals/skills/icons/gemini.webp'),
         category: 'AI Tool',
         color: '#FFD700',
         functions: [
@@ -242,7 +242,7 @@ const skillsData = [
     {
         id: 17,
         skill: 'TypeScript',
-        icon: getAssetPath('/modals/skills/icons/typescript.png'),
+        icon: getAssetPath('/modals/skills/icons/typescript.webp'),
         category: 'Programming Language',
         color: '#3178C6',
         details: 'Still learning',

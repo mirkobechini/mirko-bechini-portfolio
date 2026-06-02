@@ -48,7 +48,7 @@
 
   border-style: solid;
   border-width: 12px 16px 10px;
-  border-image-source: url("/assets/modals/projects/wood-wrapper.png");
+  border-image-source: url("/assets/modals/projects/wood-wrapper.webp");
   border-image-slice: 28 35 fill;
   border-image-width: 12px 16px 14px 16px;
   border-image-repeat: stretch;
@@ -84,7 +84,7 @@
   cursor: var(--cursor-nes-pointer);
 
   border-width: 5px 8px;
-  border-image-source: url("/assets/modals/projects/wood-button.png");
+  border-image-source: url("/assets/modals/projects/wood-button.webp");
   border-image-slice: 10 15 fill;
   border-image-width: 5px 8px;
   border-image-repeat: stretch;
@@ -130,7 +130,7 @@
 
 .selected-filter {
   /* Stato attivo: texture alternativa */
-  border-image-source: url("/assets/modals/projects/wood-button-selected.png");
+  border-image-source: url("/assets/modals/projects/wood-button-selected.webp");
 }
 
 /* Pulsante reset con immagine + testo sovrapposto */
@@ -305,7 +305,7 @@
 
   border-style: solid;
   border-width: 8px 12px;
-  border-image-source: url("/assets/modals/projects/wood-button.png");
+  border-image-source: url("/assets/modals/projects/wood-button.webp");
   border-image-slice: 10 15 fill;
   border-image-width: 5px 8px;
 

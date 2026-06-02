@@ -5,11 +5,11 @@ import projectData from '../../../data/projectData';
 import { getAssetPath } from '../../../utils/assets';
 import { isValidLink } from '../../../utils/links';
 
-const frontendIcon = getAssetPath('/modals/projects/frontend-icon.png');
-const backendIcon = getAssetPath('/modals/projects/backend-icon.png');
-const fullstackIcon = getAssetPath('/modals/projects/fullstack-icon.png');
-const folderIcon = getAssetPath('/modals/projects/folder-icon.png');
-const resetButtonIcon = getAssetPath('/modals/projects/reset-button.png');
+const frontendIcon = getAssetPath('/modals/projects/frontend-icon.webp');
+const backendIcon = getAssetPath('/modals/projects/backend-icon.webp');
+const fullstackIcon = getAssetPath('/modals/projects/fullstack-icon.webp');
+const folderIcon = getAssetPath('/modals/projects/folder-icon.webp');
+const resetButtonIcon = getAssetPath('/modals/projects/reset-button.webp');
 
 const ProjectsModal = memo(function ProjectsModal() {
 

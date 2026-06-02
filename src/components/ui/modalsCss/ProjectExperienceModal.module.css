@@ -20,7 +20,7 @@
 .button-container {
   border-style: solid;
   border-width: 40px 40px;
-  border-image-source: url("/assets/modals/project-experience/button-container.png");
+  border-image-source: url("/assets/modals/project-experience/button-container.webp");
   border-image-slice: 80 80 fill;
   border-image-width: 20px 20px;
   border-image-repeat: stretch;

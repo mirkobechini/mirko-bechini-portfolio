@@ -1,6 +1,6 @@
 import { getAssetPath } from '../../utils/assets';
 
-const deskModal = getAssetPath('/modals/projects/desk-modal.png');
+const deskModal = getAssetPath('/modals/projects/desk-modal.webp');
 
 const projectsModalConfig = {
     id: 3,

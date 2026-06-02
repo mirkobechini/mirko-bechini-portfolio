@@ -75,7 +75,7 @@
   height: auto;
   padding: 0;
 
-  background-image: url("/assets/modals/skills/ui/book-btn-home.png");
+  background-image: url("/assets/modals/skills/ui/book-btn-home.webp");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;
@@ -384,7 +384,7 @@
   border-style: solid;
   border-color: transparent;
 
-  border-image-source: url("/assets/modals/skills/ui/book-modal-bg.png");
+  border-image-source: url("/assets/modals/skills/ui/book-modal-bg.webp");
   border-image-slice: 35 62 fill;
   border-image-width: 35px 62px 35px 62px;
   border-image-repeat: repeat;

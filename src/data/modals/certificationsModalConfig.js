@@ -1,6 +1,6 @@
 import { getAssetPath } from '../../utils/assets';
 
-const paintingModal = getAssetPath('/modals/certifications/painting-modal.png');
+const paintingModal = getAssetPath('/modals/certifications/painting-modal.webp');
 
 const certificationsModalConfig = {
     id: 4,

@@ -17,7 +17,7 @@ import MODAL_DATA from '../data/ModalData';
 import { MODAL_IDS } from '../data/uiConstants';
 
 /* Assets */
-const denBackground = getAssetPath('/backgrounds/den.png');
+const denBackground = getAssetPath('/backgrounds/den.webp');
 
 export default function HomePage() {
     // Refs

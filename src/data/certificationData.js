@@ -13,7 +13,7 @@ const certificationData = [
     {
         id: 2,
         title: 'Certificato di completamento corso LEARN REACT',
-        preview: getAssetPath('/modals/certifications/certificato-react-scrimba.png'),
+        preview: getAssetPath('/modals/certifications/certificato-react-scrimba.webp'),
         link: null,
         organization: 'Scrimba',
         organizationUrl: 'https://scrimba.com/learn-react-c0e',
@@ -22,7 +22,7 @@ const certificationData = [
     {
         id: 3,
         title: 'Certification 3',
-        preview: getAssetPath('/modals/certifications/certificato-react-scrimba.png'),
+        preview: getAssetPath('/modals/certifications/certificato-react-scrimba.webp'),
         link: '#',
         organization: 'Ente 3',
         organizationUrl: '#',
