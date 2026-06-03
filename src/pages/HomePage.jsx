@@ -72,7 +72,7 @@ export default function HomePage() {
             )}
             <div className="den-wrapper">
 
-                <img className="den-image" src={denBackground} onLoad={centerBackground} alt="Monkey Den" draggable="false" loading="eager" fetchPriority="high" decoding="async" />
+                <img className="den-image" src={denBackground} onLoad={centerBackground} alt="Monkey Den" draggable="false" loading="eager" fetchPriority="high" decoding="async" width="1568" height="454" />
 
                 <button className='sprite monkey' aria-label="Sezione Chi Sono" title='About me' onClick={() => openModal(MODAL_IDS.ABOUT_ME)} onMouseEnter={() => preloadModalSprite(MODAL_IDS.ABOUT_ME)} onFocus={() => preloadModalSprite(MODAL_IDS.ABOUT_ME)} onTouchStart={() => preloadModalSprite(MODAL_IDS.ABOUT_ME)}>
                     <div className="nes-container is-rounded sprite-tag">Chi Sono</div>

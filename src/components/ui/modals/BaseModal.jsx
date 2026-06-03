@@ -124,7 +124,7 @@ export default function BaseModal({ variant, closeModal }) {
                 </div>
                 <button ref={closeBtnRef} data-modal-slot="button" className={styles['game-btn']} onClick={closeModal}>CONTINUA</button>
                 {spriteSrc && (
-                    <img data-modal-slot="sprite" className={styles['modal-sprite']} src={spriteSrc} alt={`${variant.theme} modal sprite`} />
+                    <img data-modal-slot="sprite" className={styles['modal-sprite']} src={spriteSrc} alt={`${variant.theme} modal sprite`} width="640" height="640" />
                 )}
             </div>
         </div>

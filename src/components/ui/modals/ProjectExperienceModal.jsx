@@ -34,7 +34,7 @@ const ProjectExperienceModal = memo(function ProjectExperienceModal({ setModalSp
                             onClick={() => handleButtonSelection('projects')}
                             aria-label={`Apri i progetti`}>
                             <span className={styles['button-image-frame']} aria-hidden="true">
-                                <img className={styles['button-image']} src={projectButton} alt="" aria-hidden="true" />
+                                <img className={styles['button-image']} src={projectButton} alt="" aria-hidden="true" width="566" height="390" />
                             </span>
                             <span className={sharedStyles['button-label']}>Progetti</span>
                         </button>
@@ -45,7 +45,7 @@ const ProjectExperienceModal = memo(function ProjectExperienceModal({ setModalSp
                             onClick={() => handleButtonSelection('experiences')}
                             aria-label={`Apri le esperienze`}>
                             <span className={styles['button-image-frame']} aria-hidden="true">
-                                <img className={styles['button-image']} src={experienceButton} alt="" aria-hidden="true" />
+                                <img className={styles['button-image']} src={experienceButton} alt="" aria-hidden="true" width="434" height="478" />
                             </span>
                             <span className={sharedStyles['button-label']}>Esperienze</span>
                         </button>
@@ -59,7 +59,7 @@ const ProjectExperienceModal = memo(function ProjectExperienceModal({ setModalSp
                         <div className={styles['experience-placeholder']}>
                             <article className={styles['experience-placeholder-card']} aria-live="polite">
                                 <div className={styles['experience-placeholder-visual']} aria-hidden="true">
-                                    <img src={experienceButton} alt="" className={styles['experience-placeholder-image']} />
+                                    <img src={experienceButton} alt="" className={styles['experience-placeholder-image']} width="434" height="478" />
                                 </div>
                                 <p className={styles['experience-placeholder-kicker']}>Esperienze</p>
                                 <h3 className={styles['experience-placeholder-title']}>Sezione in arrivo</h3>
