@@ -2,7 +2,7 @@ import { memo, useEffect, useState } from 'react';
 import styles from './BookshelfModal.module.css';
 import sharedStyles from '../shared/SharedModal.module.css';
 import SkillsModal from './SkillsModal';
-import { BOOKSHELF_PROFILES } from '../../../data/modals/bookshelfProfiles';
+import { BOOKSHELF_PROFILES } from './bookshelfProfiles';
 import { getAssetPath } from '../../../utils/assets';
 
 const formationBook = getAssetPath('/modals/bookshelf/books-formation.webp');

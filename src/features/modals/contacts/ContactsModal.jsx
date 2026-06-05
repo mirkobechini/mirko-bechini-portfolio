@@ -1,6 +1,6 @@
 import styles from './ContactsModal.module.css';
 import { memo, useEffect, useRef, useState } from 'react';
-import contacts from '../../../data/contactsData';
+import contacts from './contactsData';
 import { isExternalWebLink } from '../../../utils/links';
 
 const ContactsModal = memo(function ContactsModal() {

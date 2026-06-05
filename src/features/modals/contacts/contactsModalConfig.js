@@ -1,4 +1,4 @@
-import { getAssetPath } from '../../utils/assets';
+import { getAssetPath } from '../../../utils/assets';
 
 const parrotModal = getAssetPath('/modals/contacts/parrot-modal.webp');
 

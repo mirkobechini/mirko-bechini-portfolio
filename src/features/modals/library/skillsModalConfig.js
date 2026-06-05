@@ -1,4 +1,4 @@
-import { getAssetPath } from '../../utils/assets';
+import { getAssetPath } from '../../../utils/assets';
 
 const bookshelfModal = getAssetPath('/modals/bookshelf/books-monkey.webp');
 

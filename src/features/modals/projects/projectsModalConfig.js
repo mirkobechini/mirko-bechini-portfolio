@@ -1,4 +1,4 @@
-import { getAssetPath } from '../../utils/assets';
+import { getAssetPath } from '../../../utils/assets';
 
 const deskModal = getAssetPath('/modals/projects/desk-modal.webp');
 

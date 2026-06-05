@@ -1,5 +1,5 @@
 import styles from './CertificationsModal.module.css';
-import certificationData from '../../../data/certificationData';
+import certificationData from './certificationData';
 import { memo } from 'react';
 import { isValidLink } from '../../../utils/links';
 

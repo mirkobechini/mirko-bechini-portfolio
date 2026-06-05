@@ -1,6 +1,6 @@
-import skillsData from '../skillsData';
-import educationData from '../educationData';
-import { getAssetPath } from '../../utils/assets';
+import skillsData from './skillsData';
+import educationData from './educationData';
+import { getAssetPath } from '../../../utils/assets';
 
 const skillsProfileSprite = getAssetPath('/modals/skills/ui/library-modal.webp');
 const formationProfileSprite = getAssetPath('/modals/skills/ui/library-modal.webp');

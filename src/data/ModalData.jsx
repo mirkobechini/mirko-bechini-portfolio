@@ -1,9 +1,9 @@
 import { lazy } from 'react';
-import aboutMeModalConfig from './modals/aboutMeModalConfig';
-import skillsModalConfig from './modals/skillsModalConfig';
-import projectsModalConfig from './modals/projectsModalConfig';
-import certificationsModalConfig from './modals/certificationsModalConfig';
-import contactsModalConfig from './modals/contactsModalConfig';
+import aboutMeModalConfig from '../features/modals/about/aboutMeModalConfig';
+import skillsModalConfig from '../features/modals/library/skillsModalConfig';
+import projectsModalConfig from '../features/modals/projects/projectsModalConfig';
+import certificationsModalConfig from '../features/modals/certifications/certificationsModalConfig';
+import contactsModalConfig from '../features/modals/contacts/contactsModalConfig';
 
 // Lazy load componenti modali
 const AboutMeModal = lazy(() => import('../features/modals/about/AboutMeModal'));

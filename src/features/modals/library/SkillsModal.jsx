@@ -1,7 +1,7 @@
 import { memo, useEffect, useMemo, useRef, useState } from 'react';
 import styles from './SkillsModal.module.css';
 import sharedStyles from '../shared/SharedModal.module.css';
-import defaultSkillsData from '../../../data/skillsData';
+import defaultSkillsData from './skillsData';
 
 const SKILL_COLUMNS = 4;
 
