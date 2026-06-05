@@ -217,6 +217,8 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
                                     ))}
                                 </div>
                             </section>
+
+                           {/*TODO: add formation page with related projects*/}
                             <section className={styles['formation-panel']}>
                                 <h4>Roadmap</h4>
                                 <div className={styles['formation-cards']}>

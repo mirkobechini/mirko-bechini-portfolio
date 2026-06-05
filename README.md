@@ -217,6 +217,7 @@ I token globali sono definiti in [src/index.css](src/index.css) dentro `:root`:
 - [ ] Aggiunta animazioni e transizioni
 - [ ] Refinement visuale generale
 - [ ] Integrazione API esterna
+- [ ] Add formation specific page with related projects
 - [ ] Loader per migliorare l'esperienza utente
 
 ---
