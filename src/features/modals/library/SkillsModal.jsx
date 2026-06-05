@@ -1,6 +1,6 @@
 import { memo, useEffect, useMemo, useRef, useState } from 'react';
-import styles from '../modalsCss/SkillsModal.module.css';
-import sharedStyles from '../modalsCss/SharedModal.module.css';
+import styles from './SkillsModal.module.css';
+import sharedStyles from '../shared/SharedModal.module.css';
 import defaultSkillsData from '../../../data/skillsData';
 
 const SKILL_COLUMNS = 4;
@@ -218,7 +218,7 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
                                 </div>
                             </section>
 
-                           {/*TODO: add formation page with related projects*/}
+                            {/*TODO: add formation page with related projects*/}
                             <section className={styles['formation-panel']}>
                                 <h4>Roadmap</h4>
                                 <div className={styles['formation-cards']}>

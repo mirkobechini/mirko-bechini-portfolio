@@ -1,4 +1,4 @@
-import styles from '../modalsCss/CertificationsModal.module.css';
+import styles from './CertificationsModal.module.css';
 import certificationData from '../../../data/certificationData';
 import { memo } from 'react';
 import { isValidLink } from '../../../utils/links';

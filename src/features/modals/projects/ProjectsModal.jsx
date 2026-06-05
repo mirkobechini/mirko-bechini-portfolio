@@ -1,6 +1,6 @@
-import styles from '../modalsCss/ProjectsModal.module.css';
+import styles from './ProjectsModal.module.css';
 import { useMemo, useState, memo } from 'react';
-import sharedStyles from '../modalsCss/SharedModal.module.css';
+import sharedStyles from '../shared/SharedModal.module.css';
 import projectData from '../../../data/projectData';
 import { getAssetPath } from '../../../utils/assets';
 import { isValidLink } from '../../../utils/links';

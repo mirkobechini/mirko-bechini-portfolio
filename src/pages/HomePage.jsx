@@ -2,7 +2,7 @@
 import { useCallback, useContext, useMemo, useRef } from 'react';
 
 /* Components */
-import BaseModal from '../components/ui/modals/BaseModal';
+import BaseModal from '../features/modals/shared/BaseModal';
 
 /* Hooks & Context */
 import { useDragScroll } from '../hooks/useDragScroll';

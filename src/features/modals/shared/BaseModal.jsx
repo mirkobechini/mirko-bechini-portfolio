@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, Suspense } from 'react';
 import ModalErrorBoundary from './ModalErrorBoundary';
-import styles from '../modalsCss/BaseModal.module.css';
-import '../modalsCss/SharedModal.module.css';
+import styles from './BaseModal.module.css';
+import './SharedModal.module.css';
 
 const LoadingFallback = () => (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>

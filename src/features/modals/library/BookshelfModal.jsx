@@ -1,6 +1,6 @@
 import { memo, useEffect, useState } from 'react';
-import styles from '../modalsCss/BookshelfModal.module.css';
-import sharedStyles from '../modalsCss/SharedModal.module.css';
+import styles from './BookshelfModal.module.css';
+import sharedStyles from '../shared/SharedModal.module.css';
 import SkillsModal from './SkillsModal';
 import { BOOKSHELF_PROFILES } from '../../../data/modals/bookshelfProfiles';
 import { getAssetPath } from '../../../utils/assets';

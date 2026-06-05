@@ -1,4 +1,4 @@
-import styles from '../modalsCss/ContactsModal.module.css';
+import styles from './ContactsModal.module.css';
 import { memo, useEffect, useRef, useState } from 'react';
 import contacts from '../../../data/contactsData';
 import { isExternalWebLink } from '../../../utils/links';

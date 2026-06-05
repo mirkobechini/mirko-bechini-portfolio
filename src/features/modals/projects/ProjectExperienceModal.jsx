@@ -1,6 +1,6 @@
 import { memo, useEffect, useState } from 'react';
-import styles from '../modalsCss/ProjectExperienceModal.module.css';
-import sharedStyles from '../modalsCss/SharedModal.module.css';
+import styles from './ProjectExperienceModal.module.css';
+import sharedStyles from '../shared/SharedModal.module.css';
 import ProjectsModal from './ProjectsModal';
 import { getAssetPath } from '../../../utils/assets';
 

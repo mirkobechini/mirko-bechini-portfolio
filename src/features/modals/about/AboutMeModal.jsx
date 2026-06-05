@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import styles from '../modalsCss/AboutMeModal.module.css';
+import styles from './AboutMeModal.module.css';
 import { getAssetPath } from '../../../utils/assets';
 
 const bottomSprite = getAssetPath('/modals/about-me/bottom-sprite.webp');
