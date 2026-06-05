@@ -41,10 +41,10 @@
 
 ## 🛠️ Tech Stack
 
-| Settore              | Tecnologie                                                                                                                                                                                                                                                                                                        |
-| :------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Frontend**         | ![React](https://img.shields.io/badge/-React-61DAFB?logo=react&logoColor=white&style=flat-square) ![Vite](https://img.shields.io/badge/-Vite-646CFF?logo=vite&logoColor=white&style=flat-square) ![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?logo=javascript&logoColor=black&style=flat-square) |
-| **Markup & Styling** | ![HTML5](https://img.shields.io/badge/-HTML5-E34F26?logo=html5&logoColor=white&style=flat-square) ![CSS3](https://img.shields.io/badge/-CSS3-1572B6?logo=css3&logoColor=white&style=flat-square)                                                                                                                  |
+| Settore              | Tecnologie                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| :------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Frontend**         | ![React](https://img.shields.io/badge/-React-61DAFB?logo=react&logoColor=white&style=flat-square) ![Vite](https://img.shields.io/badge/-Vite-646CFF?logo=vite&logoColor=white&style=flat-square) ![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?logo=javascript&logoColor=black&style=flat-square)                                                                                                                          |
+| **Markup & Styling** | ![HTML5](https://img.shields.io/badge/-HTML5-E34F26?logo=html5&logoColor=white&style=flat-square) ![CSS3](https://img.shields.io/badge/-CSS3-1572B6?logo=css3&logoColor=white&style=flat-square)                                                                                                                                                                                                                                           |
 | **Strumenti**        | ![Git](https://img.shields.io/badge/-Git-F05032?logo=git&logoColor=white&style=flat-square) ![ESLint](https://img.shields.io/badge/-ESLint-4B32C3?logo=eslint&logoColor=white&style=flat-square) ![Google Gemini](https://img.shields.io/badge/-Gemini-4285F4?logo=google&logoColor=white&style=flat-square) ![GitHub Copilot](https://img.shields.io/badge/-GitHub%20Copilot-181717?logo=githubcopilot&logoColor=white&style=flat-square) |
 
 ### Frameworks e Librerie
@@ -123,20 +123,19 @@ Apri il browser su `http://localhost:5173` (o la porta indicata dal progetto).
 │   └── preview.png
 ├── src/
 │   ├── components/
-│   │   ├── layout/
-│   │   └── ui/
-│   │       ├── modals/
-│   │       └── modalsCss/
+│   │   └── layout/
 │   ├── context/
 │   ├── data/
-│   │   ├── modals/
-│   │   ├── certificationData.js
-│   │   ├── contactsData.js
-│   │   ├── educationData.js
-│   │   ├── ModalData.jsx
-│   │   ├── projectData.js
-│   │   ├── skillsData.js
 │   │   └── uiConstants.js
+│   ├── features/
+│   │   └── modals/
+│   │       ├── about/
+│   │       ├── certifications/
+│   │       ├── contacts/
+│   │       ├── library/
+│   │       ├── projects/
+│   │       ├── shared/
+│   │       └── modalRegistry.jsx
 │   ├── hooks/
 │   ├── pages/
 │   ├── utils/
@@ -151,6 +150,9 @@ Apri il browser su `http://localhost:5173` (o la porta indicata dal progetto).
 ├── vite.config.js
 └── README.md
 ```
+
+Nota organizzativa: dentro `src/features/modals/`, il file `modalRegistry.jsx` centralizza il mapping tra config e componenti lazy.
+Le config seguono naming coerente per feature (es. `aboutModalConfig.js`, `libraryModalConfig.js`, `projectsModalConfig.js`).
 
 ---
 
@@ -208,7 +210,7 @@ I token globali sono definiti in [src/index.css](src/index.css) dentro `:root`:
 - [ ] Restyle modale "Esperienze & Progetti" (add experiences)
 - [ ] Navigazione da tastiera
 - [ ] Ottimizzazione codice e performance
-- [ ] Riorganizzazione struttura cartelle e componenti
+- [x] Riorganizzazione struttura cartelle e componenti
 
 ### Migliorie future
 

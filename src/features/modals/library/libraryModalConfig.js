@@ -2,7 +2,7 @@ import { getAssetPath } from '../../../utils/assets';
 
 const bookshelfModal = getAssetPath('/modals/bookshelf/books-monkey.webp');
 
-const skillsModalConfig = {
+const libraryModalConfig = {
     id: 2,
     title: 'Formazione & Competenze',
     theme: 'library',
@@ -10,4 +10,4 @@ const skillsModalConfig = {
     sprite: bookshelfModal,
 };
 
-export default skillsModalConfig;
+export default libraryModalConfig;

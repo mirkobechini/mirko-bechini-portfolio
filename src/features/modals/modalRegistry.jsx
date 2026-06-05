@@ -1,6 +1,6 @@
 import { lazy } from 'react';
-import aboutMeModalConfig from './about/aboutMeModalConfig';
-import skillsModalConfig from './library/skillsModalConfig';
+import aboutModalConfig from './about/aboutModalConfig';
+import libraryModalConfig from './library/libraryModalConfig';
 import projectsModalConfig from './projects/projectsModalConfig';
 import certificationsModalConfig from './certifications/certificationsModalConfig';
 import contactsModalConfig from './contacts/contactsModalConfig';
@@ -21,8 +21,8 @@ const MODAL_COMPONENTS = {
 };
 
 const MODAL_CONFIGS = [
-    aboutMeModalConfig,
-    skillsModalConfig,
+    aboutModalConfig,
+    libraryModalConfig,
     projectsModalConfig,
     certificationsModalConfig,
     contactsModalConfig,

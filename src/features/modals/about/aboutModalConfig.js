@@ -1,4 +1,4 @@
-const aboutMeModalConfig = {
+const aboutModalConfig = {
     id: 1,
     title: 'About Me',
     theme: 'monkey',
@@ -6,4 +6,4 @@ const aboutMeModalConfig = {
     sprite: null,
 };
 
-export default aboutMeModalConfig;
+export default aboutModalConfig;
