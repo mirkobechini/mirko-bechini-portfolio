@@ -13,7 +13,7 @@ import { getAssetPath } from '../utils/assets';
 import { preloadImages } from '../utils/preloadImages';
 
 /* Data & Constants */
-import MODAL_DATA from '../data/ModalData';
+import MODAL_DATA from '../features/modals/modalRegistry';
 import { MODAL_IDS } from '../data/uiConstants';
 
 /* Assets */
