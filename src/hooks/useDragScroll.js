@@ -88,14 +88,17 @@ export const useDragScroll = (scrollRef, isDragDisabled) => {
 
   // Cleanup per cancellare eventuali animazioni frame pendenti quando il componente viene smontato
   useEffect(() => {
+    centerBackground();
+    window.addEventListener("load", centerBackground);
     window.addEventListener("resize", centerBackground);
     return () => {
+      window.removeEventListener("load", centerBackground);
       window.removeEventListener("resize", centerBackground);
       if (dragRaf.current) {
         cancelAnimationFrame(dragRaf.current);
       }
     };
-  }, []);
+  }, [scrollRef]);
 
   return {
     hasMoved,
