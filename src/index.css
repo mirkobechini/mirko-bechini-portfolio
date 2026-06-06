@@ -40,6 +40,7 @@
   --icon-md: clamp(1.5rem, 1.25rem + 1.2vw, 2rem);
   --icon-lg: clamp(2.25rem, 1.9rem + 1.8vw, 3rem);
   --radius-sm: 0.25rem;
+  --sprite-scale: 1;
 }
 
 html,
@@ -140,6 +141,7 @@ main {
 .den-container {
   height: 100vh;
   width: 100vw;
+  min-height: 450px;
   overflow-x: auto;
   overflow-y: hidden;
   background-color: #1a1a1a;
@@ -253,7 +255,7 @@ main {
 .desk {
   top: 70%;
   left: 26%;
-  width: 18%;
+  width: calc(18% * var(--sprite-scale));
   background-image: url("/assets/sprites/desk.webp");
 }
 
@@ -265,7 +267,7 @@ main {
 .painting {
   top: 32%;
   left: 36%;
-  width: 6%;
+  width: calc(6% * var(--sprite-scale));
   background-image: url("/assets/sprites/painting.webp");
 }
 
@@ -277,7 +279,7 @@ main {
 .monkey {
   top: 60%;
   left: 53%;
-  width: 11%;
+  width: calc(11% * var(--sprite-scale));
   background-image: url("/assets/sprites/monkey.webp");
 }
 
@@ -289,7 +291,7 @@ main {
 .parrot {
   top: 33%;
   left: 65%;
-  width: 6%;
+  width: calc(6% * var(--sprite-scale));
   background-image: url("/assets/sprites/parrot.webp");
 }
 
@@ -301,7 +303,7 @@ main {
 .library {
   top: 65%;
   left: 77%;
-  width: 16%;
+  width: calc(16% * var(--sprite-scale));
   background-image: url("/assets/sprites/book.webp");
 }
 
@@ -313,3 +315,56 @@ main {
 /* #endregion sprite */
 
 /* #endregion Home */
+
+/*#region Responsive - Smartphone */
+
+@media (max-width: 767px) {
+  :root{
+    --sprite-scale: 2.2;
+  }
+
+  .sprite {
+    min-width: 95px;
+  }
+
+  .den-container, 
+  .den-wrapper {
+    height: 100vh !important;
+    min-height: auto !important;
+  }
+
+  .desk {
+    width: calc(24vh * var(--sprite-scale)) !important;
+    min-width: auto !important;
+  }
+
+  .desk .sprite-tag {
+    left: 55% !important;
+  }
+
+  .library {
+    width: calc(22vh * var(--sprite-scale)) !important;
+    min-width: auto !important;
+  }
+
+  .monkey {
+    width: calc(16vh * var(--sprite-scale)) !important;
+    min-width: auto !important;
+  }
+
+  .painting {
+    width: calc(9vh * var(--sprite-scale)) !important;
+    min-width: auto !important;
+  }
+
+  .parrot {
+    width: calc(9vh * var(--sprite-scale)) !important;
+    min-width: auto !important;
+  }
+  .sprite-tag {
+    font-size: var(--text-md) !important;
+    padding: var(--space-2xs) var(--space-xs) !important;
+    letter-spacing: 0.02em;
+  }
+}
+/*#endregion Responsive - Smartphone */
