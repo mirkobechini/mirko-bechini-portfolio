@@ -243,8 +243,11 @@ main {
 }
 
 
-.sprite:hover, .sprite:focus .sprite-tag {
-  opacity: 1;
+.sprite:hover,
+.sprite:focus {
+  .sprite-tag {
+    opacity: 1;
+  }
 }
 
 .desk {
