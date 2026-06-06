@@ -1,5 +1,5 @@
 /* React & Libraries */
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { DRAG_SENSITIVITY, DRAG_THRESHOLD } from "../data/uiConstants";
 
 export const useDragScroll = (scrollRef, isDragDisabled) => {
@@ -15,13 +15,13 @@ export const useDragScroll = (scrollRef, isDragDisabled) => {
   const pendingClientX = useRef(0);
 
   // Helper functions
-  function centerBackground() {
+  const centerBackground = useCallback(() => {
     const container = scrollRef.current;
     if (container) {
       const scrollCenter = (container.scrollWidth - container.clientWidth) / 2;
       container.scrollLeft = scrollCenter;
     }
-  }
+  }, [scrollRef]);
 
   function startDrag(clientX) {
     if (!hasMoved) {
@@ -98,7 +98,7 @@ export const useDragScroll = (scrollRef, isDragDisabled) => {
         cancelAnimationFrame(dragRaf.current);
       }
     };
-  }, [scrollRef]);
+  }, [centerBackground]);
 
   return {
     hasMoved,
