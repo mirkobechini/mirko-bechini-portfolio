@@ -40,6 +40,18 @@ export default function BaseModal({ variant, closeModal }) {
         });
     }
 
+
+    // Blocca lo scroll di fondo (Stanza) per evitare conflitti di drag su Mobile
+    useEffect(() => {
+        // Salviamo lo stile originale per ripristinarlo correttamente
+        const originalStyle = window.getComputedStyle(document.body).overflow;
+        document.body.style.overflow = 'hidden';
+
+        return () => {
+            document.body.style.overflow = originalStyle;
+        };
+    }, []);
+
     // Chiusura con ESC + focus trap all'interno del modale
     useEffect(() => {
         previousFocusRef.current = document.activeElement instanceof HTMLElement

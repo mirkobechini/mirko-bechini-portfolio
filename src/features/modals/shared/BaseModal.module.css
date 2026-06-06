@@ -143,3 +143,25 @@
 }
 
 /* #endregion Commons */
+
+/* #region Responsive Smartphone */
+
+@media (max-width: 767px) {
+  
+
+  .modal-title {
+   text-align: center;
+   font-size: 1.25rem;
+  }
+
+  .modal-content {
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-lg);
+  }
+
+  .game-btn {
+    padding: var(--space-2xs) var(--space-xs);
+  }
+}
+
+/* #endregion Responsive Smartphone */

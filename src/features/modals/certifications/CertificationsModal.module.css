@@ -91,3 +91,34 @@
   }
 }
 /* #endregion Certifications theme slots */
+
+/* #region Responsive Tablet */
+@media (max-width: 1023px) {
+
+  :global([data-modal-theme="painting"] [data-modal-slot="sprite"]) {
+    top: 95%;
+    left: 6%;
+    width: 30%;
+  }
+}
+
+/* #endregion Responsive Tablet */
+
+/* #region Responsive Smartphone */
+
+
+
+@media (max-width: 767px){
+  .gallery-container {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    padding: var(--space-lg);
+  }
+
+  :global([data-modal-theme="painting"] [data-modal-slot="sprite"]) {
+    top: 97%;
+    left: 6%;
+    width: 40%;
+  }
+}
+/* #endregion Responsive Smartphone */

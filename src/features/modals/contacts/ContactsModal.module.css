@@ -110,3 +110,38 @@
   }
 }
 /* #endregion Contacts theme slots */
+
+
+
+/* #region Responsive Tablet */
+@media (max-width: 1023px) {
+
+  :global([data-modal-theme="parrot"] [data-modal-slot="sprite"]) {
+    top: 85%;
+    left: 30%;
+    width: auto !important;
+    height: 25vh;        
+    max-height: 220px;
+  }
+}
+
+/* #endregion Responsive Tablet */
+
+/* #region Responsive Smartphone */
+
+
+
+@media (max-width: 767px){
+  
+
+  :global([data-modal-theme="parrot"] [data-modal-slot="sprite"]) {
+    top: 62%;
+    left: 50%;
+
+    transform: translateX(-50%);
+    width: auto !important;
+    height: 20vh;
+    max-height: 160px;
+  }
+}
+/* #endregion Responsive Smartphone */

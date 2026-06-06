@@ -26,10 +26,10 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  margin-top: clamp(4rem, 5vw, 5rem);
+  margin-top: clamp(1rem, 3vw, 3rem);
 
   width: clamp(10rem, 24vw, 15rem);
-  min-width: 9rem;
+  min-width: 2rem;
   padding: clamp(0.5rem, 1.5vw, 1rem);
 
   background: transparent;
@@ -76,3 +76,47 @@
 }
 
 /* TODO: responsive bookshelf layout (mobile/tablet) will be handled at the end of the project. */
+
+
+/* #region Responsive Smartphone */
+
+@media (max-width: 767px){
+  .bookshelf {
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-top: 5% !important;
+  }
+
+  .book-button {
+    margin-top: 0 !important; 
+    width: clamp(7rem, 40vw, 10rem); 
+    padding: var(--space-3xs);
+  }
+
+  .book-image {
+    max-height: 15vh !important; 
+  }
+
+  .book-button :global(.nes-badge), 
+  .book-button span {
+    transform: scale(0.85);
+  }
+
+  :global([data-modal-theme="library"] [data-modal-slot="button"]) {
+    padding: var(--space-md) var(--space-lg) !important;
+    right: 7% !important;
+    bottom: 8% !important;
+    transform: translateX(-50%) !important;
+  }
+
+  :global([data-modal-theme="library"] [data-modal-slot="sprite"]) {
+    top: 80%;
+    left: 50%;
+    width: auto !important;
+    height: 14vh; 
+    max-height: 110px;
+  }
+}
+
+/* #endregion Responsive Smartphone */
+
