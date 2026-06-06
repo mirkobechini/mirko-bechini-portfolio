@@ -207,19 +207,20 @@ I token globali sono definiti in [src/index.css](src/index.css) dentro `:root`:
 
 ### In sviluppo
 
-- [ ] Restyle modale "Esperienze & Progetti" (add experiences)
-- [ ] Navigazione da tastiera
-- [ ] Ottimizzazione codice e performance
+- [x] Navigazione da tastiera
 - [x] Riorganizzazione struttura cartelle e componenti
+- [ ] Responsive design
+- [ ] Clear TODOs
+- [ ] Restyle modale "Esperienze & Progetti" (add experiences)
+- [ ] Ottimizzazione codice e performance
 
 ### Migliorie future
 
-- [ ] Responsive design
+- [ ] Add formation specific page with related projects
 - [ ] Miglioramento accessibilità (A11y)
 - [ ] Aggiunta animazioni e transizioni
 - [ ] Refinement visuale generale
 - [ ] Integrazione API esterna
-- [ ] Add formation specific page with related projects
 - [ ] Loader per migliorare l'esperienza utente
 
 ---
