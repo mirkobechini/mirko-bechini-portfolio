@@ -184,7 +184,7 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
                     <section className={`${styles.page} ${styles['education-page']}`}>
                         <h3>{currentProfile.title}</h3>
                         <div className={`${styles['page-content']} ${sharedStyles['scroll-y-contain']}`}>
-                            {/*TODO: trasformare in link che apre il percorso formativo in una pagina dedicata*/}
+                            {/*TODO: trasformare in link che apre il percorso formativo in una pagina dedicata con ulteriore link a certificazione*/}
                             {educationData.map((education) => (
                                 <section className={styles['education-card']} key={education.id}>
                                     <span className={styles['education-period']}>{education.period}</span>

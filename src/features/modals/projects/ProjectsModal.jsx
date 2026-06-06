@@ -29,20 +29,11 @@ const ProjectsModal = memo(function ProjectsModal() {
         });
     }, [selectedTypeFilter, selectedScopeFilter]);
 
-    /*const groupedProjects = useMemo(() => {
-        return filteredProjects.reduce((companies, project) => {
-            if (!companies[project.projectScope]) {
-                companies[project.projectScope] = [];
-            }
-            companies[project.projectScope].push(project);
-            return companies;
-        }, {});
-    }, [filteredProjects]);*/
-
 
     return (
         <div className={styles['desk-container']}>
             {/*TODO: filter container hidden?*/}
+            {/*TODO: Add home button*/}
             <div className={styles['filter-container']}>
                 <div className={styles['filter-group']}>
                     <fieldset className={styles['filter-wrapper']}>
