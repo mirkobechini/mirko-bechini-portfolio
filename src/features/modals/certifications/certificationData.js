@@ -23,17 +23,6 @@ const certificationData = [
         organizationUrl: 'https://scrimba.com/learn-react-c0e',
         skills: ['React'],
     },
-    {
-        id: 3,
-        title: 'Certification 3',
-        preview: getAssetPath('/modals/certifications/certificato-react-scrimba.webp'),
-        previewWidth: 1320,
-        previewHeight: 840,
-        link: '#',
-        organization: 'Ente 3',
-        organizationUrl: '#',
-        skills: ['Angular', 'Express', 'MySQL'],
-    }
 ];
 
 export default certificationData;

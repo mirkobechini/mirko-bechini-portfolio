@@ -25,14 +25,14 @@ const BOOKSHELF_PROFILES = {
             {
                 title: 'Learn Typescript',
                 description: 'Corso Scrimba per imparare le basi di Typescript e tipizzazione statica.',
-                status: 'inProgress',
-                badge: 'Core stack',
+                status: 'onHold',
+                badge: 'New Skill',
             },
             {
                 title: 'AI course Fabio',
                 description: 'Iniziare il corso di Fabio sulla AI per esplorare applicazioni pratiche e casi d\'uso reali.',
                 status: 'inProgress',
-                badge: 'Hands-on',
+                badge: 'New Skill',
             },
         ],
         formationRoadmap: [
@@ -40,13 +40,13 @@ const BOOKSHELF_PROFILES = {
                 title: 'Learn Angular',
                 description: 'Seguire un corso completo su Angular per ampliare le competenze frontend e imparare a costruire applicazioni complesse.',
                 status: 'next',
-                badge: 'Planning',
+                badge: 'New Skill',
             },
             {
                 title: 'Improve Laravel skills',
                 description: 'Approfondire Laravel con progetti pratici e corsi avanzati per diventare più efficiente nello sviluppo backend.',
                 status: 'next',
-                badge: 'Planning',
+                badge: 'Upgrade Skill',
             },
             {
                 title: 'Creare backend Portfolio',

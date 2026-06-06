@@ -25,7 +25,7 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
     const skillCardRefs = useRef([]);
 
     const statusLabels = {
-        done: 'Completato',
+        onHold: 'In sospeso',
         inProgress: 'In corso',
         next: 'Prossimo',
     };
@@ -168,6 +168,7 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
                         </section>
                         <section className={styles['related-projects']}>
                             <h4>Progetti correlati:</h4>
+                            {/*TODO: trasformare in link che apre il progetto in un modal dedicato*/}
                             <ul className={styles['related-projects-list']}>
                                 {currentSkill.relatedProjects?.map((project, index) => (
                                     <li key={index} className={styles['related-projects-item']}>{project}</li>
@@ -183,6 +184,7 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
                     <section className={`${styles.page} ${styles['education-page']}`}>
                         <h3>{currentProfile.title}</h3>
                         <div className={`${styles['page-content']} ${sharedStyles['scroll-y-contain']}`}>
+                            {/*TODO: trasformare in link che apre il percorso formativo in una pagina dedicata*/}
                             {educationData.map((education) => (
                                 <section className={styles['education-card']} key={education.id}>
                                     <span className={styles['education-period']}>{education.period}</span>

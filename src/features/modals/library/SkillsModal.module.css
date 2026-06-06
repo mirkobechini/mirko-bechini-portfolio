@@ -343,9 +343,9 @@
   white-space: nowrap;
 }
 
-.status-done {
-  color: #0f5132;
-  background-color: #d1e7dd;
+.status-onHold {
+  color: #7a1c1c;
+  background-color: #e62e4678;
 }
 
 .status-inProgress {
