@@ -16,7 +16,7 @@
 .filter-container {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
 
   width: 100%;
@@ -54,16 +54,6 @@
   border-image-repeat: stretch;
 
   image-rendering: pixelated;
-}
-
-/* TODO: riguardare */
-@media (width <= 480px) {
-  .filter-wrapper {
-    /* Scaliamo mantenendo il rapporto: il lato è sempre circa il doppio della parte alta */
-    border-image-width: 8px 18px 6px 18px;
-    border-width: 8px 18px 6px;
-    padding: var(--space-xs) var(--space-2xs) var(--space-2xs);
-  }
 }
 
 .button-label {
@@ -133,8 +123,8 @@
   border-image-source: url("/assets/modals/projects/wood-button-selected.webp");
 }
 
-/* Pulsante reset con immagine + testo sovrapposto */
-.reset-button-container {
+/* Pulsante reset con immagine + testo sovrapposto + filter per mobile*/
+.filter-button {
   position: relative;
 
   width: clamp(8.75rem, 18vw, 10.5rem);
@@ -151,7 +141,7 @@
   transition: transform 0.1s ease;
 }
 
-.reset-button-container img {
+.filter-button img {
   display: block;
 
   width: 100%;
@@ -161,15 +151,15 @@
   image-rendering: pixelated;
 }
 
-.reset-button-container:hover {
+.filter-button:hover {
   transform: scale(1.05);
 }
 
-.reset-button-container:active {
+.filter-button:active {
   transform: scale(0.95);
 }
 
-.reset-text {
+.filter-button-text {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -437,7 +427,6 @@
 
 /* #endregion Scrollbar styles */
 
-
 /** #region Responsive Smartphone */
 @media (max-width: 767px) {
   .projects-grid {
@@ -460,6 +449,19 @@
 
   .project-title {
     font-size: var(--text-lg);
+  }
+
+  .filter-container {
+    justify-content: center;
+    gap: var(--space-md);
+  }
+  
+
+  .filter-wrapper {
+    /* Scaliamo mantenendo il rapporto: il lato è sempre circa il doppio della parte alta */
+    border-image-width: 8px 18px 6px 18px;
+    border-width: 8px 18px 6px;
+    padding: var(--space-xs) var(--space-2xs) var(--space-2xs);
   }
 }
 /* #endregion Responsive Smartphone */
