@@ -156,11 +156,23 @@
 
   .modal-content {
     margin-bottom: var(--space-lg);
-    padding-bottom: var(--space-lg);
+    padding-bottom: calc(var(--space-lg) * 2);
   }
 
   .game-btn {
     padding: var(--space-2xs) var(--space-xs);
+  }
+
+  .game-modal {
+    width: 90%;
+    height: 80%;
+    max-width: none;
+    max-height: none;
+  }
+
+  .modal-sprite {
+    width: 60%;
+    left: 15% !important;
   }
 }
 

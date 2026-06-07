@@ -32,7 +32,7 @@ const ProjectsModal = memo(function ProjectsModal() {
 
     return (
         <div className={styles['desk-container']}>
-            {/*TODO: filter container hidden?*/}
+            {/*TODO: filter container hidden? in smartphone*/}
             {/*TODO: Add home button*/}
             <div className={styles['filter-container']}>
                 <div className={styles['filter-group']}>

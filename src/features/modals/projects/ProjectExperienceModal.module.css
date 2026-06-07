@@ -138,3 +138,50 @@
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
+
+/* #region Responsive Smartphone */
+
+@media (max-width: 767px) {
+  .project-experience-home {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xxs);
+    margin-top: 0 !important;
+  }
+
+  .button-container {
+    border-width: 20px 20px !important;
+    border-image-width: 10px 10px !important;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .button-project-experience {
+    margin-top: 0 !important;
+    width: min(85%, 12rem);
+    height: 15vh !important;
+    min-height: 0 !important;
+    padding:0 !important;
+    gap: 0;
+  }
+
+  .button-image-frame {
+    height: 70% !important;
+    width: 100%;
+  }
+
+  .button-image {
+    max-height: 12vh !important;
+    min-width: 90px !important;
+    object-fit: contain;
+  }
+
+  .button-project-experience :global([class*="button-label"]) {
+    font-size: var(--text-xs) !important;
+    margin: 0;
+  }
+
+}
+/* #endregion Responsive Smartphone */
