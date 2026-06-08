@@ -114,6 +114,22 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
         return () => document.removeEventListener('keydown', handleKeyDown);
     }, [currentSkill, currentProfile.enableKeyboardNavigation, isSkillsProfile, skillsData]);
 
+
+    {/*Responsive smartphone */}
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768); // Determine if the device is mobile
+
+    const handleResize = () => {
+        const isMobile = window.innerWidth < 768;
+        setIsMobile(isMobile);
+    };
+
+    useEffect(() => {
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
     return (
         <div className={`${styles.book} ${profileVariantClass}`} data-profile={currentProfile.id}>
             {onBackToBookshelf && (
