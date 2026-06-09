@@ -185,46 +185,6 @@ I token globali sono definiti in [src/index.css](src/index.css) dentro `:root`:
 
 ---
 
-## 🗺️ Roadmap
-
-### Completato
-
-- [x] Integrazione di React Router
-- [x] Struttura pagina Home con background interattivo
-- [x] Modale base e gestione apertura/chiusura sezioni
-- [x] Modale "About Me"
-- [x] Modale "Formazione & Competenze"
-- [x] Modale "Esperienze & Progetti"
-- [x] Modale "Certificazioni"
-- [x] Modale "Contatti"
-- [x] Gestione stato globale con Context
-- [x] Preload immagini principali
-- [x] Styling e design retrò con NES.css
-- [x] Gestione drag e touch della scena
-- [x] Restyle modale "Formazione & Competenze"
-- [x] Restyle modale "Contatti"
-- [x] Restyle modale "About Me"
-
-### In sviluppo
-
-- [x] Navigazione da tastiera
-- [x] Riorganizzazione struttura cartelle e componenti
-- [ ] Responsive design
-- [ ] Clear TODOs
-- [ ] Restyle modale "Esperienze & Progetti" (add experiences)
-- [ ] Ottimizzazione codice e performance
-
-### Migliorie future
-
-- [ ] Add formation specific page with related projects
-- [ ] Miglioramento accessibilità (A11y)
-- [ ] Aggiunta animazioni e transizioni
-- [ ] Refinement visuale generale
-- [ ] Integrazione API esterna
-- [ ] Loader per migliorare l'esperienza utente
-
----
-
 ## 📧 Contatti
 
 Se vuoi metterti in contatto con me, puoi trovarmi qui:
