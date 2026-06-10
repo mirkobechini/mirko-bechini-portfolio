@@ -222,12 +222,12 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
                                 <h4>Focus attuale</h4>
                                 <div className={styles['formation-cards']}>
                                     {formationFocus.map((item, index) => (
-                                        <article key={`focus-${index}`} className={styles['formation-card']}>
+                                        <article key={`focus-${index}`} className={styles['education-card']}>
                                             <header className={styles['formation-card-header']}>
                                                 <h5>{item.title}</h5>
-                                                <span className={`${styles['formation-status']} ${styles[`status-${item.status}`]}`}>
+                                                {!isMobile && <span className={`${styles['formation-status']} ${styles[`status-${item.status}`]}`}>
                                                     {statusLabels[item.status] ?? 'Info'}
-                                                </span>
+                                                </span>}
                                             </header>
                                             <p>{item.description}</p>
                                             {item.badge && <span className={styles['formation-badge']}>{item.badge}</span>}
@@ -241,12 +241,12 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
                                 <h4>Roadmap</h4>
                                 <div className={styles['formation-cards']}>
                                     {formationRoadmap.map((item, index) => (
-                                        <article key={`roadmap-${index}`} className={styles['formation-card']}>
+                                        <article key={`roadmap-${index}`} className={styles['education-card']}>
                                             <header className={styles['formation-card-header']}>
                                                 <h5>{item.title}</h5>
-                                                <span className={`${styles['formation-status']} ${styles[`status-${item.status}`]}`}>
+                                                {!isMobile && <span className={`${styles['formation-status']} ${styles[`status-${item.status}`]}`}>
                                                     {statusLabels[item.status] ?? 'Info'}
-                                                </span>
+                                                </span>}
                                             </header>
                                             <p>{item.description}</p>
                                             {item.badge && <span className={styles['formation-badge']}>{item.badge}</span>}
