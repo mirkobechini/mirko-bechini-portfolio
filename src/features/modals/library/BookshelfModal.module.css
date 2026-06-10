@@ -99,21 +99,6 @@
   .book-button span {
     transform: scale(0.85);
   }
-
-  :global([data-modal-theme="library"] [data-modal-slot="button"]) {
-    padding: var(--space-md) var(--space-lg) !important;
-    right: 7% !important;
-    bottom: 8% !important;
-    transform: translateX(-50%) !important;
-  }
-
-  :global([data-modal-theme="library"] [data-modal-slot="sprite"]) {
-    top: 80%;
-    left: 50%;
-    width: auto !important;
-    height: 14vh; 
-    max-height: 110px;
-  }
 }
 
 /* #endregion Responsive Smartphone */

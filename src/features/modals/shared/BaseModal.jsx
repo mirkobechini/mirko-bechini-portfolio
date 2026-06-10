@@ -120,9 +120,8 @@ export default function BaseModal({ variant, closeModal }) {
     const Component = variant.component;
 
     // Le dimensioni del modale sono gestite in BaseModal.module.css.
-//TODO: parchment theme
     return (
-        <div className={`${styles['modal-overlay']} ${styles[`theme-${variant.theme}`]}`} data-modal-theme={variant.theme} onClick={closeModal}>
+        <div className={`${styles['modal-overlay']} `} data-modal-theme={variant.theme} onClick={closeModal}>
             <div className={styles['modal-header']}>
                 <h2 id="modal-title" data-modal-slot="title" className={styles['modal-title']}>{variant.title}</h2>
             </div>
