@@ -17,7 +17,7 @@
 - [Tech Stack](#️-tech-stack)
 - [Quick Start](#-quick-start)
 - [Struttura del progetto](#-struttura-del-progetto)
-- [Roadmap](#️-roadmap)
+- [Convenzioni CSS Responsive](#-convenzioni-css-responsive)
 - [Contatti](#-contatti)
 
 ---
