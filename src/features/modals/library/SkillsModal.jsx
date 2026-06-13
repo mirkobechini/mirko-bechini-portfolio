@@ -156,7 +156,7 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
                                     aria-label={`Apri dettagli skill ${skill.skill}`}
                                     aria-pressed={currentSkill?.id === skill.id}
                                 >
-                                    <img className="nes-icon is-medium" src={skill.icon} alt="" aria-hidden="true" width="32" height="32" />
+                                    <img className="nes-icon is-medium" src={skill.icon} alt={`Icona skill ${skill.skill}`} aria-hidden="true" width="32" height="32" />
                                 </button>
                             ))}
                         </div>
