@@ -75,6 +75,13 @@
   transform: translate(-50%, -50%);
 }
 
+:global([data-modal-theme="library"] [data-modal-slot="button"]) {
+  position: absolute;
+  right: 20%;
+  bottom: 10%;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.875rem;
+}
 
 /* #region Responsive Smartphone */
 

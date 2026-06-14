@@ -142,6 +142,10 @@
   backface-visibility: hidden;
 }
 
+:global([data-modal-theme="library"] [data-modal-slot="content"]):has([data-library-view="profile"]) {
+  overflow: visible !important;
+}
+
 /* #endregion Commons */
 
 /* #region Responsive Smartphone */
@@ -176,6 +180,48 @@
     width: 60%;
     left: 15% ;
   }
+
+  /*#region Library Profile View */
+  :global([data-modal-theme="library"]):has([data-library-view="profile"]) .game-btn {
+    position: absolute;
+    left: 50% !important;
+    right: auto !important;
+    /* Spinge il bottone sul bordo inferiore, calcolandolo sul risvolto */
+    bottom: -65px !important; 
+    transform: translateX(-50%) !important;
+    z-index: 10;
+    
+    /* Stile pixel art coordinato al marrone del libro/pergamena */
+    background-color: #3e2723 !important;
+    color: #e8f5e9 !important;
+    padding: 0.55rem 1.5rem !important;
+    font-size: 0.875rem !important;
+    width: fit-content;
+    box-shadow: 0 4px 0 #271715; /* Effetto 3D pixel art sotto il bottone */
+  }
+
+  :global([data-modal-theme="library"]):has([data-library-view="profile"]) .game-btn:hover {
+    transform: translateX(-50%) scale(1.1) !important;
+    background-color: #5d4037 !important;
+  }
+
+  :global([data-modal-theme="library"]):has([data-library-view="profile"]) .game-btn:active {
+    transform: translateX(-50%) translateY(2px) scale(1) !important;
+    box-shadow: 0 2px 0 #271715;
+  }
+
+  /* Gestione dello Sprite Scimmietta in questa specifica vista */
+  :global([data-modal-theme="library"]):has([data-library-view="profile"]) [data-modal-slot="sprite"] {
+    /* Per adesso la nascondiamo o la teniamo fissa per non farla sovrapporre. 
+       Appena decidi dove metterla basterà cambiare questi valori */
+    display: none; 
+  }
+
+  
+
+
+
+  /*#endregion Library Profile View */
 }
 
 /* #endregion Responsive Smartphone */
