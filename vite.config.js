@@ -14,4 +14,9 @@ export default defineConfig({
       webp: { lossless: false, quality: 70 },
     }),
   ],
+  build: {
+    minify: 'esbuild',
+    cssCodeSplit: true,
+    cssMinify: 'esbuild',
+  }
 })
