@@ -252,11 +252,23 @@ main {
   }
 }
 
+.sprite-character {
+  display: block;
+  max-width: 100%;
+  height: 100%;
+  object-fit: contain;
+  
+  image-rendering: pixelated; 
+  image-rendering: crisp-edges;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .desk {
   top: 70%;
   left: 26%;
   width: calc(18% * var(--sprite-scale));
-  background-image: url("/assets/sprites/desk.webp");
 }
 
 .desk .sprite-tag {
@@ -268,7 +280,6 @@ main {
   top: 32%;
   left: 36%;
   width: calc(6% * var(--sprite-scale));
-  background-image: url("/assets/sprites/painting.webp");
 }
 
 .painting .sprite-tag {
@@ -280,7 +291,6 @@ main {
   top: 60%;
   left: 53%;
   width: calc(11% * var(--sprite-scale));
-  background-image: url("/assets/sprites/monkey.webp");
 }
 
 .monkey .sprite-tag {
@@ -292,7 +302,6 @@ main {
   top: 33%;
   left: 65%;
   width: calc(6% * var(--sprite-scale));
-  background-image: url("/assets/sprites/parrot.webp");
 }
 
 .parrot .sprite-tag {
@@ -304,7 +313,6 @@ main {
   top: 65%;
   left: 77%;
   width: calc(16% * var(--sprite-scale));
-  background-image: url("/assets/sprites/book.webp");
 }
 
 .library .sprite-tag {
