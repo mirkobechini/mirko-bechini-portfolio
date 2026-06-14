@@ -17,6 +17,6 @@ export default defineConfig({
   build: {
     minify: true,
     cssCodeSplit: true,
-    cssMinify: treu,
+    cssMinify: true,
   }
 })
