@@ -463,5 +463,13 @@
     border-width: 8px 18px 6px;
     padding: var(--space-xs) var(--space-2xs) var(--space-2xs);
   }
+
+
+  
+:global([data-modal-theme="desk"] [data-modal-slot="sprite"]) {
+  top: 93%;
+  left: 12%;
+  width: 50%;
+}
 }
 /* #endregion Responsive Smartphone */
