@@ -162,3 +162,47 @@
   }
 }
 /* #endregion About Me theme slots */
+
+/* #region Responsive adjustments */
+
+@media (max-width: 767px) {
+  :global([data-modal-theme="monkey"] [data-modal-slot="title"]) {
+    font-size: var(--text-md);
+    padding: 0.25rem 0.5rem;
+    border-width: 10px 15px;
+    border-image-repeat: stretch;
+    top: 4.5%;
+    left: 25%;
+  }
+
+  .top-left-angle {
+    width: 110%;
+    top: -13.5%;
+    left: -16.4%;
+  }
+
+  .bottom-sprite {
+    width: 50%;
+    bottom: -10%;
+    left: -20%;
+  }
+
+  :global([data-modal-theme="monkey"] [data-modal-slot="modal"]) {
+    padding-top: 1.7rem;
+    padding-right: 0.2rem;
+  }
+
+  :global([data-modal-theme="monkey"] [data-modal-slot="content"]) {
+    font-size: var(--text-lg);
+    padding-right: 0.5rem;
+  }
+
+  :global([data-modal-theme="monkey"] [data-modal-slot="button"]) {
+    font-size: var(--text-xs);
+    padding: 0.25rem 0.5rem 0.15rem;
+    right: -21%;
+    bottom: -10%;
+  }
+}
+
+/* #endregion Responsive adjustments */
