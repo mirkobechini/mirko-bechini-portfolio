@@ -15,6 +15,9 @@
 
 .bottom-sprite {
   position: absolute;
+  cursor: pointer;
+  background: none;
+  border: none;
 
   width: clamp(100px, 20vw, 200px);
   bottom: -65px;
@@ -22,6 +25,24 @@
 
   transform: translate(-10%, -10%);
 }
+
+.bottom-sprite:hover {
+  transform: translate(-10%, -10%) scale(1.2);
+  transition: all 0.1s;
+}
+
+.bottom-sprite:focus-visible {
+  outline: none;
+  filter: drop-shadow(0 0 0.125rem rgb(255 255 255 / 95%))
+    drop-shadow(0 0 0.45rem rgb(12 86 148 / 90%));
+}
+
+.bottom-sprite img {
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+}
+
 /* #endregion About Me sprite */
 
 /* #region About Me theme slots */
@@ -200,7 +221,7 @@
     bottom: 0%;
   }
 
-    .top-left-angle {
+  .top-left-angle {
     width: 110%;
     top: -11.5%;
     left: -5.4%;

@@ -30,8 +30,10 @@ const AboutMeModal = memo(function AboutMeModal() {
                 Mi piace leggere i manga, guardare gli anime e allenarmi in palestra, tutte attività
                 che mi aiutano ad affrontare le sfide quotidiane con grinta e perseveranza.
             </p>
-            <img src={bottomSprite} alt="bottom sprite" className={styles['bottom-sprite']} onClick={handleCurriculum} />
             <img src={topLeftAngle} alt="top angle" className={styles['top-left-angle']} />
+            <button alt="curriculum button" className={styles['bottom-sprite']} onClick={handleCurriculum}>
+                <img src={bottomSprite} alt="bottom sprite" />
+            </button>
         </>
     );
 });
