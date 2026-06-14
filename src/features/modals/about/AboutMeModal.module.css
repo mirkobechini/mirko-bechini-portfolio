@@ -2,17 +2,25 @@
 .top-left-angle {
   position: absolute;
 
-  width: 35%;
-  top: -13.5%;
-  left: -4.4%;
+  width: clamp(150px, 23vw, 250px);
+  top: -48px;
+  left: -13px;
+
+  transform: translate(-10%, -10%);
+
+  z-index: 11;
+  pointer-events: none;
+  image-rendering: pixelated;
 }
 
 .bottom-sprite {
   position: absolute;
 
-  width: 20%;
-  bottom: -10%;
-  left: 2%;
+  width: clamp(100px, 20vw, 200px);
+  bottom: -65px;
+  left: 25px;
+
+  transform: translate(-10%, -10%);
 }
 /* #endregion About Me sprite */
 
@@ -175,18 +183,6 @@
     left: 25%;
   }
 
-  .top-left-angle {
-    width: 110%;
-    top: -13.5%;
-    left: -16.4%;
-  }
-
-  .bottom-sprite {
-    width: 50%;
-    bottom: -10%;
-    left: -20%;
-  }
-
   :global([data-modal-theme="monkey"] [data-modal-slot="modal"]) {
     padding-top: 1.7rem;
     padding-right: 0.2rem;
@@ -200,9 +196,22 @@
   :global([data-modal-theme="monkey"] [data-modal-slot="button"]) {
     font-size: var(--text-xs);
     padding: 0.25rem 0.5rem 0.15rem;
-    right: -21%;
-    bottom: -10%;
+    right: -11%;
+    bottom: 0%;
   }
+
+    .top-left-angle {
+    width: 110%;
+    top: -11.5%;
+    left: -5.4%;
+  }
+
+  .bottom-sprite {
+    width: 50%;
+    bottom: -10%;
+    left: -10%;
+  }
+
 }
 
 /* #endregion Responsive adjustments */
