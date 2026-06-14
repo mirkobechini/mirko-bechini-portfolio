@@ -4,6 +4,11 @@ import { getAssetPath } from '../../../utils/assets';
 
 const bottomSprite = getAssetPath('/modals/about-me/bottom-sprite.webp');
 const topLeftAngle = getAssetPath('/modals/about-me/top-left-angle.webp');
+const curriculumPDF = getAssetPath('/modals/about-me/Bechini-Mirko_CV.pdf');
+
+function handleCurriculum() {
+    window.open(curriculumPDF, '_blank');
+}
 
 const AboutMeModal = memo(function AboutMeModal() {
     return (
@@ -25,8 +30,7 @@ const AboutMeModal = memo(function AboutMeModal() {
                 Mi piace leggere i manga, guardare gli anime e allenarmi in palestra, tutte attività
                 che mi aiutano ad affrontare le sfide quotidiane con grinta e perseveranza.
             </p>
-            {/*TODO: add curriculum when bottom sprite will be pressed*/}
-            <img src={bottomSprite} alt="bottom sprite" className={styles['bottom-sprite']} />
+            <img src={bottomSprite} alt="bottom sprite" className={styles['bottom-sprite']} onClick={handleCurriculum} />
             <img src={topLeftAngle} alt="top angle" className={styles['top-left-angle']} />
         </>
     );
