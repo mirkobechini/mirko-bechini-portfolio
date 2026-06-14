@@ -1,4 +1,4 @@
-const ASSETS_PATH = import.meta.env.VITE_ASSETS_PATH;
+const ASSETS_PATH = import.meta.env.VITE_ASSETS_PATH || '';
 
 function getAssetPath(path) {
     return `${ASSETS_PATH}${path}`;
