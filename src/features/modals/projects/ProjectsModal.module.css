@@ -141,6 +141,11 @@
   transition: transform 0.1s ease;
 }
 
+.mobile-trigger-btn,
+.close-filters-btn {
+  display: none;
+}
+
 .filter-button img {
   display: block;
 
@@ -451,11 +456,25 @@
     font-size: var(--text-lg);
   }
 
+  /*#region Filter styles */
+
   .filter-container {
+    display: none;
     justify-content: center;
     gap: var(--space-md);
   }
-  
+
+  /* Quando l'utente clicca su "Filtri", React aggiunge la classe e il CSS lo mostra */
+  .filter-container.is-open-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .filter-container.is-open-mobile ~ .mobile-trigger-btn {
+    display: none;
+  }
 
   .filter-wrapper {
     /* Scaliamo mantenendo il rapporto: il lato è sempre circa il doppio della parte alta */
@@ -464,12 +483,21 @@
     padding: var(--space-xs) var(--space-2xs) var(--space-2xs);
   }
 
-
+  /* Il pulsante per attivare i filtri compare SOLO su mobile */
+  .mobile-trigger-btn {
+    display: block;
+  }
   
-:global([data-modal-theme="desk"] [data-modal-slot="sprite"]) {
-  top: 93%;
-  left: 12%;
-  width: 50%;
-}
+  /* Il pulsante per nasconderli compare solo dentro il menu mobile */
+  .close-filters-btn {
+    display: block;
+  }
+/*#endregion Filter styles */
+
+  :global([data-modal-theme="desk"] [data-modal-slot="sprite"]) {
+    top: 93%;
+    left: 12%;
+    width: 50%;
+  }
 }
 /* #endregion Responsive Smartphone */

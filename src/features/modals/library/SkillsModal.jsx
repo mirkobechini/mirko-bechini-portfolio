@@ -39,12 +39,14 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
     };
 
     useEffect(() => {
-        const currentIndex = currentSkill == null
-            ? -1
-            : skillsData.findIndex((skill) => skill.id === currentSkill.id);
+        if (currentSkill == null) return;
 
-        if (currentIndex >= 0) {
-            skillCardRefs.current[currentIndex]?.focus({ preventScroll: true });
+        const currentIndex = skillsData.findIndex((skill) => skill.id === currentSkill.id);
+        const activeCard = skillCardRefs.current[currentIndex];
+
+        // Forziamo il focus hardware solo se il browser non ha già il focus lì sopra
+        if (currentIndex >= 0 && document.activeElement !== activeCard) {
+            activeCard?.focus({ preventScroll: true });
         }
     }, [currentSkill, skillsData]);
 
@@ -115,7 +117,7 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
     }, [currentSkill, currentProfile.enableKeyboardNavigation, isSkillsProfile, skillsData]);
 
 
-    {/*Responsive smartphone */}
+    {/*Responsive smartphone */ }
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768); // Determine if the device is mobile
 
     const handleResize = () => {

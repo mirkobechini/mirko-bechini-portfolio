@@ -16,13 +16,9 @@ const ProjectExperienceModal = memo(function ProjectExperienceModal({ setModalSp
     }
 
     useEffect(() => {
-        if (selectedView == null) {
-            setModalSprite?.(defaultModalSprite ?? null);
-            return;
-        }
-
+        // Imposta lo sprite iniziale solo quando il componente viene montato o se cambia il default
         setModalSprite?.(defaultModalSprite ?? null);
-    }, [defaultModalSprite, selectedView, setModalSprite]);
+    }, [defaultModalSprite, setModalSprite]);
 
     return (
         <>
