@@ -1,9 +1,10 @@
-import { memo, useEffect, useState } from 'react';
+import { memo, useEffect, useState, lazy, Suspense } from 'react';
 import styles from './BookshelfModal.module.css';
 import sharedStyles from '../shared/SharedModal.module.css';
-import SkillsModal from './SkillsModal';
 import { BOOKSHELF_PROFILES } from './bookshelfProfiles';
 import { getAssetPath } from '../../../utils/assets';
+
+const SkillsModal = lazy(() => import('./SkillsModal'));
 
 const formationBook = getAssetPath('/modals/bookshelf/books-formation.webp');
 const skillsBook = getAssetPath('/modals/bookshelf/books-skill.webp');
@@ -51,10 +52,12 @@ const BookshelfModal = memo(function BookshelfModal({ setModalSprite, defaultMod
             ) : (
                 <div className={styles.book} data-library-view="profile">
                     {activeProfile != null && (
-                        <SkillsModal
-                            profile={activeProfile}
-                            onBackToBookshelf={handleBackToBookshelf}
-                        />
+                        <Suspense fallback={<div className={sharedStyles.loading}>Caricamento...</div>}>
+                            <SkillsModal
+                                profile={activeProfile}
+                                onBackToBookshelf={handleBackToBookshelf}
+                            />
+                        </Suspense>
                     )}
                 </div>
             )}

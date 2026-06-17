@@ -1,13 +1,20 @@
-import { useEffect, useRef, useState, Suspense } from 'react';
+import { useEffect, useRef, useState, lazy, Suspense } from 'react';
 import ModalErrorBoundary from './ModalErrorBoundary';
 import styles from './BaseModal.module.css';
-import './SharedModal.module.css';
 
 const LoadingFallback = () => (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
         <p>Caricamento...</p>
     </div>
 );
+
+const LAZY_MODAL_COMPONENTS = {
+    aboutMe: lazy(() => import('../about/AboutMeModal')),
+    bookshelf: lazy(() => import('../library/BookshelfModal')),
+    projects: lazy(() => import('../projects/ProjectExperienceModal')),
+    certifications: lazy(() => import('../certifications/CertificationsModal')),
+    contacts: lazy(() => import('../contacts/ContactsModal')),
+};
 
 export default function BaseModal({ variant, closeModal }) {
     const closeBtnRef = useRef(null);
@@ -117,7 +124,7 @@ export default function BaseModal({ variant, closeModal }) {
         };
     }, [closeModal]);
 
-    const Component = variant.component;
+    const Component = LAZY_MODAL_COMPONENTS[variant.componentKey];
 
     // Le dimensioni del modale sono gestite in BaseModal.module.css.
     return (

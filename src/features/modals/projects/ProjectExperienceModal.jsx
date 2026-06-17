@@ -1,8 +1,9 @@
-import { memo, useEffect, useState } from 'react';
+import { memo, useEffect, useState, lazy, Suspense } from 'react';
 import styles from './ProjectExperienceModal.module.css';
 import sharedStyles from '../shared/SharedModal.module.css';
-import ProjectsModal from './ProjectsModal';
 import { getAssetPath } from '../../../utils/assets';
+import ProjectsModal from './ProjectsModal';
+
 
 const projectButton = getAssetPath('/modals/project-experience/button-project.webp');
 const experienceButton = getAssetPath('/modals/project-experience/button-experience.webp');
@@ -50,7 +51,9 @@ const ProjectExperienceModal = memo(function ProjectExperienceModal({ setModalSp
             ) : (
                 <div className={styles['desk-container']}>
                     {selectedView === 'projects' ? (
-                        <ProjectsModal />
+                        <Suspense fallback={<div className={sharedStyles.loading}>Caricamento...</div>}>
+                            <ProjectModal />
+                        </Suspense>
                     ) : (
                         <div className={styles['experience-placeholder']}>
                             <article className={styles['experience-placeholder-card']} aria-live="polite">
