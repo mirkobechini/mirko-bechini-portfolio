@@ -1,4 +1,4 @@
-import { memo, useEffect, useState, lazy, Suspense } from 'react';
+import { memo, useEffect, useState } from 'react';
 import styles from './ProjectExperienceModal.module.css';
 import sharedStyles from '../shared/SharedModal.module.css';
 import { getAssetPath } from '../../../utils/assets';
@@ -51,9 +51,7 @@ const ProjectExperienceModal = memo(function ProjectExperienceModal({ setModalSp
             ) : (
                 <div className={styles['desk-container']}>
                     {selectedView === 'projects' ? (
-                        <Suspense fallback={<div className={sharedStyles.loading}>Caricamento...</div>}>
-                            <ProjectModal />
-                        </Suspense>
+                            <ProjectsModal />
                     ) : (
                         <div className={styles['experience-placeholder']}>
                             <article className={styles['experience-placeholder-card']} aria-live="polite">
