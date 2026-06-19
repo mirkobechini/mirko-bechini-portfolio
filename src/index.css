@@ -262,6 +262,8 @@ main {
   position: absolute;
   top: 0;
   left: 0;
+  -webkit-user-drag: none;
+  user-select: none;
 }
 
 .desk {

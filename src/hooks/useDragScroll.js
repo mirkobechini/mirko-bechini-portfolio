@@ -40,6 +40,14 @@ export const useDragScroll = (scrollRef, isDragDisabled) => {
     const container = scrollRef.current;
     if (!isHolding.current || !container || isDragDisabled) return;
 
+    const x = clientX - container.offsetLeft;
+
+    // Determinazione drag/click: SINCRONA, non dipende dalla RAF
+    if (!isDragging.current && Math.abs(x - startX.current) > DRAG_THRESHOLD) {
+      isDragging.current = true;
+    }
+
+
     // Salvo solo l'ultimo input del mouse
     pendingClientX.current = clientX;
 
@@ -70,6 +78,14 @@ export const useDragScroll = (scrollRef, isDragDisabled) => {
     if (dragRaf.current) {
       cancelAnimationFrame(dragRaf.current);
       dragRaf.current = null;
+
+      // Applica l'ultimo movimento pendente prima di fermarsi del tutto
+      const container = scrollRef.current;
+      if (container) {
+        const x = pendingClientX.current - container.offsetLeft;
+        const walk = (x - startX.current) * DRAG_SENSITIVITY;
+        container.scrollLeft = scrollLeft.current - walk;
+      }
     }
   }
 
