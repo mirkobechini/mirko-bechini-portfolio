@@ -56,7 +56,7 @@ export default function HomePage() {
     // Handlers
     const closeModal = useCallback(() => {
         setActiveSection(null);
-    }, []);
+    }, [setActiveSection]);
 
     const openModal = useCallback((id) => {
         if (!isDragging.current) {
@@ -65,7 +65,7 @@ export default function HomePage() {
                 setActiveSection(selectedModal);
             }
         }
-    }, [modalById, isDragging]);
+    }, [modalById, isDragging, setActiveSection]);
 
     // Preload handlers for sprite images
     const preloadHandlers = (id) => ({
