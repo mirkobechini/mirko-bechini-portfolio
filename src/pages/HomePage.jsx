@@ -54,18 +54,50 @@ export default function HomePage() {
     }, [modalById]);
 
     // Handlers
-    const closeModal = () => {
+    const closeModal = useCallback(() => {
         setActiveSection(null);
-    };
+    }, []);
 
-    const openModal = (id) => {
+    const openModal = useCallback((id) => {
         if (!isDragging.current) {
             const selectedModal = modalById[id];
             if (selectedModal) {
                 setActiveSection(selectedModal);
             }
         }
-    };
+    }, [modalById, isDragging]);
+
+    // Preload handlers for sprite images
+    const preloadHandlers = (id) => ({
+        onMouseEnter: () => preloadModalSprite(id),
+        onFocus: () => preloadModalSprite(id),
+        onTouchStart: () => preloadModalSprite(id),
+    });
+
+
+    // Sprites data for rendering buttons
+    const SPRITES = [
+        {
+            id: MODAL_IDS.ABOUT_ME, src: monkeySprite, className: 'monkey', label: 'Chi Sono',
+            ariaLabel: 'Sezione Chi Sono', title: 'About me', alt: 'Scimmia sezione Chi Sono', fetchPriority: 'high'
+        },
+        {
+            id: MODAL_IDS.BOOKSHELF, src: librarySprite, className: 'library', label: 'Formazione & Competenze',
+            ariaLabel: 'Sezione Formazione & Competenze', title: 'Formation & Skills', alt: 'Libreria sezione Formazione & Competenze', fetchPriority: 'low'
+        },
+        {
+            id: MODAL_IDS.PROJECTS, src: deskSprite, className: 'desk', label: 'Esperienze & Progetti',
+            ariaLabel: 'Sezione Esperienze & Progetti', title: 'Experiences & Projects', alt: 'Scrivania sezione Esperienze & Progetti', fetchPriority: 'low'
+        },
+        {
+            id: MODAL_IDS.CONTACTS, src: parrotSprite, className: 'parrot', label: 'Contatti',
+            ariaLabel: 'Sezione Contatti', title: 'Contacts', alt: 'Pappagallo sezione Contatti', fetchPriority: 'low'
+        },
+        {
+            id: MODAL_IDS.CERTIFICATIONS, src: paintingSprite, className: 'painting', label: 'Certificazioni',
+            ariaLabel: 'Sezione Certificazioni', title: 'Certifications', alt: 'Quadro sezione Certificazioni', fetchPriority: 'low'
+        },
+    ];
 
     return (
         <div className="den-container" ref={scrollRef} onMouseDown={handleGrab} onMouseLeave={handleLeave} onMouseUp={handleLeave} onMouseMove={handleMovement} onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleLeave}>
@@ -79,26 +111,19 @@ export default function HomePage() {
 
                 <img className="den-image" src={denBackground} onLoad={centerBackground} alt="Monkey Den" draggable="false" loading="eager" fetchPriority="high" decoding="async" width="1568" height="454" />
 
-                <button className='sprite monkey' aria-label="Sezione Chi Sono" title='About me' onClick={() => openModal(MODAL_IDS.ABOUT_ME)} onMouseEnter={() => preloadModalSprite(MODAL_IDS.ABOUT_ME)} onFocus={() => preloadModalSprite(MODAL_IDS.ABOUT_ME)} onTouchStart={() => preloadModalSprite(MODAL_IDS.ABOUT_ME)}>
-                    <img src={monkeySprite} alt="Scimmia sezione Chi Sono" className="sprite-character" fetchPriority="high" draggable="false" onDragStart={(e) => e.preventDefault()}/>
-                    <div className="nes-container is-rounded sprite-tag">Chi Sono</div>
-                </button>
-                <button className='sprite library' aria-label="Sezione Formazione & Competenze" title='Formation & Skills' onClick={() => openModal(MODAL_IDS.BOOKSHELF)} onMouseEnter={() => preloadModalSprite(MODAL_IDS.BOOKSHELF)} onFocus={() => preloadModalSprite(MODAL_IDS.BOOKSHELF)} onTouchStart={() => preloadModalSprite(MODAL_IDS.BOOKSHELF)}>
-                    <img src={librarySprite} alt="Libreria sezione Formazione & Competenze" className="sprite-character" fetchPriority="low" draggable="false" onDragStart={(e) => e.preventDefault()}/>
-                    <div className="nes-container is-rounded sprite-tag">Formazione & Competenze</div>
-                </button>
-                <button className='sprite desk' aria-label="Sezione Esperienze & Progetti" title='Experiences & Projects' onClick={() => openModal(MODAL_IDS.PROJECTS)} onMouseEnter={() => preloadModalSprite(MODAL_IDS.PROJECTS)} onFocus={() => preloadModalSprite(MODAL_IDS.PROJECTS)} onTouchStart={() => preloadModalSprite(MODAL_IDS.PROJECTS)}>
-                    <img src={deskSprite} alt="Scrivania sezione Esperienze & Progetti" className="sprite-character" fetchPriority="low" draggable="false" onDragStart={(e) => e.preventDefault()}/>
-                    <div className="nes-container is-rounded sprite-tag">Esperienze & Progetti</div>
-                </button>
-                <button className='sprite parrot' aria-label="Sezione Contatti" title='Contacts' onClick={() => openModal(MODAL_IDS.CONTACTS)} onMouseEnter={() => preloadModalSprite(MODAL_IDS.CONTACTS)} onFocus={() => preloadModalSprite(MODAL_IDS.CONTACTS)} onTouchStart={() => preloadModalSprite(MODAL_IDS.CONTACTS)}>
-                    <img src={parrotSprite} alt="Pappagallo sezione Contatti" className="sprite-character" fetchPriority="low" draggable="false" onDragStart={(e) => e.preventDefault()}/>
-                    <div className="nes-container is-rounded sprite-tag">Contatti</div>
-                </button>
-                <button className='sprite painting' aria-label="Sezione Certificazioni" title='Certifications' onClick={() => openModal(MODAL_IDS.CERTIFICATIONS)} onMouseEnter={() => preloadModalSprite(MODAL_IDS.CERTIFICATIONS)} onFocus={() => preloadModalSprite(MODAL_IDS.CERTIFICATIONS)} onTouchStart={() => preloadModalSprite(MODAL_IDS.CERTIFICATIONS)}>
-                    <img src={paintingSprite} alt="Quadro sezione Certificazioni" className="sprite-character" fetchPriority="low" draggable="false" onDragStart={(e) => e.preventDefault()}/>
-                    <div className="nes-container is-rounded sprite-tag">Certificazioni</div>
-                </button>
+                {SPRITES.map(({ id, src, className, label, ariaLabel, title, alt, fetchPriority }) => (
+                    <button
+                        key={id}
+                        className={`sprite ${className}`}
+                        aria-label={ariaLabel}
+                        title={title}
+                        onClick={() => openModal(id)}
+                        {...preloadHandlers(id)}
+                    >
+                        <img src={src} alt={alt} className="sprite-character" fetchPriority={fetchPriority} draggable="false" />
+                        <div className="nes-container is-rounded sprite-tag">{label}</div>
+                    </button>
+                ))}
             </div>
             {activeSection && (<BaseModal key={`${activeSection.id}-${activeSection.sprite ?? ''}`} variant={activeSection} closeModal={closeModal} role="dialog" />)}
         </div >
