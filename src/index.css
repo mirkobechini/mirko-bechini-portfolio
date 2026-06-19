@@ -41,6 +41,7 @@
   --icon-lg: clamp(2.25rem, 1.9rem + 1.8vw, 3rem);
   --radius-sm: 0.25rem;
   --sprite-scale: 1;
+  --color-accent: #ffe066;
 }
 
 html,
@@ -75,7 +76,7 @@ option {
 }
 
 *:focus-visible {
-  outline: 2px solid #ffe066;
+  outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
 
@@ -216,7 +217,7 @@ main {
   outline: none;
   box-shadow: none;
   transform: translate(-50%, -50%) scale(1.1);
-  filter: drop-shadow(0 0 0.7rem rgb(255 224 102 / 90%));
+  filter: drop-shadow(0 0 0.7rem rgb(var(--color-accent) / 90%));
 }
 
 .sprite-tag {
@@ -257,8 +258,8 @@ main {
   height: 100%;
   object-fit: contain;
   
-  image-rendering: pixelated; 
   image-rendering: crisp-edges;
+  image-rendering: pixelated; 
   position: absolute;
   top: 0;
   left: 0;

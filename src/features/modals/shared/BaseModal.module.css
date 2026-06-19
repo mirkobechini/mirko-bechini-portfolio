@@ -172,6 +172,7 @@
     height: 80%;
     max-width: none;
     max-height: none;
+    image-rendering: crisp-edges; 
     image-rendering: pixelated;
 
   }

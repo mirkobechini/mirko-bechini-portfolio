@@ -51,6 +51,7 @@
   height: auto;
   max-height: clamp(9rem, 30vh, 14rem);
   object-fit: contain;
+  image-rendering: crisp-edges; 
   image-rendering: pixelated;
 }
 

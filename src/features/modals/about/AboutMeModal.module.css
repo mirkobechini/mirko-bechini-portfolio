@@ -10,6 +10,7 @@
 
   z-index: 11;
   pointer-events: none;
+  image-rendering: crisp-edges; 
   image-rendering: pixelated;
 }
 
@@ -40,6 +41,7 @@
 .bottom-sprite img {
   width: 100%;
   height: auto;
+  image-rendering: crisp-edges; 
   image-rendering: pixelated;
 }
 
@@ -58,6 +60,7 @@
   border-image-width: 147px 143px;
   border-image-repeat: repeat;
 
+  image-rendering: crisp-edges; 
   image-rendering: pixelated;
   animation: modal-jump-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -78,6 +81,7 @@
   border-image-slice: 24 108 35 103 fill;
   border-image-repeat: repeat;
 
+  image-rendering: crisp-edges; 
   image-rendering: pixelated;
   text-align: center;
   font-size: var(--text-xl);
@@ -132,8 +136,8 @@
   border: none !important;
   box-shadow: none !important;
 
-  image-rendering: pixelated;
   image-rendering: crisp-edges;
+  image-rendering: pixelated;
 }
 
 :global(
@@ -161,6 +165,7 @@
   border-image-slice: 120 307 135 302 fill;
   border-image-repeat: repeat;
 
+  image-rendering: crisp-edges;
   image-rendering: pixelated;
 }
 

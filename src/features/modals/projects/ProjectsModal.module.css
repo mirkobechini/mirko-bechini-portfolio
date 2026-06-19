@@ -53,6 +53,7 @@
   border-image-width: 12px 16px 14px 16px;
   border-image-repeat: stretch;
 
+  image-rendering: crisp-edges;
   image-rendering: pixelated;
 }
 
@@ -115,6 +116,7 @@
   height: clamp(1.05rem, 1rem + 0.45vw, 1.35rem);
 
   object-fit: contain;
+  image-rendering: crisp-edges;
   image-rendering: pixelated;
 }
 
@@ -297,6 +299,7 @@
   border-image-slice: 10 15 fill;
   border-image-width: 5px 8px;
 
+  image-rendering: crisp-edges;
   image-rendering: pixelated;
 }
 
@@ -487,12 +490,12 @@
   .mobile-trigger-btn {
     display: block;
   }
-  
+
   /* Il pulsante per nasconderli compare solo dentro il menu mobile */
   .close-filters-btn {
     display: block;
   }
-/*#endregion Filter styles */
+  /*#endregion Filter styles */
 
   :global([data-modal-theme="desk"] [data-modal-slot="sprite"]) {
     top: 93%;

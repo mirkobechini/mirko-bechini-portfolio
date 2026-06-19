@@ -21,6 +21,7 @@
   left: 16%;
   transform: translate(-50%, -50%);
   pointer-events: none;
+  image-rendering: crisp-edges; 
   image-rendering: pixelated;
 }
 
@@ -88,6 +89,7 @@
   writing-mode: vertical-rl;
   text-orientation: upright;
   cursor: var(--cursor-nes-pointer);
+  image-rendering: crisp-edges; 
   image-rendering: pixelated;
   transform: translateX(-50%);
 }
