@@ -222,7 +222,6 @@ main {
 .sprite-tag {
   position: absolute;
 
-
   width: fit-content;
 
   transform: translate(-50%, 50%) scale(1);
@@ -272,18 +271,19 @@ main {
 }
 
 .desk .sprite-tag {
-  bottom: 50%;
-  left: 40%;
+  bottom: 92%;
+  left: 55%;
+
 }
 
 .painting {
-  top: 32%;
+  top: 28%;
   left: 36%;
   width: calc(6% * var(--sprite-scale));
 }
 
 .painting .sprite-tag {
-  bottom: 80%;
+  bottom: 110%;
   left: 50%;
 }
 
@@ -294,8 +294,8 @@ main {
 }
 
 .monkey .sprite-tag {
-  bottom: 70%;
-  left: 45%;
+  bottom: 110%;
+  left: 40%;
 }
 
 .parrot {
@@ -305,7 +305,7 @@ main {
 }
 
 .parrot .sprite-tag {
-  bottom: 85%;
+  bottom: 115%;
   left: 45%;
 }
 
@@ -316,7 +316,7 @@ main {
 }
 
 .library .sprite-tag {
-  bottom: 60%;
+  bottom: 105%;
   left: 55%;
 }
 
