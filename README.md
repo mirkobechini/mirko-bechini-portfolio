@@ -1,66 +1,179 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🚀 MirkoBechini-Portfolio
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white&style=flat-square)](https://react.dev)
+[![Laravel](https://img.shields.io/badge/Laravel-12-FB2E1D?logo=laravel&logoColor=white&style=flat-square)](https://laravel.com)
+[![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white&style=flat-square)](https://vitejs.dev)
+[![Last Commit](https://img.shields.io/github/last-commit/mirkobechini/mirko-bechini-portfolio/main?style=flat-square)](https://github.com/mirkobechini/mirko-bechini-portfolio/commits)
 
-## About Laravel
+> Portfolio personale interattivo con stile retrò, costruito con React, Laravel e NES.css.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+![Banner o Screenshot](./readmeAssets/preview.png)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 📑 Indice
 
-## Learning Laravel
+- [Demo](#-demo)
+- [Caratteristiche principali](#-caratteristiche-principali)
+- [Tech Stack](#️-tech-stack)
+- [Quick Start](#-quick-start)
+- [Script disponibili](#-script-disponibili)
+- [Struttura del progetto](#-struttura-del-progetto)
+- [GitHub Actions](#-github-actions)
+- [Contatti](#-contatti)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## 🌍 Demo
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Live: In arrivo...
+  ![Preview GIF](./readmeAssets/preview-gif.gif)
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🌟 Caratteristiche principali
 
-### Premium Partners
+- **Home interattiva a scena unica**: navigazione tramite sprite cliccabili in un ambiente retrò.
+- **Modali tematiche**: sezioni dedicate a About Me, Formazione & Competenze, Esperienze & Progetti, Certificazioni e Contatti.
+- **Backend Laravel 12**: API pronte per future integrazioni, rotte gestite lato server.
+- **Gestione stato globale**: apertura/chiusura modali via Context API.
+- **Preload immagini**: caricamento anticipato degli asset per migliorare la percezione di fluidità.
+- **Navigazione drag/touch**: esplorazione orizzontale della scena con mouse e dispositivi touch.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+---
 
-## Contributing
+## 🛠️ Tech Stack
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+| Settore              | Tecnologie                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| :------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Frontend**         | ![React](https://img.shields.io/badge/-React-61DAFB?logo=react&logoColor=white&style=flat-square) ![Vite](https://img.shields.io/badge/-Vite-646CFF?logo=vite&logoColor=white&style=flat-square) ![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?logo=javascript&logoColor=black&style=flat-square) ![React Router](https://img.shields.io/badge/-React%20Router-CA4245?logo=reactrouter&logoColor=white&style=flat-square)       |
+| **Backend**          | ![Laravel](https://img.shields.io/badge/-Laravel-FB2E1D?logo=laravel&logoColor=white&style=flat-square) ![PHP](https://img.shields.io/badge/-PHP-777BB4?logo=php&logoColor=white&style=flat-square)                                                                                                                                                                                                                                             |
+| **Markup & Styling** | ![HTML5](https://img.shields.io/badge/-HTML5-E34F26?logo=html5&logoColor=white&style=flat-square) ![CSS3](https://img.shields.io/badge/-CSS3-1572B6?logo=css3&logoColor=white&style=flat-square) ![NES.css](https://img.shields.io/badge/-NES.css-000000?logo=css3&logoColor=white&style=flat-square)                                                                                                                                           |
+| **Strumenti**        | ![Git](https://img.shields.io/badge/-Git-F05032?logo=git&logoColor=white&style=flat-square) ![ESLint](https://img.shields.io/badge/-ESLint-4B32C3?logo=eslint&logoColor=white&style=flat-square) ![Lighthouse](https://img.shields.io/badge/-Lighthouse-F44B21?logo=lighthouse&logoColor=white&style=flat-square) ![GitHub Actions](https://img.shields.io/badge/-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white&style=flat-square) |
+| **AI**               | ![GitHub Copilot](https://img.shields.io/badge/-GitHub%20Copilot-181717?logo=githubcopilot&logoColor=white&style=flat-square) ![Gemini](https://img.shields.io/badge/-Gemini-4285F4?logo=google&logoColor=white&style=flat-square)                                                                                                                                                                                                              |
 
-## Code of Conduct
+### Frameworks e Librerie
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+| Frontend                                                   | Backend                              |
+| :--------------------------------------------------------- | :----------------------------------- |
+| [React](https://react.dev) ^19.2.4                         | [Laravel](https://laravel.com) ^12.0 |
+| [React Router](https://reactrouter.com) ^7                 | [PHP](https://php.net) ^8.2          |
+| [Vite](https://vitejs.dev) ^8                              |                                      |
+| [NES.css](https://nostalgic-css.github.io/NES.css/) ^2.2.1 |                                      |
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 🚀 Quick Start
 
-## License
+### Prerequisiti
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Node.js 24+
+- PHP 8.2+
+- Composer 2.x
+
+### Installazione
+
+```bash
+# Clona la repository
+git clone https://github.com/mirkobechini/mirko-bechini-portfolio.git
+cd mirko-bechini-portfolio
+
+# Installa dipendenze PHP (Laravel)
+composer install
+
+# Installa dipendenze JavaScript
+npm install
+
+# Prepara l'ambiente
+cp .env.example .env
+php artisan key:generate
+
+# Avvia l'ambiente di sviluppo (unico comando)
+npm run dev
+```
+
+Visita [http://localhost:8000](http://localhost:8000) nel browser.
+
+### Build di produzione
+
+```bash
+npm run build
+```
+
+---
+
+## 📜 Script disponibili
+
+| Comando                    | Descrizione                                                    |
+| :------------------------- | :------------------------------------------------------------- |
+| `npm run dev`              | Avvia Vite (HMR) e Laravel (`php artisan serve`) in simultanea |
+| `npm run vite`             | Solo dev server Vite                                           |
+| `npm run laravel`          | Solo server Laravel                                            |
+| `npm run build`            | Build di produzione Vite                                       |
+| `npm run lint`             | Analisi statica del codice con ESLint                          |
+| `npm run preview`          | Preview del build di produzione                                |
+| `php artisan serve`        | Avvia il server HTTP di Laravel                                |
+| `php artisan key:generate` | Genera la chiave dell'applicazione                             |
+
+---
+
+## 📁 Struttura del progetto
+
+```
+mirko-bechini-portfolio/
+├── app/                        # Logica backend Laravel
+│   ├── Http/Controllers/       # Controller
+│   ├── Models/                 # Modelli Eloquent
+│   └── Providers/              # Service provider
+├── config/                     # Configurazioni Laravel
+├── database/                   # Migrazioni, factories, seeders
+├── public/
+│   ├── assets/                 # Asset statici (immagini, sprite, sfondi)
+│   ├── build/                  # Output build Vite (generato)
+│   └── index.php               # Front controller Laravel
+├── resources/
+│   ├── js/
+│   │   ├── app.js              # Entry point Vite (importa main.jsx)
+│   │   ├── bootstrap.js        # Bootstrap JS (Axios)
+│   │   └── src/                # ★ App React (componenti, pagine, contesto)
+│   │       ├── components/     # Componenti layout
+│   │       ├── context/        # Stato globale (Context API)
+│   │       ├── features/       # Modali e feature
+│   │       ├── hooks/          # Custom hooks
+│   │       ├── pages/          # Pagine (HomePage, 404)
+│   │       └── utils/          # Utility (assets, links, preload)
+│   └── views/
+│       └── app.blade.php       # Template Blade per l'SPA
+├── routes/
+│   ├── web.php                 # Rotta catch-all per il frontend React
+│   └── api.php                 # API routes (per il futuro backend)
+├── tests/                      # Test PHPUnit
+├── .github/workflows/          # GitHub Actions CI/CD
+├── vite.config.js              # Configurazione Vite
+├── eslint.config.js            # Configurazione ESLint
+├── lighthouserc.json           # Configurazione Lighthouse CI
+└── package.json                # Dipendenze e script Node
+```
+
+---
+
+## 🤖 GitHub Actions
+
+Ad ogni push su `main` (o pull request) vengono eseguiti automaticamente:
+
+1. ✅ **Setup PHP + Composer + Node.js**
+2. ✅ **Install dipendenze** (PHP + Node)
+3. ✅ **Controllo link rotti** (lychee)
+4. ✅ **ESLint** — analisi codice React
+5. ✅ **Build Vite** — build di produzione
+6. ✅ **Lighthouse CI** — audit performance, accessibilità, SEO
+7. ✅ **Job summary** — report riassuntivo
+
+---
+
+## 📞 Contatti
+
+- **GitHub**: [@mirkobechini](https://github.com/mirkobechini)
+- **Sito**: In arrivo...
+
+---
