@@ -1,194 +1,66 @@
-# 🚀 MirkoBechini-Portfolio
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white&style=flat-square)](https://react.dev)
-[![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white&style=flat-square)](https://vitejs.dev)
-[![Last Commit](https://img.shields.io/github/last-commit/mirkobechini/mirko-bechini-portfolio/main?style=flat-square)](https://github.com/mirkobechini/mirko-bechini-portfolio/commits)
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
-> Portfolio personale interattivo con stile retrò, costruito con React, Vite e NES.css.
+## About Laravel
 
-![Banner o Screenshot](./readmeAssets/preview.png)
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
----
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-## 📑 Indice
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-- [Demo](#-demo)
-- [Caratteristiche principali](#-caratteristiche-principali)
-- [Tech Stack](#️-tech-stack)
-- [Quick Start](#-quick-start)
-- [Struttura del progetto](#-struttura-del-progetto)
-- [Convenzioni CSS Responsive](#-convenzioni-css-responsive)
-- [Contatti](#-contatti)
+## Learning Laravel
 
----
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-## 🌍 Demo
+You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-- Live: In arrivo...
-  ![Preview GIF](./readmeAssets/preview-gif.gif)
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
----
+## Laravel Sponsors
 
-## 🌟 Caratteristiche principali
+We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-- **Home interattiva a scena unica**: navigazione tramite sprite cliccabili in un ambiente retrò.
-- **Modali tematiche**: sezioni dedicate a About Me, Formazione & Competenze, Esperienze & Progetti, Certificazioni e Contatti.
-- **Gestione stato globale**: apertura/chiusura modali via Context API.
-- **Preload immagini**: caricamento anticipato degli asset per migliorare la percezione di fluidità.
-- **Navigazione drag/touch**: esplorazione orizzontale della scena con mouse e dispositivi touch.
+### Premium Partners
 
----
+- **[Vehikl](https://vehikl.com/)**
+- **[Tighten Co.](https://tighten.co)**
+- **[WebReinvent](https://webreinvent.com/)**
+- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+- **[64 Robots](https://64robots.com)**
+- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
+- **[Cyber-Duck](https://cyber-duck.co.uk)**
+- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
+- **[Jump24](https://jump24.co.uk)**
+- **[Redberry](https://redberry.international/laravel/)**
+- **[Active Logic](https://activelogic.com)**
+- **[byte5](https://byte5.de)**
+- **[OP.GG](https://op.gg)**
 
-## 🛠️ Tech Stack
+## Contributing
 
-| Settore              | Tecnologie                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| :------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Frontend**         | ![React](https://img.shields.io/badge/-React-61DAFB?logo=react&logoColor=white&style=flat-square) ![Vite](https://img.shields.io/badge/-Vite-646CFF?logo=vite&logoColor=white&style=flat-square) ![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?logo=javascript&logoColor=black&style=flat-square)                                                                                                                          |
-| **Markup & Styling** | ![HTML5](https://img.shields.io/badge/-HTML5-E34F26?logo=html5&logoColor=white&style=flat-square) ![CSS3](https://img.shields.io/badge/-CSS3-1572B6?logo=css3&logoColor=white&style=flat-square)                                                                                                                                                                                                                                           |
-| **Strumenti**        | ![Git](https://img.shields.io/badge/-Git-F05032?logo=git&logoColor=white&style=flat-square) ![ESLint](https://img.shields.io/badge/-ESLint-4B32C3?logo=eslint&logoColor=white&style=flat-square) ![Google Gemini](https://img.shields.io/badge/-Gemini-4285F4?logo=google&logoColor=white&style=flat-square) ![GitHub Copilot](https://img.shields.io/badge/-GitHub%20Copilot-181717?logo=githubcopilot&logoColor=white&style=flat-square) |
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-### Frameworks e Librerie
+## Code of Conduct
 
-- **React Router DOM**: Gestione routing client-side.
-- **NES.css**: Stile retrò per UI e componenti.
-- **vite-plugin-image-optimizer**: Ottimizzazione immagini in fase di build.
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
----
+## Security Vulnerabilities
 
-## 🚀 Quick Start
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-### Requisiti
+## License
 
-Prima di iniziare, assicurati di avere installato:
-
-- Node.js (v18+)
-- Un package manager (npm, pnpm, yarn)
-
-### Installazione
-
-```bash
-# Clona il repository
-git clone https://github.com/mirkobechini/mirko-bechini-portfolio.git
-
-# Entra nella cartella del progetto
-cd mirko-bechini-portfolio
-
-# Installa le dipendenze
-npm install
-
-```
-
-### Avvio
-
-```bash
-# Avvio ambiente di sviluppo
-npm run dev
-
-# Lint del codice
-npm run lint
-
-# Build produzione
-npm run build
-
-# Anteprima build locale
-npm run preview
-
-```
-
-Apri il browser su `http://localhost:5173` (o la porta indicata dal progetto).
-
----
-
-## 📂 Struttura del progetto
-
-```text
-.
-├── public/
-│   ├── assets/
-│   │   ├── _tmp-unused/
-│   │   │   └── 2026-05-29/
-│   │   ├── backgrounds/
-│   │   ├── modals/
-│   │   │   ├── about-me/
-│   │   │   ├── bookshelf/
-│   │   │   ├── certifications/
-│   │   │   ├── contacts/
-│   │   │   ├── projects/
-│   │   │   └── skills/
-│   │   │       ├── icons/
-│   │   │       └── ui/
-│   │   └── sprites/
-├── readmeAssets/
-│   ├── preview-gif.gif
-│   └── preview.png
-├── src/
-│   ├── components/
-│   │   └── layout/
-│   ├── context/
-│   ├── data/
-│   │   └── uiConstants.js
-│   ├── features/
-│   │   └── modals/
-│   │       ├── about/
-│   │       ├── certifications/
-│   │       ├── contacts/
-│   │       ├── library/
-│   │       ├── projects/
-│   │       ├── shared/
-│   │       └── modalRegistry.jsx
-│   ├── hooks/
-│   ├── pages/
-│   ├── utils/
-│   ├── App.jsx
-│   ├── index.css
-│   └── main.jsx
-├── .gitignore
-├── eslint.config.js
-├── index.html
-├── package-lock.json
-├── package.json
-├── vite.config.js
-└── README.md
-```
-
-Nota organizzativa: dentro `src/features/modals/`, il file `modalRegistry.jsx` centralizza il mapping tra config e componenti lazy.
-Le config seguono naming coerente per feature (es. `aboutModalConfig.js`, `libraryModalConfig.js`, `projectsModalConfig.js`).
-
----
-
-## 📐 Convenzioni CSS Responsive
-
-### Unità consigliate
-
-- `px`: da usare solo per dettagli pixel-art o bordi sprite che devono restare precisi.
-- `rem`: unita principale per spaziature e tipografia coerenti su tutto il progetto.
-- `em`: utile per componenti locali legati al font-size del parent.
-- `%`: ideale per dimensioni dipendenti dal contenitore.
-- `vw` / `vh`: utile per elementi legati direttamente alla viewport.
-- `clamp(min, ideal, max)`: scelta preferita per dimensioni fluide con limiti controllati.
-
-### Scala token (design tokens)
-
-I token globali sono definiti in [src/index.css](src/index.css) dentro `:root`:
-
-- Spaziature: `--space-3xs` ... `--space-3xl`
-- Tipografia: `--text-xs`, `--text-sm`, `--text-md`, `--text-lg`, `--text-xl`
-- Icone: `--icon-sm`, `--icon-md`, `--icon-lg`
-- Radius: `--radius-sm`
-
-### Regole pratiche
-
-- Preferire sempre token globali invece di valori hardcoded.
-- Evitare nuovi `px` per `margin`, `padding`, `gap` e `font-size`.
-- Usare `clamp(...)` nei token, non sparso nei componenti (salvo casi specifici).
-- Mantenere `px` per `border-image-slice` e parti retro/pixel-sensitive.
-
----
-
-## 📧 Contatti
-
-Se vuoi metterti in contatto con me, puoi trovarmi qui:
-
-- **Email**: mirkobechini@gmail.com
-- **LinkedIn**: [Mirko Bechini](https://www.linkedin.com/in/mirko-bechini-892202252)
-- **Repository del progetto**: [GitHub](https://github.com/mirkobechini/mirko-bechini-portfolio)
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
