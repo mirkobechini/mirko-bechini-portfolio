@@ -48,11 +48,8 @@ jobs:
       - name: Clean install Node dependencies
         run: npm ci
 
-      - name: Prepare environment
-        run: cp .env.example .env
-
-      - name: Generate app key
-        run: php artisan key:generate
+      - name: Prepare environment for tests
+        run: cp .env.ci .env
 
       - name: Check for Broken Links
         uses: lycheeverse/lychee-action@v1.9.0
