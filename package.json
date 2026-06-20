@@ -6,6 +6,7 @@
         "vite": "vite",
         "laravel": "php artisan serve",
         "build": "vite build",
+        "lint": "eslint .",
         "preview": "vite preview"
     },
     "devDependencies": {
