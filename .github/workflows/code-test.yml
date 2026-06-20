@@ -19,38 +19,56 @@ jobs:
       - name: Download code
         uses: actions/checkout@v6
 
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          tools: composer:v2
+
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
           node-version: "24"
 
-      - name: Install dependencies
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: composer-${{ hashFiles('composer.lock') }}
+
+      - name: Install PHP dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Cache Node dependencies
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: npm-${{ hashFiles('package-lock.json') }}
+
+      - name: Install Node dependencies
         run: npm install
 
-      - name: Emulate Installation
-        run: |
-          echo "Emulating installation process..."
-          # Simulate installation steps here
-          sleep 2
-          echo "Installation complete."
+      - name: Prepare environment
+        run: cp .env.example .env
+
+      - name: Generate app key
+        run: php artisan key:generate
 
       - name: Check for Broken Links
         uses: lycheeverse/lychee-action@v1.9.0
         with:
-          # Scansiona tutti i file .html
-          args: --verbose --no-progress --offline "**/*.html"
+          args: --verbose --no-progress --offline "resources/views/*.blade.php"
 
-      # Controlla la qualità del codice CSS, JavaScript, HTML, ecc. (variante superlinter)
       - name: Run ESLint
         run: npm run lint
 
-      - name: Build app
+      - name: Build Vite assets
         run: npm run build
 
-      - name: Start preview server
-        run: npm run preview -- --host 127.0.0.1 --port 4173 &
+      - name: Start Laravel server
+        run: php artisan serve --port=4173 --host=127.0.0.1 &
 
-      - name: Wait for preview server
+      - name: Wait for Laravel server
         run: npx wait-on http://127.0.0.1:4173
 
       # Controlla le performance e l'accessibilità del sito con Lighthouse
@@ -59,8 +77,8 @@ jobs:
         with:
           urls: |
             http://127.0.0.1:4173
-          configPath: './lighthouserc.json'
-          uploadArtifacts: true # Ti permette di scaricare il report finale
+          configPath: "./lighthouserc.json"
+          uploadArtifacts: true
 
       - name: Write job summary
         if: always()
