@@ -12,7 +12,71 @@ permissions:
   checks: write
 
 jobs:
-  technical-test:
+  quality-checks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download code
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+
+      - name: Cache Node dependencies
+        uses: actions/cache@v5
+        with:
+          path: node_modules
+          key: npm-${{ hashFiles('package-lock.json') }}
+
+      - name: Clean install Node dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Build Vite assets
+        run: npm run build
+
+      - name: Check for Broken Links
+        uses: lycheeverse/lychee-action@v1.9.0
+        with:
+          args: --verbose --no-progress --offline "resources/views/*.blade.php"
+
+  php-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download code
+        uses: actions/checkout@v6
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          tools: composer:v2
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v5
+        with:
+          path: vendor
+          key: composer-${{ hashFiles('composer.lock') }}
+
+      - name: Install PHP dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Prepare environment
+        run: |
+          cp .env.ci .env
+          php artisan key:generate --force
+
+      - name: Run PHP tests
+        run: php artisan test
+
+  lighthouse:
+    if: github.event_name == 'push'
+    needs: [quality-checks, php-tests]
     runs-on: ubuntu-latest
 
     steps:
@@ -36,28 +100,22 @@ jobs:
           path: vendor
           key: composer-${{ hashFiles('composer.lock') }}
 
-      - name: Install PHP dependencies
-        run: composer install --no-interaction --prefer-dist
-
       - name: Cache Node dependencies
         uses: actions/cache@v5
         with:
           path: node_modules
           key: npm-${{ hashFiles('package-lock.json') }}
 
-      - name: Clean install Node dependencies
+      - name: Install PHP dependencies (production only)
+        run: composer install --no-interaction --prefer-dist --no-dev
+
+      - name: Install Node dependencies
         run: npm ci
 
-      - name: Prepare environment for tests
-        run: cp .env.ci .env
-
-      - name: Check for Broken Links
-        uses: lycheeverse/lychee-action@v1.9.0
-        with:
-          args: --verbose --no-progress --offline "resources/views/*.blade.php"
-
-      - name: Run ESLint
-        run: npm run lint
+      - name: Prepare environment
+        run: |
+          cp .env.ci .env
+          php artisan key:generate --force
 
       - name: Build Vite assets
         run: npm run build
@@ -68,7 +126,6 @@ jobs:
       - name: Wait for Laravel server
         run: npx wait-on http://127.0.0.1:4173
 
-      # Controlla le performance e l'accessibilità del sito con Lighthouse
       - name: Lighthouse Audit
         uses: treosh/lighthouse-ci-action@v12
         with:
