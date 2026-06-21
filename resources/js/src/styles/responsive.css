@@ -1,0 +1,53 @@
+/*#region Responsive - Smartphone */
+
+@media (max-width: 767px) {
+    :root {
+        --sprite-scale: 2.2;
+    }
+
+    .sprite {
+        min-width: 95px;
+    }
+
+    .den-container,
+    .den-wrapper {
+        height: 100vh !important;
+        min-height: auto !important;
+    }
+
+    .desk {
+        width: calc(24vh * var(--sprite-scale)) !important;
+        min-width: auto !important;
+    }
+
+    .desk .sprite-tag {
+        left: 55% !important;
+    }
+
+    .library {
+        width: calc(22vh * var(--sprite-scale)) !important;
+        min-width: auto !important;
+    }
+
+    .monkey {
+        width: calc(16vh * var(--sprite-scale)) !important;
+        min-width: auto !important;
+    }
+
+    .painting {
+        width: calc(9vh * var(--sprite-scale)) !important;
+        min-width: auto !important;
+    }
+
+    .parrot {
+        width: calc(9vh * var(--sprite-scale)) !important;
+        min-width: auto !important;
+    }
+
+    .sprite-tag {
+        font-size: var(--text-md) !important;
+        padding: var(--space-2xs) var(--space-xs) !important;
+        letter-spacing: 0.02em;
+    }
+}
+/*#endregion Responsive - Smartphone */

@@ -1,0 +1,215 @@
+/* #region Home */
+
+/* #region Start - Scroll guide indicators */
+@keyframes blink-guide {
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.scroll-guide-left,
+.scroll-guide-right {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: clamp(1.75rem, 4vw, 3.125rem);
+    z-index: 999;
+    pointer-events: none;
+    animation: blink-guide 2s ease-in-out infinite;
+}
+
+.scroll-guide-left {
+    left: 0;
+    background: linear-gradient(to right, rgb(255 255 255 / 50%), transparent);
+}
+
+.scroll-guide-right {
+    right: 0;
+    background: linear-gradient(to left, rgb(255 255 255 / 50%), transparent);
+}
+/* #endregion Start */
+
+/* #region Den background styling */
+.den-container {
+    height: 100vh;
+    width: 100vw;
+    min-height: 450px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    background-color: #1a1a1a;
+
+    /* Hide scrollbar for all browsers */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scroll-snap-align: center;
+
+    /* NES cursor with drag fallback */
+    cursor: var(--cursor-nes-grab);
+    user-select: none;
+}
+
+.den-container::-webkit-scrollbar {
+    display: none;
+}
+
+.den-container:active {
+    cursor: var(--cursor-nes-grabbing);
+}
+
+.den-wrapper {
+    height: 100vh;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.den-image {
+    width: auto;
+    height: 100%;
+    display: block;
+    max-width: none;
+
+    pointer-events: none;
+    -webkit-user-drag: none;
+}
+/* #endregion Den background styling */
+
+/* #region Sprite buttons */
+.sprite {
+    position: absolute;
+    border: none;
+    cursor: var(--cursor-nes-pointer);
+    aspect-ratio: 1;
+    z-index: 10;
+    padding: 0;
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 0.2s ease;
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+
+    overflow: visible !important;
+}
+
+.sprite:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+    filter: drop-shadow(0 0 0.5rem rgb(255 255 255 / 50%));
+}
+
+.sprite:focus-visible {
+    outline: none;
+    box-shadow: none;
+    transform: translate(-50%, -50%) scale(1.1);
+    filter: drop-shadow(0 0 0.7rem rgb(var(--color-accent) / 90%));
+}
+/* #endregion Sprite buttons */
+
+/* #region Sprite tags */
+.sprite-tag {
+    position: absolute;
+    width: fit-content;
+    transform: translate(-50%, 50%) scale(1);
+    background-color: #000;
+    color: #fff;
+    border-color: #fff !important;
+
+    white-space: nowrap;
+    padding: var(--space-2xs) var(--space-xs) !important;
+    font-size: var(--text-xl);
+    z-index: 20;
+    opacity: 0;
+    pointer-events: none;
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+}
+
+.sprite:hover .sprite-tag,
+.sprite:focus .sprite-tag {
+    opacity: 1;
+}
+/* #endregion Sprite tags */
+
+/* #region Sprite character images */
+.sprite-character {
+    display: block;
+    max-width: 100%;
+    height: 100%;
+    object-fit: contain;
+
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-user-drag: none;
+    user-select: none;
+}
+/* #endregion Sprite character images */
+
+/* #region Individual sprite positions */
+.desk {
+    top: 70%;
+    left: 26%;
+    width: calc(18% * var(--sprite-scale));
+}
+
+.desk .sprite-tag {
+    bottom: 92%;
+    left: 55%;
+}
+
+.painting {
+    top: 28%;
+    left: 36%;
+    width: calc(6% * var(--sprite-scale));
+}
+
+.painting .sprite-tag {
+    bottom: 110%;
+    left: 50%;
+}
+
+.monkey {
+    top: 60%;
+    left: 53%;
+    width: calc(11% * var(--sprite-scale));
+}
+
+.monkey .sprite-tag {
+    bottom: 110%;
+    left: 40%;
+}
+
+.parrot {
+    top: 33%;
+    left: 65%;
+    width: calc(6% * var(--sprite-scale));
+}
+
+.parrot .sprite-tag {
+    bottom: 115%;
+    left: 45%;
+}
+
+.library {
+    top: 65%;
+    left: 77%;
+    width: calc(16% * var(--sprite-scale));
+}
+
+.library .sprite-tag {
+    bottom: 105%;
+    left: 55%;
+}
+/* #endregion Individual sprite positions */
+
+/* #endregion Home */

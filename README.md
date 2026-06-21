@@ -37,8 +37,10 @@
 - **Modali tematiche**: sezioni dedicate a About Me, Formazione & Competenze, Esperienze & Progetti, Certificazioni e Contatti.
 - **Backend Laravel 12**: API pronte per future integrazioni, rotte gestite lato server.
 - **Gestione stato globale**: apertura/chiusura modali via Context API.
-- **Preload immagini**: caricamento anticipato degli asset per migliorare la percezione di fluidità.
-- **Navigazione drag/touch**: esplorazione orizzontale della scena con mouse e dispositivi touch.
+- **Navigazione drag/touch**: esplorazione orizzontale della scena con mouse e dispositivi touch ottimizzata via `requestAnimationFrame`.
+- **Lazy loading modali**: ogni modale è caricato dinamicamente con `React.lazy()` all'apertura, riducendo il bundle iniziale.
+- **Navigazione da tastiera**: hook `useKeyboardNavigation` per navigazione frecce (lineare o a griglia) nei modali.
+- **CSS modulare**: ogni componente ha il proprio CSS Module per stili incapsulati.
 
 ---
 
@@ -104,16 +106,18 @@ npm run build
 
 ## 📜 Script disponibili
 
-| Comando                    | Descrizione                                                    |
-| :------------------------- | :------------------------------------------------------------- |
-| `npm run dev`              | Avvia Vite (HMR) e Laravel (`php artisan serve`) in simultanea |
-| `npm run vite`             | Solo dev server Vite                                           |
-| `npm run laravel`          | Solo server Laravel                                            |
-| `npm run build`            | Build di produzione Vite                                       |
-| `npm run lint`             | Analisi statica del codice con ESLint                          |
-| `npm run preview`          | Preview del build di produzione                                |
-| `php artisan serve`        | Avvia il server HTTP di Laravel                                |
-| `php artisan key:generate` | Genera la chiave dell'applicazione                             |
+| Comando                    | Descrizione                                                                       |
+| :------------------------- | :-------------------------------------------------------------------------------- |
+| `npm run dev`              | Avvia Vite (HMR) e Laravel (`php artisan serve`) in simultanea (via concurrently) |
+| `npm run vite`             | Solo dev server Vite                                                              |
+| `npm run laravel`          | Solo server Laravel                                                               |
+| `npm run build`            | Build di produzione Vite                                                          |
+| `npm run lint`             | Analisi statica del codice con ESLint                                             |
+| `npm run preview`          | Preview del build di produzione                                                   |
+| `composer run pint`        | Formatta il codice PHP secondo lo stile Laravel                                   |
+| `php artisan serve`        | Avvia il server HTTP di Laravel                                                   |
+| `php artisan key:generate` | Genera la chiave dell'applicazione                                                |
+| `php artisan test`         | Esegue i test PHPUnit                                                             |
 
 ---
 
@@ -136,17 +140,28 @@ mirko-bechini-portfolio/
 │   │   ├── app.js              # Entry point Vite (importa main.jsx)
 │   │   ├── bootstrap.js        # Bootstrap JS (Axios)
 │   │   └── src/                # ★ App React (componenti, pagine, contesto)
-│   │       ├── components/     # Componenti layout
+│   │       ├── components/     # Componenti UI (layout, ScrollGuideIndicators)
+│   │       │   ├── layout/     # DefaultLayout (Outlet router)
+│   │       │   └── ui/         # Componenti UI puri riutilizzabili
 │   │       ├── context/        # Stato globale (Context API)
-│   │       ├── features/       # Modali e feature
-│   │       ├── hooks/          # Custom hooks
+│   │       ├── data/           # Configurazioni e costanti (spriteConfig, uiConstants)
+│   │       ├── features/       # Modali organizzati per sezione
+│   │       │   └── modals/
+│   │       │       ├── shared/     # BaseModal, ModalErrorBoundary, CSS condivisi
+│   │       │       ├── about/      # AboutMeModal
+│   │       │       ├── library/    # BookshelfModal, SkillsModal, FormationView, ecc.
+│   │       │       ├── projects/   # ProjectExperienceModal, ProjectsModal
+│   │       │       ├── certifications/ # CertificationsModal
+│   │       │       └── contacts/   # ContactsModal
+│   │       ├── hooks/          # Custom hooks (useDragScroll, useKeyboardNavigation)
 │   │       ├── pages/          # Pagine (HomePage, 404)
-│   │       └── utils/          # Utility (assets, links, preload)
+│   │       ├── styles/         # CSS globali suddivisi (global, home, responsive)
+│   │       └── utils/          # Utility (assets, links, preloadImages)
 │   └── views/
 │       └── app.blade.php       # Template Blade per l'SPA
 ├── routes/
 │   ├── web.php                 # Rotta catch-all per il frontend React
-│   └── api.php                 # API routes (per il futuro backend)
+│   └── console.php             # Comandi Artisan personalizzati
 ├── tests/                      # Test PHPUnit
 ├── .github/workflows/          # GitHub Actions CI/CD
 ├── vite.config.js              # Configurazione Vite
