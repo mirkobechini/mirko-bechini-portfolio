@@ -1,7 +1,8 @@
-import { memo, useEffect, useMemo, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import styles from './SkillsModal.module.css';
 import sharedStyles from '../shared/SharedModal.module.css';
 import defaultSkillsData from './skillsData';
+import { useKeyboardNavigation } from '../../../hooks/useKeyboardNavigation';
 
 const SKILL_COLUMNS = 4;
 
@@ -50,71 +51,22 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
         }
     }, [currentSkill, skillsData]);
 
-    useEffect(() => {
-        if (!currentProfile.enableKeyboardNavigation || !isSkillsProfile || skillsData.length === 0) {
-            return;
-        }
+    const currentSkillIndex = currentSkill == null
+        ? -1
+        : skillsData.findIndex((skill) => skill.id === currentSkill.id);
 
-        function getNextIndex(currentIndex, key) {
-            const totalSkills = skillsData.length;
+    const handleSkillNavigate = useCallback((nextIndex) => {
+        setCurrentSkill(skillsData[nextIndex]);
+    }, [skillsData]);
 
-            if (totalSkills === 0) return -1;
-            if (currentIndex < 0) {
-                return key === 'ArrowLeft' || key === 'ArrowUp' ? totalSkills - 1 : 0;
-            }
-
-            switch (key) {
-                case 'ArrowRight':
-                    return (currentIndex + 1) % totalSkills;
-                case 'ArrowLeft':
-                    return (currentIndex - 1 + totalSkills) % totalSkills;
-                case 'ArrowDown': {
-                    const rowJump = currentIndex + SKILL_COLUMNS;
-                    if (rowJump < totalSkills) return rowJump;
-
-                    const sameColumnFirstRow = currentIndex % SKILL_COLUMNS;
-                    return sameColumnFirstRow < totalSkills ? sameColumnFirstRow : totalSkills - 1;
-                }
-                case 'ArrowUp': {
-                    const rowJump = currentIndex - SKILL_COLUMNS;
-                    if (rowJump >= 0) return rowJump;
-
-                    const currentColumn = currentIndex % SKILL_COLUMNS;
-                    const lastIndexInColumn = totalSkills - 1 - ((totalSkills - 1 - currentColumn) % SKILL_COLUMNS);
-                    return lastIndexInColumn;
-                }
-                default:
-                    return currentIndex;
-            }
-        }
-
-        function handleKeyDown(event) {
-            const arrowKeys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'];
-            if (!arrowKeys.includes(event.key)) return;
-
-            const activeEl = document.activeElement;
-            const isTypingTarget = activeEl?.tagName === 'INPUT'
-                || activeEl?.tagName === 'TEXTAREA'
-                || activeEl?.tagName === 'SELECT'
-                || activeEl?.isContentEditable;
-
-            if (isTypingTarget) return;
-
-            event.preventDefault();
-
-            const currentIndex = currentSkill == null
-                ? -1
-                : skillsData.findIndex((skill) => skill.id === currentSkill.id);
-            const nextIndex = getNextIndex(currentIndex, event.key);
-
-            if (nextIndex >= 0) {
-                setCurrentSkill(skillsData[nextIndex]);
-            }
-        }
-
-        document.addEventListener('keydown', handleKeyDown);
-        return () => document.removeEventListener('keydown', handleKeyDown);
-    }, [currentSkill, currentProfile.enableKeyboardNavigation, isSkillsProfile, skillsData]);
+    useKeyboardNavigation({
+        currentIndex: currentSkillIndex,
+        onNavigate: handleSkillNavigate,
+        totalItems: skillsData.length,
+        mode: 'grid',
+        columns: SKILL_COLUMNS,
+        enabled: currentProfile.enableKeyboardNavigation && isSkillsProfile && skillsData.length > 0,
+    });
 
 
     {/*Responsive smartphone */ }

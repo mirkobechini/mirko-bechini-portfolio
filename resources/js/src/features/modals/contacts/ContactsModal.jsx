@@ -1,65 +1,26 @@
 import styles from './ContactsModal.module.css';
-import { memo, useEffect, useRef, useState } from 'react';
+import { memo, useCallback, useRef, useState } from 'react';
 import contacts from './contactsData';
 import { isExternalWebLink } from '../../../utils/links';
+import { useKeyboardNavigation } from '../../../hooks/useKeyboardNavigation';
 
 const ContactsModal = memo(function ContactsModal() {
-
 
     const [currentIndex, setCurrentIndex] = useState(-1);
     const contactRefs = useRef([]);
 
-    const moveToPreviousContact = () => {
-        setCurrentIndex((prevIndex) => {
-            if (contacts.length === 0) return -1;
-            if (prevIndex < 0) return contacts.length - 1;
-            return (prevIndex - 1 + contacts.length) % contacts.length;
-        });
-    };
-
-    const moveToNextContact = () => {
-        setCurrentIndex((prevIndex) => {
-            if (contacts.length === 0) return -1;
-            if (prevIndex < 0) return 0;
-            return (prevIndex + 1) % contacts.length;
-        });
-    };
-
-    useEffect(() => {
-        if (currentIndex >= 0) {
-            contactRefs.current[currentIndex]?.focus({ preventScroll: true });
-        }
-    }, [currentIndex]);
-
-    useEffect(() => {
-        function handleKeyDown(event) {
-            const arrowKeys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'];
-            if (!arrowKeys.includes(event.key)) return;
-
-            const activeEl = document.activeElement;
-            const isTypingTarget = activeEl?.tagName === 'INPUT'
-                || activeEl?.tagName === 'TEXTAREA'
-                || activeEl?.tagName === 'SELECT'
-                || activeEl?.isContentEditable;
-
-            if (isTypingTarget) return;
-
-            event.preventDefault();
-
-            if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
-                moveToPreviousContact();
-                return;
-            }
-
-            moveToNextContact();
-        }
-
-        document.addEventListener('keydown', handleKeyDown);
-
-        return () => {
-            document.removeEventListener('keydown', handleKeyDown);
-        };
+    const handleNavigate = useCallback((nextIndex) => {
+        setCurrentIndex(nextIndex);
+        contactRefs.current[nextIndex]?.focus({ preventScroll: true });
     }, []);
+
+    useKeyboardNavigation({
+        currentIndex,
+        onNavigate: handleNavigate,
+        totalItems: contacts.length,
+        mode: 'linear',
+        enabled: contacts.length > 0,
+    });
 
     return (
         <div className={styles['contacts-container']}>
