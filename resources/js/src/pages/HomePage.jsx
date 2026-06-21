@@ -3,6 +3,7 @@ import { useCallback, useContext, useMemo, useRef } from 'react';
 
 /* Components */
 import BaseModal from '../features/modals/shared/BaseModal';
+import ScrollGuideIndicators from '../components/ui/ScrollGuideIndicators';
 
 /* Hooks & Context */
 import { useDragScroll } from '../hooks/useDragScroll';
@@ -71,12 +72,7 @@ export default function HomePage() {
 
     return (
         <div className="den-container" ref={scrollRef} onMouseDown={handleGrab} onMouseLeave={handleLeave} onMouseUp={handleLeave} onMouseMove={handleMovement} onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleLeave}>
-            {(!hasMoved &&
-                <>
-                    <div className="scroll-guide-left"></div>
-                    <div className="scroll-guide-right"></div>
-                </>
-            )}
+            {!hasMoved && <ScrollGuideIndicators />}
             <div className="den-wrapper">
 
                 <img className="den-image" src={denBackground} onLoad={centerBackground} alt="Monkey Den" draggable="false" loading="eager" fetchPriority="high" decoding="async" width="1568" height="454" />
