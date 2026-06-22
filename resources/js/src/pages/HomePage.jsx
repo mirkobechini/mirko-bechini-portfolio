@@ -98,7 +98,7 @@ export default function HomePage() {
                     </button>
                 ))}
             </div>
-            {activeSection && (<BaseModal key={`${activeSection.id}-${activeSection.sprite ?? ''}`} variant={activeSection} closeModal={closeModal} role="dialog" />)}
+            {activeSection && (<BaseModal key={`${activeSection.id}-${activeSection.sprite ?? ''}`} variant={activeSection} closeModal={closeModal} openModal={openModal} role="dialog" />)}
         </div >
 
     )

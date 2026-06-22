@@ -16,7 +16,7 @@ const LAZY_MODAL_COMPONENTS = {
     contacts: lazy(() => import('../contacts/ContactsModal')),
 };
 
-export default function BaseModal({ variant, closeModal }) {
+export default function BaseModal({ variant, closeModal, openModal }) {
     const closeBtnRef = useRef(null);
     const dialogRef = useRef(null);
     const previousFocusRef = useRef(null);
@@ -136,7 +136,7 @@ export default function BaseModal({ variant, closeModal }) {
                 <div data-modal-slot="content" className={styles['modal-content']}>
                     <ModalErrorBoundary key={variant.id}>
                         <Suspense fallback={<LoadingFallback />}>
-                            <Component setModalSprite={setSpriteSrc} defaultModalSprite={variant.sprite ?? null} />
+                            <Component setModalSprite={setSpriteSrc} defaultModalSprite={variant.sprite ?? null} openModal={openModal} />
                         </Suspense>
                     </ModalErrorBoundary>
                 </div>

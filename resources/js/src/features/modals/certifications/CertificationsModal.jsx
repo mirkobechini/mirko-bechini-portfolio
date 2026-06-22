@@ -3,7 +3,12 @@ import certificationData from './certificationData';
 import { memo } from 'react';
 import { isValidLink } from '../../../utils/links';
 
-const CertificationsModal = memo(function CertificationsModal() {
+const CertificationsModal = memo(function CertificationsModal({ openModal }) {
+
+    function handleCertClick(certId) {
+        // TODO: Navigate to the specific formation modal for this certification
+        openModal(2);
+    }
 
     return (
         <div className={styles['gallery-container']}>
@@ -12,9 +17,8 @@ const CertificationsModal = memo(function CertificationsModal() {
                 certificationData.map(cert => (
 
                     <div className={styles['certificate-item']} key={cert.id}>
-                        <div className={styles.frame}>
-                            {/*TODO: onclick goes to specified formation modal*/}
-                            <img src={cert.preview} alt={cert.title} loading="lazy" decoding="async" width={cert.previewWidth ?? 1320} height={cert.previewHeight ?? 840} /> {/* Ottimizzazione del caricamento dell'immagine */}
+                        <div className={styles.frame} onClick={() => handleCertClick(cert.id)} role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleCertClick(cert.id); }}>
+                            <img src={cert.preview} alt={cert.title} loading="lazy" decoding="async" width={cert.previewWidth ?? 1320} height={cert.previewHeight ?? 840} />
                         </div>
                         <p>
                             {cert.title} @ {isValidLink(cert.organizationUrl)
