@@ -68,7 +68,8 @@ export default function HomePage() {
                 setActiveSection(selectedModal);
             }
         }
-    }, [modalById, isDragging, setActiveSection]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [modalById, setActiveSection]);
 
     // Preload handlers for sprite images
     const preloadHandlers = (id) => ({
