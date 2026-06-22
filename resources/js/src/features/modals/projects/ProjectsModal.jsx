@@ -11,7 +11,7 @@ const fullstackIcon = getAssetPath('/modals/projects/fullstack-icon.webp');
 const folderIcon = getAssetPath('/modals/projects/folder-icon.webp');
 const resetButtonIcon = getAssetPath('/modals/projects/reset-button.webp');
 
-const ProjectsModal = memo(function ProjectsModal() {
+const ProjectsModal = memo(function ProjectsModal({ onBackToProjectsHome }) {
 
     const [selectedTypeFilter, setSelectedTypeFilter] = useState('all');
     const [selectedScopeFilter, setSelectedScopeFilter] = useState('all');
@@ -33,8 +33,15 @@ const ProjectsModal = memo(function ProjectsModal() {
 
     return (
         <div className={styles['desk-container']}>
-            {/*TODO: Add home button*/}
             <div className={`${styles['filter-container']} ${isFiltersOpenMobile ? styles['is-open-mobile'] : ''}`}>
+                {onBackToProjectsHome && (
+                    <button type="button" className={styles['back-button']} onClick={onBackToProjectsHome} aria-label="Torna alla scelta progetti/esperienze">
+                        <svg className={styles['back-arrow']} viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#e8c879" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="15 18 9 12 15 6" />
+                        </svg>
+                        <span>Torna indietro</span>
+                    </button>
+                )}
                 <div className={styles['filter-group']}>
                     <fieldset className={styles['filter-wrapper']}>
                         <input type='radio' className={styles['visually-hidden']} id='all-types' name='projectTypeFilter' value='all' checked={selectedTypeFilter === 'all'} onChange={e => setSelectedTypeFilter(e.target.value)} />

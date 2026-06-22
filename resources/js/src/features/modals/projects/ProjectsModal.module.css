@@ -24,6 +24,50 @@
   margin-bottom: var(--space-3xs);
 }
 
+/* Pulsante per tornare indietro alla scelta Progetti/Esperienze */
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  padding: var(--space-2xs) var(--space-sm);
+  margin-right: auto;
+  margin-left: var(--space-lg);
+
+  font-family: inherit;
+  font-size: clamp(0.75rem, 0.7rem + 0.2vw, 0.88rem);
+  font-weight: bold;
+  color: #e8c879;
+  text-shadow: 0.0625rem 0.0625rem 0 #000;
+  white-space: nowrap;
+
+  cursor: var(--cursor-nes-pointer);
+
+  border-style: solid;
+  border-width: 5px 8px;
+  border-image-source: url("/assets/modals/projects/wood-button.webp");
+  border-image-slice: 10 15 fill;
+  border-image-width: 5px 8px;
+  border-image-repeat: stretch;
+
+  background: transparent;
+  transition: transform 0.1s ease;
+}
+
+.back-button:hover {
+  transform: scale(1.05);
+}
+
+.back-button:active {
+  transform: scale(0.95);
+}
+
+.back-arrow {
+  flex-shrink: 0;
+  width: clamp(0.9rem, 0.85rem + 0.2vw, 1.1rem);
+  height: clamp(0.9rem, 0.85rem + 0.2vw, 1.1rem);
+  filter: drop-shadow(0.0625rem 0.0625rem 0 #000);
+}
+
 /* Stack verticale dei blocchi filtro */
 .filter-group {
   display: flex;

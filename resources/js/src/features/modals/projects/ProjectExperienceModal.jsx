@@ -16,6 +16,10 @@ const ProjectExperienceModal = memo(function ProjectExperienceModal({ setModalSp
         setSelectedView(viewKey);
     }
 
+    function handleBackToProjectsHome() {
+        setSelectedView(null);
+    }
+
     useEffect(() => {
         // Imposta lo sprite iniziale solo quando il componente viene montato o se cambia il default
         setModalSprite?.(defaultModalSprite ?? null);
@@ -51,10 +55,17 @@ const ProjectExperienceModal = memo(function ProjectExperienceModal({ setModalSp
             ) : (
                 <div className={styles['desk-container']}>
                     {selectedView === 'projects' ? (
-                            <ProjectsModal />
+                            <ProjectsModal onBackToProjectsHome={handleBackToProjectsHome} />
                     ) : (
                         <div className={styles['experience-placeholder']}>
-                            <article className={styles['experience-placeholder-card']} aria-live="polite">
+                            <button type="button" className={styles['back-button']} onClick={handleBackToProjectsHome} aria-label="Torna alla scelta progetti/esperienze">
+                                <svg className={styles['back-arrow']} viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#e8c879" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <polyline points="15 18 9 12 15 6" />
+                                </svg>
+                                <span>Torna indietro</span>
+                            </button>
+                            <div className={styles['experience-card-wrapper']}>
+                                <article className={styles['experience-placeholder-card']} aria-live="polite">
                                 <div className={styles['experience-placeholder-visual']} aria-hidden="true">
                                     <img src={experienceButton} alt="" className={styles['experience-placeholder-image']} width="434" height="478" />
                                 </div>
@@ -65,6 +76,7 @@ const ProjectExperienceModal = memo(function ProjectExperienceModal({ setModalSp
                                 </p>
                                 <span className={styles['experience-placeholder-badge']}>Work in progress</span>
                             </article>
+                            </div>
                         </div>
                     )}
                 </div>
