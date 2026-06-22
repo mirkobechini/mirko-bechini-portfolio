@@ -1,5 +1,4 @@
 import { createRoot } from 'react-dom/client'
-import 'nes.css/css/nes.min.css'
 import './styles/global.css'
 import './styles/home.css'
 import './styles/responsive.css'
