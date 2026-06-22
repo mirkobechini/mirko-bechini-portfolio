@@ -15,10 +15,6 @@
     <noscript>
         <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     </noscript>
-    <link rel="stylesheet" href="/nes.min.css" media="print" onload="this.media='all'">
-    <noscript>
-        <link rel="stylesheet" href="/nes.min.css">
-    </noscript>
     <link rel="preload" as="image" href="/assets/backgrounds/den.webp">
     <link rel="preload" as="image" href="/assets/sprites/monkey.webp" fetchPriority="high">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
