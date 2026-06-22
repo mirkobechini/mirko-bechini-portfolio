@@ -1,243 +1,240 @@
 .project-experience-home {
-  display: flex;
-  flex: 1;
-  width: 100%;
-  min-height: 100%;
-  justify-content: center;
-  align-items: flex-start;
-  gap: clamp(1rem, 4vw, 3rem);
-  padding: clamp(1rem, 2.2vw, 1.75rem);
+    display: flex;
+    flex: 1;
+    width: 100%;
+    min-height: 100%;
+    justify-content: center;
+    align-items: flex-start;
+    gap: clamp(1rem, 4vw, 3rem);
+    padding: clamp(1rem, 2.2vw, 1.75rem);
 }
 
 .desk-container {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
-  height: 100%;
-  gap: var(--space-2xs);
+    height: 100%;
+    gap: var(--space-2xs);
 }
 
 /* Pulsante per tornare indietro alla scelta Progetti/Esperienze */
 .back-button {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2xs);
-  padding: var(--space-2xs) var(--space-sm);
-  margin-right: auto;
-  margin-left: var(--space-lg);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    padding: var(--space-2xs) var(--space-sm);
+    margin-right: auto;
+    margin-left: var(--space-lg);
 
-  font-family: inherit;
-  font-size: clamp(0.75rem, 0.7rem + 0.2vw, 0.88rem);
-  font-weight: bold;
-  color: #e8c879;
-  text-shadow: 0.0625rem 0.0625rem 0 #000;
-  white-space: nowrap;
+    font-family: inherit;
+    font-size: clamp(0.75rem, 0.7rem + 0.2vw, 0.88rem);
+    font-weight: bold;
+    color: #e8c879;
+    text-shadow: 0.0625rem 0.0625rem 0 #000;
+    white-space: nowrap;
 
-  cursor: var(--cursor-nes-pointer);
+    cursor: var(--cursor-nes-pointer);
 
-  border-style: solid;
-  border-width: 5px 8px;
-  border-image-source: url("/assets/modals/projects/wood-button.webp");
-  border-image-slice: 10 15 fill;
-  border-image-width: 5px 8px;
-  border-image-repeat: stretch;
+    border-style: solid;
+    border-width: 5px 8px;
+    border-image-source: url("/assets/modals/projects/wood-button.webp");
+    border-image-slice: 10 15 fill;
+    border-image-width: 5px 8px;
+    border-image-repeat: stretch;
 
-  background: transparent;
-  transition: transform 0.1s ease;
+    background: transparent;
+    transition: transform 0.1s ease;
 }
 
 .back-button:hover {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 .back-button:active {
-  transform: scale(0.95);
+    transform: scale(0.95);
 }
 
 .back-arrow {
-  flex-shrink: 0;
-  width: clamp(0.9rem, 0.85rem + 0.2vw, 1.1rem);
-  height: clamp(0.9rem, 0.85rem + 0.2vw, 1.1rem);
-  filter: drop-shadow(0.0625rem 0.0625rem 0 #000);
+    flex-shrink: 0;
+    width: clamp(0.9rem, 0.85rem + 0.2vw, 1.1rem);
+    height: clamp(0.9rem, 0.85rem + 0.2vw, 1.1rem);
+    filter: drop-shadow(0.0625rem 0.0625rem 0 #000);
 }
 
 .button-container {
-  border-style: solid;
-  border-width: 40px 40px;
-  border-image-source: url("/assets/modals/project-experience/button-container.webp");
-  border-image-slice: 80 80 fill;
-  border-image-width: 20px 20px;
-  border-image-repeat: stretch;
+    border-style: solid;
+    border-width: 40px 40px;
+    border-image-source: url("/assets/modals/project-experience/button-container.webp");
+    border-image-slice: 80 80 fill;
+    border-image-width: 20px 20px;
+    border-image-repeat: stretch;
 
-  image-rendering: crisp-edges; 
-  image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
 }
 
 .button-project-experience {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
 
-  width: clamp(11rem, 26vw, 16rem);
-  height: clamp(13rem, 34vw, 15rem);
-  min-width: 10.5rem;
-  padding: clamp(0.6rem, 1.5vw, 1rem);
+    width: clamp(11rem, 26vw, 16rem);
+    height: clamp(13rem, 34vw, 15rem);
+    min-width: 10.5rem;
+    padding: clamp(0.6rem, 1.5vw, 1rem);
 
-  background: transparent;
-  border: 0;
-  cursor: var(--cursor-nes-pointer);
-  transition:
-    transform 0.18s ease,
-    filter 0.18s ease;
+    background: transparent;
+    border: 0;
+    cursor: var(--cursor-nes-pointer);
+    transition:
+        transform 0.18s ease,
+        filter 0.18s ease;
 }
 
 .button-project-experience:focus-visible {
-  outline: none;
-  filter: drop-shadow(0 0 0.7rem rgb(255 224 102 / 90%));
+    outline: none;
+    filter: drop-shadow(0 0 0.7rem rgb(255 224 102 / 90%));
 }
 
 .button-image {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  image-rendering: crisp-edges; 
-  image-rendering: pixelated;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
 }
 
 .button-image-frame {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: clamp(8.5rem, 24vh, 12.5rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: clamp(8.5rem, 24vh, 12.5rem);
 }
 
 .experience-placeholder {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding: var(--space-2xs);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-2xs);
 }
 
 .experience-card-wrapper {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: clamp(0.75rem, 2vw, 1.5rem);
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(0.75rem, 2vw, 1.5rem);
 }
 
 .experience-placeholder-card {
-  width: min(100%, 31rem);
-  border: 2px solid rgb(125 89 67 / 45%);
-  border-radius: 0.5rem;
-  background: linear-gradient(
-    180deg,
-    rgb(255 253 244 / 92%) 0%,
-    rgb(255 245 220 / 88%) 100%
-  );
-  box-shadow: 0 8px 26px rgb(62 39 35 / 12%);
-  padding: clamp(0.85rem, 2vw, 1.25rem);
-  color: #3e2723;
+    width: min(100%, 31rem);
+    border: 2px solid rgb(125 89 67 / 45%);
+    border-radius: 0.5rem;
+    background: linear-gradient(
+        180deg,
+        rgb(255 253 244 / 92%) 0%,
+        rgb(255 245 220 / 88%) 100%
+    );
+    box-shadow: 0 8px 26px rgb(62 39 35 / 12%);
+    padding: clamp(0.85rem, 2vw, 1.25rem);
+    color: #3e2723;
 }
 
 .experience-placeholder-visual {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 0.3rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.3rem;
 }
 
 .experience-placeholder-image {
-  width: clamp(5.8rem, 20vw, 8.4rem);
-  height: auto;
-  object-fit: contain;
-  image-rendering: crisp-edges; 
-  image-rendering: pixelated;
-  filter: drop-shadow(0 4px 8px rgb(62 39 35 / 22%));
+    width: clamp(5.8rem, 20vw, 8.4rem);
+    height: auto;
+    object-fit: contain;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+    filter: drop-shadow(0 4px 8px rgb(62 39 35 / 22%));
 }
 
 .experience-placeholder-kicker {
-  margin: 0;
-  font-size: clamp(0.68rem, 0.9vw, 0.8rem);
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  opacity: 0.8;
+    margin: 0;
+    font-size: clamp(0.68rem, 0.9vw, 0.8rem);
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.8;
 }
 
 .experience-placeholder-title {
-  margin: 0.3rem 0 0;
-  font-size: clamp(1rem, 1.3vw, 1.2rem);
-  text-transform: uppercase;
+    margin: 0.3rem 0 0;
+    font-size: clamp(1rem, 1.3vw, 1.2rem);
+    text-transform: uppercase;
 }
 
 .experience-placeholder-description {
-  margin: 0.55rem 0 0;
-  line-height: 1.45;
-  font-size: clamp(0.8rem, 1vw, 0.92rem);
+    margin: 0.55rem 0 0;
+    line-height: 1.45;
+    font-size: clamp(0.8rem, 1vw, 0.92rem);
 }
 
 .experience-placeholder-badge {
-  display: inline-flex;
-  margin-top: 0.8rem;
-  padding: 0.2rem 0.45rem;
-  border: 1px solid rgb(125 89 67 / 55%);
-  border-radius: 0.35rem;
-  background: rgb(255 248 225 / 90%);
-  font-size: clamp(0.64rem, 0.82vw, 0.78rem);
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+    display: inline-flex;
+    margin-top: 0.8rem;
+    padding: 0.2rem 0.45rem;
+    border: 1px solid rgb(125 89 67 / 55%);
+    border-radius: 0.35rem;
+    background: rgb(255 248 225 / 90%);
+    font-size: clamp(0.64rem, 0.82vw, 0.78rem);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
 }
-
-
 
 /* #region Responsive Smartphone */
 
 @media (max-width: 767px) {
-  .project-experience-home {
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-xs);
-    padding: var(--space-xxs);
-    margin-top: 0 !important;
-  }
+    .project-experience-home {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-xs);
+        padding: var(--space-xxs);
+        margin-top: 0 !important;
+    }
 
-  .button-container {
-    border-width: 20px 20px !important;
-    border-image-width: 10px 10px !important;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
+    .button-container {
+        border-width: 20px 20px !important;
+        border-image-width: 10px 10px !important;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
 
-  .button-project-experience {
-    margin-top: 0 !important;
-    width: min(85%, 12rem);
-    height: 15vh !important;
-    min-height: 0 !important;
-    padding:0 !important;
-    gap: 0;
-  }
+    .button-project-experience {
+        margin-top: 0 !important;
+        width: min(85%, 12rem);
+        height: 15vh !important;
+        min-height: 0 !important;
+        padding: 0 !important;
+        gap: 0;
+    }
 
-  .button-image-frame {
-    height: 70% !important;
-    width: 100%;
-  }
+    .button-image-frame {
+        height: 70% !important;
+        width: 100%;
+    }
 
-  .button-image {
-    max-height: 12vh !important;
-    min-width: 90px !important;
-    object-fit: contain;
-  }
+    .button-image {
+        max-height: 12vh !important;
+        min-width: 90px !important;
+        object-fit: contain;
+    }
 
-  .button-project-experience :global([class*="button-label"]) {
-    font-size: var(--text-xs) !important;
-    margin: 0;
-  }
-
+    .button-project-experience :global([class*="button-label"]) {
+        font-size: var(--text-xs) !important;
+        margin: 0;
+    }
 }
 /* #endregion Responsive Smartphone */

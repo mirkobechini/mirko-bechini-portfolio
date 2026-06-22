@@ -55,7 +55,7 @@ const ProjectExperienceModal = memo(function ProjectExperienceModal({ setModalSp
             ) : (
                 <div className={styles['desk-container']}>
                     {selectedView === 'projects' ? (
-                            <ProjectsModal onBackToProjectsHome={handleBackToProjectsHome} />
+                        <ProjectsModal onBackToProjectsHome={handleBackToProjectsHome} />
                     ) : (
                         <div className={styles['experience-placeholder']}>
                             <button type="button" className={styles['back-button']} onClick={handleBackToProjectsHome} aria-label="Torna alla scelta progetti/esperienze">
@@ -66,16 +66,16 @@ const ProjectExperienceModal = memo(function ProjectExperienceModal({ setModalSp
                             </button>
                             <div className={styles['experience-card-wrapper']}>
                                 <article className={styles['experience-placeholder-card']} aria-live="polite">
-                                <div className={styles['experience-placeholder-visual']} aria-hidden="true">
-                                    <img src={experienceButton} alt="" className={styles['experience-placeholder-image']} width="434" height="478" />
-                                </div>
-                                <p className={styles['experience-placeholder-kicker']}>Esperienze</p>
-                                <h3 className={styles['experience-placeholder-title']}>Sezione in arrivo</h3>
-                                <p className={styles['experience-placeholder-description']}>
-                                    Sto organizzando questa parte con un componente dedicato.
-                                </p>
-                                <span className={styles['experience-placeholder-badge']}>Work in progress</span>
-                            </article>
+                                    <div className={styles['experience-placeholder-visual']} aria-hidden="true">
+                                        <img src={experienceButton} alt="" className={styles['experience-placeholder-image']} width="434" height="478" />
+                                    </div>
+                                    <p className={styles['experience-placeholder-kicker']}>Esperienze</p>
+                                    <h3 className={styles['experience-placeholder-title']}>Sezione in arrivo</h3>
+                                    <p className={styles['experience-placeholder-description']}>
+                                        Sto organizzando questa parte con un componente dedicato.
+                                    </p>
+                                    <span className={styles['experience-placeholder-badge']}>Work in progress</span>
+                                </article>
                             </div>
                         </div>
                     )}
