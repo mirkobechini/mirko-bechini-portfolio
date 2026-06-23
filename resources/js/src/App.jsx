@@ -9,8 +9,6 @@ import HomePage from './pages/HomePage';
 import { GlobalContextProvider } from './context/GlobalContext';
 
 function App() {
-
-
   return (
     <>
       <GlobalContextProvider>
