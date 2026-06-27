@@ -96,7 +96,7 @@ export default function HomePage() {
                     >
                         <img
                             src={src}
-                            srcSet={`${srcSm} ${width * 0.5}w, ${srcMd} ${width * 0.75}w, ${src} ${width}w`}
+                            srcSet={`${srcSm} ${Math.round(width * 0.5)}w, ${srcMd} ${Math.round(width * 0.75)}w, ${src} ${width}w`}
                             sizes="(max-width: 767px) 40vw, 20vw"
                             alt={alt}
                             className="sprite-character"
