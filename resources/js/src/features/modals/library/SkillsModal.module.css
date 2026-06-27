@@ -129,7 +129,9 @@
     border: 0.0625rem solid rgb(110 84 62 / 30%);
     border-radius: 0.25rem;
     cursor: var(--cursor-nes-pointer);
-    transition: background-color 0.15s, border-color 0.15s;
+    transition:
+        background-color 0.15s,
+        border-color 0.15s;
     white-space: nowrap;
     line-height: 1.4;
     flex-shrink: 0;
@@ -273,7 +275,9 @@
     border: 0.0625rem solid rgb(110 84 62 / 30%);
     border-radius: 0.25rem;
     cursor: var(--cursor-nes-pointer);
-    transition: background-color 0.15s, border-color 0.15s;
+    transition:
+        background-color 0.15s,
+        border-color 0.15s;
     white-space: nowrap;
     line-height: 1.4;
     flex-shrink: 0;
@@ -343,7 +347,9 @@
     border: 0.0625rem solid var(--panel-border, rgb(141 110 99 / 35%));
 
     box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 10%);
-    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    transition:
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
 }
 
 .education-card[role="button"]:hover {

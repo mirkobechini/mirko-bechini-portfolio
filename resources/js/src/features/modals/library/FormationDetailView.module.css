@@ -69,7 +69,7 @@
 }
 
 .detail-org-link + .detail-period::before {
-    content: '·';
+    content: "·";
     margin-right: 0.5rem;
     color: #aaa;
 }
@@ -121,7 +121,7 @@
 }
 
 .highlight-item::before {
-    content: '›';
+    content: "›";
     position: absolute;
     left: 0.25rem;
     font-weight: bold;
@@ -173,7 +173,9 @@
     color: #fff;
     background-color: #8d6e63;
     border-radius: 0.1875rem;
-    transition: background-color 0.15s, transform 0.15s;
+    transition:
+        background-color 0.15s,
+        transform 0.15s;
 }
 
 .module-skill-tag[role="button"]:hover {
@@ -201,7 +203,9 @@
     color: #fff;
     background-color: #6d4c41;
     border-radius: 0.25rem;
-    transition: background-color 0.15s, transform 0.15s;
+    transition:
+        background-color 0.15s,
+        transform 0.15s;
 }
 
 .detail-skill-tag[role="button"]:hover {
@@ -226,7 +230,9 @@
     background-color: #5d4037;
     border-radius: 0.3125rem;
     text-decoration: none;
-    transition: background-color 0.15s, transform 0.15s;
+    transition:
+        background-color 0.15s,
+        transform 0.15s;
     width: fit-content;
 }
 
@@ -254,7 +260,9 @@
     border: 0.0625rem solid rgb(110 84 62 / 30%);
     border-radius: 0.25rem;
     cursor: var(--cursor-nes-pointer);
-    transition: background-color 0.15s, border-color 0.15s;
+    transition:
+        background-color 0.15s,
+        border-color 0.15s;
     white-space: nowrap;
     flex-shrink: 0;
 }
