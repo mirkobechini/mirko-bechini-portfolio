@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import react from '@vitejs/plugin-react';
+import purgecss from 'vite-plugin-purgecss';
 
 export default defineConfig({
     plugins: [
@@ -8,6 +9,24 @@ export default defineConfig({
         laravel({
             input: ['resources/js/app.js'],
             refresh: true,
+        }),
+        purgecss({
+            content: [
+                'resources/js/src/**/*.{jsx,js,tsx,ts}',
+                'resources/views/**/*.blade.php',
+            ],
+            safelist: {
+                standard: [
+                    'sprite', 'sprite-tag', 'sprite-character',
+                    'den-container', 'den-wrapper', 'den-image',
+                    'scroll-guide-left', 'scroll-guide-right',
+                    'nes-badge',
+                ],
+                greedy: [/modal/, /game-/],
+            },
+            defaultExtractor(content) {
+                return content.match(/[\w-/:]+(?<!:)/g) || [];
+            },
         }),
     ],
 });
