@@ -12,16 +12,33 @@ const skillsBook = getAssetPath('/modals/bookshelf/books-skill.webp');
 const BookshelfModal = memo(function BookshelfModal({ setModalSprite, defaultModalSprite }) {
 
     const [selectedProfile, setSelectedProfile] = useState(null);
+    const [preselectSkill, setPreselectSkill] = useState(null);
 
     function handleBookSelection(profileKey) {
         setSelectedProfile(profileKey);
+        setPreselectSkill(null);
+        setReturnToEducation(null);
     }
 
     function handleBackToBookshelf() {
         setSelectedProfile(null);
+        setPreselectSkill(null);
+        setReturnToEducation(null);
+    }
+
+    function handleSwitchToSkill(skillName, education) {
+        setSelectedProfile('skills');
+        setPreselectSkill(skillName);
+        setReturnToEducation(education);
+    }
+
+    function handleBackToFormation() {
+        setSelectedProfile('formation');
+        setPreselectSkill(null);
     }
 
     const activeProfile = selectedProfile == null ? null : BOOKSHELF_PROFILES[selectedProfile];
+    const [returnToEducation, setReturnToEducation] = useState(null);
 
     useEffect(() => {
         if (selectedProfile == null) {
@@ -30,7 +47,7 @@ const BookshelfModal = memo(function BookshelfModal({ setModalSprite, defaultMod
         }
 
         setModalSprite?.(activeProfile?.modalSprite ?? defaultModalSprite ?? null);
-    }, [activeProfile, defaultModalSprite, selectedProfile, setModalSprite]);
+    }, [activeProfile, defaultModalSprite, selectedProfile, setModalSprite, preselectSkill]);
 
     return (
         <>
@@ -56,6 +73,10 @@ const BookshelfModal = memo(function BookshelfModal({ setModalSprite, defaultMod
                             <SkillsModal
                                 profile={activeProfile}
                                 onBackToBookshelf={handleBackToBookshelf}
+                                onSwitchToSkill={handleSwitchToSkill}
+                                onBackToFormation={handleBackToFormation}
+                                preselectSkill={preselectSkill}
+                                returnToEducation={returnToEducation}
                             />
                         </Suspense>
                     )}

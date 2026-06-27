@@ -2,10 +2,22 @@ import { memo } from 'react';
 import styles from './SkillsModal.module.css';
 import sharedStyles from '../shared/SharedModal.module.css';
 
-const SkillsGridView = memo(function SkillsGridView({ skillsData, currentSkill, skillCardRefs, onSkillClick, title }) {
+const SkillsGridView = memo(function SkillsGridView({ skillsData, currentSkill, skillCardRefs, onSkillClick, title, onBackToFormation, returnToEducation }) {
     return (
         <section className={styles.page}>
-            <h3>{title}</h3>
+            <h3 className={styles['skills-h3-wrap']}>
+                <span>{title}</span>
+                {returnToEducation && onBackToFormation && (
+                    <button
+                        type="button"
+                        className={styles['btn-back-formation-page']}
+                        onClick={() => onBackToFormation()}
+                        aria-label="Torna alla formazione"
+                    >
+                        ‹ Formazione
+                    </button>
+                )}
+            </h3>
             <div className={`${styles['page-content']} ${sharedStyles['scroll-y-contain']}`} style={{ paddingRight: 0 }}>
                 <div className={`${styles['skills-list']} ${sharedStyles['scroll-y-contain']}`}>
                     {skillsData.map((skill, index) => (

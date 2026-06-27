@@ -8,7 +8,7 @@ import FormationView from './FormationView';
 
 const SKILL_COLUMNS = 4;
 
-const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
+const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf, onSwitchToSkill, onBackToFormation, preselectSkill, returnToEducation }) {
     const currentProfile = profile ?? {
         id: 'skills',
         title: 'Competenze',
@@ -26,6 +26,16 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
 
     const [currentSkill, setCurrentSkill] = useState(null);
     const skillCardRefs = useRef([]);
+
+    /* Auto-select skill when coming from formation tag */
+    useEffect(() => {
+        if (isSkillsProfile && preselectSkill) {
+            const found = skillsData.find(
+                (s) => s.skill.toLowerCase() === preselectSkill.toLowerCase()
+            );
+            if (found) setCurrentSkill(found);
+        }
+    }, [preselectSkill, isSkillsProfile, skillsData]);
 
     const handleSkillClick = (skill) => {
         setCurrentSkill(skill);
@@ -78,6 +88,8 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
                     skillCardRefs={skillCardRefs}
                     onSkillClick={handleSkillClick}
                     title={currentProfile.title}
+                    onBackToFormation={onBackToFormation}
+                    returnToEducation={returnToEducation}
                 />
             )}
 
@@ -94,6 +106,8 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf }) {
                     educationData={educationData}
                     formationFocus={formationFocus}
                     formationRoadmap={formationRoadmap}
+                    onSwitchToSkill={onSwitchToSkill}
+                    returnToEducation={returnToEducation}
                 />
             )}
 

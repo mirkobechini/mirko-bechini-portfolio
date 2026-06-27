@@ -1,6 +1,7 @@
-import { memo, useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import styles from './SkillsModal.module.css';
 import sharedStyles from '../shared/SharedModal.module.css';
+import FormationDetailView from './FormationDetailView';
 
 const STATUS_LABELS = {
     onHold: 'In sospeso',
@@ -8,8 +9,9 @@ const STATUS_LABELS = {
     next: 'Prossimo',
 };
 
-const FormationView = memo(function FormationView({ currentProfile, educationData, formationFocus, formationRoadmap }) {
+const FormationView = memo(function FormationView({ currentProfile, educationData, formationFocus, formationRoadmap, onSwitchToSkill, returnToEducation }) {
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    const [selectedEducation, setSelectedEducation] = useState(null);
 
     useEffect(() => {
         function handleResize() {
@@ -19,14 +21,83 @@ const FormationView = memo(function FormationView({ currentProfile, educationDat
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+    /* Auto-open detail when returning from skills */
+    useEffect(() => {
+        if (returnToEducation) {
+            setSelectedEducation(returnToEducation);
+        }
+    }, [returnToEducation]);
+
+    const handleEducationClick = useCallback((education) => {
+        setSelectedEducation(education);
+    }, []);
+
+    const handleDetailBack = useCallback(() => {
+        setSelectedEducation(null);
+    }, []);
+
+    const handleKeyDown = useCallback((e, education) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            setSelectedEducation(education);
+        }
+    }, []);
+
+    /* ── Detail view (both pages) ── */
+    if (selectedEducation) {
+        return (
+            <>
+                <section className={styles.page}>
+                    <h3 className={styles['detail-h3']}>
+                        <button
+                            type="button"
+                            className={styles['detail-back-inline']}
+                            onClick={handleDetailBack}
+                            aria-label="Torna alla visione d'insieme"
+                        >
+                            <span aria-hidden="true">‹</span> Indietro
+                        </button>
+                        <span className={styles['detail-h3-title']}>{selectedEducation.course}</span>
+                    </h3>
+                    <div className={`${styles['page-content']} ${sharedStyles['scroll-y-contain']}`}>
+                        <FormationDetailView
+                            education={selectedEducation}
+                            page={1}
+                            onSkillTagClick={onSwitchToSkill}
+                        />
+                    </div>
+                </section>
+                <section className={styles.page}>
+                    <h3 className={styles['detail-h3-title-only']}>{selectedEducation.course}</h3>
+                    <div className={`${styles['page-content']} ${sharedStyles['scroll-y-contain']}`}>
+                        <FormationDetailView
+                            education={selectedEducation}
+                            page={2}
+                            onSkillTagClick={onSwitchToSkill}
+                        />
+                    </div>
+                </section>
+            </>
+        );
+    }
+
+    /* ── Overview (list of education cards) ── */
     return (
         <>
             <section className={`${styles.page} ${styles['education-page']}`}>
                 <h3>{currentProfile.title}</h3>
                 <div className={`${styles['page-content']} ${sharedStyles['scroll-y-contain']}`}>
-                    {/*TODO: trasformare in link che apre il percorso formativo in una pagina dedicata con ulteriore link a certificazione*/}
                     {educationData.map((education) => (
-                        <section className={styles['education-card']} key={education.id}>
+                        <section
+                            className={styles['education-card']}
+                            key={education.id}
+                            role="button"
+                            tabIndex={0}
+                            aria-label={`Dettagli formazione: ${education.course}`}
+                            onClick={() => handleEducationClick(education)}
+                            onKeyDown={(e) => handleKeyDown(e, education)}
+                            style={{ cursor: 'var(--cursor-nes-pointer)' }}
+                        >
                             <span className={styles['education-period']}>{education.period}</span>
                             <h5 className={styles['education-title']}>{education.course} - {education.organization}</h5>
                             <p className={styles['education-description']}>{education.description}</p>
@@ -62,7 +133,6 @@ const FormationView = memo(function FormationView({ currentProfile, educationDat
                         </div>
                     </section>
 
-                    {/*TODO: add formation page with related projects*/}
                     <section className={styles['formation-panel']}>
                         <h4>Roadmap</h4>
                         <div className={styles['formation-cards']}>
