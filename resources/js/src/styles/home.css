@@ -51,6 +51,9 @@
     /* NES cursor with drag fallback */
     cursor: var(--cursor-nes-grab);
     user-select: none;
+
+    /* GPU-accelerated scrolling — avoids forced reflow */
+    will-change: scroll-position;
 }
 
 .den-container::-webkit-scrollbar {

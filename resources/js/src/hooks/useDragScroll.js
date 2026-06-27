@@ -18,6 +18,7 @@ export const useDragScroll = (scrollRef, isDragDisabled) => {
   const centerBackground = useCallback(() => {
     const container = scrollRef.current;
     if (container) {
+      // Use scrollBy for relative positioning to avoid double reflow
       const scrollCenter = (container.scrollWidth - container.clientWidth) / 2;
       container.scrollLeft = scrollCenter;
     }
@@ -55,12 +56,15 @@ export const useDragScroll = (scrollRef, isDragDisabled) => {
     if (dragRaf.current) return;
 
     dragRaf.current = requestAnimationFrame(() => {
-      const x = pendingClientX.current - container.offsetLeft;
-      const walk = (x - startX.current) * DRAG_SENSITIVITY;
-
-      if (Math.abs(x - startX.current) > DRAG_THRESHOLD) {
-        isDragging.current = true;
+      const container = scrollRef.current;
+      if (!container) {
+        dragRaf.current = null;
+        return;
       }
+      // Leggi offsetLeft una volta sola e riutilizzalo
+      const offsetLeft = container.offsetLeft;
+      const x = pendingClientX.current - offsetLeft;
+      const walk = (x - startX.current) * DRAG_SENSITIVITY;
 
       container.scrollLeft = scrollLeft.current - walk;
       dragRaf.current = null;
@@ -82,7 +86,8 @@ export const useDragScroll = (scrollRef, isDragDisabled) => {
       // Applica l'ultimo movimento pendente prima di fermarsi del tutto
       const container = scrollRef.current;
       if (container) {
-        const x = pendingClientX.current - container.offsetLeft;
+        const offsetLeft = container.offsetLeft;
+        const x = pendingClientX.current - offsetLeft;
         const walk = (x - startX.current) * DRAG_SENSITIVITY;
         container.scrollLeft = scrollLeft.current - walk;
       }
