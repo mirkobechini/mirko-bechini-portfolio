@@ -18,7 +18,6 @@ export const useDragScroll = (scrollRef, isDragDisabled) => {
   const centerBackground = useCallback(() => {
     const container = scrollRef.current;
     if (container) {
-      // Use scrollBy for relative positioning to avoid double reflow
       const scrollCenter = (container.scrollWidth - container.clientWidth) / 2;
       container.scrollLeft = scrollCenter;
     }
