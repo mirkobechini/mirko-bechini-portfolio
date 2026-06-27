@@ -85,7 +85,7 @@ export default function HomePage() {
 
                 <img className="den-image" src={denBackground} onLoad={centerBackground} alt="Monkey Den" draggable="false" loading="eager" fetchPriority="high" decoding="async" width="1568" height="454" />
 
-                {SPRITES.map(({ id, src, className, label, ariaLabel, title, alt, fetchPriority }) => (
+                {SPRITES.map(({ id, src, className, label, ariaLabel, title, alt, fetchPriority, loading, width, height }) => (
                     <button
                         key={id}
                         className={`sprite ${className}`}
@@ -94,7 +94,7 @@ export default function HomePage() {
                         onClick={() => openModal(id)}
                         {...preloadHandlers(id)}
                     >
-                        <img src={src} alt={alt} className="sprite-character" fetchPriority={fetchPriority} draggable="false" />
+                        <img src={src} alt={alt} className="sprite-character" fetchPriority={fetchPriority} loading={loading} width={width} height={height} draggable="false" />
                         <div className="nes-container is-rounded sprite-tag">{label}</div>
                     </button>
                 ))}

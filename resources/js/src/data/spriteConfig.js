@@ -17,6 +17,9 @@ const SPRITES = [
         title: 'About me',
         alt: 'Scimmia sezione Chi Sono',
         fetchPriority: 'high',
+        loading: 'eager',
+        width: 480,
+        height: 550,
     },
     {
         id: MODAL_IDS.BOOKSHELF,
@@ -27,6 +30,9 @@ const SPRITES = [
         title: 'Formation & Skills',
         alt: 'Libreria sezione Formazione & Competenze',
         fetchPriority: 'low',
+        loading: 'lazy',
+        width: 572,
+        height: 538,
     },
     {
         id: MODAL_IDS.PROJECTS,
@@ -37,6 +43,9 @@ const SPRITES = [
         title: 'Experiences & Projects',
         alt: 'Scrivania sezione Esperienze & Progetti',
         fetchPriority: 'low',
+        loading: 'lazy',
+        width: 726,
+        height: 553,
     },
     {
         id: MODAL_IDS.CONTACTS,
@@ -47,6 +56,9 @@ const SPRITES = [
         title: 'Contacts',
         alt: 'Pappagallo sezione Contatti',
         fetchPriority: 'low',
+        loading: 'lazy',
+        width: 471,
+        height: 538,
     },
     {
         id: MODAL_IDS.CERTIFICATIONS,
@@ -57,6 +69,9 @@ const SPRITES = [
         title: 'Certifications',
         alt: 'Quadro sezione Certificazioni',
         fetchPriority: 'low',
+        loading: 'lazy',
+        width: 605,
+        height: 518,
     },
 ];
 
