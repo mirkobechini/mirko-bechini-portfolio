@@ -134,6 +134,7 @@ const skillsData = [
         relatedProjects: [
             'Gods Backoffice',
             'CV Backoffice',
+            'Portfolio personale',
         ],
     },
     {
@@ -159,6 +160,9 @@ const skillsData = [
         functions: [
             'Hosting di repository Git',
             'Collaborazione con pull request e issues',
+            'Integrazione con CI/CD e GitHub Actions',
+            'Utilizzo di GitHub Pages per il deploy di siti statici',
+            'Gestione di progetti con GitHub Projects',
         ],
         relatedProjects: [
             'Tutti i progetti',
@@ -245,7 +249,19 @@ const skillsData = [
         icon: getAssetPath('/modals/skills/icons/typescript.webp'),
         category: 'Programming Language',
         color: '#3178C6',
-        details: 'Still learning',
+        functions: ['Still learning'],
+    },
+    {
+        id: 18,
+        skill: 'AI',
+        /*TODO:add image */
+        icon: getAssetPath('/modals/skills/icons/ai.webp'),
+        category: 'AI Tool',
+        color: '#FFD700',
+        functions: [
+            'Agent-based AI tools for code generation and content creation',
+            'System Thinking and problem-solving with AI',
+        ],
     }
 ];
 
