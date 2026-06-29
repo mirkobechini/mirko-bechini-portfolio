@@ -2,6 +2,7 @@ import { memo, useEffect, useState, lazy, Suspense } from 'react';
 import styles from './BookshelfModal.module.css';
 import sharedStyles from '../shared/SharedModal.module.css';
 import { BOOKSHELF_PROFILES } from './bookshelfProfiles';
+import educationData from './educationData';
 import { getAssetPath } from '../../../utils/assets';
 
 const SkillsModal = lazy(() => import('./SkillsModal'));
@@ -9,10 +10,22 @@ const SkillsModal = lazy(() => import('./SkillsModal'));
 const formationBook = getAssetPath('/modals/bookshelf/books-formation.webp');
 const skillsBook = getAssetPath('/modals/bookshelf/books-skill.webp');
 
-const BookshelfModal = memo(function BookshelfModal({ setModalSprite, defaultModalSprite }) {
+const BookshelfModal = memo(function BookshelfModal({ setModalSprite, defaultModalSprite, modalParams }) {
 
     const [selectedProfile, setSelectedProfile] = useState(null);
     const [preselectSkill, setPreselectSkill] = useState(null);
+    const [returnToEducation, setReturnToEducation] = useState(null);
+
+    /* Auto-open "Formazione" book and select matching education when coming from a certification */
+    useEffect(() => {
+        const preselectId = modalParams?.preselectEducation;
+        if (preselectId == null) return;
+        const found = educationData.find((e) => e.id === preselectId);
+        if (found) {
+            setSelectedProfile('formation');
+            setReturnToEducation(found);
+        }
+    }, [modalParams?.preselectEducation]);
 
     function handleBookSelection(profileKey) {
         setSelectedProfile(profileKey);
@@ -38,7 +51,6 @@ const BookshelfModal = memo(function BookshelfModal({ setModalSprite, defaultMod
     }
 
     const activeProfile = selectedProfile == null ? null : BOOKSHELF_PROFILES[selectedProfile];
-    const [returnToEducation, setReturnToEducation] = useState(null);
 
     useEffect(() => {
         if (selectedProfile == null) {
