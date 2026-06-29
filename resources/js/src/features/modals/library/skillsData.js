@@ -262,6 +262,36 @@ const skillsData = [
             'Agent-based AI tools for code generation and content creation',
             'System Thinking and problem-solving with AI',
         ],
+    },
+    {
+        id: 19,
+        skill: 'Figma',
+        icon: getAssetPath('/modals/skills/icons/figma.webp'),
+        category: 'Design Tool',
+        color: '#F24E1E',
+        functions: [
+            'Seguire progetti di design e prototipazione',
+        ],
+        relatedProjects: [
+            'Digital Business Card',
+            'Tenzies',
+            'Assembly Endgame',
+            'Quizzical',
+        ],
+    },
+    {
+        id: 20,
+        skill: 'Notion',
+        icon: getAssetPath('/modals/skills/icons/notion.webp'),
+        category: 'Productivity Tool',
+        color: '#000000',
+        functions: [
+            'Organizzazione di progetti e appunti',
+            'Creazione di database e tabelle',
+        ],
+        relatedProjects: [
+            'Tutti i progetti',
+        ],
     }
 ];
 
