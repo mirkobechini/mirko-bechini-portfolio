@@ -122,7 +122,7 @@
 
     white-space: nowrap;
     padding: var(--space-2xs) var(--space-xs) !important;
-    font-size: var(--text-xl);
+    font-size: var(--text-l);
     z-index: 20;
     opacity: 0;
     pointer-events: none;
