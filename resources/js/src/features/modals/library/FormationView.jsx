@@ -55,7 +55,7 @@ const FormationView = memo(function FormationView({ currentProfile, educationDat
                             onClick={handleDetailBack}
                             aria-label="Torna alla visione d'insieme"
                         >
-                            <span aria-hidden="true">‹</span> Indietro
+                            <span aria-hidden="true">‹</span> Formazione
                         </button>
                         <span className={styles['detail-h3-title']}>{selectedEducation.course}</span>
                     </h3>
