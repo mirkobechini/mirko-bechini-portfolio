@@ -98,7 +98,7 @@ const ProjectsModal = memo(function ProjectsModal({ onBackToProjectsHome }) {
                             </div>
                             <div className={styles['links-group']}>
                                 {isValidLink(project.repo) && <a href={project.repo} className={styles['view-btn']} target="_blank" rel="noopener noreferrer">Apri Documentazione</a>}
-                                {isValidLink(project.demo) && <a href={project.demo} className={styles['view-btn']} target="_blank" rel="noopener noreferrer">Vai al sito</a>}
+                                {isValidLink(project.live) && <a href={project.live} className={styles['view-btn']} target="_blank" rel="noopener noreferrer">Vai al sito</a>}
                             </div>
                         </div>
                     ))}

@@ -8,7 +8,7 @@ const projectData = [
         type: "backend",
         technologies: ['PHP', 'Laravel', 'Blade', 'MySQL', 'Breeze', 'Bootstrap', 'API'],
         repo: 'https://github.com/mirkobechini/gods-backoffice',
-        demo: "#"
+        live: "#"
     },
     {
         id: 2,
@@ -19,7 +19,7 @@ const projectData = [
         type: "frontend",
         technologies: ['React', 'Axios', 'HTML', 'CSS', 'Bootstrap', 'JS'], //tecnologie categorizzate in frontend e backend ed hanno codice colore
         repo: 'https://github.com/mirkobechini/gods-guest-site',
-        demo: "#"
+        live: "#"
     },
     {
         id: 3,
@@ -30,7 +30,62 @@ const projectData = [
         type: "backend",
         technologies: ['PHP', 'Laravel', 'Blade', 'Breeze', 'Bootstrap', 'MySQL'],
         repo: 'https://github.com/mirkobechini/CV_Backoffice',
-        demo: "#"
+        live: "#"
+    },
+    {
+        id: 4,
+        title: 'Digital Business Card',
+        description: 'Biglietto da visita digitale realizzato in React come esercizio del corso React di Scrimba.',
+        preview: 'https://via.placeholder.com/300x200',
+        projectScope: 'personal',
+        type: "frontend",
+        technologies: ['React', 'HTML', 'CSS', 'Bootstrap', 'Vite'],
+        repo: 'https://github.com/mirkobechini/digital-business-card',
+        live: "https://mirkobechini.github.io/digital-business-card/"
+    },
+    {
+        id: 5,
+        title: 'Tenzies',
+        description: 'Gioco di dadi realizzato in React come esercizio del corso React di Scrimba.',
+        preview: 'https://via.placeholder.com/300x200',
+        projectScope: 'personal',
+        type: "frontend",
+        technologies: ['React', 'HTML', 'CSS', 'Vite', 'Figma'],
+        repo: 'https://github.com/mirkobechini/tenzies',
+        live: "https://mirkobechini.github.io/tenzies/"
+    },
+    {
+        id: 6,
+        title: 'Assembly Endgame',
+        description: 'Sito web per un progetto di gioco da tavolo, realizzato in React come esercizio del corso React di Scrimba.',
+        preview: 'https://via.placeholder.com/300x200',
+        projectScope: 'personal',
+        type: "frontend",
+        technologies: ['React', 'HTML', 'CSS', 'Vite', 'Figma'],
+        repo: 'https://github.com/mirkobechini/assembly-endgame',
+        live: "https://mirkobechini.github.io/assembly-endgame/"
+    },
+    {
+        id: 7,
+        title: 'Quizzical',
+        description: 'Quiz interattivo realizzato in React come esercizio del corso React di Scrimba.',
+        preview: 'https://via.placeholder.com/300x200',
+        projectScope: 'personal',
+        type: "frontend",
+        technologies: ['React', 'HTML', 'CSS', 'Vite', 'Figma'],
+        repo: 'https://github.com/mirkobechini/quizzical',
+        live: "https://mirkobechini.github.io/quizzical/"
+    },
+    {
+        id: 8,
+        title: 'Portfolio personale',
+        description: 'Portfolio personale realizzato in React con Vite, progettato per mostrare il mio percorso e le mie competenze.',
+        preview: 'https://via.placeholder.com/300x200',
+        projectScope: 'personal',
+        type: "fullstack",
+        technologies: ['React', 'HTML', 'CSS', 'Vite', 'Laravel', 'JS',],
+        repo: 'https://github.com/mirkobechini/mirko-bechini-portfolio',
+        live: "#"
     }
 ];
 
