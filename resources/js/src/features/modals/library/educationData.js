@@ -4,16 +4,15 @@ const educationData = [
     {
         id: 1,
         course: 'Web development part-time specializzazione PHP e Laravel',
-        description: "Corso online di 9 mesi con specializzazione in PHP e Laravel. Oltre 700 ore di lezioni e progetti pratici, culminati in uno stage finale con sviluppo di applicazioni web complete.",
+        description: "Corso online di 9 mesi con specializzazione in PHP e Laravel. Oltre 350 ore di lezioni e progetti pratici, culminati in uno stage finale con sviluppo di applicazioni web complete.",
         certificate: 'https://cdn.certifier.io/fa42c19f-1139-4574-ac7a-83b13341a48e/credentials/01kjpz4adz63kdjmb8dvkkvqkp/designs/01kecgnrmxpmnwpapcy6fqm34w/EaIJLLzwYX.png',
         organization: 'Boolean',
         organizationUrl: 'https://boolean.careers',
         period: '05/2025 - 02/2026',
         skills: ['HTML', 'CSS', 'JavaScript', 'React', 'Node.js', 'Express', 'MySQL', 'PHP', 'Laravel'],
         highlights: [
-            'Stage finale con sviluppo di un backoffice completo in Laravel',
-            'Progetto di gruppo con metodologie Agile',
-            'Oltre 700 ore di formazione pratica',
+            'Esame finale con sviluppo di un backoffice completo in Laravel',
+            'Oltre 350 ore di formazione pratica',
             'Specializzazione full-stack con focus su Laravel',
         ],
         modules: [
@@ -34,7 +33,7 @@ const educationData = [
             },
             {
                 title: 'Specializzazione PHP & Laravel',
-                description: 'PHP moderno, Laravel MVC, Eloquent ORM, Blade, Livewire e testing.',
+                description: 'PHP moderno, Laravel MVC, Eloquent ORM, Blade, Breeze.',
                 skillsModules: ['PHP', 'Laravel'],
             },
         ],
@@ -42,6 +41,7 @@ const educationData = [
     {
         id: 2,
         course: 'LEARN REACT',
+        description: 'Corso intensivo di React con progetti pratici e interattivi, completato in poche settimane.',
         certificate: getAssetPath('/modals/certifications/certificato-react-scrimba.webp'),
         organization: 'Scrimba',
         organizationUrl: 'https://scrimba.com/learn-react-c0e',
@@ -73,6 +73,7 @@ const educationData = [
     {
         id: 3,
         course: 'LEARN TYPESCRIPT',
+        description: 'Corso completo di TypeScript con focus su tipizzazione statica e integrazione con progetti React.',
         certificate: getAssetPath('/modals/certifications/certificato-typescript-scrimba.webp'),
         organization: 'Scrimba',
         organizationUrl: 'https://scrimba.com/learn-typescript',
@@ -101,6 +102,78 @@ const educationData = [
             },
         ],
     },
+    {
+        id: 4,
+        course: 'Multistack AI Developer',
+        description: 'Corso avanzato di sviluppo full-stack con integrazione di modelli AI, progettazione di sistemi complessi e sviluppo multipiattaforma.',
+        certificate: '',
+        organization: 'Online',
+        organizationUrl: '',
+        period: '05/2026 - current',
+        skills: ['AI'],
+        highlights: [
+            'In corso di completamento',
+            'Integrazione di modelli AI in applicazioni web',
+            'Sviluppo di progetti full-stack con AI',
+        ],
+        modules: [
+            {
+                title: 'Pre-Corso / Setup',
+                description: 'Git, VS Code, Copilot, Ollama — strumenti e ambiente di sviluppo.',
+                skillsModules: ['AI'],
+            },
+            {
+                title: 'Mindset Multistack',
+                description: 'Modello a 2 strati, Brief, Workflow — approccio multipiattaforma.',
+                skillsModules: ['AI'],
+            },
+            {
+                title: 'Systems Thinking',
+                description: 'Architettura, decisioni, trade-off — progettare sistemi complessi.',
+                skillsModules: ['AI'],
+            },
+            {
+                title: 'Web',
+                description: 'Build completo — dal brief al deploy di un\'applicazione web.',
+                skillsModules: ['AI'],
+            },
+            {
+                title: 'Desktop',
+                description: 'App native con agenti — sviluppo per desktop con integrazione AI.',
+                skillsModules: ['AI'],
+            },
+            {
+                title: 'Mobile',
+                description: 'Cross-platform development — app mobile con framework moderni.',
+                skillsModules: ['AI'],
+            },
+            {
+                title: 'Dati e API',
+                description: 'Backend, database, integrazioni — gestione dati e API.',
+                skillsModules: ['AI'],
+            },
+            {
+                title: 'AI Locale',
+                description: 'Ollama, modelli, tool building — AI eseguita in locale.',
+                skillsModules: ['AI'],
+            },
+            {
+                title: 'Multipiattaforma',
+                description: 'Un progetto, più target — codice condiviso tra web, desktop e mobile.',
+                skillsModules: ['AI'],
+            },
+            {
+                title: 'Progetto Finale',
+                description: 'Build autonomo end-to-end — progetto completo dall\'idea al rilascio.',
+                skillsModules: ['AI'],
+            },
+            {
+                title: 'Presenta e Rifletti',
+                description: 'Demo day, peer review — presentazione e revisione del progetto finale.',
+                skillsModules: ['AI'],
+            },
+        ],
+    }
 ];
 
 export default educationData;

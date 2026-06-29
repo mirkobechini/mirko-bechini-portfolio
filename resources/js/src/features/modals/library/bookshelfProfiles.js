@@ -23,24 +23,24 @@ const BOOKSHELF_PROFILES = {
         educationData,
         formationFocus: [
             {
+                title: 'Multistack AI Developer',
+                description: 'Corso avanzato di sviluppo full-stack con integrazione di modelli AI, progettazione di sistemi complessi e sviluppo multipiattaforma.',
+                status: 'inProgress',
+                badge: 'New Skills',
+            },
+            {
                 title: 'Learn Typescript',
                 description: 'Corso Scrimba per imparare le basi di Typescript e tipizzazione statica.',
                 status: 'onHold',
                 badge: 'New Skill',
             },
-            {
-                title: 'AI course Fabio',
-                description: 'Iniziare il corso di Fabio sulla AI per esplorare applicazioni pratiche e casi d\'uso reali.',
-                status: 'inProgress',
-                badge: 'New Skill',
-            },
         ],
         formationRoadmap: [
             {
-                title: 'Learn Angular',
-                description: 'Seguire un corso completo su Angular per ampliare le competenze frontend e imparare a costruire applicazioni complesse.',
+                title: 'Creare backend Portfolio',
+                description: 'Sviluppare un progetto backend completo per il portfolio, utilizzando Laravel o Node.js, per dimostrare le competenze acquisite e avere un caso studio da mostrare ai potenziali datori di lavoro.',
                 status: 'next',
-                badge: 'New Skill',
+                badge: 'Portfolio',
             },
             {
                 title: 'Improve Laravel skills',
@@ -49,10 +49,10 @@ const BOOKSHELF_PROFILES = {
                 badge: 'Upgrade Skill',
             },
             {
-                title: 'Creare backend Portfolio',
-                description: 'Sviluppare un progetto backend completo per il portfolio, utilizzando Laravel o Node.js, per dimostrare le competenze acquisite e avere un caso studio da mostrare ai potenziali datori di lavoro.',
+                title: 'Learn Angular',
+                description: 'Seguire un corso completo su Angular per ampliare le competenze frontend e imparare a costruire applicazioni complesse.',
                 status: 'next',
-                badge: 'Portfolio',
+                badge: 'New Skill',
             },
         ],
     },
