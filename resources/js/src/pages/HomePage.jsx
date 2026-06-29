@@ -24,6 +24,7 @@ export default function HomePage() {
     // Refs
     const scrollRef = useRef(null);
     const preloadedSpritesRef = useRef(new Set());
+    const modalParamsRef = useRef({});
 
     // State
     const { activeSection, setActiveSection } = useContext(GlobalContext);
@@ -61,10 +62,11 @@ export default function HomePage() {
         });
     }, [setActiveSection]);
 
-    const openModal = useCallback((id) => {
+    const openModal = useCallback((id, params) => {
         if (!isDragging.current) {
             const selectedModal = modalById[id];
             if (selectedModal) {
+                modalParamsRef.current = params ?? {};
                 setActiveSection(selectedModal);
             }
         }
@@ -110,7 +112,7 @@ export default function HomePage() {
                     </button>
                 ))}
             </div>
-            {activeSection && (<BaseModal key={`${activeSection.id}-${activeSection.sprite ?? ''}`} variant={activeSection} closeModal={closeModal} openModal={openModal} role="dialog" />)}
+            {activeSection && (<BaseModal key={`${activeSection.id}-${activeSection.sprite ?? ''}`} variant={activeSection} closeModal={closeModal} openModal={openModal} modalParams={modalParamsRef.current} role="dialog" />)}
         </div >
 
     )
