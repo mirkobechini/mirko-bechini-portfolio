@@ -8,16 +8,26 @@ const FilterPanel = memo(function FilterPanel({
     onReset,
     resetLabel,
     resetIcon,
-    isMobileOpen,
-    onShowMobile,
-    onHideMobile,
+    isOpen,
+    onShow,
+    onHide,
     showLabel,
     hideLabel,
     mobileIcon,
 }) {
+    const handleToggleFilters = () => {
+        if (isOpen) {
+            onHide?.();
+        } else {
+            onShow?.();
+        }
+    };
+
+    const toggleLabel = isOpen ? hideLabel : showLabel;
+
     return (
         <>
-            <div className={`${styles['filter-container']} ${isMobileOpen ? styles['is-open-mobile'] : ''}`}>
+            <div className={`${styles['filter-container']} ${isOpen ? styles['is-open'] : ''}`}>
                 {onBack && (
                     <button type="button" className={styles['back-button']} onClick={onBack} aria-label={backLabel}>
                         <svg className={styles['back-arrow']} viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#e8c879" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -35,19 +45,17 @@ const FilterPanel = memo(function FilterPanel({
                         <span className={styles['filter-button-text']}>{resetLabel}</span>
                     </button>
                 )}
-
-                {onHideMobile && (
-                    <button className={`${styles['filter-button']} ${styles['close-filters-btn']}`} onClick={onHideMobile} type="button">
-                        <img src={mobileIcon} alt={hideLabel} width="85" height="85" />
-                        <span className={styles['filter-button-text']}>{hideLabel}</span>
-                    </button>
-                )}
             </div>
 
-            {onShowMobile && (
-                <button className={`${styles['filter-button']} ${styles['mobile-trigger-btn']}`} onClick={onShowMobile} type="button">
-                    <img src={mobileIcon} alt={showLabel} width="85" height="85" />
-                    <span className={styles['filter-button-text']}>{showLabel}</span>
+            {(onShow || onHide) && (
+                <button
+                    className={`${styles['filter-button']} ${styles['trigger-btn']}`}
+                    onClick={handleToggleFilters}
+                    type="button"
+                    aria-pressed={isOpen}
+                >
+                    <img src={mobileIcon} alt={toggleLabel} width="85" height="85" />
+                    <span className={styles['filter-button-text']}>{toggleLabel}</span>
                 </button>
             )}
         </>

@@ -33,7 +33,7 @@ const ProjectsModal = memo(function ProjectsModal({ onBackToProjectsHome }) {
         scopeOptions,
     } = useProjectFilters(projectData);
 
-    const [isFiltersOpenMobile, setIsFiltersOpenMobile] = useState(false);
+    const [isFiltersOpen, setIsFiltersOpen] = useState(false);
 
     const typeFilterOptions = useMemo(() => {
         return typeOptions.map(option => {
@@ -87,9 +87,9 @@ const ProjectsModal = memo(function ProjectsModal({ onBackToProjectsHome }) {
                 onReset={resetFilters}
                 resetLabel="Reset"
                 resetIcon={resetButtonIcon}
-                isMobileOpen={isFiltersOpenMobile}
-                onShowMobile={() => setIsFiltersOpenMobile(true)}
-                onHideMobile={() => setIsFiltersOpenMobile(false)}
+                isOpen={isFiltersOpen}
+                onShow={() => setIsFiltersOpen(true)}
+                onHide={() => setIsFiltersOpen(false)}
                 showLabel="Filtri"
                 hideLabel="Nascondi"
                 mobileIcon={resetButtonIcon}
