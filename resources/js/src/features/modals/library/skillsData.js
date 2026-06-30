@@ -254,7 +254,6 @@ const skillsData = [
     {
         id: 18,
         skill: 'AI',
-        /*TODO:add image */
         icon: getAssetPath('/modals/skills/icons/ai.webp'),
         category: 'AI Tool',
         color: '#FFD700',

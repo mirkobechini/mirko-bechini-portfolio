@@ -27,7 +27,6 @@ const SkillDetailView = memo(function SkillDetailView({ currentSkill, detailsTit
                 </section>
                 <section className={styles['related-projects']}>
                     <h4>Progetti correlati:</h4>
-                    {/*TODO: trasformare in link che apre il progetto in un modal dedicato*/}
                     <ul className={styles['related-projects-list']}>
                         {currentSkill.relatedProjects?.map((project, index) => (
                             <li key={index} className={styles['related-projects-item']}>{project}</li>
