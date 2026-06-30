@@ -1,6 +1,8 @@
 import styles from './ProjectsModal.module.css';
-import { useMemo, useState, memo } from 'react';
+import { memo, useMemo, useState } from 'react';
 import sharedStyles from '../shared/SharedModal.module.css';
+import FilterPanel from './components/FilterPanel';
+import FilterGroup from './components/FilterGroup';
 import projectData from './projectData';
 import { getAssetPath } from '../../../utils/assets';
 import { isValidLink } from '../../../utils/links';
@@ -12,11 +14,9 @@ const folderIcon = getAssetPath('/modals/projects/folder-icon.webp');
 const resetButtonIcon = getAssetPath('/modals/projects/reset-button.webp');
 
 const ProjectsModal = memo(function ProjectsModal({ onBackToProjectsHome }) {
-
     const [selectedTypeFilter, setSelectedTypeFilter] = useState('all');
     const [selectedScopeFilter, setSelectedScopeFilter] = useState('all');
-
-    const [isFiltersOpenMobile, setIsFiltersOpenMobile] = useState(false); // Show filters by default on desktop
+    const [isFiltersOpenMobile, setIsFiltersOpenMobile] = useState(false);
 
     const filteredProjects = useMemo(() => {
         return projectData.filter(project => {
@@ -30,66 +30,125 @@ const ProjectsModal = memo(function ProjectsModal({ onBackToProjectsHome }) {
         });
     }, [selectedTypeFilter, selectedScopeFilter]);
 
+    const typeFilterOptions = useMemo(() => ([
+        {
+            id: 'all',
+            value: 'all',
+            content: (
+                <>
+                    <img className={styles.icon} src={folderIcon} alt="Tutti" width="90" height="68" />
+                    Tutti
+                </>
+            ),
+        },
+        {
+            id: 'frontend',
+            value: 'frontend',
+            content: (
+                <>
+                    <img className={styles.icon} src={frontendIcon} alt="Frontend" width="106" height="67" />
+                    Frontend
+                </>
+            ),
+        },
+        {
+            id: 'backend',
+            value: 'backend',
+            content: (
+                <>
+                    <img className={styles.icon} src={backendIcon} alt="Backend" width="71" height="80" />
+                    Backend
+                </>
+            ),
+        },
+        {
+            id: 'fullstack',
+            value: 'fullstack',
+            content: (
+                <>
+                    <img className={styles.icon} src={fullstackIcon} alt="Fullstack" width="100" height="86" />
+                    Fullstack
+                </>
+            ),
+        },
+    ]), []);
+
+    const scopeFilterOptions = useMemo(() => ([
+        {
+            id: 'all',
+            value: 'all',
+            content: (
+                <>
+                    <img className={styles.icon} src={folderIcon} alt="Tutti" width="90" height="68" />
+                    Tutti
+                </>
+            ),
+        },
+        {
+            id: 'personal',
+            value: 'personal',
+            content: (
+                <>
+                    <img className={styles.icon} src={folderIcon} alt="Personali" width="90" height="68" />
+                    Personali
+                </>
+            ),
+        },
+        {
+            id: 'work',
+            value: 'work',
+            content: (
+                <>
+                    <img className={styles.icon} src={folderIcon} alt="Lavoro" width="90" height="68" />
+                    Lavoro
+                </>
+            ),
+        },
+    ]), []);
+
+    function handleResetFilters() {
+        setSelectedTypeFilter('all');
+        setSelectedScopeFilter('all');
+    }
 
     return (
         <div className={styles['desk-container']}>
-            <div className={`${styles['filter-container']} ${isFiltersOpenMobile ? styles['is-open-mobile'] : ''}`}>
-                {onBackToProjectsHome && (
-                    <button type="button" className={styles['back-button']} onClick={onBackToProjectsHome} aria-label="Torna alla scelta progetti/esperienze">
-                        <svg className={styles['back-arrow']} viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#e8c879" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <polyline points="15 18 9 12 15 6" />
-                        </svg>
-                        <span>Torna indietro</span>
-                    </button>
-                )}
-                <div className={styles['filter-group']}>
-                    <fieldset className={styles['filter-wrapper']}>
-                        <input type='radio' className={styles['visually-hidden']} id='all-types' name='projectTypeFilter' value='all' checked={selectedTypeFilter === 'all'} onChange={e => setSelectedTypeFilter(e.target.value)} />
-                        <label htmlFor='all-types' className={`${styles['button-label']} ${selectedTypeFilter === 'all' ? styles['selected-filter'] : ''}`}> <img className={styles.icon} src={folderIcon} alt="Tutti" width="90" height="68" /> Tutti</label>
-                        <input type='radio' className={styles['visually-hidden']} id='frontend' name='projectTypeFilter' value='frontend' checked={selectedTypeFilter === 'frontend'} onChange={e => setSelectedTypeFilter(e.target.value)} />
-                        <label htmlFor='frontend' className={`${styles['button-label']} ${selectedTypeFilter === 'frontend' ? styles['selected-filter'] : ''}`}> <img className={styles.icon} src={frontendIcon} alt="Frontend" width="106" height="67" /> Frontend</label>
-                        <input type='radio' className={styles['visually-hidden']} id='backend' name='projectTypeFilter' value='backend' checked={selectedTypeFilter === 'backend'} onChange={e => setSelectedTypeFilter(e.target.value)} />
-                        <label htmlFor='backend' className={`${styles['button-label']} ${selectedTypeFilter === 'backend' ? styles['selected-filter'] : ''}`}> <img className={styles.icon} src={backendIcon} alt="Backend" width="71" height="80" /> Backend</label>
-                        <input type='radio' className={styles['visually-hidden']} id='fullstack' name='projectTypeFilter' value='fullstack' checked={selectedTypeFilter === 'fullstack'} onChange={e => setSelectedTypeFilter(e.target.value)} />
-                        <label htmlFor='fullstack' className={`${styles['button-label']} ${selectedTypeFilter === 'fullstack' ? styles['selected-filter'] : ''}`}> <img className={styles.icon} src={fullstackIcon} alt="Fullstack" width="100" height="86" /> Fullstack</label>
-                    </fieldset>
-                    <fieldset className={styles['filter-wrapper']}>
-                        <input type='radio' className={styles['visually-hidden']} id='all-projects' name='projectScopeFilter' value='all' checked={selectedScopeFilter === 'all'} onChange={e => setSelectedScopeFilter(e.target.value)} />
-                        <label htmlFor='all-projects' className={`${styles['button-label']} ${selectedScopeFilter === 'all' ? styles['selected-filter'] : ''}`}> <img className={styles.icon} src={folderIcon} alt="Tutti" width="90" height="68" /> Tutti</label>
-                        <input type='radio' className={styles['visually-hidden']} id='personal-projects' name='projectScopeFilter' value='personal' checked={selectedScopeFilter === 'personal'} onChange={e => setSelectedScopeFilter(e.target.value)} />
-                        <label htmlFor='personal-projects' className={`${styles['button-label']} ${selectedScopeFilter === 'personal' ? styles['selected-filter'] : ''}`}> <img className={styles.icon} src={folderIcon} alt="Personali" width="90" height="68" /> Personali</label>
-                        <input type='radio' className={styles['visually-hidden']} id='work-projects' name='projectScopeFilter' value='work' checked={selectedScopeFilter === 'work'} onChange={e => setSelectedScopeFilter(e.target.value)} />
-                        <label htmlFor='work-projects' className={`${styles['button-label']} ${selectedScopeFilter === 'work' ? styles['selected-filter'] : ''}`}> <img className={styles.icon} src={folderIcon} alt="Lavoro" width="90" height="68" /> Lavoro</label>
-                    </fieldset>
-                </div>
-                <button className={styles['filter-button']} onClick={() => { setSelectedTypeFilter('all'); setSelectedScopeFilter('all'); }} type="button">
-                    <img src={resetButtonIcon} alt="Reset Filters" width="499" height="141" />
-                    <span className={styles['filter-button-text']}>Reset</span>
-                </button>
-
-                <button className={`${styles['filter-button']} ${styles['close-filters-btn']}`} onClick={() => setIsFiltersOpenMobile(false)} type="button">
-                    <img src={resetButtonIcon} alt="Hide Filters" width="85" height="85" />
-                    <span className={styles['filter-button-text']}>Nascondi</span>
-                </button>
-            </div>
-
-            <button className={`${styles['filter-button']} ${styles['mobile-trigger-btn']}`} onClick={() => setIsFiltersOpenMobile(true)} type="button">
-                <img src={resetButtonIcon} alt="Show Filters" width="85" height="85" />
-                <span className={styles['filter-button-text']}>Filtri</span>
-            </button>
+            <FilterPanel
+                onBack={onBackToProjectsHome}
+                backLabel="Torna alla scelta progetti/esperienze"
+                onReset={handleResetFilters}
+                resetLabel="Reset"
+                resetIcon={resetButtonIcon}
+                isMobileOpen={isFiltersOpenMobile}
+                onShowMobile={() => setIsFiltersOpenMobile(true)}
+                onHideMobile={() => setIsFiltersOpenMobile(false)}
+                showLabel="Filtri"
+                hideLabel="Nascondi"
+                mobileIcon={resetButtonIcon}
+            >
+                <FilterGroup
+                    name="projectTypeFilter"
+                    options={typeFilterOptions}
+                    selectedValue={selectedTypeFilter}
+                    onChange={setSelectedTypeFilter}
+                />
+                <FilterGroup
+                    name="projectScopeFilter"
+                    options={scopeFilterOptions}
+                    selectedValue={selectedScopeFilter}
+                    onChange={setSelectedScopeFilter}
+                />
+            </FilterPanel>
 
             <div className={`${styles['projects-view']} ${sharedStyles['scroll-y-contain']}`}>
                 <div className={styles['projects-grid']}>
-                    {
-                        filteredProjects.length === 0 && (
-                            <div className={styles['no-projects']}>
-                                <p>Nessun progetto trovato con i filtri selezionati.</p>
-                            </div>
-                        )
-                    }
+                    {filteredProjects.length === 0 && (
+                        <div className={styles['no-projects']}>
+                            <p>Nessun progetto trovato con i filtri selezionati.</p>
+                        </div>
+                    )}
                     {filteredProjects.map((project, index) => (
-
-                        <div className={`${styles['project-blueprint']} ${index % 2 === 0 ? "" : styles.alternate}`} key={project.id}>
+                        <div className={`${styles['project-blueprint']} ${index % 2 === 0 ? '' : styles.alternate}`} key={project.id}>
                             <div className={styles['blueprint-header']}></div>
                             <h4 className={styles['project-title']}>{project.title}</h4>
                             <p>{project.description}</p>
@@ -97,8 +156,12 @@ const ProjectsModal = memo(function ProjectsModal({ onBackToProjectsHome }) {
                                 {project.technologies.length > 0 ? `#${project.technologies.join(' #')}` : ''}
                             </div>
                             <div className={styles['links-group']}>
-                                {isValidLink(project.repo) && <a href={project.repo} className={styles['view-btn']} target="_blank" rel="noopener noreferrer">Apri Documentazione</a>}
-                                {isValidLink(project.live) && <a href={project.live} className={styles['view-btn']} target="_blank" rel="noopener noreferrer">Vai al sito</a>}
+                                {isValidLink(project.repo) && (
+                                    <a href={project.repo} className={styles['view-btn']} target="_blank" rel="noopener noreferrer">Apri Documentazione</a>
+                                )}
+                                {isValidLink(project.live) && (
+                                    <a href={project.live} className={styles['view-btn']} target="_blank" rel="noopener noreferrer">Vai al sito</a>
+                                )}
                             </div>
                         </div>
                     ))}
