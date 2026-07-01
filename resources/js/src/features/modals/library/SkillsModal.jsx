@@ -5,6 +5,7 @@ import { useKeyboardNavigation } from '../../../hooks/useKeyboardNavigation';
 import SkillsGridView from './SkillsGridView';
 import SkillDetailView from './SkillDetailView';
 import FormationView from './FormationView';
+import playBookFlip from '../../../utils/playBookFlip';
 
 const SKILL_COLUMNS = 4;
 
@@ -39,10 +40,12 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf, onSw
 
     const handleSkillClick = (skill) => {
         setCurrentSkill(skill);
+        playBookFlip();
     };
 
     const handleHomeClick = () => {
         onBackToBookshelf?.();
+        playBookFlip();
     };
 
     useEffect(() => {
@@ -62,6 +65,7 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf, onSw
 
     const handleSkillNavigate = useCallback((nextIndex) => {
         setCurrentSkill(skillsData[nextIndex]);
+        playBookFlip();
     }, [skillsData]);
 
     useKeyboardNavigation({

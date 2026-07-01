@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import styles from './SkillsModal.module.css';
 import sharedStyles from '../shared/SharedModal.module.css';
+import playBookFlip from '../../../utils/playBookFlip';
 
 const SkillsGridView = memo(function SkillsGridView({ skillsData, currentSkill, skillCardRefs, onSkillClick, title, onBackToFormation, returnToEducation }) {
     return (
@@ -11,7 +12,7 @@ const SkillsGridView = memo(function SkillsGridView({ skillsData, currentSkill, 
                     <button
                         type="button"
                         className={styles['btn-back-formation-page']}
-                        onClick={() => onBackToFormation()}
+                        onClick={() => { onBackToFormation(); playBookFlip(); }}
                         aria-label="Torna alla formazione"
                     >
                         ‹ Formazione

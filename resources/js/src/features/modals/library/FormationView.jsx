@@ -2,6 +2,7 @@ import { memo, useCallback, useEffect, useState } from 'react';
 import styles from './SkillsModal.module.css';
 import sharedStyles from '../shared/SharedModal.module.css';
 import FormationDetailView from './FormationDetailView';
+import playBookFlip from '../../../utils/playBookFlip';
 
 const STATUS_LABELS = {
     onHold: 'In sospeso',
@@ -30,10 +31,12 @@ const FormationView = memo(function FormationView({ currentProfile, educationDat
 
     const handleEducationClick = useCallback((education) => {
         setSelectedEducation(education);
+        playBookFlip();
     }, []);
 
     const handleDetailBack = useCallback(() => {
         setSelectedEducation(null);
+        playBookFlip();
     }, []);
 
     const handleKeyDown = useCallback((e, education) => {

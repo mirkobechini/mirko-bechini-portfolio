@@ -2,9 +2,9 @@ import { useCallback, useRef } from 'react';
 import { getAssetPath } from '../utils/assets';
 
 const SOUND_FILES = [
-    getAssetPath('/sounds/monkey-1.ogg'),
-    getAssetPath('/sounds/monkey-2.ogg'),
-    getAssetPath('/sounds/monkey-3.ogg'),
+    getAssetPath('/sounds/about/monkey-1.ogg'),
+    getAssetPath('/sounds/about/monkey-2.ogg'),
+    getAssetPath('/sounds/about/monkey-3.ogg'),
 ];
 
 /**

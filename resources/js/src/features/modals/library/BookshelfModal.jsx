@@ -4,6 +4,7 @@ import sharedStyles from '../shared/SharedModal.module.css';
 import { BOOKSHELF_PROFILES } from './bookshelfProfiles';
 import educationData from './educationData';
 import { getAssetPath } from '../../../utils/assets';
+import playBookFlip from '../../../utils/playBookFlip';
 
 const SkillsModal = lazy(() => import('./SkillsModal'));
 
@@ -31,23 +32,27 @@ const BookshelfModal = memo(function BookshelfModal({ setModalSprite, defaultMod
         setSelectedProfile(profileKey);
         setPreselectSkill(null);
         setReturnToEducation(null);
+        playBookFlip();
     }
 
     function handleBackToBookshelf() {
         setSelectedProfile(null);
         setPreselectSkill(null);
         setReturnToEducation(null);
+        playBookFlip();
     }
 
     function handleSwitchToSkill(skillName, education) {
         setSelectedProfile('skills');
         setPreselectSkill(skillName);
         setReturnToEducation(education);
+        playBookFlip();
     }
 
     function handleBackToFormation() {
         setSelectedProfile('formation');
         setPreselectSkill(null);
+        playBookFlip();
     }
 
     const activeProfile = selectedProfile == null ? null : BOOKSHELF_PROFILES[selectedProfile];
