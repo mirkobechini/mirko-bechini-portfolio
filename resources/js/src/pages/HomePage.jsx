@@ -7,6 +7,7 @@ import ScrollGuideIndicators from '../components/ui/ScrollGuideIndicators';
 
 /* Hooks & Context */
 import { useDragScroll } from '../hooks/useDragScroll';
+import useSound from '../hooks/useSound';
 import GlobalContext from '../context/GlobalContext';
 
 /* Utils */
@@ -15,6 +16,7 @@ import { preloadImages } from '../utils/preloadImages';
 
 /* Data & Constants */
 import MODAL_DATA from '../features/modals/modalRegistry';
+import { MODAL_IDS } from '../data/uiConstants';
 import SPRITES from '../data/spriteConfig';
 
 /* Assets */
@@ -32,6 +34,7 @@ export default function HomePage() {
     // Custom hooks
     const { hasMoved, handleGrab, handleLeave, handleMovement, handleTouchStart, handleTouchMove, centerBackground, isDragging } =
         useDragScroll(scrollRef, activeSection !== null);
+    const { playRandomSound } = useSound(800);
 
     const modalById = useMemo(
         () => Object.fromEntries(MODAL_DATA.map((modal) => [modal.id, modal])),
@@ -68,6 +71,7 @@ export default function HomePage() {
             if (selectedModal) {
                 modalParamsRef.current = params ?? {};
                 setActiveSection(selectedModal);
+                if (id === MODAL_IDS.ABOUT_ME) playRandomSound();
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -75,9 +79,18 @@ export default function HomePage() {
 
     // Preload handlers for sprite images
     const preloadHandlers = (id) => ({
-        onMouseEnter: () => preloadModalSprite(id),
-        onFocus: () => preloadModalSprite(id),
-        onTouchStart: () => preloadModalSprite(id),
+        onMouseEnter: () => {
+            preloadModalSprite(id);
+            if (id === MODAL_IDS.ABOUT_ME) playRandomSound();
+        },
+        onFocus: () => {
+            preloadModalSprite(id);
+            if (id === MODAL_IDS.ABOUT_ME) playRandomSound();
+        },
+        onTouchStart: () => {
+            preloadModalSprite(id);
+            if (id === MODAL_IDS.ABOUT_ME) playRandomSound();
+        },
     });
 
     return (
