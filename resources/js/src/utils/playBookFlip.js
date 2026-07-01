@@ -1,22 +1,11 @@
 import { getAssetPath } from './assets';
 
-const BOOK_FLIP_FILES = [
-    getAssetPath('/sounds/library/book_flip.1.ogg'),
-    getAssetPath('/sounds/library/book_flip.2.ogg'),
-    getAssetPath('/sounds/library/book_flip.3.ogg'),
-    getAssetPath('/sounds/library/book_flip.4.ogg'),
-    getAssetPath('/sounds/library/book_flip.5.ogg'),
-    getAssetPath('/sounds/library/book_flip.6.ogg'),
-    getAssetPath('/sounds/library/book_flip.7.ogg'),
-    getAssetPath('/sounds/library/book_flip.8.ogg'),
-    getAssetPath('/sounds/library/book_flip.9.ogg'),
-    getAssetPath('/sounds/library/book_flip.10.ogg'),
-];
+const PAGE_TURN_SRC = getAssetPath('/sounds/library/page-turn.wav');
 
 let lastPlayed = 0;
 
 /**
- * Play a random book flip sound with shared debounce (300ms).
+ * Play a page turn sound with shared debounce (300ms).
  * Crea un nuovo Audio ad ogni chiamata per evitare conflitti di stato.
  */
 export default function playBookFlip() {
@@ -24,9 +13,7 @@ export default function playBookFlip() {
     if (now - lastPlayed < 300) return;
     lastPlayed = now;
 
-    const src = BOOK_FLIP_FILES[Math.floor(Math.random() * BOOK_FLIP_FILES.length)];
-
-    const audio = new Audio(src);
+    const audio = new Audio(PAGE_TURN_SRC);
     audio.volume = 0.3;
     audio.play().catch(() => { });
 }
