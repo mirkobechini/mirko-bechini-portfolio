@@ -7,7 +7,9 @@ import SkillDetailView from './SkillDetailView';
 import FormationView from './FormationView';
 import playBookFlip from '../../../utils/playBookFlip';
 
-const SKILL_COLUMNS = 4;
+const SKILL_COLUMNS_DESKTOP = 4;
+const SKILL_COLUMNS_MOBILE = 3;
+const MOBILE_BREAKPOINT = 768;
 
 const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf, onSwitchToSkill, onBackToFormation, preselectSkill, returnToEducation }) {
     const currentProfile = profile ?? {
@@ -27,6 +29,20 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf, onSw
 
     const [currentSkill, setCurrentSkill] = useState(null);
     const skillCardRefs = useRef([]);
+    const [skillColumns, setSkillColumns] = useState(
+        window.innerWidth < MOBILE_BREAKPOINT ? SKILL_COLUMNS_MOBILE : SKILL_COLUMNS_DESKTOP
+    );
+
+    /* Rileva il numero di colonne in base alla larghezza viewport */
+    useEffect(() => {
+        function handleResize() {
+            setSkillColumns(
+                window.innerWidth < MOBILE_BREAKPOINT ? SKILL_COLUMNS_MOBILE : SKILL_COLUMNS_DESKTOP
+            );
+        }
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     /* Auto-select skill when coming from formation tag */
     useEffect(() => {
@@ -73,7 +89,7 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf, onSw
         onNavigate: handleSkillNavigate,
         totalItems: skillsData.length,
         mode: 'grid',
-        columns: SKILL_COLUMNS,
+        columns: skillColumns,
         enabled: currentProfile.enableKeyboardNavigation && isSkillsProfile && skillsData.length > 0,
     });
 
