@@ -14,11 +14,10 @@ const BOOK_FLIP_FILES = [
 ];
 
 let lastPlayed = 0;
-let audioEl = null;
 
 /**
  * Play a random book flip sound with shared debounce (300ms).
- * Can be called from anywhere — uses module-level singleton Audio element.
+ * Crea un nuovo Audio ad ogni chiamata per evitare conflitti di stato.
  */
 export default function playBookFlip() {
     const now = Date.now();
@@ -27,11 +26,7 @@ export default function playBookFlip() {
 
     const src = BOOK_FLIP_FILES[Math.floor(Math.random() * BOOK_FLIP_FILES.length)];
 
-    if (!audioEl) {
-        audioEl = new Audio();
-    }
-
-    audioEl.src = src;
-    audioEl.volume = 0.3;
-    audioEl.play().catch(() => { });
+    const audio = new Audio(src);
+    audio.volume = 0.3;
+    audio.play().catch(() => { });
 }

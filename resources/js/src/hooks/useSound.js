@@ -9,13 +9,13 @@ const SOUND_FILES = [
 
 /**
  * Hook that provides functions to play monkey sounds with debounce.
+ * Crea un nuovo Audio ad ogni chiamata per evitare conflitti di stato.
  * @param {number} debounceMs - Minimum interval between sounds in ms (default: 800)
  * @returns {{ playSoundShort: () => void, playSoundFull: () => void }}
  */
 export default function useSound(debounceMs = 800) {
     const lastHoverRef = useRef(0);
     const lastClickRef = useRef(0);
-    const audioRef = useRef(null);
 
     const play = useCallback((isShort) => {
         const now = Date.now();
@@ -24,24 +24,16 @@ export default function useSound(debounceMs = 800) {
         if (now - lastRef.current < debounceMs) return;
         lastRef.current = now;
 
-        const randomIndex = Math.floor(Math.random() * SOUND_FILES.length);
-        const soundSrc = SOUND_FILES[randomIndex];
+        const src = SOUND_FILES[Math.floor(Math.random() * SOUND_FILES.length)];
 
-        if (!audioRef.current) {
-            audioRef.current = new Audio();
-        }
-
-        audioRef.current.src = soundSrc;
-        audioRef.current.volume = 0.3;
-        audioRef.current.play().catch(() => { });
+        const audio = new Audio(src);
+        audio.volume = 0.3;
+        audio.play().catch(() => { });
 
         if (isShort) {
-            clearTimeout(audioRef.current._shortTimer);
-            audioRef.current._shortTimer = setTimeout(() => {
-                if (audioRef.current) {
-                    audioRef.current.pause();
-                    audioRef.current.currentTime = 0;
-                }
+            setTimeout(() => {
+                audio.pause();
+                audio.currentTime = 0;
             }, 400);
         }
     }, [debounceMs]);
