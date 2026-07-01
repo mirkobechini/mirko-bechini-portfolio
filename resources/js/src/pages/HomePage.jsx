@@ -1,5 +1,5 @@
 /* React & Libraries */
-import { useCallback, useContext, useMemo, useRef } from 'react';
+import { useCallback, useContext, useMemo, useRef, useState } from 'react';
 
 /* Components */
 import BaseModal from '../features/modals/shared/BaseModal';
@@ -26,15 +26,15 @@ export default function HomePage() {
     // Refs
     const scrollRef = useRef(null);
     const preloadedSpritesRef = useRef(new Set());
-    const modalParamsRef = useRef({});
 
     // State
     const { activeSection, setActiveSection } = useContext(GlobalContext);
+    const [modalParams, setModalParams] = useState({});
 
     // Custom hooks
     const { hasMoved, handleGrab, handleLeave, handleMovement, handleTouchStart, handleTouchMove, centerBackground, isDragging } =
         useDragScroll(scrollRef, activeSection !== null);
-    const { playRandomSound } = useSound(800);
+    const { playSoundShort, playSoundFull } = useSound(800);
 
     const modalById = useMemo(
         () => Object.fromEntries(MODAL_DATA.map((modal) => [modal.id, modal])),
@@ -69,9 +69,9 @@ export default function HomePage() {
         if (!isDragging.current) {
             const selectedModal = modalById[id];
             if (selectedModal) {
-                modalParamsRef.current = params ?? {};
+                setModalParams(params ?? {});
                 setActiveSection(selectedModal);
-                if (id === MODAL_IDS.ABOUT_ME) playRandomSound();
+                if (id === MODAL_IDS.ABOUT_ME) playSoundFull();
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -81,15 +81,12 @@ export default function HomePage() {
     const preloadHandlers = (id) => ({
         onMouseEnter: () => {
             preloadModalSprite(id);
-            if (id === MODAL_IDS.ABOUT_ME) playRandomSound(true);
+            if (id === MODAL_IDS.ABOUT_ME) playSoundShort();
         },
-        onFocus: () => {
-            preloadModalSprite(id);
-            if (id === MODAL_IDS.ABOUT_ME) playRandomSound(true);
-        },
+        onFocus: () => preloadModalSprite(id),
         onTouchStart: () => {
             preloadModalSprite(id);
-            if (id === MODAL_IDS.ABOUT_ME) playRandomSound(true);
+            if (id === MODAL_IDS.ABOUT_ME) playSoundShort();
         },
     });
 
@@ -125,7 +122,7 @@ export default function HomePage() {
                     </button>
                 ))}
             </div>
-            {activeSection && (<BaseModal key={`${activeSection.id}-${activeSection.sprite ?? ''}`} variant={activeSection} closeModal={closeModal} openModal={openModal} modalParams={modalParamsRef.current} role="dialog" />)}
+            {activeSection && (<BaseModal key={`${activeSection.id}-${activeSection.sprite ?? ''}`} variant={activeSection} closeModal={closeModal} openModal={openModal} modalParams={modalParams} role="dialog" />)}
         </div >
 
     )
