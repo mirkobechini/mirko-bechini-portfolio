@@ -7,12 +7,12 @@ import ScrollGuideIndicators from '../components/ui/ScrollGuideIndicators';
 
 /* Hooks & Context */
 import { useDragScroll } from '../hooks/useDragScroll';
-import useSound from '../hooks/useSound';
 import GlobalContext from '../context/GlobalContext';
 
 /* Utils */
 import { getAssetPath } from '../utils/assets';
 import { preloadImages } from '../utils/preloadImages';
+import { playMonkeyHover, playMonkeyClick } from '../utils/playMonkeySound';
 import { playParrotHover, playParrotClick } from '../utils/playParrotSound';
 
 /* Data & Constants */
@@ -35,7 +35,6 @@ export default function HomePage() {
     // Custom hooks
     const { hasMoved, handleGrab, handleLeave, handleMovement, handleTouchStart, handleTouchMove, centerBackground, isDragging } =
         useDragScroll(scrollRef, activeSection !== null);
-    const { playSoundShort, playSoundFull } = useSound(800);
 
     const modalById = useMemo(
         () => Object.fromEntries(MODAL_DATA.map((modal) => [modal.id, modal])),
@@ -72,7 +71,7 @@ export default function HomePage() {
             if (selectedModal) {
                 setModalParams(params ?? {});
                 setActiveSection(selectedModal);
-                if (id === MODAL_IDS.ABOUT_ME) playSoundFull();
+                if (id === MODAL_IDS.ABOUT_ME) playMonkeyClick();
                 if (id === MODAL_IDS.CONTACTS) playParrotClick();
             }
         }
@@ -83,13 +82,13 @@ export default function HomePage() {
     const preloadHandlers = (id) => ({
         onMouseEnter: () => {
             preloadModalSprite(id);
-            if (id === MODAL_IDS.ABOUT_ME) playSoundShort();
+            if (id === MODAL_IDS.ABOUT_ME) playMonkeyHover();
             if (id === MODAL_IDS.CONTACTS) playParrotHover();
         },
         onFocus: () => preloadModalSprite(id),
         onTouchStart: () => {
             preloadModalSprite(id);
-            if (id === MODAL_IDS.ABOUT_ME) playSoundShort();
+            if (id === MODAL_IDS.ABOUT_ME) playMonkeyHover();
             if (id === MODAL_IDS.CONTACTS) playParrotHover();
         },
     });
