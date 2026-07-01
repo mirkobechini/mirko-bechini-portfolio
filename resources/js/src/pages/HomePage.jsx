@@ -13,6 +13,7 @@ import GlobalContext from '../context/GlobalContext';
 /* Utils */
 import { getAssetPath } from '../utils/assets';
 import { preloadImages } from '../utils/preloadImages';
+import { playParrotHover, playParrotClick } from '../utils/playParrotSound';
 
 /* Data & Constants */
 import MODAL_DATA from '../features/modals/modalRegistry';
@@ -72,6 +73,7 @@ export default function HomePage() {
                 setModalParams(params ?? {});
                 setActiveSection(selectedModal);
                 if (id === MODAL_IDS.ABOUT_ME) playSoundFull();
+                if (id === MODAL_IDS.CONTACTS) playParrotClick();
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -82,11 +84,13 @@ export default function HomePage() {
         onMouseEnter: () => {
             preloadModalSprite(id);
             if (id === MODAL_IDS.ABOUT_ME) playSoundShort();
+            if (id === MODAL_IDS.CONTACTS) playParrotHover();
         },
         onFocus: () => preloadModalSprite(id),
         onTouchStart: () => {
             preloadModalSprite(id);
             if (id === MODAL_IDS.ABOUT_ME) playSoundShort();
+            if (id === MODAL_IDS.CONTACTS) playParrotHover();
         },
     });
 
