@@ -72,6 +72,7 @@ const SkillsModal = memo(function SkillsModal({ profile, onBackToBookshelf, onSw
 
         if (currentIndex >= 0 && document.activeElement !== activeCard) {
             activeCard?.focus({ preventScroll: true });
+            activeCard?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
     }, [currentSkill, skillsData]);
 
