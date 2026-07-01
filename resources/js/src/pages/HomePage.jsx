@@ -81,15 +81,15 @@ export default function HomePage() {
     const preloadHandlers = (id) => ({
         onMouseEnter: () => {
             preloadModalSprite(id);
-            if (id === MODAL_IDS.ABOUT_ME) playRandomSound();
+            if (id === MODAL_IDS.ABOUT_ME) playRandomSound(true);
         },
         onFocus: () => {
             preloadModalSprite(id);
-            if (id === MODAL_IDS.ABOUT_ME) playRandomSound();
+            if (id === MODAL_IDS.ABOUT_ME) playRandomSound(true);
         },
         onTouchStart: () => {
             preloadModalSprite(id);
-            if (id === MODAL_IDS.ABOUT_ME) playRandomSound();
+            if (id === MODAL_IDS.ABOUT_ME) playRandomSound(true);
         },
     });
 

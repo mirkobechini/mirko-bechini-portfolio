@@ -16,7 +16,7 @@ export default function useSound(debounceMs = 800) {
     const lastPlayedRef = useRef(0);
     const audioRef = useRef(null);
 
-    const playRandomSound = useCallback(() => {
+    const playRandomSound = useCallback((short = false) => {
         const now = Date.now();
         if (now - lastPlayedRef.current < debounceMs) return;
 
@@ -32,10 +32,21 @@ export default function useSound(debounceMs = 800) {
         }
 
         audioRef.current.src = soundSrc;
-        audioRef.current.volume = 0.5;
+        audioRef.current.volume = 0.3;
         audioRef.current.play().catch(() => {
             // Autoplay might be blocked, silently ignore
         });
+
+        // Se è un suono breve (hover), taglia dopo 400ms
+        if (short) {
+            clearTimeout(audioRef.current._shortTimer);
+            audioRef.current._shortTimer = setTimeout(() => {
+                if (audioRef.current) {
+                    audioRef.current.pause();
+                    audioRef.current.currentTime = 0;
+                }
+            }, 400);
+        }
     }, [debounceMs]);
 
     return { playRandomSound };
