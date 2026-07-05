@@ -2,11 +2,12 @@
     display: flex;
     flex: 1;
     width: 100%;
-    min-height: 100%;
+    height: 100%;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     gap: clamp(1rem, 4vw, 3rem);
     padding: clamp(1rem, 2.2vw, 1.75rem);
+    overflow: hidden; /* Evita la scrollbar in questa vista */
 }
 
 .desk-container {

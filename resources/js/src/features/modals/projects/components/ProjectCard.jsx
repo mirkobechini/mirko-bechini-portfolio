@@ -7,7 +7,7 @@ const ProjectCard = memo(function ProjectCard({ project, isAlternate }) {
         <div className={`${styles['project-blueprint']} ${isAlternate ? styles.alternate : ''}`}>
             <div className={styles['blueprint-header']}></div>
             <h4 className={styles['project-title']}>{project.title}</h4>
-            <p>{project.description}</p>
+            <p className={styles['project-description']} title={project.description}>{project.description}</p>
             <div className={styles['tech-stack']}>
                 {project.technologies.length > 0 ? `#${project.technologies.join(' #')}` : ''}
             </div>

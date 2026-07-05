@@ -83,7 +83,7 @@ const ProjectsModal = memo(function ProjectsModal({ onBackToProjectsHome }) {
         <div className={styles['desk-container']}>
             <FilterPanel
                 onBack={onBackToProjectsHome}
-                backLabel="Torna alla scelta progetti/esperienze"
+                backLabel="Torna indietro"
                 onReset={resetFilters}
                 resetLabel="Reset"
                 resetIcon={resetButtonIcon}

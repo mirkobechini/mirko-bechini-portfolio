@@ -7,7 +7,19 @@
 }
 
 /* #region Filter styles */
-/* Contenitore esterno area filtri (prima fascia del modale) */
+/* Contenitore header per pulsanti sempre visibili (Back, Filtri) */
+.filter-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    padding: 0 var(--space-lg); /* Aggiunto padding per allineamento */
+    gap: var(--space-md);
+    margin-bottom: var(--space-xs);
+}
+
+/* Contenitore esterno area filtri (fascia espandibile) */
 .filter-container {
     display: none;
     align-items: center;
@@ -29,8 +41,6 @@
     align-items: center;
     gap: var(--space-2xs);
     padding: var(--space-2xs) var(--space-sm);
-    margin-right: auto;
-    margin-left: var(--space-lg);
 
     font-family: inherit;
     font-size: clamp(0.75rem, 0.7rem + 0.2vw, 0.88rem);
@@ -240,8 +250,13 @@
 
 /* Card progetto base */
 .project-blueprint {
-    max-width: 45%;
-    padding: var(--space-lg);
+    flex: 1 1 300px; /* Permette alla card di restringersi/allungarsi con un base iniziale */
+    max-width: 350px;
+    min-height: 250px; /* Altezza minima uniforme */
+    padding: var(--space-md) var(--space-lg);
+
+    display: flex;
+    flex-direction: column;
 
     color: #0d47a1;
     background: #e3f2fd;
@@ -251,9 +266,23 @@
     transform: rotate(-2deg);
     transition:
         transform 0.3s,
-        z-index 0;
+        z-index 0.3s ease;
 
-    contain: layout paint; /* Per ottimizzare le prestazioni del rendering */
+    contain: layout paint;
+}
+
+/* Stile per la descrizione con troncamento a 3 righe */
+.project-description {
+    margin: 0;
+    font-size: clamp(0.75rem, 0.7rem + 0.15vw, 0.85rem);
+    line-height: 1.5;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    flex-grow: 1; /* Spinge i link verso il basso */
 }
 
 /* Variante alternata per spezzare il ritmo visivo */
@@ -282,16 +311,19 @@
 
 .project-title {
     margin-top: 0;
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--space-xs);
 
-    font-size: var(--text-md);
+    font-size: var(--text-base);
+    font-weight: bold;
+    line-height: 1.2;
 }
 
 .tech-stack {
-    margin-top: var(--space-sm);
+    margin-top: var(--space-xs);
+    margin-bottom: var(--space-sm);
 
-    font-size: var(--text-xs);
-    color: #555;
+    font-size: var(--text-2xs);
+    color: #444;
 }
 
 /* #region Projects theme slots */
@@ -359,17 +391,17 @@
 
 .links-group {
     display: flex;
+    flex-wrap: wrap;
 
-    margin-top: var(--space-lg);
-    gap: var(--space-sm);
+    margin-top: auto; /* Assicura che i bottoni siano a fondo card */
+    gap: var(--space-xs);
+    padding-top: var(--space-sm);
 }
 
 .view-btn {
     display: inline-block;
 
-    margin-top: var(--space-sm);
-
-    font-size: var(--text-sm);
+    font-size: var(--text-xs);
     font-weight: bold;
     color: inherit;
     text-decoration: underline;
@@ -443,6 +475,11 @@
         flex-direction: column;
         align-items: center;
         width: 100%;
+        gap: var(--space-md);
+    }
+
+    .filter-header {
+        margin-bottom: var(--space-md);
     }
 
     .filter-wrapper {
