@@ -258,8 +258,15 @@ const skillsData = [
         category: 'AI Tool',
         color: '#FFD700',
         functions: [
-            'Agent-based AI tools for code generation and content creation',
-            'System Thinking and problem-solving with AI',
+            'Creazione di Brief, ADR e Skills per AI',
+            'System Thinking e problem-solving con AI',
+            'Utilizzo di AI per generare codice, contenuti e assistenza alla scrittura',
+            'Integrazione di AI in progetti web e applicazioni',
+        ],
+        relatedProjects: [
+            'PdfEditor',
+            'Nasa - NEAM',
+            'AI Agent Skills',
         ],
     },
     {

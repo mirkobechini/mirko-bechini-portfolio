@@ -113,8 +113,12 @@ const educationData = [
         skills: ['AI'],
         highlights: [
             'In corso di completamento',
-            'Integrazione di modelli AI in applicazioni web',
             'Sviluppo di progetti full-stack con AI',
+            'Progettazione di sistemi complessi e multipiattaforma',
+            'Creazione di Skills, Brief e ADR per agenti AI',
+            'Utilizzo di AI per generare codice, contenuti e assistenza alla scrittura',
+            'Integrazione di AI in progetti web e applicazioni',
+            'System Thinking e problem-solving con AI',
         ],
         modules: [
             {

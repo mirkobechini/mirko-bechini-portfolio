@@ -17,7 +17,7 @@ const projectData = [
         preview: 'https://via.placeholder.com/300x200',
         projectScope: 'work',
         type: "frontend",
-        technologies: ['React', 'Axios', 'HTML', 'CSS', 'Bootstrap', 'JS'], //tecnologie categorizzate in frontend e backend ed hanno codice colore
+        technologies: ['React', 'Axios', 'HTML', 'CSS', 'Bootstrap', 'JS'],
         repo: 'https://github.com/mirkobechini/gods-guest-site',
         live: "#"
     },
@@ -86,6 +86,39 @@ const projectData = [
         technologies: ['React', 'HTML', 'CSS', 'Vite', 'Laravel', 'JS',],
         repo: 'https://github.com/mirkobechini/mirko-bechini-portfolio',
         live: "#"
+    },
+    {
+        id: 9,
+        title: 'PdfEditor',
+        description: 'Applicazione cross-platform per la modifica e gestione di file PDF, con funzionalità di visualizzazione, annotazione, conversione, modifica testo e manipolazione avanzata. Architettura modulare che copre web (Next.js), desktop (Tauri v2), mobile (React Native) e backend (FastAPI).',
+        preview: 'https://via.placeholder.com/300x200',
+        projectScope: 'personal',
+        type: "fullstack",
+        technologies: ['AI','Next.js', 'React Native', 'Tauri v2', 'FastAPI', 'Python', 'TypeScript', 'TailwindCSS'],
+        repo: 'https://github.com/mirkobechini/pdfEditor',
+        live: '#',
+    },
+    {
+        id: 10,
+        title: 'Nasa - NEAM',
+        description: 'Webapp per monitorare asteroidi near-Earth usando l\'API gratuita NASA NeoWs, con visualizzazioni interattive, alert system e risorse educative. Singolo deploy su Vercel.',
+        preview: 'https://via.placeholder.com/300x200',
+        projectScope: 'personal',
+        type: "fullstack",
+        technologies: ['AI', 'Next.js', 'SQLite', 'Three.js','Vercel', 'NASA API'],
+        repo: 'https://github.com/mirkobechini/nasa-neam',
+        live: '#'
+    },
+    {
+        id: 11,
+        title: 'AI Agent Skills',
+        description: 'Repo con le varie skill sviluppate per l\'AI Agent.',
+        preview: 'https://via.placeholder.com/300x200',
+        projectScope: 'personal',
+        type: "fullstack",
+        technologies: ['AI', 'Python'],
+        repo: 'https://github.com/mirkobechini/agent-skills',
+        live: '#'
     }
 ];
 
