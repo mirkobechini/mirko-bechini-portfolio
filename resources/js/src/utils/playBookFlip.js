@@ -1,6 +1,6 @@
 import { getAssetPath } from './assets';
 
-const PAGE_TURN_SRC = getAssetPath('/sounds/library/page-turn.wav');
+const PAGE_TURN_SRC = getAssetPath('/sounds/library/page-turn.ogg');
 
 let lastPlayed = 0;
 
