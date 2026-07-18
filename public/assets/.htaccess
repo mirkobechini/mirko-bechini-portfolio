@@ -1,0 +1,11 @@
+<IfModule mod_headers.c>
+    # Immagini: cache 1 anno, immutable (non cambiano mai)
+    <FilesMatch "\.(webp|png|jpg|jpeg|gif|svg|ico)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+
+    # Suoni: cache 1 anno, immutable
+    <FilesMatch "\.(ogg|wav|m4a)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+</IfModule>
