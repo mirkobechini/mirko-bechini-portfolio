@@ -1,0 +1,61 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
+    text-align: center;
+    font-family: "Press Start 2P", monospace;
+    background: #1a1a1a;
+    color: #efebe9;
+    gap: 2rem;
+}
+
+.glitch {
+    position: relative;
+    font-size: clamp(4rem, 15vw, 8rem);
+    font-weight: bold;
+    color: #e76e05;
+    text-shadow:
+        4px 4px 0 #000,
+        -2px -2px 0 #ffe066;
+    line-height: 1;
+    image-rendering: pixelated;
+}
+
+.message {
+    font-size: clamp(0.625rem, 2vw, 0.875rem);
+    line-height: 1.8;
+    max-width: 30rem;
+    color: #a09888;
+}
+
+.btn-home {
+    font-family: "Press Start 2P", monospace;
+    font-size: clamp(0.5rem, 1.5vw, 0.75rem);
+    padding: 1rem 2rem;
+    background: #e76e05;
+    color: #fff;
+    border: 4px solid #000;
+    cursor: var(--cursor-nes-pointer);
+    text-transform: uppercase;
+    box-shadow: 0 4px 0 #8a4303;
+    transition:
+        transform 0.1s,
+        box-shadow 0.1s;
+}
+
+.btn-home:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 #8a4303;
+}
+
+.btn-home:hover {
+    filter: brightness(1.1);
+}
+
+.btn-home:focus-visible {
+    outline: 2px solid #ffe066;
+    outline-offset: 2px;
+}

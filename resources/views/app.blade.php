@@ -5,7 +5,19 @@
     <meta charset="UTF-8" />
     <meta name="description"
         content="Il portfolio di Mirko Bechini: scopri i miei progetti di sviluppo web e le mie competenze.">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph (Facebook, LinkedIn, WhatsApp, Telegram, ecc.) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mirkobechini.com/" />
+    <meta property="og:title" content="Mirko Bechini - Portfolio" />
+    <meta property="og:description"
+        content="Il portfolio di Mirko Bechini: scopri i miei progetti di sviluppo web e le mie competenze." />
+    <meta property="og:image" content="{{ asset('assets/backgrounds/den.webp') }}" />
+    <meta property="og:image:width" content="1568" />
+    <meta property="og:image:height" content="454" />
+    <meta property="og:locale" content="it_IT" />
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" as="style"
