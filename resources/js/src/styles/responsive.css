@@ -2,7 +2,7 @@
 
 @media (max-width: 767px) {
     :root {
-        --sprite-scale: 2.2;
+        --sprite-scale: 1.6;
     }
 
     .sprite {
