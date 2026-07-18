@@ -1,4 +1,5 @@
 import { getAssetPath } from './assets';
+import { playPooled } from './audioPool';
 
 const SOUND_FILES = [
     getAssetPath('/sounds/about/monkey-1.ogg'),
@@ -9,20 +10,16 @@ const SOUND_FILES = [
 let lastHover = 0;
 let lastClick = 0;
 
+function randomSound() {
+    return SOUND_FILES[Math.floor(Math.random() * SOUND_FILES.length)];
+}
+
 export function playMonkeyHover() {
     const now = Date.now();
     if (now - lastHover < 800) return;
     lastHover = now;
 
-    const src = SOUND_FILES[Math.floor(Math.random() * SOUND_FILES.length)];
-    const audio = new Audio(src);
-    audio.volume = 0.3;
-    audio.play().catch(() => { });
-
-    setTimeout(() => {
-        audio.pause();
-        audio.currentTime = 0;
-    }, 400);
+    playPooled(randomSound(), { volume: 0.3, maxDuration: 400 });
 }
 
 export function playMonkeyClick() {
@@ -30,8 +27,5 @@ export function playMonkeyClick() {
     if (now - lastClick < 800) return;
     lastClick = now;
 
-    const src = SOUND_FILES[Math.floor(Math.random() * SOUND_FILES.length)];
-    const audio = new Audio(src);
-    audio.volume = 0.3;
-    audio.play().catch(() => { });
+    playPooled(randomSound(), { volume: 0.3 });
 }
