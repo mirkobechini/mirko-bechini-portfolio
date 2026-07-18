@@ -48,6 +48,9 @@
         font-size: var(--text-md) !important;
         padding: var(--space-2xs) var(--space-xs) !important;
         letter-spacing: 0.02em;
+        opacity: 1 !important;
+        pointer-events: none;
+        transform: translate(-50%, 50%) scale(1) !important;
     }
 }
 /*#endregion Responsive - Smartphone */
