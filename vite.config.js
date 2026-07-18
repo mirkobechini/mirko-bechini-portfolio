@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import react from '@vitejs/plugin-react';
@@ -45,6 +46,16 @@ export default defineConfig({
                         return 'vendor-react';
                     }
                 },
+            },
+        },
+    },
+    test: {
+        globals: true,
+        environment: 'jsdom',
+        setupFiles: './resources/js/src/test/setup.js',
+        css: {
+            modules: {
+                classNameStrategy: 'non-scoped',
             },
         },
     },
