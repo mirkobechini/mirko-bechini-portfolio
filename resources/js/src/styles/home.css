@@ -133,7 +133,7 @@
 }
 
 .sprite:hover .sprite-tag,
-.sprite:focus .sprite-tag {
+.sprite:focus-visible .sprite-tag {
     opacity: 1;
 }
 /* #endregion Sprite tags */

@@ -56,13 +56,6 @@ export default function HomePage() {
     // Handlers
     const closeModal = useCallback(() => {
         setActiveSection(null);
-        // After the modal unmounts and restores focus to the sprite button,
-        // remove focus so the sprite-tag doesn't stay visible via :focus CSS
-        requestAnimationFrame(() => {
-            if (document.activeElement instanceof HTMLElement) {
-                document.activeElement.blur();
-            }
-        });
     }, [setActiveSection]);
 
     const openModal = useCallback((id, params) => {
