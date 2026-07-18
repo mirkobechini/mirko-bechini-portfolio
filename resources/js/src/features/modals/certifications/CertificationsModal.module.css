@@ -1,124 +1,146 @@
 /* #region Gallery layout */
 .gallery-container {
-  display: grid;
-  grid-auto-flow: dense;
-  grid-template-columns: repeat(2, 1fr);
+    display: grid;
+    grid-auto-flow: dense;
+    grid-template-columns: repeat(2, 1fr);
 
-  height: 100%;
-  gap: var(--space-xl);
-  padding: var(--space-xl);
+    height: 100%;
+    gap: var(--space-xl);
+    padding: var(--space-xl);
 
-  overflow-y: auto;
+    overflow-y: auto;
 }
 /* #endregion Gallery layout */
 
 /* #region Gallery items */
 .certificate-item {
-  height: max-content;
+    height: max-content;
 
-  color: #f5f5f5;
-  text-align: center;
+    color: #f5f5f5;
+    text-align: center;
 }
 
 .frame {
-  background: white;
-  border: 0.5rem solid #5d4037; /* Cornice interna in legno */
+    position: relative;
+    background: #2a2a2a;
+    border: 0.5rem solid #5d4037; /* Cornice interna in legno */
 
-  padding: var(--space-2xs);
+    padding: var(--space-2xs);
 
-  box-shadow: 0.3125rem 0.3125rem 0.9375rem rgb(0 0 0 / 50%);
-  transition: transform 0.3s;
+    box-shadow: 0.3125rem 0.3125rem 0.9375rem rgb(0 0 0 / 50%);
+    transition: transform 0.3s;
+    overflow: hidden;
+}
+
+/* Skeleton shimmer mentre l'immagine carica */
+.frame::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+    z-index: 1;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Quando l'immagine è caricata, copre lo skeleton */
+.frame img {
+    position: relative;
+    z-index: 2;
+
+    display: block;
+    width: 100%;
+    height: auto;
 }
 
 .frame:hover {
-  /* Leggero zoom per enfatizzare l'elemento in focus */
-  transform: scale(1.05); /* Effetto "avvicinamento" al passaggio del mouse */
-}
-
-.frame img {
-  /* Evita gap inline e mantiene proporzioni originali */
-  display: block;
-  width: 100%;
-  height: auto;
+    /* Leggero zoom per enfatizzare l'elemento in focus */
+    transform: scale(1.05); /* Effetto "avvicinamento" al passaggio del mouse */
 }
 /* #endregion Gallery items */
 
 /* #region Certifications theme slots */
 :global([data-modal-theme="painting"] [data-modal-slot="modal"]) {
-  border: 0.9375rem solid #d4af37;
-  border-image: linear-gradient(to bottom, #d4af37, #f7e083, #d4af37) 1;
+    border: 0.9375rem solid #d4af37;
+    border-image: linear-gradient(to bottom, #d4af37, #f7e083, #d4af37) 1;
 
-  background: #2c1e14;
-  box-shadow:
-    0 0 3.125rem rgb(0 0 0 / 80%),
-    inset 0 0 1.25rem rgb(0 0 0 / 50%);
+    background: #2c1e14;
+    box-shadow:
+        0 0 3.125rem rgb(0 0 0 / 80%),
+        inset 0 0 1.25rem rgb(0 0 0 / 50%);
 
-  animation: galleryZoom 0.4s ease-out forwards;
+    animation: galleryZoom 0.4s ease-out forwards;
 }
 
 :global([data-modal-theme="painting"] [data-modal-slot="sprite"]) {
-  top: 95%;
-  left: -11%;
-  width: 30%;
+    top: 95%;
+    left: -11%;
+    width: 30%;
 }
 
 :global([data-modal-theme="painting"] [data-modal-slot="button"]) {
-  padding: var(--space-sm) var(--space-xl);
+    padding: var(--space-sm) var(--space-xl);
 
-  color: #2c1e14;
-  text-shadow: 0 0.0625rem 0 rgb(255 255 255 / 35%);
-  background: linear-gradient(180deg, #f7e083 0%, #d4af37 100%);
-  border: 0.1875rem solid #8b6a1f;
-  box-shadow: 0 0.25rem 0 rgb(0 0 0 / 35%);
+    color: #2c1e14;
+    text-shadow: 0 0.0625rem 0 rgb(255 255 255 / 35%);
+    background: linear-gradient(180deg, #f7e083 0%, #d4af37 100%);
+    border: 0.1875rem solid #8b6a1f;
+    box-shadow: 0 0.25rem 0 rgb(0 0 0 / 35%);
 }
 
 :global([data-modal-theme="painting"] [data-modal-slot="button"]:hover) {
-  transform: scale(1.08);
-  box-shadow:
-    0 0.25rem 0 rgb(0 0 0 / 35%),
-    0 0 0.7rem rgb(255 224 102 / 55%);
+    transform: scale(1.08);
+    box-shadow:
+        0 0.25rem 0 rgb(0 0 0 / 35%),
+        0 0 0.7rem rgb(255 224 102 / 55%);
 }
 
 @keyframes gallery-zoom {
-  0% {
-    transform: scale(0.5);
-    opacity: 0;
-  }
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
 
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 /* #endregion Certifications theme slots */
 
 /* #region Responsive Tablet */
 @media (max-width: 1023px) {
-
-  :global([data-modal-theme="painting"] [data-modal-slot="sprite"]) {
-    top: 95%;
-    left: 6%;
-    width: 30%;
-  }
+    :global([data-modal-theme="painting"] [data-modal-slot="sprite"]) {
+        top: 95%;
+        left: 6%;
+        width: 30%;
+    }
 }
 
 /* #endregion Responsive Tablet */
 
 /* #region Responsive Smartphone */
 
+@media (max-width: 767px) {
+    .gallery-container {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+        padding: var(--space-lg);
+    }
 
-
-@media (max-width: 767px){
-  .gallery-container {
-    grid-template-columns: 1fr;
-    gap: var(--space-lg);
-    padding: var(--space-lg);
-  }
-
-  :global([data-modal-theme="painting"] [data-modal-slot="sprite"]) {
-    top: 97%;
-    left: 6%;
-    width: 40%;
-  }
+    :global([data-modal-theme="painting"] [data-modal-slot="sprite"]) {
+        top: 97%;
+        left: 6%;
+        width: 40%;
+    }
 }
 /* #endregion Responsive Smartphone */

@@ -110,10 +110,8 @@ export const useDragScroll = (scrollRef, isDragDisabled) => {
   useEffect(() => {
     centerBackground();
     window.addEventListener("load", centerBackground);
-    window.addEventListener("resize", centerBackground);
     return () => {
       window.removeEventListener("load", centerBackground);
-      window.removeEventListener("resize", centerBackground);
       if (dragRaf.current) {
         cancelAnimationFrame(dragRaf.current);
       }
