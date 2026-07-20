@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 
 // Mock lazy-loaded modal components
 vi.mock('../features/modals/about/AboutMeModal', () => ({
-    default: function MockModal({ setModalSprite }) {
+    default: function MockModal() {
         return <div data-testid="modal-content">About Me Content</div>;
     },
 }));

@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useContext } from 'react';
@@ -64,27 +64,27 @@ describe('GlobalContextProvider', () => {
     });
 
     it('memoizes context value to prevent unnecessary re-renders', () => {
-        const renderCount = { count: 0 };
-        function Counter() {
+        function Counter({ onRender }) {
             useContext(GlobalContext);
-            renderCount.count++;
+            onRender();
             return null;
         }
 
+        let count = 0;
+        const onRender = () => { count++; };
+
         const { rerender } = render(
             <GlobalContextProvider>
-                <Counter />
+                <Counter onRender={onRender} />
             </GlobalContextProvider>
         );
 
-        // Re-render del provider senza cambiare state
         rerender(
             <GlobalContextProvider>
-                <Counter />
+                <Counter onRender={onRender} />
             </GlobalContextProvider>
         );
 
-        // useMemo fa sì che il conteggio non aumenti
-        expect(renderCount.count).toBe(2);
+        expect(count).toBe(2);
     });
 });
