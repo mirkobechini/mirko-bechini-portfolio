@@ -9,10 +9,17 @@
             }
         },
         "collect": {
-            "staticDistDir": "public/build",
-            "startServerCommand": "php artisan serve --port=8080",
-            "url": ["http://localhost:8080"],
-            "numberOfRuns": 2
+            "url": ["http://127.0.0.1:4173"],
+            "numberOfRuns": 1,
+            "settings": {
+                "preset": "desktop",
+                "onlyCategories": [
+                    "performance",
+                    "accessibility",
+                    "best-practices",
+                    "seo"
+                ]
+            }
         },
         "upload": {
             "target": "filesystem",
