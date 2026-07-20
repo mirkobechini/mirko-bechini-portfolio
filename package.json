@@ -9,10 +9,12 @@
         "lint": "eslint .",
         "preview": "vite preview",
         "test": "vitest run",
-        "test:watch": "vitest"
+        "test:watch": "vitest",
+        "lighthouse": "lhci autorun"
     },
     "devDependencies": {
         "@eslint/js": "^10.0.1",
+        "@lhci/cli": "^0.15.1",
         "@testing-library/jest-dom": "^6.9.1",
         "@testing-library/react": "^16.3.2",
         "@testing-library/user-event": "^14.6.1",

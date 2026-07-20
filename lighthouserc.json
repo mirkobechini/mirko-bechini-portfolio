@@ -1,10 +1,22 @@
 {
-  "ci": {
-    "assert": {
-      "assertions": {
-        "categories:seo": ["error", {"minScore": 0.95}],
-        "categories:performance": ["warn", {"minScore": 0.7}]
-      }
+    "ci": {
+        "assert": {
+            "assertions": {
+                "categories:seo": ["error", { "minScore": 0.95 }],
+                "categories:performance": ["warn", { "minScore": 0.7 }],
+                "categories:accessibility": ["warn", { "minScore": 0.85 }],
+                "categories:best-practices": ["warn", { "minScore": 0.85 }]
+            }
+        },
+        "collect": {
+            "staticDistDir": "public/build",
+            "startServerCommand": "php artisan serve --port=8080",
+            "url": ["http://localhost:8080"],
+            "numberOfRuns": 2
+        },
+        "upload": {
+            "target": "filesystem",
+            "outputDir": "lighthouse-reports"
+        }
     }
-  }
 }
