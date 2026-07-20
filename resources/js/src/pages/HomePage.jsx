@@ -91,6 +91,8 @@ export default function HomePage() {
             {!hasMoved && <ScrollGuideIndicators />}
             <div className="den-wrapper">
 
+                <h1 className="sr-only">Mirko Bechini - Portfolio</h1>
+
                 <img className="den-image" src={denBackground} onLoad={centerBackground} alt="Monkey Den" draggable="false" loading="eager" fetchPriority="high" decoding="async" width="1568" height="454" />
 
                 {SPRITES.map(({ id, src, srcSm, srcMd, className, label, ariaLabel, title, alt, fetchPriority, loading, width, height }) => (

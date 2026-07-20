@@ -17,6 +17,9 @@
     <meta property="og:image:height" content="454" />
     <meta property="og:locale" content="it_IT" />
 
+    <link rel="canonical" href="https://mirkobechini.com/" />
+    <meta name="robots" content="index, follow" />
+
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
