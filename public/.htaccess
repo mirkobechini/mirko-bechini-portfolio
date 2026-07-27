@@ -43,6 +43,11 @@
 </IfModule>
 
 <IfModule mod_headers.c>
+    # Critical build metadata and SW bootstrap must never be cached aggressively
+    <FilesMatch "^(manifest\.json|manifest\.webmanifest|registerSW\.js|sw\.js)$">
+        Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    </FilesMatch>
+
     # JS/CSS: no immutable cache, so deploy updates are picked up reliably
     <FilesMatch "\.(js|mjs|css)$">
         Header set Cache-Control "public, max-age=300, must-revalidate"
