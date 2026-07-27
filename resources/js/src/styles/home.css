@@ -48,6 +48,9 @@
     scrollbar-width: none;
     scroll-snap-align: center;
 
+    /* Prevent browser interference with custom drag/touch scroll */
+    touch-action: none;
+
     /* NES cursor with drag fallback */
     cursor: var(--cursor-nes-grab);
     user-select: none;

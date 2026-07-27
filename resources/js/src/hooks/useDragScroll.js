@@ -99,11 +99,17 @@ export const useDragScroll = (scrollRef, isDragDisabled) => {
 
   // Touch
   function handleTouchStart(event) {
+    // NON preventDefault qui: lascia che i click (tap) funzionino sui pulsanti
     startDrag(event.touches[0].clientX);
   }
 
   function handleTouchMove(event) {
     moveDrag(event.touches[0].clientX);
+
+    // Previeni scroll nativo solo se l'utente sta effettivamente dragando
+    if (isDragging.current) {
+      event.preventDefault();
+    }
   }
 
   // Cleanup per cancellare eventuali animazioni frame pendenti quando il componente viene smontato
