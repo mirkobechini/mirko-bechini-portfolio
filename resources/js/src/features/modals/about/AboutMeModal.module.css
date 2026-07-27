@@ -215,7 +215,7 @@
   }
 
   :global([data-modal-theme="monkey"] [data-modal-slot="content"]) {
-    font-size: var(--text-lg);
+    font-size: var(--text-xl);
     padding-right: 0.5rem;
   }
 
