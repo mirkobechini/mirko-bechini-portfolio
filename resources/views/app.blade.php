@@ -37,12 +37,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mirko Bechini - Portfolio</title>
 
+    <!-- Iubenda Privacy & Cookie Policy -->
+    <script type="text/javascript">
+        (function(w, d) {
+            var loader = function() {
+                var s = d.createElement("script"),
+                    tag = d.getElementsByTagName("script")[0];
+                s.src = "https://cdn.iubenda.com/iubenda.js";
+                tag.parentNode.insertBefore(s, tag);
+            };
+            if (w.addEventListener) {
+                w.addEventListener("load", loader, false);
+            } else if (w.attachEvent) {
+                w.attachEvent("onload", loader);
+            } else {
+                w.onload = loader;
+            }
+        })(window, document);
+    </script>
+
     @viteReactRefresh
     @vite(['resources/js/app.js'])
 </head>
 
 <body>
     <div id="root"></div>
+
+    <!-- Iubenda legal links -->
+    <div
+        style="position: fixed; bottom: 0; left: 0; right: 0; display: flex; justify-content: center; gap: 1rem; padding: 0.5rem; background: rgba(26, 26, 26, 0.85); z-index: 9999; font-size: 0.625rem;">
+        <a href="https://www.iubenda.com/privacy-policy/41686608" class="iubenda-white iubenda-noiframe iubenda-embed"
+            title="Privacy Policy" style="color: #ffe066; text-decoration: none;">Privacy Policy</a>
+        <a href="https://www.iubenda.com/privacy-policy/41686608/cookie-policy"
+            class="iubenda-white iubenda-noiframe iubenda-embed" title="Cookie Policy"
+            style="color: #ffe066; text-decoration: none;">Cookie Policy</a>
+    </div>
 </body>
 
 </html>
