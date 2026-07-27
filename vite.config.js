@@ -38,6 +38,7 @@ export default defineConfig({
                 name: 'Mirko Bechini - Portfolio',
                 short_name: 'Mirko Portfolio',
                 description: 'Il portfolio di Mirko Bechini: progetti di sviluppo web e competenze.',
+                lang: 'it',
                 theme_color: '#1a1a1a',
                 background_color: '#1a1a1a',
                 display: 'standalone',
@@ -45,6 +46,36 @@ export default defineConfig({
                 scope: '/',
                 start_url: '/',
                 icons: [
+                    {
+                        src: '/icons/pwa-48x48.png',
+                        sizes: '48x48',
+                        type: 'image/png',
+                    },
+                    {
+                        src: '/icons/pwa-72x72.png',
+                        sizes: '72x72',
+                        type: 'image/png',
+                    },
+                    {
+                        src: '/icons/pwa-96x96.png',
+                        sizes: '96x96',
+                        type: 'image/png',
+                    },
+                    {
+                        src: '/icons/pwa-128x128.png',
+                        sizes: '128x128',
+                        type: 'image/png',
+                    },
+                    {
+                        src: '/icons/pwa-144x144.png',
+                        sizes: '144x144',
+                        type: 'image/png',
+                    },
+                    {
+                        src: '/icons/pwa-152x152.png',
+                        sizes: '152x152',
+                        type: 'image/png',
+                    },
                     {
                         src: '/icons/pwa-192x192.png',
                         sizes: '192x192',
@@ -55,10 +86,33 @@ export default defineConfig({
                         sizes: '512x512',
                         type: 'image/png',
                     },
+                    {
+                        src: '/icons/pwa-512x512.png',
+                        sizes: '512x512',
+                        type: 'image/png',
+                        purpose: 'maskable',
+                    },
+                ],
+                screenshots: [
+                    {
+                        src: '/screenshots/desktop-screenshot.webp',
+                        sizes: '1280x720',
+                        type: 'image/webp',
+                        form_factor: 'wide',
+                        label: 'Vista desktop del portfolio',
+                    },
+                    {
+                        src: '/screenshots/mobile-screenshot.webp',
+                        sizes: '360x780',
+                        type: 'image/webp',
+                        form_factor: 'narrow',
+                        label: 'Vista mobile del portfolio',
+                    },
                 ],
             },
             workbox: {
                 globPatterns: ['**/*.{js,css,html,ico,png,webp,svg,ogg}'],
+                navigateFallback: '/',
                 runtimeCaching: [
                     {
                         urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
@@ -69,6 +123,8 @@ export default defineConfig({
                         },
                     },
                 ],
+                navigationPreload: false,
+                disableDevLogs: true,
             },
         }),
     ],

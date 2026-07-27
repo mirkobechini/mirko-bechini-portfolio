@@ -31,8 +31,8 @@ const AboutMeModal = memo(function AboutMeModal() {
                 che mi aiutano ad affrontare le sfide quotidiane con grinta e perseveranza.
             </p>
             <img src={topLeftAngle} alt="top angle" className={styles['top-left-angle']} />
-            <button alt="curriculum button" className={styles['bottom-sprite']} onClick={handleCurriculum}>
-                <img src={bottomSprite} alt="bottom sprite" />
+            <button aria-label="Scarica il curriculum vitae" className={styles['bottom-sprite']} onClick={handleCurriculum}>
+                <img src={bottomSprite} alt="Scarica il curriculum vitae" />
             </button>
         </>
     );
