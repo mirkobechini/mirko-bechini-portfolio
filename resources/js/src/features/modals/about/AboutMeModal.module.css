@@ -1,243 +1,241 @@
 /* #region About Me sprite */
 .top-left-angle {
-  position: absolute;
+    position: absolute;
 
-  width: clamp(150px, 23vw, 250px);
-  top: -48px;
-  left: -13px;
+    width: clamp(150px, 23vw, 250px);
+    top: -48px;
+    left: -13px;
 
-  transform: translate(-10%, -10%);
+    transform: translate(-10%, -10%);
 
-  z-index: 11;
-  pointer-events: none;
-  image-rendering: crisp-edges; 
-  image-rendering: pixelated;
+    z-index: 11;
+    pointer-events: none;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
 }
 
 .bottom-sprite {
-  position: absolute;
-  cursor: pointer;
-  background: none;
-  border: none;
+    position: absolute;
+    cursor: pointer;
+    background: none;
+    border: none;
 
-  width: clamp(100px, 20vw, 200px);
-  bottom: -65px;
-  left: 25px;
+    width: clamp(100px, 20vw, 200px);
+    bottom: -65px;
+    left: 25px;
 
-  transform: translate(-10%, -10%);
+    transform: translate(-10%, -10%);
 }
 
 .bottom-sprite:hover {
-  transform: translate(-10%, -10%) scale(1.2);
-  transition: all 0.1s;
+    transform: translate(-10%, -10%) scale(1.2);
+    transition: all 0.1s;
 }
 
 .bottom-sprite:focus-visible {
-  outline: none;
-  filter: drop-shadow(0 0 0.125rem rgb(255 255 255 / 95%))
-    drop-shadow(0 0 0.45rem rgb(12 86 148 / 90%));
+    outline: none;
+    filter: drop-shadow(0 0 0.125rem rgb(255 255 255 / 95%))
+        drop-shadow(0 0 0.45rem rgb(12 86 148 / 90%));
 }
 
 .bottom-sprite img {
-  width: 100%;
-  height: auto;
-  image-rendering: crisp-edges; 
-  image-rendering: pixelated;
+    width: 100%;
+    height: auto;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
 }
 
 /* #endregion About Me sprite */
 
 /* #region About Me theme slots */
 :global([data-modal-theme="monkey"] [data-modal-slot="modal"]) {
-  padding: clamp(1rem, 2.8vw, 1.6875rem) clamp(0.875rem, 2.2vw, 1.25rem);
+    padding: clamp(1rem, 2.8vw, 1.6875rem) clamp(0.875rem, 2.2vw, 1.25rem);
 
-  border-width: 40px 40px;
-  border-style: solid;
-  border-color: transparent;
+    border-width: 40px 40px;
+    border-style: solid;
+    border-color: transparent;
 
-  border-image-source: url("/assets/modals/about-me/monkey-modal-bg.webp");
-  border-image-slice: 147 143 fill;
-  border-image-width: 147px 143px;
-  border-image-repeat: repeat;
+    border-image-source: url("/assets/modals/about-me/monkey-modal-bg.webp");
+    border-image-slice: 147 143 fill;
+    border-image-width: 147px 143px;
+    border-image-repeat: repeat;
 
-  image-rendering: crisp-edges; 
-  image-rendering: pixelated;
-  animation: modal-jump-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+    animation: modal-jump-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 :global([data-modal-theme="monkey"] [data-modal-slot="title"]) {
-  position: absolute;
-  z-index: 10;
-  top: 14%;
-  left: 50%;
+    position: absolute;
+    z-index: 10;
+    top: 14%;
+    left: 50%;
 
-  padding: 0.5rem 1rem;
+    padding: 0.5rem 1rem;
 
-  border-width: 10px 60px;
-  border-style: solid;
-  border-color: transparent;
+    border-width: 10px 60px;
+    border-style: solid;
+    border-color: transparent;
 
-  border-image-source: url("/assets/modals/about-me/title-bg.webp");
-  border-image-slice: 24 108 35 103 fill;
-  border-image-repeat: repeat;
+    border-image-source: url("/assets/modals/about-me/title-bg.webp");
+    border-image-slice: 24 108 35 103 fill;
+    border-image-repeat: repeat;
 
-  image-rendering: crisp-edges; 
-  image-rendering: pixelated;
-  text-align: center;
-  font-size: var(--text-xl);
-  transform: translate(-50%, -50%);
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+    text-align: center;
+    font-size: var(--text-xl);
+    transform: translate(-50%, -50%);
 }
 
 :global([data-modal-theme="monkey"] [data-modal-slot="content"]) {
-  font-size: var(--text-lg);
-  line-height: 1.5;
+    font-size: var(--text-lg);
 
-  padding-right: 1rem;
-  overflow-y: auto;
-  color: #000;
-  text-shadow: 1px 1px 2px rgb(0 0 0 / 50%);
+    padding-right: 1rem;
+    overflow-y: auto;
+    color: #000;
+    text-shadow: 1px 1px 2px rgb(0 0 0 / 50%);
 
-  scrollbar-color: auto !important;
+    scrollbar-color: auto !important;
 }
 
 :global(
-  [data-modal-theme="monkey"] [data-modal-slot="content"]
+    [data-modal-theme="monkey"] [data-modal-slot="content"]
 )::-webkit-scrollbar {
-  width: 1.5rem !important;
+    width: 1.5rem !important;
 }
 
 :global(
-  [data-modal-theme="monkey"] [data-modal-slot="content"]
+    [data-modal-theme="monkey"] [data-modal-slot="content"]
 )::-webkit-scrollbar-track {
-  background-image: url("/assets/modals/about-me/scrollbar-track.webp") !important;
-  background-repeat: repeat-y !important;
-  background-position: center !important;
-  background-color: transparent !important;
-  background-size: 0.75rem 100% !important;
-  border: none !important;
+    background-image: url("/assets/modals/about-me/scrollbar-track.webp") !important;
+    background-repeat: repeat-y !important;
+    background-position: center !important;
+    background-color: transparent !important;
+    background-size: 0.75rem 100% !important;
+    border: none !important;
 
-  border-top: 25px solid transparent !important;
-  border-bottom: 25px solid transparent !important;
-  background-clip: padding-box !important;
+    border-top: 25px solid transparent !important;
+    border-bottom: 25px solid transparent !important;
+    background-clip: padding-box !important;
 }
 
 :global(
-  [data-modal-theme="monkey"] [data-modal-slot="content"]
+    [data-modal-theme="monkey"] [data-modal-slot="content"]
 )::-webkit-scrollbar-thumb {
-  background-image: url("/assets/modals/about-me/scrollbar-thumb.webp") !important;
-  background-repeat: no-repeat !important;
-  background-position: center !important;
-  background-color: transparent !important;
-  background-size: contain !important;
+    background-image: url("/assets/modals/about-me/scrollbar-thumb.webp") !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-color: transparent !important;
+    background-size: contain !important;
 
-  min-height: 50px !important;
-  max-height: 50px !important;
+    min-height: 50px !important;
+    max-height: 50px !important;
 
-  border: none !important;
-  box-shadow: none !important;
+    border: none !important;
+    box-shadow: none !important;
 
-  image-rendering: crisp-edges;
-  image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
 }
 
 :global(
-  [data-modal-theme="monkey"] .modal-content[data-modal-slot="content"]
+    [data-modal-theme="monkey"] .modal-content[data-modal-slot="content"]
 )::-webkit-scrollbar-button {
-  display: none !important;
+    display: none !important;
 }
 
 :global([data-modal-theme="monkey"] [data-modal-slot="button"]) {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-  right: -3%;
-  bottom: -2.5%;
+    right: -3%;
+    bottom: -2.5%;
 
-  max-width: fit-content;
-  padding: 0.35rem 0.75rem 0.25rem;
+    max-width: fit-content;
+    padding: 0.35rem 0.75rem 0.25rem;
 
-  border-width: 20px 40px;
-  border-style: solid;
-  border-color: transparent;
+    border-width: 20px 40px;
+    border-style: solid;
+    border-color: transparent;
 
-  border-image-source: url("/assets/modals/about-me/monkey-modal-game-btn.webp");
-  border-image-slice: 120 307 135 302 fill;
-  border-image-repeat: repeat;
+    border-image-source: url("/assets/modals/about-me/monkey-modal-game-btn.webp");
+    border-image-slice: 120 307 135 302 fill;
+    border-image-repeat: repeat;
 
-  image-rendering: crisp-edges;
-  image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
 }
 
 :global([data-modal-theme="monkey"] [data-modal-slot="button"]:focus-visible) {
-  outline: none;
-  filter: drop-shadow(0 0 0.125rem rgb(255 255 255 / 95%))
-    drop-shadow(0 0 0.45rem rgb(12 86 148 / 90%));
+    outline: none;
+    filter: drop-shadow(0 0 0.125rem rgb(255 255 255 / 95%))
+        drop-shadow(0 0 0.45rem rgb(12 86 148 / 90%));
 }
 
 :global([data-modal-theme="monkey"] [data-modal-slot="sprite"]) {
-  top: 100%;
-  left: 19.5%;
+    top: 100%;
+    left: 19.5%;
 }
 
 @keyframes modal-jump-in {
-  0% {
-    transform: scale(0.5);
-    opacity: 0;
-  }
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
 
-  70% {
-    transform: scale(1.1);
-  }
+    70% {
+        transform: scale(1.1);
+    }
 
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 /* #endregion About Me theme slots */
 
 /* #region Responsive adjustments */
 
 @media (max-width: 767px) {
-  :global([data-modal-theme="monkey"] [data-modal-slot="title"]) {
-    font-size: var(--text-md);
-    padding: 0.25rem 0.5rem;
-    border-width: 10px 15px;
-    border-image-repeat: stretch;
-    top: 4.5%;
-    left: 25%;
-  }
+    :global([data-modal-theme="monkey"] [data-modal-slot="title"]) {
+        font-size: var(--text-md);
+        padding: 0.25rem 0.5rem;
+        border-width: 10px 15px;
+        border-image-repeat: stretch;
+        top: 4.5%;
+        left: 25%;
+    }
 
-  :global([data-modal-theme="monkey"] [data-modal-slot="modal"]) {
-    padding-top: 1.7rem;
-    padding-right: 0.2rem;
-  }
+    :global([data-modal-theme="monkey"] [data-modal-slot="modal"]) {
+        padding-top: 1.7rem;
+        padding-right: 0.2rem;
+    }
 
-  :global([data-modal-theme="monkey"] [data-modal-slot="content"]) {
-    font-size: var(--text-xl);
-    padding-right: 0.5rem;
-  }
+    :global([data-modal-theme="monkey"] [data-modal-slot="content"]) {
+        font-size: var(--text-lx);
+        padding-right: 0.5rem;
+    }
 
-  :global([data-modal-theme="monkey"] [data-modal-slot="button"]) {
-    font-size: var(--text-xs);
-    padding: 0.25rem 0.5rem 0.15rem;
-    right: -11%;
-    bottom: 0%;
-  }
+    :global([data-modal-theme="monkey"] [data-modal-slot="button"]) {
+        font-size: var(--text-xs);
+        padding: 0.25rem 0.5rem 0.15rem;
+        right: -11%;
+        bottom: 0%;
+    }
 
-  .top-left-angle {
-    width: 110%;
-    top: -11.5%;
-    left: -5.4%;
-  }
+    .top-left-angle {
+        width: 110%;
+        top: -11.5%;
+        left: -5.4%;
+    }
 
-  .bottom-sprite {
-    width: 50%;
-    bottom: -10%;
-    left: -10%;
-  }
-
+    .bottom-sprite {
+        width: 50%;
+        bottom: -10%;
+        left: -10%;
+    }
 }
 
 /* #endregion Responsive adjustments */

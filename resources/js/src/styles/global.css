@@ -35,6 +35,7 @@
     --text-sm: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
     --text-md: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
     --text-lg: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
+    --text-lx: clamp(1.125rem, 1rem + 0.7vw, 1.375rem);
     --text-xl: clamp(1.25rem, 1.05rem + 0.9vw, 1.5rem);
     --icon-sm: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
     --icon-md: clamp(1.5rem, 1.25rem + 1.2vw, 2rem);
