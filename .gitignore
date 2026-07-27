@@ -24,3 +24,7 @@ yarn-error.log
 
 # Lighthouse reports
 /lighthouse-reports
+/.lighthouseci
+
+# npm audit
+npm-audit.json
