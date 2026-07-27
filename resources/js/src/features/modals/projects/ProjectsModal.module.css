@@ -173,7 +173,7 @@
 .filter-button {
     position: relative;
 
-    width: clamp(8.75rem, 18vw, 10.5rem);
+    width: clamp(6.25rem, 30vw, 10.5rem);
     height: auto;
     padding: 0;
     line-height: 0;
