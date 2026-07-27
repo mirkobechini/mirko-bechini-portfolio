@@ -40,6 +40,8 @@
         filter 0.18s ease;
 }
 
+/* cache-bust: keep - forces new hashed css filename on deploy */
+
 .book-button:focus-visible {
     outline: none;
     filter: drop-shadow(0 0 0.125rem rgb(255 255 255 / 95%))
