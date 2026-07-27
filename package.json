@@ -40,6 +40,9 @@
         "react-router-dom": "^7.18.0"
     },
     "overrides": {
+        "brace-expansion": "5.0.8",
+        "tmp": "0.2.3",
+        "uuid": "9.0.0",
         "esbuild": ">=0.28.1"
     }
 }
