@@ -213,4 +213,4 @@ Il workflow **Verification Tests** (`code-test.yml`) si attiva su push e pull re
 
 - **GitHub**: [@mirkobechini](https://github.com/mirkobechini)
 - **LinkedIn**: [Mirko Bechini](https://www.linkedin.com/in/mirko-bechini-892202252/)
-- **Sito**: In arrivo...
+- **Sito**: [https://mirkobechini.com](https://mirkobechini.com)
