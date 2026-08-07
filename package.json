@@ -10,7 +10,8 @@
         "preview": "vite preview",
         "test": "vitest run",
         "test:watch": "vitest",
-        "lighthouse": "lhci autorun"
+        "lighthouse": "lhci autorun",
+        "predeploy": "bash scripts/predeploy.sh"
     },
     "devDependencies": {
         "@eslint/js": "^10.0.1",

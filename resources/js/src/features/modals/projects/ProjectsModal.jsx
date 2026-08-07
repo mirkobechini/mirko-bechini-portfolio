@@ -5,7 +5,7 @@ import FilterPanel from './components/FilterPanel';
 import FilterGroup from './components/FilterGroup';
 import ProjectsGrid from './components/ProjectsGrid';
 import useProjectFilters from './hooks/useProjectFilters';
-import projectData from './projectData';
+import useGithubProjects from '../../../hooks/useGithubProjects';
 import { getAssetPath } from '../../../utils/assets';
 
 const frontendIcon = getAssetPath('/modals/projects/frontend-icon.webp');
@@ -22,6 +22,7 @@ const iconConfig = {
 };
 
 const ProjectsModal = memo(function ProjectsModal({ onBackToProjectsHome }) {
+    const { projects: githubProjects, loading, error } = useGithubProjects();
     const {
         filteredProjects,
         selectedTypeFilter,
@@ -31,7 +32,7 @@ const ProjectsModal = memo(function ProjectsModal({ onBackToProjectsHome }) {
         resetFilters,
         typeOptions,
         scopeOptions,
-    } = useProjectFilters(projectData);
+    } = useProjectFilters(githubProjects);
 
     const [isFiltersOpen, setIsFiltersOpen] = useState(false);
 
@@ -109,7 +110,20 @@ const ProjectsModal = memo(function ProjectsModal({ onBackToProjectsHome }) {
             </FilterPanel>
 
             <div className={`${styles['projects-view']} ${sharedStyles['scroll-y-contain']}`}>
-                <ProjectsGrid projects={filteredProjects} />
+                {loading ? (
+                    <div className={styles['no-projects']}>
+                        <p>Caricamento progetti...</p>
+                    </div>
+                ) : error ? (
+                    <div className={styles['no-projects']}>
+                        <p>{error}</p>
+                        {filteredProjects.length === 0 && (
+                            <p>Riprova più tardi o ricarica la pagina.</p>
+                        )}
+                    </div>
+                ) : (
+                    <ProjectsGrid projects={filteredProjects} />
+                )}
             </div>
         </div>
     );
