@@ -15,7 +15,7 @@ const AboutMeModal = memo(function AboutMeModal() {
         <>
             <h3 style={{ marginBottom: '1rem' }}>Ciao sono Mirko</h3>
             <p style={{ marginBottom: '1rem' }}>Un sviluppatore web che ha arricchito le proprie competenze in Informatica,
-                acquisite alle scuole superiori, conseguendo un Master in Web Development.</p>
+                acquisite alle scuole superiori, conseguendo un Masterclass in Web Development.</p>
             <p style={{ marginBottom: '1rem' }}>
                 Le esperienze passate mi hanno permesso di acquisire importanti soft skills,
                 come la capacità di lavorare in team, la gestione del tempo e la risoluzione di problemi
