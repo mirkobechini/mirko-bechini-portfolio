@@ -7,6 +7,7 @@
  * - live URL personalizzato (se diverso dalla homepage GitHub)
  * - extraTechnologies: tecnologie non rilevate da GitHub (es. AI, Figma, Tauri)
  * - exclude: true per nascondere il repo (fork, esercizi, config, etc.)
+ * - pinned: true per mettere il progetto in cima (ordinamento manuale)
  *
  * La chiave è il nome repo su GitHub (case-sensitive).
  */
@@ -26,6 +27,7 @@ const projectsMeta = {
     "CV_Backoffice": {
         type: "backend",
         projectScope: "personal",
+        pinned: true,
         extraTechnologies: [],
         description: "Gestione flotta mezzi con monitoraggio delle scadenze, gestione di eventuali guasti, log chilometrici, registrazione e gestione dell'equipaggiamento di ogni mezzo.",
     },
@@ -60,12 +62,14 @@ const projectsMeta = {
     "mirko-bechini-portfolio": {
         type: "fullstack",
         projectScope: "personal",
+        pinned: true,
         extraTechnologies: ["CSS Animations", "PWA"],
         description: "Portfolio personale realizzato in React con Vite, progettato per mostrare il mio percorso e le mie competenze.",
     },
     pdfEditor: {
         type: "fullstack",
         projectScope: "personal",
+        pinned: true,
         extraTechnologies: ["AI", "Next.js", "React Native", "Tauri", "FastAPI", "Python", "TypeScript", "TailwindCSS"],
         description: "Applicazione cross-platform per la modifica e gestione di file PDF, con funzionalità di visualizzazione, annotazione, conversione, modifica testo e manipolazione avanzata. Architettura modulare che copre web (Next.js), desktop (Tauri v2), mobile (React Native) e backend (FastAPI).",
     },
@@ -78,6 +82,7 @@ const projectsMeta = {
     "agent-skills": {
         type: "fullstack",
         projectScope: "personal",
+        pinned: true,
         extraTechnologies: ["AI", "Python"],
         description: "Repo con le varie skill sviluppate per l'AI Agent.",
     },

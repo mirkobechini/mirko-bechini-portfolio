@@ -24,6 +24,7 @@ export function mapRepoToProject(repo, meta) {
         live: meta.live || repo.homepage || "#",
         stars: repo.stargazers_count ?? 0,
         updatedAt: repo.pushed_at || repo.updated_at,
+        pinned: meta.pinned || false,
     };
 }
 
@@ -80,8 +81,12 @@ export function transformRepos(repos) {
         return mapRepoToProject(repo, meta);
     });
 
-    // Ordina prima i repo con le modifiche più recenti
+    // Ordina: prima i pinned (in cima), poi per data di modifica (più recenti prima)
     return projects.sort((a, b) => {
+        const pinnedA = a.pinned ? 1 : 0;
+        const pinnedB = b.pinned ? 1 : 0;
+        if (pinnedA !== pinnedB) return pinnedB - pinnedA;
+
         const timeA = a.updatedAt ? new Date(a.updatedAt).getTime() : 0;
         const timeB = b.updatedAt ? new Date(b.updatedAt).getTime() : 0;
         return timeB - timeA;
