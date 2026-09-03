@@ -3,7 +3,8 @@ import { getRepos } from "../features/modals/projects/services/githubApi";
 import { transformRepos } from "../features/modals/projects/services/projectMapper";
 import useLocalStorage from "./useLocalStorage";
 
-const CACHE_KEY = "github_projects_cache";
+// Bump della versione quando cambia il formato dei dati (es. aggiunta campo pinned)
+const CACHE_KEY = "github_projects_cache_v2";
 const CACHE_TTL_MS = 30 * 60 * 1000; // 30 minuti
 
 /**
