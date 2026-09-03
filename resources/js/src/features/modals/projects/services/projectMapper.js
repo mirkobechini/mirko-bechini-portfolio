@@ -75,8 +75,15 @@ export function filterRepos(repos) {
 export function transformRepos(repos) {
     const filtered = filterRepos(repos);
 
-    return filtered.map((repo) => {
+    const projects = filtered.map((repo) => {
         const meta = projectsMeta[repo.name] || {};
         return mapRepoToProject(repo, meta);
+    });
+
+    // Ordina prima i repo con le modifiche più recenti
+    return projects.sort((a, b) => {
+        const timeA = a.updatedAt ? new Date(a.updatedAt).getTime() : 0;
+        const timeB = b.updatedAt ? new Date(b.updatedAt).getTime() : 0;
+        return timeB - timeA;
     });
 }

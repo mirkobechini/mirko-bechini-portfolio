@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { getRepos } from "../features/modals/projects/services/githubApi";
 import { transformRepos } from "../features/modals/projects/services/projectMapper";
 import useLocalStorage from "./useLocalStorage";
@@ -27,9 +27,16 @@ export default function useGithubProjects() {
 
     const [error, setError] = useState(null);
 
+    // Ref per evitare setState sincrono dentro l'effect al primo mount
+    const isFirstFetch = useRef(true);
+
     const fetchProjects = useCallback(async () => {
-        setLoading(true);
-        setError(null);
+        // Al primo fetch (dal mount) loading/error sono già sui valori di default:
+        // evita setState sincroni dentro l'effect (render a cascata)
+        if (!isFirstFetch.current) {
+            setLoading(true);
+            setError(null);
+        }
 
         try {
             const repos = await getRepos();
@@ -57,13 +64,18 @@ export default function useGithubProjects() {
                 }
             }
         } finally {
-            setLoading(false);
+            if (!isFirstFetch.current) {
+                setLoading(false);
+            }
+            isFirstFetch.current = false;
         }
     }, [cache]);
 
     useEffect(() => {
         const cached = cache.get();
         if (!cached) {
+            // Il fetch è asincrono: i setState avvengono dopo il primo await, non sincroni nell'effect
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             fetchProjects();
         }
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
