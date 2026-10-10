@@ -21,6 +21,8 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+coverage
+/coverage
 
 # Lighthouse reports
 /lighthouse-reports

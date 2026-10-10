@@ -132,6 +132,7 @@ export default defineConfig({
         globals: true,
         environment: 'jsdom',
         setupFiles: './resources/js/src/test/setup.js',
+        coverage: { provider: 'v8', reporter: ['text', 'html'], include: ['resources/js/src/**'], exclude: ['**/test/**'] },
         css: {
             modules: {
                 classNameStrategy: 'non-scoped',
