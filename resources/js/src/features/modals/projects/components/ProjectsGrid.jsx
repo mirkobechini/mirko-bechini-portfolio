@@ -1,14 +1,15 @@
 import { memo } from 'react';
 import styles from './ProjectsGrid.module.css';
 import ProjectCard from './ProjectCard';
+import ProjectsMessage from './ProjectsMessage';
 
 const ProjectsGrid = memo(function ProjectsGrid({ projects }) {
     if (projects.length === 0) {
         return (
             <div className={styles['projects-grid']}>
-                <div className={styles['no-projects']}>
+                <ProjectsMessage>
                     <p>Nessun progetto trovato con i filtri selezionati.</p>
-                </div>
+                </ProjectsMessage>
             </div>
         );
     }
