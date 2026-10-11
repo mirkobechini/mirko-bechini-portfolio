@@ -12,19 +12,6 @@
     gap: 12%;
 }
 
-.profile-sprite {
-    position: absolute;
-    z-index: 3;
-    width: clamp(13.25rem, 32vw, 18rem);
-    height: auto;
-    top: 95%;
-    left: 16%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    image-rendering: crisp-edges;
-    image-rendering: pixelated;
-}
-
 .book-skills {
     --panel-bg: #f5f5f5;
     --panel-border: rgb(141 110 99 / 35%);
@@ -100,7 +87,6 @@
     filter: drop-shadow(0 0 0.125rem rgb(255 255 255 / 95%))
         drop-shadow(0 0 0.45rem rgb(12 86 148 / 90%));
 }
-/* #endregion Book layout */
 
 .page-content {
     display: flex;
@@ -151,8 +137,6 @@
         opacity: 1;
     }
 }
-/* #endregion Skills theme slots */
-
 /* #region Responsive adjustments */
 @media (max-width: 767px) {
     :global([data-modal-theme="library"] [data-modal-slot="modal"]) {
@@ -170,10 +154,6 @@
         margin: 0;
 
         font-size: var(--font-size-small, 0.875rem);
-    }
-
-    .profile-sprite {
-        display: none;
     }
 
     .book {
