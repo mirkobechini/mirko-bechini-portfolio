@@ -58,7 +58,7 @@ describe('ProjectsModal', () => {
         render(<ProjectsModal onBackToProjectsHome={vi.fn()} />);
 
         expect(screen.getByText('Progetto Uno')).toBeInTheDocument();
-        expect(screen.getByRole('status')).toHaveTextContent(/non aggiornati/);
+        expect(screen.getByRole('status')).toHaveTextContent(/non essere aggiornati/);
     });
 
     it('mentre ricarica mostra i progetti già disponibili invece del caricamento', () => {
