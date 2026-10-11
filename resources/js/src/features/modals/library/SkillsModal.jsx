@@ -1,5 +1,5 @@
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import styles from './SkillsModal.module.css';
+import styles from './BookLayout.module.css';
 import defaultSkillsData from './skillsData';
 import { useKeyboardNavigation } from '../../../hooks/useKeyboardNavigation';
 import SkillsGridView from './SkillsGridView';

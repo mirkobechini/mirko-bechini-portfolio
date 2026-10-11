@@ -1,0 +1,165 @@
+/* Contenitore header per pulsanti sempre visibili (Back, Filtri) */
+.filter-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    padding: 0 var(--space-lg); /* Aggiunto padding per allineamento */
+    gap: var(--space-md);
+    margin-bottom: var(--space-xs);
+}
+
+/* Contenitore esterno area filtri (fascia espandibile) */
+.filter-container {
+    display: none;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
+    width: 100%;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-3xs);
+}
+
+.filter-container.is-open {
+    display: flex;
+}
+
+/* Pulsante per tornare indietro alla scelta Progetti/Esperienze */
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    padding: var(--space-2xs) var(--space-sm);
+
+    font-family: inherit;
+    font-size: clamp(0.75rem, 0.7rem + 0.2vw, 0.88rem);
+    font-weight: bold;
+    color: #e8c879;
+    text-shadow: 0.0625rem 0.0625rem 0 #000;
+    white-space: nowrap;
+
+    cursor: var(--cursor-nes-pointer);
+
+    border-style: solid;
+    border-width: 5px 8px;
+    border-image-source: url("/assets/modals/projects/wood-button.webp");
+    border-image-slice: 10 15 fill;
+    border-image-width: 5px 8px;
+    border-image-repeat: stretch;
+
+    background: transparent;
+    transition: transform 0.1s ease;
+}
+
+.back-button:hover {
+    transform: scale(1.05);
+}
+
+.back-button:active {
+    transform: scale(0.95);
+}
+
+.back-arrow {
+    flex-shrink: 0;
+    width: clamp(0.9rem, 0.85rem + 0.2vw, 1.1rem);
+    height: clamp(0.9rem, 0.85rem + 0.2vw, 1.1rem);
+    filter: drop-shadow(0.0625rem 0.0625rem 0 #000);
+}
+
+/* Stack verticale dei blocchi filtro */
+.filter-group {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    flex-wrap: nowrap;
+
+    gap: var(--space-xs);
+}
+
+/* Pulsante reset con immagine + testo sovrapposto + filter per mobile*/
+.filter-button {
+    position: relative;
+
+    width: clamp(6.25rem, 30vw, 10.5rem);
+    height: auto;
+    padding: 0;
+    line-height: 0;
+
+    font-family: inherit;
+
+    cursor: var(--cursor-nes-pointer);
+    background: none;
+    border: none;
+
+    transition: transform 0.1s ease;
+}
+
+.trigger-btn {
+    display: inline-flex;
+}
+
+.filter-button img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    font-family: inherit;
+    image-rendering: pixelated;
+}
+
+.filter-button:hover {
+    transform: scale(1.05);
+}
+
+.filter-button:active {
+    transform: scale(0.95);
+}
+
+.filter-button-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 100%;
+    transform: translate(-50%, -50%);
+
+    font-size: var(--text-sm);
+    color: #8cc906;
+    text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000,
+        2px 2px 0 #000;
+
+    pointer-events: none;
+}
+
+@media (max-width: 767px) {
+    .filter-container {
+        display: none;
+        justify-content: center;
+        gap: var(--space-md);
+    }
+
+    /* Quando l'utente clicca su "Filtri", React aggiunge la classe e il CSS lo mostra */
+    .filter-container.is-open {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: var(--space-md);
+    }
+
+    .filter-header {
+        margin-bottom: var(--space-md);
+    }
+
+    /* Il pulsante per attivare i filtri compare */
+    .trigger-btn {
+        display: block;
+    }
+}

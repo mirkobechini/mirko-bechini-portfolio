@@ -1,5 +1,6 @@
 import { memo, useCallback, useEffect, useState } from 'react';
-import styles from './SkillsModal.module.css';
+import layout from './BookLayout.module.css';
+import styles from './FormationView.module.css';
 import sharedStyles from '../shared/SharedModal.module.css';
 import FormationDetailView from './FormationDetailView';
 import playBookFlip from '../../../utils/playBookFlip';
@@ -50,7 +51,7 @@ const FormationView = memo(function FormationView({ currentProfile, educationDat
     if (selectedEducation) {
         return (
             <>
-                <section className={styles.page}>
+                <section className={layout.page}>
                     <h3 className={styles['detail-h3']}>
                         <button
                             type="button"
@@ -62,7 +63,7 @@ const FormationView = memo(function FormationView({ currentProfile, educationDat
                         </button>
                         <span className={styles['detail-h3-title']}>{selectedEducation.course}</span>
                     </h3>
-                    <div className={`${styles['page-content']} ${sharedStyles['scroll-y-contain']}`}>
+                    <div className={`${layout['page-content']} ${sharedStyles['scroll-y-contain']}`}>
                         <FormationDetailView
                             education={selectedEducation}
                             page={1}
@@ -70,9 +71,9 @@ const FormationView = memo(function FormationView({ currentProfile, educationDat
                         />
                     </div>
                 </section>
-                <section className={styles.page}>
+                <section className={layout.page}>
                     <h3 className={styles['detail-h3-title-only']}>{selectedEducation.course}</h3>
-                    <div className={`${styles['page-content']} ${sharedStyles['scroll-y-contain']}`}>
+                    <div className={`${layout['page-content']} ${sharedStyles['scroll-y-contain']}`}>
                         <FormationDetailView
                             education={selectedEducation}
                             page={2}
@@ -87,9 +88,9 @@ const FormationView = memo(function FormationView({ currentProfile, educationDat
     /* ── Overview (list of education cards) ── */
     return (
         <>
-            <section className={`${styles.page} ${styles['education-page']}`}>
+            <section className={`${layout.page} ${styles['education-page']}`}>
                 <h3>{currentProfile.title}</h3>
-                <div className={`${styles['page-content']} ${sharedStyles['scroll-y-contain']}`}>
+                <div className={`${layout['page-content']} ${sharedStyles['scroll-y-contain']}`}>
                     {educationData.map((education) => (
                         <section
                             className={styles['education-card']}
@@ -113,9 +114,9 @@ const FormationView = memo(function FormationView({ currentProfile, educationDat
                     ))}
                 </div>
             </section>
-            <section className={styles.page}>
+            <section className={layout.page}>
                 <h3>{currentProfile.detailsTitle ?? 'Percorso e prossimi step'}</h3>
-                <div className={`${styles['page-content']} ${sharedStyles['scroll-y-contain']}`}>
+                <div className={`${layout['page-content']} ${sharedStyles['scroll-y-contain']}`}>
                     <section className={styles['formation-panel']}>
                         <h4>Focus attuale</h4>
                         <div className={styles['formation-cards']}>

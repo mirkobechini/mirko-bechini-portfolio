@@ -184,4 +184,49 @@ describe('useDragScroll', () => {
 
         expect(container.scrollLeft).toBe(400);
     });
+
+    it('touchmove: previene lo scroll nativo solo se si sta davvero trascinando', () => {
+        const ref = { current: createMockContainer() };
+        const { result } = renderHook(() => useDragScroll(ref, false));
+
+        act(() => {
+            result.current.handleTouchStart({ touches: [{ clientX: 100 }] });
+        });
+
+        // movimento sotto la soglia: è ancora un tap, lo scroll nativo non va bloccato
+        const smallMove = { touches: [{ clientX: 102 }], preventDefault: vi.fn() };
+        act(() => {
+            result.current.handleTouchMove(smallMove);
+        });
+        expect(smallMove.preventDefault).not.toHaveBeenCalled();
+
+        // movimento oltre la soglia: drag vero
+        const bigMove = { touches: [{ clientX: 140 }], preventDefault: vi.fn() };
+        act(() => {
+            result.current.handleTouchMove(bigMove);
+        });
+        expect(bigMove.preventDefault).toHaveBeenCalledTimes(1);
+    });
+
+    it('se il contenitore sparisce prima del frame, la RAF non lancia e si può ripianificare', () => {
+        const ref = { current: createMockContainer() };
+        const { result } = renderHook(() => useDragScroll(ref, false));
+
+        act(() => {
+            result.current.handleGrab({ clientX: 100 });
+            result.current.handleMovement({ clientX: 130 });
+        });
+        expect(rafCallbacks).toHaveLength(1);
+
+        ref.current = null;
+        expect(() => rafCallbacks.forEach((cb) => cb())).not.toThrow();
+
+        // dragRaf è stato azzerato: un nuovo movimento pianifica un nuovo frame
+        ref.current = createMockContainer();
+        rafCallbacks = [];
+        act(() => {
+            result.current.handleMovement({ clientX: 150 });
+        });
+        expect(rafCallbacks).toHaveLength(1);
+    });
 });

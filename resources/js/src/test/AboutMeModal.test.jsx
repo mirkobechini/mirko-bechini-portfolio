@@ -1,5 +1,6 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi, afterEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import AboutMeModal from '../features/modals/about/AboutMeModal';
 
 describe('AboutMeModal', () => {
@@ -36,5 +37,22 @@ describe('AboutMeModal', () => {
     it('renders hobby paragraph', () => {
         render(<AboutMeModal />);
         expect(screen.getByText(/palestra/)).toBeInTheDocument();
+    });
+
+    describe('curriculum', () => {
+        afterEach(() => {
+            vi.restoreAllMocks();
+        });
+
+        it('apre il PDF del curriculum in una nuova scheda al click', async () => {
+            const openSpy = vi.spyOn(window, 'open').mockImplementation(() => null);
+            const user = userEvent.setup();
+            render(<AboutMeModal />);
+
+            await user.click(screen.getByRole('button'));
+
+            expect(openSpy).toHaveBeenCalledTimes(1);
+            expect(openSpy).toHaveBeenCalledWith(expect.stringContaining('Bechini-Mirko_CV.pdf'), '_blank');
+        });
     });
 });

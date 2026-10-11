@@ -6,155 +6,6 @@
     gap: var(--space-2xs);
 }
 
-/* #region Filter styles */
-/* Contenitore header per pulsanti sempre visibili (Back, Filtri) */
-.filter-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    width: 100%;
-    padding: 0 var(--space-lg); /* Aggiunto padding per allineamento */
-    gap: var(--space-md);
-    margin-bottom: var(--space-xs);
-}
-
-/* Contenitore esterno area filtri (fascia espandibile) */
-.filter-container {
-    display: none;
-    align-items: center;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-
-    width: 100%;
-    gap: var(--space-lg);
-    margin-bottom: var(--space-3xs);
-}
-
-.filter-container.is-open {
-    display: flex;
-}
-
-/* Pulsante per tornare indietro alla scelta Progetti/Esperienze */
-.back-button {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2xs);
-    padding: var(--space-2xs) var(--space-sm);
-
-    font-family: inherit;
-    font-size: clamp(0.75rem, 0.7rem + 0.2vw, 0.88rem);
-    font-weight: bold;
-    color: #e8c879;
-    text-shadow: 0.0625rem 0.0625rem 0 #000;
-    white-space: nowrap;
-
-    cursor: var(--cursor-nes-pointer);
-
-    border-style: solid;
-    border-width: 5px 8px;
-    border-image-source: url("/assets/modals/projects/wood-button.webp");
-    border-image-slice: 10 15 fill;
-    border-image-width: 5px 8px;
-    border-image-repeat: stretch;
-
-    background: transparent;
-    transition: transform 0.1s ease;
-}
-
-.back-button:hover {
-    transform: scale(1.05);
-}
-
-.back-button:active {
-    transform: scale(0.95);
-}
-
-.back-arrow {
-    flex-shrink: 0;
-    width: clamp(0.9rem, 0.85rem + 0.2vw, 1.1rem);
-    height: clamp(0.9rem, 0.85rem + 0.2vw, 1.1rem);
-    filter: drop-shadow(0.0625rem 0.0625rem 0 #000);
-}
-
-/* Stack verticale dei blocchi filtro */
-.filter-group {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    flex-wrap: nowrap;
-
-    gap: var(--space-xs);
-}
-
-/* Wrapper grafico in stile "cornice legno" per i pulsanti filtro */
-.filter-wrapper {
-    position: relative;
-    box-sizing: border-box;
-
-    display: flex;
-    flex-wrap: wrap;
-
-    width: 100%;
-    gap: var(--space-2xs);
-    padding: var(--space-2xs) var(--space-sm) var(--space-3xs);
-
-    border-style: solid;
-    border-width: 12px 16px 10px;
-    border-image-source: url("/assets/modals/projects/wood-wrapper.webp");
-    border-image-slice: 28 35 fill;
-    border-image-width: 12px 16px 14px 16px;
-    border-image-repeat: stretch;
-
-    image-rendering: crisp-edges;
-    image-rendering: pixelated;
-}
-
-.button-label {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    width: auto;
-    min-width: 76px;
-    gap: var(--space-2xs);
-    padding: var(--space-2xs) var(--space-sm);
-
-    font-weight: bold;
-    text-align: center;
-    white-space: nowrap;
-    font-size: clamp(0.8rem, 0.74rem + 0.25vw, 0.95rem);
-
-    cursor: var(--cursor-nes-pointer);
-
-    border-width: 5px 8px;
-    border-image-source: url("/assets/modals/projects/wood-button.webp");
-    border-image-slice: 10 15 fill;
-    border-image-width: 5px 8px;
-    border-image-repeat: stretch;
-
-    transition: transform 0.1s ease;
-}
-
-.button-label:hover {
-    transform: scale(1.05);
-}
-
-.visually-hidden {
-    position: absolute;
-
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-
-    overflow: hidden;
-    white-space: nowrap;
-
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-}
-
 .icon {
     width: clamp(1.05rem, 1rem + 0.45vw, 1.35rem);
     height: clamp(1.05rem, 1rem + 0.45vw, 1.35rem);
@@ -164,169 +15,12 @@
     image-rendering: pixelated;
 }
 
-.selected-filter {
-    /* Stato attivo: texture alternativa */
-    border-image-source: url("/assets/modals/projects/wood-button-selected.webp");
-}
-
-/* Pulsante reset con immagine + testo sovrapposto + filter per mobile*/
-.filter-button {
-    position: relative;
-
-    width: clamp(6.25rem, 30vw, 10.5rem);
-    height: auto;
-    padding: 0;
-    line-height: 0;
-
-    font-family: inherit;
-
-    cursor: var(--cursor-nes-pointer);
-    background: none;
-    border: none;
-
-    transition: transform 0.1s ease;
-}
-
-.trigger-btn {
-    display: inline-flex;
-}
-
-.filter-button img {
-    display: block;
-
-    width: 100%;
-    height: auto;
-
-    font-family: inherit;
-    image-rendering: pixelated;
-}
-
-.filter-button:hover {
-    transform: scale(1.05);
-}
-
-.filter-button:active {
-    transform: scale(0.95);
-}
-
-.filter-button-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-
-    width: 100%;
-    transform: translate(-50%, -50%);
-
-    font-size: var(--text-sm);
-    color: #8cc906;
-    text-shadow:
-        -1px -1px 0 #000,
-        1px -1px 0 #000,
-        -1px 1px 0 #000,
-        1px 1px 0 #000,
-        2px 2px 0 #000;
-
-    pointer-events: none;
-}
-
-/* #endregion Filter styles */
-
-/* #region Project styles */
 /* Area scrollabile con tutti i blueprint */
 .projects-view {
     scrollbar-gutter: stable;
     -webkit-overflow-scrolling: touch;
 }
 
-/* Griglia/flow delle card progetto */
-.projects-grid {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-
-    margin: var(--space-sm);
-    gap: var(--space-xl);
-}
-
-/* Card progetto base */
-.project-blueprint {
-    flex: 1 1 300px; /* Permette alla card di restringersi/allungarsi con un base iniziale */
-    max-width: 350px;
-    min-height: 250px; /* Altezza minima uniforme */
-    padding: var(--space-md) var(--space-lg);
-
-    display: flex;
-    flex-direction: column;
-
-    color: #0d47a1;
-    background: #e3f2fd;
-    border-left: 0.3125rem solid #1565c0;
-
-    box-shadow: 0.3125rem 0.3125rem 0.9375rem rgb(0 0 0 / 30%);
-    transform: rotate(-2deg);
-    transition:
-        transform 0.3s,
-        z-index 0.3s ease;
-
-    contain: layout paint;
-}
-
-/* Stile per la descrizione con troncamento a 3 righe */
-.project-description {
-    margin: 0;
-    font-size: clamp(0.75rem, 0.7rem + 0.15vw, 0.85rem);
-    line-height: 1.5;
-
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-
-    flex-grow: 1; /* Spinge i link verso il basso */
-}
-
-/* Variante alternata per spezzare il ritmo visivo */
-.project-blueprint.alternate {
-    color: #f57f17;
-    background: #fff9c4;
-    border-left-color: #fbc02d;
-
-    transform: rotate(3deg);
-}
-
-.project-blueprint:hover {
-    z-index: 10;
-    transform: rotate(0) scale(1.05);
-}
-
-.blueprint-header {
-    margin-bottom: var(--space-sm);
-
-    font-size: var(--text-xs);
-    font-weight: bold;
-    opacity: 0.6;
-
-    border-bottom: 1px dashed;
-}
-
-.project-title {
-    margin-top: 0;
-    margin-bottom: var(--space-xs);
-
-    font-size: var(--text-base);
-    font-weight: bold;
-    line-height: 1.2;
-}
-
-.tech-stack {
-    margin-top: var(--space-xs);
-    margin-bottom: var(--space-sm);
-
-    font-size: var(--text-2xs);
-    color: #444;
-}
-
-/* #region Projects theme slots */
 :global([data-modal-theme="desk"] [data-modal-slot="modal"]) {
     background-color: #1a2426;
     background-image: radial-gradient(#4e342e 1px, transparent 1px);
@@ -335,7 +29,7 @@
     border: 0.3125rem solid #4b2c1e;
     box-shadow: inset 0 0 6.25rem rgb(0 0 0 / 50%);
 
-    animation: deskSlideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation: desk-slide-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
 :global([data-modal-theme="desk"] [data-modal-slot="title"]) {
@@ -387,43 +81,18 @@
         opacity: 1;
     }
 }
-/* #endregion Projects theme slots */
 
-.links-group {
-    display: flex;
-    flex-wrap: wrap;
-
-    margin-top: auto; /* Assicura che i bottoni siano a fondo card */
-    gap: var(--space-xs);
-    padding-top: var(--space-sm);
-}
-
-.view-btn {
-    display: inline-block;
-
-    font-size: var(--text-xs);
-    font-weight: bold;
-    color: inherit;
-    text-decoration: underline;
-}
-
-.view-btn:hover {
-    color: #1565c0;
-}
-
-/* #endregion Project styles */
-
-/* #region Scrollbar styles */
-::-webkit-scrollbar {
+/* Scrollbar stile NES, limitata all'area progetti (prima era globale: colpiva tutte le scrollbar del sito) */
+.projects-view::-webkit-scrollbar {
     width: 16px;
 }
 
-::-webkit-scrollbar-track {
+.projects-view::-webkit-scrollbar-track {
     background: #212529;
     border-left: 4px solid #000; /* Effetto bordo NES */
 }
 
-::-webkit-scrollbar-thumb {
+.projects-view::-webkit-scrollbar-thumb {
     background-color: #e76e05;
 
     /* Creiamo l'effetto scalino pixelato con un bordo doppio */
@@ -431,74 +100,14 @@
     box-shadow: inset -4px -4px 0 0 #8a4303; /* Ombra interna per dare profondità */
 }
 
-::-webkit-scrollbar-thumb:hover {
+.projects-view::-webkit-scrollbar-thumb:hover {
     background-color: #ff9234;
 }
 
-/* #endregion Scrollbar styles */
-
-/* #region Responsive Smartphone */
 @media (max-width: 767px) {
-    .projects-grid {
-        flex-direction: column;
-        align-items: center;
-        gap: var(--space-lg);
-        margin: var(--space-sm) 0;
-    }
-
-    .project-blueprint {
-        max-width: 90%;
-        word-wrap: break-word;
-        transform: rotate(0);
-        padding: var(--space-md);
-    }
-
-    .project-blueprint.alternate {
-        transform: rotate(0);
-    }
-
-    .project-title {
-        font-size: var(--text-lg);
-    }
-
-    /*#region Filter styles */
-
-    .filter-container {
-        display: none;
-        justify-content: center;
-        gap: var(--space-md);
-    }
-
-    /* Quando l'utente clicca su "Filtri", React aggiunge la classe e il CSS lo mostra */
-    .filter-container.is-open {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        gap: var(--space-md);
-    }
-
-    .filter-header {
-        margin-bottom: var(--space-md);
-    }
-
-    .filter-wrapper {
-        /* Scaliamo mantenendo il rapporto: il lato è sempre circa il doppio della parte alta */
-        border-image-width: 8px 18px 6px 18px;
-        border-width: 8px 18px 6px;
-        padding: var(--space-xs) var(--space-2xs) var(--space-2xs);
-    }
-
-    /* Il pulsante per attivare i filtri compare */
-    .trigger-btn {
-        display: block;
-    }
-    /*#endregion Filter styles */
-
     :global([data-modal-theme="desk"] [data-modal-slot="sprite"]) {
         top: 93%;
         left: 12%;
         width: 50%;
     }
 }
-/* #endregion Responsive Smartphone */

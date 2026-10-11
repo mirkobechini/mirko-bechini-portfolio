@@ -177,7 +177,75 @@ const educationData = [
                 skillsModules: ['AI'],
             },
         ],
-    }
+    },
+    {
+        id: 5,
+        course: 'CS50’s Introduction to Programming with Python',
+        description: 'Corso di Python introduttivo offerto da Harvard University, che copre le basi della programmazione, la gestione delle eccezioni, l\'utilizzo di librerie esterne e la scrittura di test unitari.',
+        certificate: getAssetPath('/modals/certifications/cs50-python.webp'),
+        organization: 'Harvard University',
+        organizationUrl: 'https://cs50.harvard.edu/python/',
+        period: '08/2026 - in corso',
+        skills: ['Python'],
+        highlights: [
+            'Introduzione a Python, funzioni, variabili e tipi di dati',
+            'Istruzioni condizionali, cicli e gestione delle eccezioni',
+            'Utilizzo di librerie esterne e test unitari',
+            'Progetti pratici interattivi integrati nella piattaforma',
+        ],
+        modules: [
+            {
+                title: 'Functions, Variables & Data Types',
+                description: 'Introduzione a funzioni, variabili, tipi di dati e strutture dati in Python.',
+                skillsModules: ['Python'],
+            },
+            {
+                title: 'Conditionals',
+                description: 'Istruzioni condizionali, operatori logici e confronto, e moduli Python.',
+                skillsModules: ['Python'],
+            },
+            {
+                title: 'Loops',
+                description: 'Cicli for e while, iterazioni su liste e dizionari, e comprensione delle liste.',
+                skillsModules: ['Python'],
+            },
+            {
+                title: 'Exceptions',
+                description: 'Gestione delle eccezioni, debugging e logging.',
+                skillsModules: ['Python'],
+            },
+            {
+                title: 'Libraries',
+                description: 'Utilizzo di librerie esterne, installazione e gestione dei pacchetti.',
+                skillsModules: ['Python'],
+            },
+            {
+                title: 'Unit Tests',
+                description: 'Scrittura di test unitari, test-driven development e debugging.',
+                skillsModules: ['Python'],
+            },
+            {
+                title: ' File I/O',
+                description: 'Lettura e scrittura di file, gestione dei percorsi e formati di file.',
+                skillsModules: ['Python'],
+            },
+            {
+                title: 'Regular Expressions',
+                description: 'Utilizzo delle espressioni regolari per la ricerca e la manipolazione di stringhe.',
+                skillsModules: ['Python'],
+            },
+            {
+                title: ' Object-Oriented Programming',
+                description: 'Concetti di programmazione orientata agli oggetti, classi, oggetti, ereditarietà e polimorfismo.',
+                skillsModules: ['Python'],
+            },
+            {
+                title: 'Et Cetera',
+                description: 'Altri argomenti avanzati come threading, networking e database.',
+                skillsModules: ['Python'],
+            }
+        ],
+    },
 ];
 
 export default educationData;

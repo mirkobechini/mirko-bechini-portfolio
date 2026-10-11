@@ -1,0 +1,81 @@
+/* Wrapper grafico in stile "cornice legno" per i pulsanti filtro */
+.filter-wrapper {
+    position: relative;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    width: 100%;
+    gap: var(--space-2xs);
+    padding: var(--space-2xs) var(--space-sm) var(--space-3xs);
+
+    border-style: solid;
+    border-width: 12px 16px 10px;
+    border-image-source: url("/assets/modals/projects/wood-wrapper.webp");
+    border-image-slice: 28 35 fill;
+    border-image-width: 12px 16px 14px 16px;
+    border-image-repeat: stretch;
+
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+}
+
+.button-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: auto;
+    min-width: 76px;
+    gap: var(--space-2xs);
+    padding: var(--space-2xs) var(--space-sm);
+
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+    font-size: clamp(0.8rem, 0.74rem + 0.25vw, 0.95rem);
+
+    cursor: var(--cursor-nes-pointer);
+
+    border-width: 5px 8px;
+    border-image-source: url("/assets/modals/projects/wood-button.webp");
+    border-image-slice: 10 15 fill;
+    border-image-width: 5px 8px;
+    border-image-repeat: stretch;
+
+    transition: transform 0.1s ease;
+}
+
+.button-label:hover {
+    transform: scale(1.05);
+}
+
+.visually-hidden {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+
+    overflow: hidden;
+    white-space: nowrap;
+
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.selected-filter {
+    /* Stato attivo: texture alternativa */
+    border-image-source: url("/assets/modals/projects/wood-button-selected.webp");
+}
+
+@media (max-width: 767px) {
+    .filter-wrapper {
+        /* Scaliamo mantenendo il rapporto: il lato è sempre circa il doppio della parte alta */
+        border-image-width: 8px 18px 6px 18px;
+        border-width: 8px 18px 6px;
+        padding: var(--space-xs) var(--space-2xs) var(--space-2xs);
+    }
+}

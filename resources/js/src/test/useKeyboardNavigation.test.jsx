@@ -171,4 +171,79 @@ describe('useKeyboardNavigation', () => {
 
         expect(onNavigate).not.toHaveBeenCalled();
     });
+
+    // --- Grid mode: tasti orizzontali e partenza senza selezione ---
+
+    it('moves to the next item with ArrowRight in grid mode', async () => {
+        const user = userEvent.setup();
+        render(<TestComponent currentIndex={1} onNavigate={onNavigate} totalItems={8} mode="grid" columns={4} />);
+
+        await user.keyboard('{ArrowRight}');
+
+        expect(onNavigate).toHaveBeenCalledWith(2);
+    });
+
+    it('moves to the previous item with ArrowLeft in grid mode', async () => {
+        const user = userEvent.setup();
+        render(<TestComponent currentIndex={1} onNavigate={onNavigate} totalItems={8} mode="grid" columns={4} />);
+
+        await user.keyboard('{ArrowLeft}');
+
+        expect(onNavigate).toHaveBeenCalledWith(0);
+    });
+
+    it('starts at the first item with ArrowRight/ArrowDown in grid mode when nothing is selected', async () => {
+        const user = userEvent.setup();
+        render(<TestComponent currentIndex={-1} onNavigate={onNavigate} totalItems={8} mode="grid" columns={4} />);
+
+        await user.keyboard('{ArrowRight}');
+        await user.keyboard('{ArrowDown}');
+
+        expect(onNavigate).toHaveBeenNthCalledWith(1, 0);
+        expect(onNavigate).toHaveBeenNthCalledWith(2, 0);
+    });
+
+    it('starts at the last item with ArrowLeft/ArrowUp in grid mode when nothing is selected', async () => {
+        const user = userEvent.setup();
+        render(<TestComponent currentIndex={-1} onNavigate={onNavigate} totalItems={8} mode="grid" columns={4} />);
+
+        await user.keyboard('{ArrowLeft}');
+        await user.keyboard('{ArrowUp}');
+
+        expect(onNavigate).toHaveBeenNthCalledWith(1, 7);
+        expect(onNavigate).toHaveBeenNthCalledWith(2, 7);
+    });
+
+    // --- Comportamento sugli eventi ---
+
+    it('prevents the default scroll for arrow keys but not for other keys', () => {
+        render(<TestComponent currentIndex={0} onNavigate={onNavigate} totalItems={5} />);
+
+        const arrow = new KeyboardEvent('keydown', { key: 'ArrowDown', cancelable: true });
+        const letter = new KeyboardEvent('keydown', { key: 'a', cancelable: true });
+        document.dispatchEvent(arrow);
+        document.dispatchEvent(letter);
+
+        expect(arrow.defaultPrevented).toBe(true);
+        expect(letter.defaultPrevented).toBe(false);
+    });
+
+    it('does not call onNavigate when there is a single item (next index equals current)', async () => {
+        const user = userEvent.setup();
+        render(<TestComponent currentIndex={0} onNavigate={onNavigate} totalItems={1} mode="linear" />);
+
+        await user.keyboard('{ArrowRight}');
+
+        expect(onNavigate).not.toHaveBeenCalled();
+    });
+
+    it('removes the keydown listener on unmount', async () => {
+        const user = userEvent.setup();
+        const { unmount } = render(<TestComponent currentIndex={0} onNavigate={onNavigate} totalItems={5} />);
+
+        unmount();
+        await user.keyboard('{ArrowRight}');
+
+        expect(onNavigate).not.toHaveBeenCalled();
+    });
 });

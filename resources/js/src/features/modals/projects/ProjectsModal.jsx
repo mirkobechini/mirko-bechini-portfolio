@@ -4,8 +4,9 @@ import sharedStyles from '../shared/SharedModal.module.css';
 import FilterPanel from './components/FilterPanel';
 import FilterGroup from './components/FilterGroup';
 import ProjectsGrid from './components/ProjectsGrid';
+import ProjectsMessage from './components/ProjectsMessage';
 import useProjectFilters from './hooks/useProjectFilters';
-import projectData from './projectData';
+import useGithubProjects from '../../../hooks/useGithubProjects';
 import { getAssetPath } from '../../../utils/assets';
 
 const frontendIcon = getAssetPath('/modals/projects/frontend-icon.webp');
@@ -22,6 +23,7 @@ const iconConfig = {
 };
 
 const ProjectsModal = memo(function ProjectsModal({ onBackToProjectsHome }) {
+    const { projects: githubProjects, loading, error } = useGithubProjects();
     const {
         filteredProjects,
         selectedTypeFilter,
@@ -31,9 +33,10 @@ const ProjectsModal = memo(function ProjectsModal({ onBackToProjectsHome }) {
         resetFilters,
         typeOptions,
         scopeOptions,
-    } = useProjectFilters(projectData);
+    } = useProjectFilters(githubProjects);
 
     const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+    const hasProjects = githubProjects.length > 0;
 
     const typeFilterOptions = useMemo(() => {
         return typeOptions.map(option => {
@@ -109,7 +112,25 @@ const ProjectsModal = memo(function ProjectsModal({ onBackToProjectsHome }) {
             </FilterPanel>
 
             <div className={`${styles['projects-view']} ${sharedStyles['scroll-y-contain']}`}>
-                <ProjectsGrid projects={filteredProjects} />
+                {loading && !hasProjects ? (
+                    <ProjectsMessage>
+                        <p>Caricamento progetti...</p>
+                    </ProjectsMessage>
+                ) : error && !hasProjects ? (
+                    <ProjectsMessage variant="error">
+                        <p>{error}</p>
+                        <p>Riprova più tardi o ricarica la pagina.</p>
+                    </ProjectsMessage>
+                ) : (
+                    <>
+                        {error && (
+                            <ProjectsMessage variant="error" role="status">
+                                Impossibile aggiornare i progetti: i dati mostrati potrebbero non essere aggiornati.
+                            </ProjectsMessage>
+                        )}
+                        <ProjectsGrid projects={filteredProjects} />
+                    </>
+                )}
             </div>
         </div>
     );

@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -18,7 +18,15 @@ vi.mock('../features/modals/certifications/CertificationsModal', () => ({
     default: function MockModal() { return <div data-testid="modal-content">Certifications Content</div>; },
 }));
 vi.mock('../features/modals/contacts/ContactsModal', () => ({
-    default: function MockModal() { return <div data-testid="modal-content">Contacts Content</div>; },
+    // Ha un pulsante interno (per il focus trap) che cambia lo sprite (per setModalSprite)
+    default: function MockModal({ setModalSprite }) {
+        return (
+            <div data-testid="modal-content">
+                Contacts Content
+                <button onClick={() => setModalSprite('/new-sprite.webp')}>Cambia sprite</button>
+            </div>
+        );
+    },
 }));
 
 const mockVariant = {
@@ -120,5 +128,99 @@ describe('BaseModal', () => {
         const { unmount } = render(<BaseModal variant={mockVariant} closeModal={vi.fn()} />);
         unmount();
         expect(document.body.style.overflow).toBe('');
+    });
+});
+
+describe('BaseModal - focus management', () => {
+    const contactsVariant = { id: 5, title: 'Contatti', theme: 'parrot', componentKey: 'contacts', sprite: null };
+    let BaseModal;
+
+    beforeEach(async () => {
+        vi.resetModules();
+        const mod = await import('../features/modals/shared/BaseModal');
+        BaseModal = mod.default;
+    });
+
+    afterEach(() => {
+        vi.restoreAllMocks();
+    });
+
+    // jsdom non calcola il layout: getClientRects() è sempre vuoto, quindi nessun elemento
+    // risulterebbe "focusable". Lo simuliamo per testare il focus trap.
+    const mockVisibleElements = () =>
+        vi.spyOn(HTMLElement.prototype, 'getClientRects').mockReturnValue([{}]);
+
+    it('porta il focus sul pulsante CONTINUA al mount', () => {
+        render(<BaseModal variant={mockVariant} closeModal={vi.fn()} />);
+        expect(screen.getByText('CONTINUA')).toHaveFocus();
+    });
+
+    it("ripristina il focus all'elemento precedente allo smontaggio", () => {
+        const opener = document.createElement('button');
+        document.body.appendChild(opener);
+        opener.focus();
+
+        const { unmount } = render(<BaseModal variant={mockVariant} closeModal={vi.fn()} />);
+        expect(opener).not.toHaveFocus();
+
+        unmount();
+        expect(opener).toHaveFocus();
+        opener.remove();
+    });
+
+    it("Tab dall'ultimo elemento riporta il focus al primo", async () => {
+        mockVisibleElements();
+        const user = userEvent.setup();
+        render(<BaseModal variant={contactsVariant} closeModal={vi.fn()} />);
+        const inner = await screen.findByText('Cambia sprite');
+
+        expect(screen.getByText('CONTINUA')).toHaveFocus();
+        await user.tab();
+
+        expect(inner).toHaveFocus();
+    });
+
+    it("Shift+Tab dal primo elemento porta il focus sull'ultimo", async () => {
+        mockVisibleElements();
+        const user = userEvent.setup();
+        render(<BaseModal variant={contactsVariant} closeModal={vi.fn()} />);
+        const inner = await screen.findByText('Cambia sprite');
+
+        inner.focus();
+        await user.tab({ shift: true });
+
+        expect(screen.getByText('CONTINUA')).toHaveFocus();
+    });
+
+    it('Tab senza elementi focusable lascia il focus sul dialog', async () => {
+        // senza mock getClientRects() è vuoto: nessun elemento risulta focusable
+        const user = userEvent.setup();
+        render(<BaseModal variant={mockVariant} closeModal={vi.fn()} />);
+
+        await user.tab();
+
+        expect(screen.getByRole('dialog')).toHaveFocus();
+    });
+
+    it('se il focus esce dal dialog viene riportato dentro', async () => {
+        mockVisibleElements();
+        const outside = document.createElement('button');
+        document.body.appendChild(outside);
+        render(<BaseModal variant={contactsVariant} closeModal={vi.fn()} />);
+        const inner = await screen.findByText('Cambia sprite');
+
+        outside.focus();
+
+        expect(inner).toHaveFocus();
+        outside.remove();
+    });
+
+    it('setModalSprite aggiorna lo sprite mostrato', async () => {
+        const user = userEvent.setup();
+        const { container } = render(<BaseModal variant={contactsVariant} closeModal={vi.fn()} />);
+
+        await user.click(await screen.findByText('Cambia sprite'));
+
+        expect(container.querySelector('[data-modal-slot="sprite"]')).toHaveAttribute('src', '/new-sprite.webp');
     });
 });

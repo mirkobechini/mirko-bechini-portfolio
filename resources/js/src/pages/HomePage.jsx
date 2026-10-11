@@ -7,17 +7,15 @@ import ScrollGuideIndicators from '../components/ui/ScrollGuideIndicators';
 
 /* Hooks & Context */
 import { useDragScroll } from '../hooks/useDragScroll';
+import useSpritePreload from '../hooks/useSpritePreload';
 import GlobalContext from '../context/GlobalContext';
 
 /* Utils */
 import { getAssetPath } from '../utils/assets';
-import { preloadImages } from '../utils/preloadImages';
-import { playMonkeyHover, playMonkeyClick } from '../utils/playMonkeySound';
-import { playParrotHover, playParrotClick } from '../utils/playParrotSound';
+import { playModalHover, playModalClick } from '../utils/modalSounds';
 
 /* Data & Constants */
 import MODAL_DATA from '../features/modals/modalRegistry';
-import { MODAL_IDS } from '../data/uiConstants';
 import SPRITES from '../data/spriteConfig';
 
 /* Assets */
@@ -26,7 +24,6 @@ const denBackground = getAssetPath('/backgrounds/den.webp');
 export default function HomePage() {
     // Refs
     const scrollRef = useRef(null);
-    const preloadedSpritesRef = useRef(new Set());
 
     // State
     const { activeSection, setActiveSection } = useContext(GlobalContext);
@@ -41,17 +38,7 @@ export default function HomePage() {
         []
     );
 
-    const preloadModalSprite = useCallback((id) => {
-        const selectedModal = modalById[id];
-        const sprite = selectedModal?.sprite;
-
-        if (!sprite || preloadedSpritesRef.current.has(sprite)) {
-            return;
-        }
-
-        preloadedSpritesRef.current.add(sprite);
-        preloadImages([sprite]);
-    }, [modalById]);
+    const preloadModalSprite = useSpritePreload(modalById);
 
     // Handlers
     const closeModal = useCallback(() => {
@@ -64,8 +51,7 @@ export default function HomePage() {
             if (selectedModal) {
                 setModalParams(params ?? {});
                 setActiveSection(selectedModal);
-                if (id === MODAL_IDS.ABOUT_ME) playMonkeyClick();
-                if (id === MODAL_IDS.CONTACTS) playParrotClick();
+                playModalClick(id);
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -75,14 +61,12 @@ export default function HomePage() {
     const preloadHandlers = (id) => ({
         onMouseEnter: () => {
             preloadModalSprite(id);
-            if (id === MODAL_IDS.ABOUT_ME) playMonkeyHover();
-            if (id === MODAL_IDS.CONTACTS) playParrotHover();
+            playModalHover(id);
         },
         onFocus: () => preloadModalSprite(id),
         onTouchStart: () => {
             preloadModalSprite(id);
-            if (id === MODAL_IDS.ABOUT_ME) playMonkeyHover();
-            if (id === MODAL_IDS.CONTACTS) playParrotHover();
+            playModalHover(id);
         },
     });
 

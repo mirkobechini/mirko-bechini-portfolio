@@ -1,0 +1,21 @@
+/*
+ * Estratto da nes.css (nes.min.css): è l'unica parte della versione completa che l'app usa
+ * (icone skill: <img class="nes-icon is-medium">). Il resto di nes.min.css sono icone e
+ * personaggi non utilizzati (~230 KB di CSS che blocca il rendering), per questo si importa nes-core.
+ */
+.nes-icon {
+    position: relative;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 16px;
+    margin-bottom: 16px;
+    transform: scale(2);
+    transform-origin: top left;
+}
+
+.nes-icon.is-medium {
+    margin-right: 32px;
+    margin-bottom: 32px;
+    transform: scale(3);
+}

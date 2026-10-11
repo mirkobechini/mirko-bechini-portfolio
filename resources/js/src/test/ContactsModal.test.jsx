@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
+import { useKeyboardNavigation } from '../hooks/useKeyboardNavigation';
 import ContactsModal from '../features/modals/contacts/ContactsModal';
 
 // Mock useKeyboardNavigation per evitare event listener
@@ -51,5 +52,26 @@ describe('ContactsModal', () => {
         render(<ContactsModal />);
         const links = screen.getAllByRole('link');
         expect(links).toHaveLength(3);
+    });
+
+    it('la navigazione da tastiera sposta il focus sul contatto indicato', () => {
+        render(<ContactsModal />);
+        const { onNavigate, totalItems } = useKeyboardNavigation.mock.calls.at(-1)[0];
+
+        expect(totalItems).toBe(3);
+
+        act(() => onNavigate(1));
+
+        expect(screen.getByText('LinkedIn').closest('a')).toHaveFocus();
+    });
+
+    it('il contatto selezionato con la tastiera riceve la classe selected-contact', () => {
+        render(<ContactsModal />);
+        const { onNavigate } = useKeyboardNavigation.mock.calls.at(-1)[0];
+
+        act(() => onNavigate(2));
+
+        expect(screen.getByText('GitHub').closest('a')).toHaveClass('selected-contact');
+        expect(screen.getByText('Email').closest('a')).not.toHaveClass('selected-contact');
     });
 });

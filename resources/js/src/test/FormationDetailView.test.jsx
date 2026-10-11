@@ -88,4 +88,77 @@ describe('FormationDetailView', () => {
         const { container } = render(<FormationDetailView education={{ ...mockEducation, modules: [] }} page={2} />);
         expect(container.querySelector('.modules-list')).toBeNull();
     });
+
+    describe('tag delle competenze', () => {
+        it.each([
+            ['React', '{Enter}'],
+            ['React', ' '],
+            ['HTML', '{Enter}'],
+            ['HTML', ' '],
+        ])('"%s" con il tasto %j chiama onSkillTagClick', async (skill, key) => {
+            const user = userEvent.setup();
+            const onSkillTagClick = vi.fn();
+            render(<FormationDetailView education={mockEducation} page={2} onSkillTagClick={onSkillTagClick} />);
+
+            screen.getByText(skill).focus();
+            await user.keyboard(key);
+
+            expect(onSkillTagClick).toHaveBeenCalledTimes(1);
+            expect(onSkillTagClick).toHaveBeenCalledWith(skill, mockEducation);
+        });
+
+        it('gli altri tasti non fanno nulla', async () => {
+            const user = userEvent.setup();
+            const onSkillTagClick = vi.fn();
+            render(<FormationDetailView education={mockEducation} page={2} onSkillTagClick={onSkillTagClick} />);
+
+            screen.getByText('HTML').focus();
+            await user.keyboard('a');
+
+            expect(onSkillTagClick).not.toHaveBeenCalled();
+        });
+
+        it('senza onSkillTagClick i tag non sono pulsanti', () => {
+            render(<FormationDetailView education={mockEducation} page={2} />);
+
+            expect(screen.getByText('HTML')).not.toHaveAttribute('role');
+            expect(screen.getByText('React')).not.toHaveAttribute('tabindex');
+        });
+    });
+
+    describe('contenuti opzionali', () => {
+        it('mostra il link al certificato in una nuova scheda', () => {
+            render(<FormationDetailView education={mockEducation} page={2} />);
+
+            const link = screen.getByText('Vedi certificato');
+            expect(link).toHaveAttribute('href', 'https://cert.example.com/cert.pdf');
+            expect(link).toHaveAttribute('target', '_blank');
+            expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+        });
+
+        it('senza certificato non mostra il link', () => {
+            render(<FormationDetailView education={{ ...mockEducation, certificate: null }} page={2} />);
+
+            expect(screen.queryByText('Vedi certificato')).not.toBeInTheDocument();
+        });
+
+        it('senza organizationUrl non mostra il link al certificato', () => {
+            render(<FormationDetailView education={{ ...mockEducation, organizationUrl: undefined }} page={2} />);
+
+            expect(screen.queryByText('Vedi certificato')).not.toBeInTheDocument();
+        });
+
+        it('senza punti salienti la pagina 1 non mostra la sezione', () => {
+            render(<FormationDetailView education={{ ...mockEducation, highlights: [] }} page={1} />);
+
+            expect(screen.queryByText('Punti salienti')).not.toBeInTheDocument();
+        });
+
+        it('senza moduli e competenze la pagina 2 non mostra le sezioni', () => {
+            render(<FormationDetailView education={{ ...mockEducation, modules: [], skills: [], certificate: null }} page={2} />);
+
+            expect(screen.queryByText('Moduli del corso')).not.toBeInTheDocument();
+            expect(screen.queryByText('Competenze acquisite')).not.toBeInTheDocument();
+        });
+    });
 });

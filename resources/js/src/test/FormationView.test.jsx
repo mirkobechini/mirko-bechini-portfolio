@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -192,5 +192,67 @@ describe('FormationView', () => {
             />
         );
         expect(screen.getByText('Percorso e prossimi step')).toBeInTheDocument();
+    });
+
+    describe('tastiera e ridimensionamento', () => {
+        const renderOverview = (props = {}) =>
+            render(
+                <FormationView
+                    currentProfile={mockProfile}
+                    educationData={mockEducationData}
+                    formationFocus={mockFocus}
+                    formationRoadmap={mockRoadmap}
+                    onSwitchToSkill={vi.fn()}
+                    {...props}
+                />
+            );
+
+        afterEach(() => {
+            vi.restoreAllMocks();
+        });
+
+        it.each(['{Enter}', ' '])('il tasto %j sulla card apre il dettaglio', async (key) => {
+            const user = userEvent.setup();
+            renderOverview();
+
+            screen.getByRole('button', { name: /Dettagli formazione: Web Development/ }).focus();
+            await user.keyboard(key);
+
+            expect(screen.getByRole('button', { name: /Torna alla visione d'insieme/ })).toBeInTheDocument();
+        });
+
+        it('gli altri tasti non aprono il dettaglio', async () => {
+            const user = userEvent.setup();
+            renderOverview();
+
+            screen.getByRole('button', { name: /Dettagli formazione: Web Development/ }).focus();
+            await user.keyboard('a');
+
+            expect(screen.queryByRole('button', { name: /Torna alla visione d'insieme/ })).not.toBeInTheDocument();
+        });
+
+        it('ascolta il resize e rimuove il listener allo smontaggio', () => {
+            const addSpy = vi.spyOn(window, 'addEventListener');
+            const removeSpy = vi.spyOn(window, 'removeEventListener');
+
+            const { unmount } = renderOverview();
+            expect(addSpy).toHaveBeenCalledWith('resize', expect.any(Function));
+
+            expect(() => window.dispatchEvent(new Event('resize'))).not.toThrow();
+
+            unmount();
+            expect(removeSpy).toHaveBeenCalledWith('resize', expect.any(Function));
+        });
+
+        it('cliccando una competenza nel dettaglio chiama onSwitchToSkill', async () => {
+            const user = userEvent.setup();
+            const onSwitchToSkill = vi.fn();
+            renderOverview({ onSwitchToSkill });
+
+            await user.click(screen.getByRole('button', { name: /Dettagli formazione: Web Development/ }));
+            await user.click(screen.getAllByText('HTML').find((el) => el.getAttribute('role') === 'button'));
+
+            expect(onSwitchToSkill).toHaveBeenCalledWith('HTML', mockEducationData[0]);
+        });
     });
 });
