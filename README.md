@@ -18,6 +18,10 @@
 - [Tech Stack](#️-tech-stack)
 - [Quick Start](#-quick-start)
 - [Script disponibili](#-script-disponibili)
+- [Dati dei progetti](#-dati-dei-progetti)
+- [Test](#-test)
+- [Sicurezza](#-sicurezza)
+- [Deploy](#-deploy)
 - [Struttura del progetto](#-struttura-del-progetto)
 - [GitHub Actions](#-github-actions)
 - [Contatti](#-contatti)
@@ -35,12 +39,14 @@
 
 - **Scena interattiva a scorrimento**: esplorazione orizzontale di un ambiente retrò popolato da sprite cliccabili.
 - **Modali tematiche lazy-loaded**: About Me, Formazione & Competenze, Esperienze & Progetti, Certificazioni e Contatti — ogni modale è caricata dinamicamente con `React.lazy()` all'apertura.
+- **Progetti da GitHub**: l'elenco viene letto dalla GitHub REST API, con cache locale (30 min), fallback sui dati vecchi e, in ultima istanza, su un elenco statico. Vedi [Dati dei progetti](#-dati-dei-progetti).
 - **Drag & touch navigation**: scrolling orizzontale fluido ottimizzato con `requestAnimationFrame` per mouse e dispositivi touch.
-- **Navigazione da tastiera**: hook `useKeyboardNavigation` per spostarsi con le frecce all'interno delle modali (lineare o a griglia).
+- **Navigazione da tastiera e accessibilità**: hook `useKeyboardNavigation`, focus trap e ripristino del focus nelle modali, messaggi di stato con `role="status"`.
 - **Stato globale con Context API**: apertura/chiusura modali e stato dell'app gestiti centralmente.
-- **CSS modulare**: ogni componente ha il proprio foglio di stile incapsulato.
-- **Backend Laravel 12**: rotta catch-al che服ve l'SPA React, pronto per future API.
-- **Ottimizzazione asset**: preload di font e immagini critiche, PWA con service worker per caching intelligente.
+- **CSS modulare**: ogni componente ha il proprio CSS module (nessun file sopra le 400 righe).
+- **Backend Laravel 12**: serve l'SPA React, risponde con un vero **404** alle URL sconosciute e aggiunge gli [header di sicurezza](#-sicurezza). Pronto per future API.
+- **Ottimizzazione asset**: `nes-core` al posto del bundle completo di NES.css, preload di font e immagini critiche, PWA con service worker per caching intelligente.
+- **Test**: oltre 370 test Vitest (copertura righe ~92%) e test PHPUnit sulle rotte e sugli header.
 - **CI/CD completo**: GitHub Actions con ESLint, build Vite, test PHP e audit Lighthouse.
 
 ---
@@ -62,7 +68,7 @@
 | [React Router](https://reactrouter.com) ^7.18              | [PHP](https://php.net) ^8.2          |
 | [Vite](https://vitejs.dev) ^8.0                            |                                      |
 | [NES.css](https://nostalgic-css.github.io/NES.css/) ^2.2.1 |                                      |
-| [Axios](https://axios-http.com) ^1.7                       |                                      |
+| [Vitest](https://vitest.dev) ^4.1 (test)                   |                                      |
 
 ---
 
@@ -81,21 +87,39 @@
 git clone https://github.com/mirkobechini/mirko-bechini-portfolio.git
 cd mirko-bechini-portfolio
 
-# Installa dipendenze PHP (Laravel)
+# Installa dipendenze PHP (Laravel) e JavaScript
 composer install
-
-# Installa dipendenze JavaScript
 npm install
 
 # Prepara l'ambiente
 cp .env.example .env
 php artisan key:generate
-
-# Avvia l'ambiente di sviluppo (unico comando)
-npm run dev
 ```
 
-Visita [http://localhost:8000](http://localhost:8000) nel browser.
+### Avvio in sviluppo
+
+Servono due cose: il dev server di Vite (HMR) e un server PHP che serva Laravel.
+
+**Con [Laravel Herd](https://herd.laravel.com)** (consigliato su Windows/macOS):
+
+```bash
+herd link mirkobechini-portfolio   # una tantum, dalla cartella del progetto
+npm run vite                       # dev server Vite
+```
+
+Poi apri `http://mirkobechini-portfolio.test` e imposta `APP_URL=http://mirkobechini-portfolio.test` nel `.env`.
+
+**Senza Herd:**
+
+```bash
+npm run dev:serve                  # Vite + php artisan serve in parallelo
+```
+
+Poi apri [http://127.0.0.1:8000](http://127.0.0.1:8000).
+
+> ⚠️ Su Windows con PHP 8.4 `php artisan serve` può fallire con `Failed to listen on 127.0.0.1:8000 (reason: ?)` su ogni porta. In quel caso usa Herd, oppure `php -S 127.0.0.1:8000 -t public public/index.php`.
+>
+> Se la pagina resta bianca, cancella `public/hot` (rimasto da un vecchio dev server) e rilancia Vite. Tieni **un solo** dev server Vite alla volta.
 
 ### Build di produzione
 
@@ -107,19 +131,106 @@ npm run build
 
 ## 📜 Script disponibili
 
-| Comando                           | Descrizione                                                                       |
-| :-------------------------------- | :-------------------------------------------------------------------------------- |
-| `npm run dev`                     | Avvia Vite (HMR) e Laravel (`php artisan serve`) in simultanea (via concurrently) |
-| `npm run vite`                    | Solo dev server Vite                                                              |
-| `npm run laravel`                 | Solo server Laravel                                                               |
-| `npm run build`                   | Build di produzione Vite                                                          |
-| `npm run lint`                    | Analisi statica del codice con ESLint                                             |
-| `npm run preview`                 | Preview del build di produzione                                                   |
-| `composer run pint`               | Formatta il codice PHP secondo lo stile Laravel                                   |
-| `node scripts/resize-sprites.mjs` | Ridimensiona gli sprite nella dimensione desiderata                               |
-| `php artisan serve`               | Avvia il server HTTP di Laravel                                                   |
-| `php artisan key:generate`        | Genera la chiave dell'applicazione                                                |
-| `php artisan test`                | Esegue i test PHPUnit                                                             |
+| Comando                               | Descrizione                                                                  |
+| :------------------------------------ | :--------------------------------------------------------------------------- |
+| `npm run dev` / `npm run vite`        | Dev server Vite (HMR)                                                        |
+| `npm run dev:serve`                   | Vite + `php artisan serve` in simultanea (via concurrently)                  |
+| `npm run laravel`                     | Solo `php artisan serve`                                                     |
+| `npm run build`                       | Build di produzione Vite                                                     |
+| `npm run preview`                     | Preview del build di produzione                                              |
+| `npm run lint`                        | Analisi statica con ESLint                                                   |
+| `npm test`                            | Test JavaScript (Vitest, una esecuzione)                                     |
+| `npm run test:watch`                  | Vitest in modalità watch                                                     |
+| `npm run test:coverage`               | Test con report di copertura (testo + `coverage/index.html`)                 |
+| `npm run lighthouse`                  | Lighthouse CI in locale (scarica `@lhci/cli` al volo con `npx`)              |
+| `npm run predeploy`                   | Controlli prima del deploy (PowerShell). `predeploy:sh` per la versione bash |
+| `php artisan test`                    | Test PHPUnit                                                                 |
+| `./vendor/bin/pint`                   | Formatta il codice PHP secondo lo stile Laravel                              |
+| `node scripts/resize-sprites.mjs`     | Ridimensiona gli sprite nella dimensione desiderata                          |
+| `node scripts/generate-pwa-icons.mjs` | Genera le icone PWA                                                          |
+
+---
+
+## 🐙 Dati dei progetti
+
+L'elenco progetti non è scritto a mano: viene composto a runtime da più fonti.
+
+```
+GitHub REST API ──► projectMapper ──► ProjectsModal
+                        ▲
+        projectsMeta.js (descrizione IT, tipo, scope, pinned, exclude)
+```
+
+- **`services/githubApi.js`** legge i repo pubblici di `mirkobechini` ed esclude fork e repo archiviati.
+- **`services/projectsMeta.js`** contiene solo ciò che GitHub non sa: descrizione in italiano, `type` (frontend/backend/fullstack), `projectScope`, `pinned`, `exclude`, tecnologie extra e URL `live`. La chiave è il nome del repo. Un repo nuovo senza voce nel meta compare comunque (con i valori di default).
+- **`hooks/useGithubProjects.js`** usa una cache in `localStorage` (30 min). Se la rete o l'API (limite di 60 richieste/ora per IP) falliscono, mostra i dati scaduti; se non ci sono, l'elenco statico `fallbackProjects.js`. In quei casi la modal mostra un avviso.
+- Se cambi il **formato** dei dati in cache, incrementa `CACHE_KEY` in `useGithubProjects.js` (oggi `github_projects_cache_v2`).
+
+Per aggiungere o nascondere un progetto basta aggiornare `projectsMeta.js`.
+
+---
+
+## 🧪 Test
+
+```bash
+npm test                 # JS: Vitest + Testing Library (jsdom)
+npm run test:coverage    # con report di copertura
+php artisan test         # PHP: rotte, 404, header di sicurezza
+```
+
+- I test JS stanno in `resources/js/src/test/`. Oltre ai componenti e agli hook, ci sono controlli "di guardia" sul CSS (es. `cssKeyframes.test.js` verifica che ogni `animation:` abbia il suo `@keyframes`: nei CSS modules un nome scritto in camelCase invece che kebab-case fa semplicemente non partire l'animazione).
+- I test PHP stanno in `tests/Feature/`.
+- La CI esegue lint, test JS, build e test PHP (vedi [GitHub Actions](#-github-actions)).
+
+---
+
+## 🔐 Sicurezza
+
+Il middleware `App\Http\Middleware\SecurityHeaders` (registrato in `bootstrap/app.php`) imposta su ogni risposta:
+
+| Header                                | Valore                                                                |
+| :------------------------------------ | :-------------------------------------------------------------------- |
+| `X-Content-Type-Options`              | `nosniff`                                                             |
+| `X-Frame-Options`                     | `SAMEORIGIN`                                                          |
+| `Referrer-Policy`                     | `strict-origin-when-cross-origin`                                     |
+| `Permissions-Policy`                  | `camera=(), microphone=(), geolocation=()`                            |
+| `Content-Security-Policy-Report-Only` | policy per Google Fonts, Iubenda e GitHub API (**solo segnalazione**) |
+| `Strict-Transport-Security`           | disattivato di default (`SECURITY_HSTS=true` per attivarlo)           |
+
+- La **CSP è in sola osservazione**: il browser segnala le violazioni in console ma non blocca nulla. Dopo il deploy controlla la console (soprattutto script iniettati da Cloudflare) e, quando è pulita, passa a `Content-Security-Policy` nel middleware.
+- In **sviluppo** vedrai violazioni per gli script e il WebSocket di Vite (`localhost:5173`): sono normali.
+- **HSTS** è già gestito da Cloudflare: non attivarlo anche in Laravel per non duplicarlo.
+- `trustProxies('*')` è attivo perché l'app sta dietro Cloudflare e Laravel Cloud.
+- Gli URL sconosciuti rispondono **404** (con la pagina d'errore dell'SPA), non 200.
+
+---
+
+## 🚢 Deploy
+
+Il sito è su **Laravel Cloud** dietro **Cloudflare**; il deploy parte dal branch `main`. Flusso di lavoro: un branch per ogni modifica, merge in `dev` con `git merge --no-ff` (niente squash, per tenere traccia dei branch), `dev` → `main` solo quando si vuole pubblicare.
+
+**Prima di fare merge su `main`:**
+
+```bash
+npm run predeploy
+```
+
+Esegue test JS e PHP, `npm audit --omit=dev` e `composer audit` (provando a correggere con `npm audit fix` / `composer update`: se cambiano i lockfile, committali) e, se esiste un `.env.production` locale, blocca il deploy con `APP_DEBUG=true` o `APP_ENV` diverso da `production`.
+
+**Variabili d'ambiente su Laravel Cloud** (nel pannello, non nel repo):
+
+| Variabile        | Valore                          |
+| :--------------- | :------------------------------ |
+| `APP_ENV`        | `production`                    |
+| `APP_DEBUG`      | `false`                         |
+| `APP_URL`        | `https://mirkobechini.com`      |
+| `LOG_LEVEL`      | `warning`                       |
+| `SESSION_DRIVER` | `cookie` (il sito non ha login) |
+| `CACHE_STORE`    | `file`                          |
+
+**Dopo il deploy:** controlla gli header su [securityheaders.com](https://securityheaders.com), la console del browser (violazioni CSP), che `/pagina-inesistente` risponda 404, gli header di cache di `/build/*` e `sw.js`, e l'aggiornamento della PWA.
+
+---
 
 ---
 
@@ -127,52 +238,55 @@ npm run build
 
 ```
 mirko-bechini-portfolio/
-├── app/                        # Logica backend Laravel
-│   ├── Http/Controllers/       # Controller (vuoti, pronti per API future)
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/        # Controller (vuoti, pronti per API future)
+│   │   └── Middleware/         # SecurityHeaders
 │   ├── Models/                 # Modelli Eloquent
 │   └── Providers/              # Service provider
-├── config/                     # Configurazioni Laravel
+├── bootstrap/app.php           # Routing, trustProxies, middleware globali
+├── config/                     # Configurazioni Laravel (+ security.php)
 ├── database/                   # Migrazioni, factories, seeders
 ├── public/
-│   ├── assets/                 # Asset statici (backgrounds, modali, sprite)
+│   ├── assets/                 # Asset statici (backgrounds, modali, sprite, suoni)
 │   ├── build/                  # Output build Vite (generato)
 │   └── index.php               # Front controller Laravel
 ├── resources/
 │   ├── js/
 │   │   ├── app.js              # Entry point Vite (importa main.jsx)
-│   │   ├── bootstrap.js        # Bootstrap JS (Axios)
 │   │   └── src/                # ★ App React
 │   │       ├── App.jsx         # Root component con Router e Context
 │   │       ├── main.jsx        # Punto di ingresso React
-│   │       ├── components/     # Componenti UI (layout, ScrollGuideIndicators)
-│   │       │   ├── layout/     # DefaultLayout (Outlet router)
-│   │       │   └── ui/         # Componenti UI puri riutilizzabili
+│   │       ├── components/     # Layout e componenti UI riutilizzabili
 │   │       ├── context/        # Stato globale con Context API
 │   │       ├── data/           # Configurazioni e costanti (spriteConfig, uiConstants)
-│   │       ├── features/       # Modali organizzati per sezione
-│   │       │   └── modals/
-│   │       │       ├── shared/         # BaseModal, ModalErrorBoundary, CSS condivisi
-│   │       │       ├── about/         # AboutMeModal
-│   │       │       ├── library/       # BookshelfModal, SkillsModal, FormationView
-│   │       │       ├── projects/      # ProjectExperienceModal, ProjectsModal
-│   │       │       ├── certifications/# CertificationsModal
-│   │       │       └── contacts/      # ContactsModal
-│   │       ├── hooks/          # Custom hooks (useDragScroll, useKeyboardNavigation)
-│   │       ├── pages/          # Pagine (HomePage, 404)
-│   │       ├── styles/         # CSS globali (global, home, responsive)
-│   │       └── utils/          # Utility (asset paths, links, preloadImages)
+│   │       ├── features/modals/
+│   │       │   ├── shared/         # BaseModal (focus trap), ModalErrorBoundary
+│   │       │   ├── about/          # AboutMeModal
+│   │       │   ├── library/        # Bookshelf, Skills, Formazione (+ BookLayout.module.css)
+│   │       │   ├── projects/       # ProjectsModal, components/, hooks/, services/ (GitHub API)
+│   │       │   ├── certifications/ # CertificationsModal
+│   │       │   └── contacts/       # ContactsModal
+│   │       ├── hooks/          # useDragScroll, useKeyboardNavigation, useGithubProjects,
+│   │       │                   # useLocalStorage, useSpritePreload
+│   │       ├── pages/          # HomePage, NotFoundPage
+│   │       ├── styles/         # CSS globali (global, home, responsive, nes-icon)
+│   │       ├── test/           # Test Vitest
+│   │       └── utils/          # asset paths, links, preloadImages, modalSounds, audio
 │   └── views/
 │       └── app.blade.php       # Template Blade SPA con preload di font e immagini
 ├── routes/
-│   ├── web.php                 # Rotta catch-all per il frontend React
-│   └── console.php             # Comandi Artisan (inspire)
+│   ├── web.php                 # Home + fallback 404 che serve l'SPA
+│   └── console.php             # Comandi Artisan
 ├── scripts/
-│   └── resize-sprites.mjs      # Utility per ridimensionamento sprite
-├── tests/                      # Test PHPUnit
+│   ├── predeploy.ps1 / .sh     # Controlli prima del deploy
+│   ├── resize-sprites.mjs      # Ridimensionamento sprite
+│   └── generate-pwa-icons.mjs  # Icone PWA
+├── tests/Feature/              # Test PHPUnit (rotte, header di sicurezza)
 ├── .github/workflows/
-│   └── code-test.yml           # CI: ESLint → build → lychee → PHP test → Lighthouse
-├── vite.config.js              # Configurazione Vite + React + Laravel + PurgeCSS
-├── eslint.config.js            # Configurazione ESLint flat config
+│   └── code-test.yml           # CI: ESLint → Vitest → build → lychee → PHP test → Lighthouse
+├── vite.config.js              # Vite + React + Laravel + PWA + Vitest
+├── eslint.config.js            # ESLint flat config
 ├── lighthouserc.json           # Soglie Lighthouse CI (SEO ≥ 0.95, Performance ≥ 0.7)
 └── package.json                # Dipendenze e script Node
 ```
@@ -181,7 +295,7 @@ mirko-bechini-portfolio/
 
 ## 🤖 GitHub Actions
 
-Il workflow **Verification Tests** (`code-test.yml`) si attiva su push e pull request verso `main` ed esegue in parallelo:
+Il workflow **Verification Tests** (`code-test.yml`) si attiva su push e pull request verso `main` ed esegue:
 
 ### `quality-checks`
 
@@ -189,8 +303,9 @@ Il workflow **Verification Tests** (`code-test.yml`) si attiva su push e pull re
 2. ✅ **Cache** `node_modules`
 3. ✅ **Install** `npm ci`
 4. ✅ **ESLint** — analisi codice React
-5. ✅ **Build Vite** — build di produzione
-6. ✅ **lychee** — controllo link rotti nei template Blade
+5. ✅ **Vitest** — test JavaScript
+6. ✅ **Build Vite** — build di produzione
+7. ✅ **lychee** — controllo link rotti nei template Blade
 
 ### `php-tests`
 
@@ -204,7 +319,7 @@ Il workflow **Verification Tests** (`code-test.yml`) si attiva su push e pull re
 
 ### `lighthouse`
 
-- Eseguito solo su **push** a `main`, dopo il successo dei due job precedenti.
+- Eseguito solo su **push** a `main`, dopo il successo dei due job precedenti (`quality-checks` e `php-tests`, che girano in parallelo).
 - Esegue audit con soglie: **SEO ≥ 0.95**, **Performance ≥ 0.7**
 
 ---
