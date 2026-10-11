@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-// Catch-all route: tutte le richieste non-API vengono gestite dall'SPA React
-Route::get('/{any?}', function () {
-    return view('app');
-})->where('any', '.*');
+Route::get('/', fn () => view('app'));
+
+// Qualsiasi altro URL: mostra comunque l'SPA (la NotFoundPage di React) ma con status 404
+Route::fallback(fn () => response()->view('app', [], 404));
