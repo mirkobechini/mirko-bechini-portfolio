@@ -1,4 +1,4 @@
-# ============================================================
+﻿# ============================================================
 # Predeploy Check — Mirko Bechini Portfolio (PowerShell)
 # ============================================================
 # Esegue in sequenza:
@@ -6,9 +6,12 @@
 #   2. php artisan test (PHP tests) → STOP se fallisce
 #   3. npm audit + auto-fix         → chiede se high/critical non fixabili
 #   4. composer audit + auto-fix    → chiede se high/critical non fixabili
+#   5. Controllo configurazione produzione (.env.production)
 # ============================================================
 
-$ErrorActionPreference = "Stop"
+# Continue: i comandi nativi (es. composer) scrivono messaggi normali su stderr, con "Stop" PowerShell 5.1 li tratterebbe
+# come errori. Gli esiti vengono controllati esplicitamente con $LASTEXITCODE.
+$ErrorActionPreference = "Continue"
 $rootDir = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
 Set-Location $rootDir
 
@@ -68,7 +71,7 @@ Print-Banner
 # STEP 1: JS Tests (vitest)
 # ============================================================
 $step = 1
-$totalSteps = 4
+$totalSteps = 5
 Print-Step $step $totalSteps "Test JavaScript (vitest)"
 
 try {
@@ -95,7 +98,7 @@ $step = 2
 Print-Step $step $totalSteps "Test PHP (phpunit)"
 
 try {
-    $output = .\vendor\bin\phpunit 2>&1
+    $output = php vendor/bin/phpunit 2>&1
     if ($LASTEXITCODE -eq 0) {
         Print-Result "PASS" "Tutti i test PHP superati"
     }
@@ -117,19 +120,19 @@ catch {
 $step = 3
 Print-Step $step $totalSteps "npm audit — controllo vulnerabilità JS"
 
-$npmOutput = npm audit 2>&1
+$npmOutput = npm audit --omit=dev 2>&1
 if ($LASTEXITCODE -eq 0) {
     Print-Result "PASS" "Nessuna vulnerabilità npm trovata"
 }
 else {
     Write-Host "🔍 Vulnerabilità npm trovate. Provo a fixare..." -ForegroundColor Yellow
     
-    $npmFixOutput = npm audit fix 2>&1
+    $npmFixOutput = npm audit fix --omit=dev 2>&1
     if ($LASTEXITCODE -eq 0) {
         Print-Result "PASS" "npm audit fix completato con successo"
     }
     else {
-        $npmAuditText = npm audit 2>&1 | Out-String
+        $npmAuditText = npm audit --omit=dev 2>&1 | Out-String
         
         if ($npmAuditText -match "high|critical") {
             Print-Result "WARN" "Vulnerabilità HIGH/CRITICAL in npm non fixabili automaticamente"
@@ -233,6 +236,38 @@ else {
         else {
             Print-Result "WARN" "Vulnerabilità composer moderate/basse — non bloccanti"
         }
+    }
+}
+
+# ============================================================
+# STEP 5: Controllo configurazione produzione
+# ============================================================
+$step = 5
+Print-Step $step $totalSteps "Configurazione produzione (.env.production)"
+
+$prodEnvFile = Join-Path (Split-Path -Parent $PSScriptRoot) ".env.production"
+
+if (-not (Test-Path $prodEnvFile)) {
+    Print-Result "WARN" ".env.production non trovato — controlla a mano le variabili su Laravel Cloud"
+}
+else {
+    $envOk = $true
+
+    if (Select-String -Path $prodEnvFile -Pattern '^APP_DEBUG=true' -Quiet) {
+        Print-Result "FAIL" "APP_DEBUG=true in .env.production"
+        $envOk = $false
+    }
+
+    if (-not (Select-String -Path $prodEnvFile -Pattern '^APP_ENV=production' -Quiet)) {
+        Print-Result "FAIL" "APP_ENV non è 'production' in .env.production"
+        $envOk = $false
+    }
+
+    if ($envOk) {
+        Print-Result "PASS" "Configurazione produzione corretta"
+    }
+    else {
+        exit 1
     }
 }
 

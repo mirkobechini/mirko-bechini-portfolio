@@ -13,7 +13,8 @@
         "test:watch": "vitest",
         "test:coverage": "vitest run --coverage",
         "lighthouse": "npx --yes @lhci/cli@0.15.1 autorun",
-        "predeploy": "bash scripts/predeploy.sh"
+        "predeploy": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/predeploy.ps1",
+        "predeploy:sh": "bash scripts/predeploy.sh"
     },
     "devDependencies": {
         "@eslint/js": "^10.0.1",
