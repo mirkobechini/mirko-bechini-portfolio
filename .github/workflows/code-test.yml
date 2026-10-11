@@ -38,6 +38,10 @@ jobs:
 
       - name: Run JS tests (Vitest)
         run: npm test
+        env:
+          # laravel-vite-plugin rifiuta di caricarsi con CI=true (pensato per il server HMR):
+          # Vitest carica vite.config.js, quindi va disattivato il controllo
+          LARAVEL_BYPASS_ENV_CHECK: "1"
 
       - name: Build Vite assets
         run: npm run build
