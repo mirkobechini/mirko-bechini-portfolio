@@ -29,7 +29,7 @@
     border: 0.3125rem solid #4b2c1e;
     box-shadow: inset 0 0 6.25rem rgb(0 0 0 / 50%);
 
-    animation: deskSlideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation: desk-slide-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
 :global([data-modal-theme="desk"] [data-modal-slot="title"]) {
