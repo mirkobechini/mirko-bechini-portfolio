@@ -35,16 +35,17 @@ class SecurityHeaders
     private function contentSecurityPolicy(): string
     {
         $iubenda = 'https://*.iubenda.com';
+        [$viteHttp, $viteWs] = $this->viteDevOrigins();
 
         return implode('; ', [
             "default-src 'self'",
             // 'unsafe-inline': lo script del loader Iubenda è inline in app.blade.php
-            "script-src 'self' 'unsafe-inline' {$iubenda}",
-            "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com {$iubenda}",
+            "script-src 'self' 'unsafe-inline' {$iubenda}{$viteHttp}",
+            "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com {$iubenda}{$viteHttp}",
             "font-src 'self' data: https://fonts.gstatic.com",
             "img-src 'self' data: https:",
             "media-src 'self'",
-            "connect-src 'self' https://api.github.com {$iubenda}",
+            "connect-src 'self' https://api.github.com {$iubenda}{$viteHttp}{$viteWs}",
             "frame-src {$iubenda}",
             "worker-src 'self'",
             "manifest-src 'self'",
@@ -53,5 +54,32 @@ class SecurityHeaders
             "form-action 'self'",
             "frame-ancestors 'self'",
         ]);
+    }
+
+    /**
+     * Origini del dev server Vite (script/CSS via HTTP, HMR via WebSocket), solo in locale
+     * e solo mentre Vite è in esecuzione (esiste public/hot). Così la console mostra solo
+     * le violazioni vere. Restituisce due stringhe già pronte da accodare alle direttive.
+     *
+     * @return array{0: string, 1: string}
+     */
+    private function viteDevOrigins(): array
+    {
+        $hotFile = public_path('hot');
+
+        if (! app()->environment('local') || ! is_file($hotFile)) {
+            return ['', ''];
+        }
+
+        $parts = parse_url(trim((string) file_get_contents($hotFile)));
+
+        if (! isset($parts['scheme'], $parts['host'])) {
+            return ['', ''];
+        }
+
+        $authority = $parts['host'].(isset($parts['port']) ? ':'.$parts['port'] : '');
+        $wsScheme = $parts['scheme'] === 'https' ? 'wss' : 'ws';
+
+        return [" {$parts['scheme']}://{$authority}", " {$wsScheme}://{$authority}"];
     }
 }

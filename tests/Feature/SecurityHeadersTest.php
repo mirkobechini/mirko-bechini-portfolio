@@ -52,4 +52,50 @@ class SecurityHeadersTest extends TestCase
         $this->get('https://localhost/')
             ->assertHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
     }
+
+    public function test_vite_dev_origins_are_not_allowed_outside_local(): void
+    {
+        $this->usePublicDirWithHotFile('http://[::1]:5173');
+
+        $csp = $this->get('/')->headers->get('Content-Security-Policy-Report-Only');
+
+        $this->assertStringNotContainsString('5173', $csp);
+    }
+
+    public function test_vite_dev_origins_are_allowed_in_local_while_vite_runs(): void
+    {
+        $this->app['env'] = 'local';
+        $this->usePublicDirWithHotFile('http://[::1]:5173');
+
+        $csp = $this->get('/')->headers->get('Content-Security-Policy-Report-Only');
+
+        $this->assertStringContainsString("script-src 'self' 'unsafe-inline' https://*.iubenda.com http://[::1]:5173", $csp);
+        $this->assertStringContainsString('ws://[::1]:5173', $csp);
+    }
+
+    public function test_no_vite_origins_in_local_without_a_hot_file(): void
+    {
+        $this->app['env'] = 'local';
+        $this->usePublicDirWithHotFile(null);
+
+        $csp = $this->get('/')->headers->get('Content-Security-Policy-Report-Only');
+
+        $this->assertStringNotContainsString('5173', $csp);
+    }
+
+    /**
+     * Usa una cartella "public" temporanea, così i test non toccano il vero public/hot
+     * (che esiste mentre il dev server Vite è in esecuzione).
+     */
+    private function usePublicDirWithHotFile(?string $hotContent): void
+    {
+        $dir = sys_get_temp_dir().'/portfolio-public-'.uniqid();
+        mkdir($dir);
+
+        if ($hotContent !== null) {
+            file_put_contents($dir.'/hot', $hotContent);
+        }
+
+        $this->app->usePublicPath($dir);
+    }
 }
