@@ -21,6 +21,7 @@
 - [Dati dei progetti](#-dati-dei-progetti)
 - [Test](#-test)
 - [Sicurezza](#-sicurezza)
+- [Pannello di amministrazione](#️-pannello-di-amministrazione)
 - [Deploy](#-deploy)
 - [Struttura del progetto](#-struttura-del-progetto)
 - [GitHub Actions](#-github-actions)
@@ -202,6 +203,28 @@ Il middleware `App\Http\Middleware\SecurityHeaders` (registrato in `bootstrap/ap
 - **HSTS** è già gestito da Cloudflare: non attivarlo anche in Laravel per non duplicarlo.
 - `trustProxies('*')` è attivo perché l'app sta dietro Cloudflare e Laravel Cloud.
 - Gli URL sconosciuti rispondono **404** (con la pagina d'errore dell'SPA), non 200.
+
+---
+
+## 🛡️ Pannello di amministrazione
+
+Il pannello (Filament 5) è su **`/admin`** e serve ad aggiornare i contenuti del sito senza fare un deploy. Oggi c'è l'accesso protetto; le risorse (progetti, competenze...) arrivano per fasi, vedi `FUTURE-PLAN.md`.
+
+- **Accesso:** solo utenti con `is_admin = true`. Un utente creato dal comando **non entra** finché non viene abilitato a mano (la colonna non è assegnabile in massa, di proposito).
+- **2FA obbligatoria** con app autenticatrice (al primo accesso il pannello obbliga a configurarla e mostra i codici di recupero: vanno conservati).
+- **Nessuna registrazione pubblica:** gli utenti si creano solo da comando.
+- Il pannello è escluso dalla CSP, dal service worker della PWA e dall'indicizzazione (`robots.txt`).
+
+**Creare l'amministratore** (in locale e, una volta, in produzione):
+
+```bash
+php artisan make:filament-user --name="Mirko" --email="LA-TUA-EMAIL" --password="PasswordTemporanea1"
+php artisan tinker --execute="App\Models\User::where('email', 'LA-TUA-EMAIL')->update(['is_admin' => true]);"
+```
+
+Poi apri `/admin`, accedi e configura il 2FA; cambia la password dal profilo. Su Laravel Cloud i due comandi si lanciano dalla scheda **Commands** dell'ambiente (accettano solo comandi non interattivi, per questo si passano `--name`, `--email` e `--password`).
+
+Gli asset di Filament (`public/css|js|fonts/filament`) **non sono nel repo**: si pubblicano da soli a ogni `composer install` (script `filament:upgrade`).
 
 ---
 
