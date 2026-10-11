@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import projectsMeta from '../features/modals/projects/services/projectsMeta';
-import { transformRepos, mapRepoToProject, filterRepos } from '../features/modals/projects/services/projectMapper';
+import { transformRepos, mapRepoToProject } from '../features/modals/projects/services/projectMapper';
 
 describe('projectsMeta', () => {
     it('exports an object with known project keys', () => {
@@ -92,27 +92,6 @@ describe('projectMapper', () => {
             { ...mockMeta, live: undefined }
         );
         expect(result.live).toBe('#');
-    });
-
-    it('filterRepos excludes repos with exclude: true in meta', () => {
-        const repos = [
-            { name: 'good-repo', fork: false, archived: false },
-            { name: 'excluded-repo', fork: false, archived: false },
-        ];
-        const metaWithExclude = {
-            'good-repo': { type: 'frontend', projectScope: 'personal', extraTechnologies: [] },
-            'excluded-repo': { type: 'backend', projectScope: 'personal', extraTechnologies: [], exclude: true },
-        };
-
-        // Temporaneamente sovrascriviamo projectsMeta per il test
-        const result = repos.filter(repo => {
-            const meta = metaWithExclude[repo.name];
-            if (meta && meta.exclude) return false;
-            return true;
-        });
-
-        expect(result).toHaveLength(1);
-        expect(result[0].name).toBe('good-repo');
     });
 
     it('transformRepos produces array with required fields', () => {
