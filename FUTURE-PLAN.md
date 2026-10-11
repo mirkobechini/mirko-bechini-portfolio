@@ -14,7 +14,7 @@ Già fatto e in produzione (o pronto nel branch `dev`):
 
 1. Per cambiare una descrizione, una skill o un corso devi modificare il codice e fare un deploy (`projectsMeta.js`, `skillsData.js`, `educationData.js`, `certificationData.js`, `contactsData.js`).
 2. Il browser chiama GitHub direttamente: limite di **60 richieste/ora per IP** senza token, e ogni visitatore rifà la stessa chiamata.
-3. Non si possono caricare immagini (anteprime dei progetti: oggi è un placeholder).
+3. Le anteprime dei progetti sono un segnaposto (caricare immagini è stato rimandato, vedi le decisioni).
 
 ## Obiettivo
 
@@ -33,15 +33,17 @@ Pannello /admin (Filament, login)
   React: useProjects / useSkills ...    (se l'API fallisce → dati statici)
 ```
 
-## Decisioni da prendere (prima di cominciare)
+## Decisioni prese (2026-10-11)
 
-| # | Domanda | Note |
+| # | Domanda | Decisione |
 |---|---|---|
-| 1 | Quali contenuti gestire da pannello? | Proposta: **progetti** (priorità), poi competenze, formazione, certificazioni, contatti. Si può fare a fasi. |
-| 2 | Database? | Laravel Cloud offre database gestiti (MySQL/Postgres): verificare piano e costo nel pannello. In locale con Herd/SQLite. |
-| 3 | Anteprime dei progetti? | Serve storage per le immagini (bucket di Laravel Cloud o disco locale). Se non servono subito, si rimanda. |
-| 4 | Il sync GitHub sovrascrive i campi del pannello? | Proposta: il sync aggiorna solo i campi "di GitHub" (nome, stelle, data, URL, linguaggio, topics); descrizione IT, tipo, scope, pinned, nascosto restano del pannello. |
-| 5 | Chi accede a `/admin`? | Un solo utente (tu), con 2FA. Nessuna registrazione pubblica. |
+| 1 | Quali contenuti gestire da pannello? | **Tutti e quattro**, a fasi: **progetti** per primi, poi competenze, formazione e certificazioni, contatti. |
+| 2 | Database | **MySQL** in produzione su Laravel Cloud (come `CV_Backoffice`; da verificare nel pannello se si può riusare lo stesso cluster con un database separato). **SQLite** in locale. Le migrazioni restano portabili. In produzione SQLite non va bene: il disco di Cloud si azzera a ogni deploy. |
+| 3 | Anteprime dei progetti | **Rimandate**: resta il segnaposto di oggi. Niente upload né storage per ora. |
+| 4 | Sync GitHub | Il sync aggiorna **solo i campi di GitHub** (nome, stelle, data, URL, linguaggio, topics). Descrizione in italiano, tipo, scope, in evidenza e nascosto restano sempre quelli del pannello. |
+| 5 | Accesso e indirizzo | **Un solo utente (tu), con 2FA obbligatoria**, creato da comando: nessuna registrazione pubblica. Pannello su **`/admin`**. |
+
+Riferimento: `portfolio-chicca` usa già **Filament 5** (5.10 al 2026-10-11) con Laravel 13 e PHP 8.4: per questo progetto vale Filament 5, non la 4. Controllare i requisiti di Laravel 12 all'installazione.
 
 ## Modello dati (bozza)
 
@@ -77,12 +79,12 @@ Ogni tabella ricalca i campi dei file `*Data.js` attuali, così il seeder può i
 
 Una branch per fase (`feat/...`), merge in `dev` con `--no-ff`, test verdi prima di ogni merge.
 
-1. **Fondamenta**: database locale e in produzione, migrazione e modello `Project`, seeder dai dati attuali, test dei modelli.
+1. **Fondamenta**: database (SQLite in locale, MySQL in produzione), migrazione e modello `Project`, seeder dai dati attuali (`projectsMeta.js` + `fallbackProjects.js`), test dei modelli.
 2. **Filament**: installazione, utente admin, risorsa `Project` (elenco, modifica, nascondi/fissa), 2FA, esclusione di `/admin` dalla CSP + test.
 3. **Sync GitHub**: comando `github:sync-projects` (+ test con `Http::fake`), scheduler, token.
 4. **API progetti**: endpoint, cache con invalidazione, throttle, 404 JSON per `api/*`, test Feature.
 5. **Frontend progetti**: `useProjects` con fallback, test (stile `useGithubProjects.test.jsx`), rimozione della chiamata diretta a GitHub dal browser.
-6. **Altre sezioni**: skills, education, certifications, contacts, ognuna con migrazione, risorsa Filament, endpoint e hook. Se serve, upload immagini.
+6. **Altre sezioni**: skills, education, certifications, contacts, ognuna con migrazione, risorsa Filament, endpoint e hook (una fase per sezione). L'upload delle immagini resta fuori finché non viene ripreso.
 7. **Pulizia**: togliere i file `*Data.js` solo se i fallback non servono più (probabilmente conviene tenerli), aggiornare README e questo documento.
 
 ## Rischi e punti di attenzione
