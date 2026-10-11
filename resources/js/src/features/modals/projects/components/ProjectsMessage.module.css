@@ -1,0 +1,30 @@
+/* Riquadro di stato: stesso linguaggio visivo delle card progetto (blueprint) */
+.message {
+    max-width: 30rem;
+    margin: var(--space-sm) auto;
+    padding: var(--space-md) var(--space-lg);
+
+    font-size: var(--text-sm);
+    line-height: 1.5;
+    text-align: center;
+
+    color: #0d47a1;
+    background: #e3f2fd;
+    border-left: 0.3125rem solid #1565c0;
+
+    box-shadow: 0.3125rem 0.3125rem 0.9375rem rgb(0 0 0 / 30%);
+}
+
+.message p {
+    margin: 0;
+}
+
+.message p + p {
+    margin-top: var(--space-xs);
+}
+
+.error {
+    color: #7a1c1c;
+    background: #ffebee;
+    border-left-color: #c62828;
+}

@@ -4,6 +4,7 @@ import sharedStyles from '../shared/SharedModal.module.css';
 import FilterPanel from './components/FilterPanel';
 import FilterGroup from './components/FilterGroup';
 import ProjectsGrid from './components/ProjectsGrid';
+import ProjectsMessage from './components/ProjectsMessage';
 import useProjectFilters from './hooks/useProjectFilters';
 import useGithubProjects from '../../../hooks/useGithubProjects';
 import { getAssetPath } from '../../../utils/assets';
@@ -112,20 +113,20 @@ const ProjectsModal = memo(function ProjectsModal({ onBackToProjectsHome }) {
 
             <div className={`${styles['projects-view']} ${sharedStyles['scroll-y-contain']}`}>
                 {loading && !hasProjects ? (
-                    <div className={styles['no-projects']}>
+                    <ProjectsMessage>
                         <p>Caricamento progetti...</p>
-                    </div>
+                    </ProjectsMessage>
                 ) : error && !hasProjects ? (
-                    <div className={styles['no-projects']}>
+                    <ProjectsMessage variant="error">
                         <p>{error}</p>
                         <p>Riprova più tardi o ricarica la pagina.</p>
-                    </div>
+                    </ProjectsMessage>
                 ) : (
                     <>
                         {error && (
-                            <p role="status" className={styles['no-projects']}>
+                            <ProjectsMessage variant="error" role="status">
                                 Impossibile aggiornare i progetti: i dati mostrati potrebbero non essere aggiornati.
-                            </p>
+                            </ProjectsMessage>
                         )}
                         <ProjectsGrid projects={filteredProjects} />
                     </>
