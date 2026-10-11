@@ -65,7 +65,7 @@
 | Frontend                                                   | Backend                              |
 | :--------------------------------------------------------- | :----------------------------------- |
 | [React](https://react.dev) ^19.2.7                         | [Laravel](https://laravel.com) ^12.0 |
-| [React Router](https://reactrouter.com) ^7.18              | [PHP](https://php.net) ^8.2          |
+| [React Router](https://reactrouter.com) ^7.18              | [PHP](https://php.net) ^8.4          |
 | [Vite](https://vitejs.dev) ^8.0                            |                                      |
 | [NES.css](https://nostalgic-css.github.io/NES.css/) ^2.2.1 |                                      |
 | [Vitest](https://vitest.dev) ^4.1 (test)                   |                                      |
@@ -77,7 +77,7 @@
 ### Prerequisiti
 
 - Node.js 24+
-- PHP 8.2+
+- PHP 8.4+ (in produzione 8.5)
 - Composer 2.x
 
 ### Installazione
@@ -175,7 +175,7 @@ Per aggiungere o nascondere un progetto basta aggiornare `projectsMeta.js`.
 ```bash
 npm test                 # JS: Vitest + Testing Library (jsdom)
 npm run test:coverage    # con report di copertura
-php artisan test         # PHP: rotte, 404, header di sicurezza
+php artisan test         # PHP: rotte, 404, header di sicurezza, versione PHP del lock
 ```
 
 - I test JS stanno in `resources/js/src/test/`. Oltre ai componenti e agli hook, ci sono controlli "di guardia" sul CSS (es. `cssKeyframes.test.js` verifica che ogni `animation:` abbia il suo `@keyframes`: nei CSS modules un nome scritto in camelCase invece che kebab-case fa semplicemente non partire l'animazione).
@@ -216,6 +216,8 @@ npm run predeploy
 ```
 
 Esegue test JS e PHP, `npm audit --omit=dev` e `composer audit` (provando a correggere con `npm audit fix` / `composer update`: se cambiano i lockfile, committali) e, se esiste un `.env.production` locale, blocca il deploy con `APP_DEBUG=true` o `APP_ENV` diverso da `production`.
+
+**Versione di PHP:** `composer.json` richiede `^8.4` (minimo supportato) e la produzione va impostata su **PHP 8.5** nelle impostazioni dell'ambiente di Laravel Cloud. La CI testa 8.4 e 8.5. Il test `ComposerLockPhpVersionTest` fallisce se un `composer update` porta nel lock pacchetti che richiedono un PHP più recente del minimo dichiarato (è già successo: Symfony 8 richiede PHP ≥ 8.4).
 
 **Variabili d'ambiente su Laravel Cloud** (nel pannello, non nel repo):
 
@@ -309,7 +311,7 @@ Il workflow **Verification Tests** (`code-test.yml`) si attiva su push e pull re
 
 ### `php-tests`
 
-1. ✅ **Setup PHP** 8.2 + Composer
+1. ✅ **Setup PHP** 8.4 e 8.5 (matrice) + Composer
 2. ✅ **Setup Node.js** 24
 3. ✅ **Cache** vendor + node_modules
 4. ✅ **Install** `composer install` + `npm ci`
