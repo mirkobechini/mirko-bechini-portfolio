@@ -40,6 +40,20 @@ class SecurityHeadersTest extends TestCase
         $response->assertHeaderMissing('Content-Security-Policy');
     }
 
+    public function test_the_admin_panel_is_excluded_from_the_csp_but_keeps_the_other_headers(): void
+    {
+        $this->get('/admin/login')
+            ->assertOk()
+            ->assertHeaderMissing('Content-Security-Policy-Report-Only')
+            ->assertHeader('X-Content-Type-Options', 'nosniff')
+            ->assertHeader('X-Frame-Options', 'SAMEORIGIN');
+    }
+
+    public function test_the_portfolio_keeps_the_csp(): void
+    {
+        $this->get('/')->assertHeader('Content-Security-Policy-Report-Only');
+    }
+
     public function test_hsts_is_not_sent_by_default(): void
     {
         $this->get('/')->assertHeaderMissing('Strict-Transport-Security');
