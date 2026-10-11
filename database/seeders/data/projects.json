@@ -1,0 +1,245 @@
+[
+    {
+        "github_repo": "gods-backoffice",
+        "title": "Gods Backoffice",
+        "description_it": "Backend realizzato come esame finale del corso Boolean. Include CRUD completo, gestione API per interazione con front-end, autenticazione Breeze e gestione relazioni DB.",
+        "type": "backend",
+        "scope": "work",
+        "technologies": [
+            "PHP",
+            "Laravel",
+            "Blade",
+            "MySQL",
+            "Breeze",
+            "Bootstrap",
+            "API"
+        ],
+        "extra_technologies": [],
+        "repo_url": "https://github.com/mirkobechini/gods-backoffice",
+        "live_url": null,
+        "stars": 0,
+        "pushed_at": null,
+        "pinned": false,
+        "hidden": false
+    },
+    {
+        "github_repo": "gods-guest-site",
+        "title": "Gods Guest Site",
+        "description_it": "Frontend per esame del corso Boolean permette di consultare le varie mitologie e dei ricevuti tramite chiamate axios a API REST, caratterizzato da design responsive, dark mode e animazioni.",
+        "type": "frontend",
+        "scope": "work",
+        "technologies": [
+            "React",
+            "HTML",
+            "CSS",
+            "Bootstrap",
+            "JS"
+        ],
+        "extra_technologies": [
+            "Axios"
+        ],
+        "repo_url": "https://github.com/mirkobechini/gods-guest-site",
+        "live_url": null,
+        "stars": 0,
+        "pushed_at": null,
+        "pinned": false,
+        "hidden": false
+    },
+    {
+        "github_repo": "CV_Backoffice",
+        "title": "CV Backoffice",
+        "description_it": "Gestione flotta mezzi con monitoraggio delle scadenze, gestione di eventuali guasti, log chilometrici, registrazione e gestione dell'equipaggiamento di ogni mezzo.",
+        "type": "backend",
+        "scope": "personal",
+        "technologies": [
+            "PHP",
+            "Laravel",
+            "Blade",
+            "Breeze",
+            "Bootstrap",
+            "MySQL"
+        ],
+        "extra_technologies": [],
+        "repo_url": "https://github.com/mirkobechini/CV_Backoffice",
+        "live_url": null,
+        "stars": 0,
+        "pushed_at": null,
+        "pinned": true,
+        "hidden": false
+    },
+    {
+        "github_repo": "digital-business-card",
+        "title": "Digital Business Card",
+        "description_it": "Biglietto da visita digitale realizzato in React come esercizio del corso React di Scrimba.",
+        "type": "frontend",
+        "scope": "personal",
+        "technologies": [
+            "React",
+            "HTML",
+            "CSS",
+            "Bootstrap",
+            "Vite"
+        ],
+        "extra_technologies": [],
+        "repo_url": "https://github.com/mirkobechini/digital-business-card",
+        "live_url": "https://mirkobechini.github.io/digital-business-card/",
+        "stars": 0,
+        "pushed_at": null,
+        "pinned": false,
+        "hidden": false
+    },
+    {
+        "github_repo": "tenzies",
+        "title": "Tenzies",
+        "description_it": "Gioco di dadi realizzato in React come esercizio del corso React di Scrimba.",
+        "type": "frontend",
+        "scope": "personal",
+        "technologies": [
+            "React",
+            "HTML",
+            "CSS",
+            "Vite"
+        ],
+        "extra_technologies": [
+            "Figma"
+        ],
+        "repo_url": "https://github.com/mirkobechini/tenzies",
+        "live_url": "https://mirkobechini.github.io/tenzies/",
+        "stars": 0,
+        "pushed_at": null,
+        "pinned": false,
+        "hidden": false
+    },
+    {
+        "github_repo": "assembly-endgame",
+        "title": "Assembly Endgame",
+        "description_it": "Sito web per un progetto di gioco da tavolo, realizzato in React come esercizio del corso React di Scrimba.",
+        "type": "frontend",
+        "scope": "personal",
+        "technologies": [
+            "React",
+            "HTML",
+            "CSS",
+            "Vite"
+        ],
+        "extra_technologies": [
+            "Figma"
+        ],
+        "repo_url": "https://github.com/mirkobechini/assembly-endgame",
+        "live_url": "https://mirkobechini.github.io/assembly-endgame/",
+        "stars": 0,
+        "pushed_at": null,
+        "pinned": false,
+        "hidden": false
+    },
+    {
+        "github_repo": "quizzical",
+        "title": "Quizzical",
+        "description_it": "Quiz interattivo realizzato in React come esercizio del corso React di Scrimba.",
+        "type": "frontend",
+        "scope": "personal",
+        "technologies": [
+            "React",
+            "HTML",
+            "CSS",
+            "Vite"
+        ],
+        "extra_technologies": [
+            "Figma"
+        ],
+        "repo_url": "https://github.com/mirkobechini/quizzical",
+        "live_url": "https://mirkobechini.github.io/quizzical/",
+        "stars": 0,
+        "pushed_at": null,
+        "pinned": false,
+        "hidden": false
+    },
+    {
+        "github_repo": "mirko-bechini-portfolio",
+        "title": "Portfolio personale",
+        "description_it": "Portfolio personale realizzato in React con Vite, progettato per mostrare il mio percorso e le mie competenze.",
+        "type": "fullstack",
+        "scope": "personal",
+        "technologies": [
+            "React",
+            "HTML",
+            "CSS",
+            "Vite",
+            "Laravel",
+            "JS"
+        ],
+        "extra_technologies": [
+            "CSS Animations",
+            "PWA"
+        ],
+        "repo_url": "https://github.com/mirkobechini/mirko-bechini-portfolio",
+        "live_url": "https://mirkobechini.com/",
+        "stars": 0,
+        "pushed_at": null,
+        "pinned": true,
+        "hidden": false
+    },
+    {
+        "github_repo": "pdfEditor",
+        "title": "PdfEditor",
+        "description_it": "Applicazione cross-platform per la modifica e gestione di file PDF, con funzionalità di visualizzazione, annotazione, conversione, modifica testo e manipolazione avanzata. Architettura modulare che copre web (Next.js), desktop (Tauri v2), mobile (React Native) e backend (FastAPI).",
+        "type": "fullstack",
+        "scope": "personal",
+        "technologies": [],
+        "extra_technologies": [
+            "AI",
+            "Next.js",
+            "React Native",
+            "Tauri",
+            "FastAPI",
+            "Python",
+            "TypeScript",
+            "TailwindCSS"
+        ],
+        "repo_url": "https://github.com/mirkobechini/pdfEditor",
+        "live_url": "https://pdfeditor.mirkobechini.com/",
+        "stars": 0,
+        "pushed_at": null,
+        "pinned": true,
+        "hidden": false
+    },
+    {
+        "github_repo": "nasa-neam",
+        "title": "Nasa - NEAM",
+        "description_it": "Webapp per monitorare asteroidi near-Earth usando l'API gratuita NASA NeoWs, con visualizzazioni interattive, alert system e risorse educative. Singolo deploy su Vercel.",
+        "type": "fullstack",
+        "scope": "personal",
+        "technologies": [],
+        "extra_technologies": [
+            "AI",
+            "Next.js",
+            "SQLite",
+            "Three.js",
+            "NASA API"
+        ],
+        "repo_url": "https://github.com/mirkobechini/nasa-neam",
+        "live_url": null,
+        "stars": 0,
+        "pushed_at": null,
+        "pinned": false,
+        "hidden": false
+    },
+    {
+        "github_repo": "agent-skills",
+        "title": "AI Agent Skills",
+        "description_it": "Repo con le varie skill sviluppate per l'AI Agent.",
+        "type": "fullstack",
+        "scope": "personal",
+        "technologies": [],
+        "extra_technologies": [
+            "AI",
+            "Python"
+        ],
+        "repo_url": "https://github.com/mirkobechini/agent-skills",
+        "live_url": null,
+        "stars": 0,
+        "pushed_at": null,
+        "pinned": true,
+        "hidden": false
+    }
+]
