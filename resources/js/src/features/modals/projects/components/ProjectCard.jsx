@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import styles from '../ProjectsModal.module.css';
+import styles from './ProjectCard.module.css';
 import { isValidLink } from '../../../../utils/links';
 
 const ProjectCard = memo(function ProjectCard({ project, isAlternate }) {

@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import styles from '../ProjectsModal.module.css';
+import styles from './FilterGroup.module.css';
 
 const FilterGroup = memo(function FilterGroup({ options, name, selectedValue, onChange }) {
     return (

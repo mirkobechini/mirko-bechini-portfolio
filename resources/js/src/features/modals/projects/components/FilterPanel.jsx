@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import styles from '../ProjectsModal.module.css';
+import styles from './FilterPanel.module.css';
 
 const FilterPanel = memo(function FilterPanel({
     children,
