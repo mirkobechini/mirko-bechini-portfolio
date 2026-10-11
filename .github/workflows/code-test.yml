@@ -91,6 +91,9 @@ jobs:
           cp .env.ci .env
           php artisan key:generate --force
 
+      - name: Check PHP code style (Pint)
+        run: vendor/bin/pint --test
+
       - name: Run PHP tests
         run: php artisan test
 
