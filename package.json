@@ -2,7 +2,8 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "dev": "concurrently \"npm run vite\" \"npm run laravel\"",
+        "dev": "vite",
+        "dev:serve": "concurrently \"npm run vite\" \"npm run laravel\"",
         "vite": "vite",
         "laravel": "php artisan serve",
         "build": "vite build",
