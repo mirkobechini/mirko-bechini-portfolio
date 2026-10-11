@@ -143,7 +143,7 @@
         border-width: 90px 40px 90px 40px;
         padding: 0;
 
-        border-image-source: url("/assets/modals/skills/ui/book-modal-parchment.png");
+        border-image-source: url("/assets/modals/skills/ui/book-modal-parchment.webp");
         border-image-slice: 90 40 90 40 fill;
         border-image-width: 90px 40px 90px 40px;
         border-image-repeat: stretch;
