@@ -1,0 +1,46 @@
+# Dependabot: le PR di aggiornamento vanno su `dev` (non su `main`), così passano dal flusso
+# normale (branch -> dev con merge --no-ff -> main al rilascio) e `main` non diverge più.
+# Nota: il file deve stare sul branch predefinito (main) per essere letto da Dependabot.
+version: 2
+
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    target-branch: "dev"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore(deps)"
+    groups:
+      # le minori/patch dei soli strumenti di sviluppo arrivano in un'unica PR
+      dev-tooling:
+        dependency-type: "development"
+        update-types: ["minor", "patch"]
+
+  - package-ecosystem: "composer"
+    directory: "/"
+    target-branch: "dev"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore(deps)"
+    ignore:
+      # laravel/framework 13 è una migrazione da pianificare, non un aggiornamento automatico
+      - dependency-name: "laravel/framework"
+        update-types: ["version-update:semver-major"]
+    groups:
+      dev-tooling:
+        dependency-type: "development"
+        update-types: ["minor", "patch"]
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    target-branch: "dev"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: "chore(ci)"
