@@ -36,6 +36,9 @@ jobs:
       - name: Run ESLint
         run: npm run lint
 
+      - name: Run JS tests (Vitest)
+        run: npm test
+
       - name: Build Vite assets
         run: npm run build
 
