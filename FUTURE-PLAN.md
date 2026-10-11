@@ -1,211 +1,93 @@
-# Piano di sviluppo: GitHub API → Laravel Backend
+# Piano futuro: backend Laravel + Filament
 
-## Stato attuale
+Documento di pianificazione. Aggiornalo man mano che le decisioni vengono prese e le fasi completate.
 
-I dati dei progetti sono hardcoded in `resources/js/src/features/modals/projects/projectData.js`.
-Obiettivo: renderli dinamici partendo dalla GitHub REST API, con un'architettura che permetta in futuro di migrare a un backend Laravel senza stravolgimenti.
+## Dove siamo
 
----
+Già fatto e in produzione (o pronto nel branch `dev`):
 
-## Architettura a 3 strati
+- Progetti letti dalla GitHub REST API (`githubApi.js` → `projectMapper.js` → `ProjectsModal`), con descrizioni, tipo, scope e `pinned` in `projectsMeta.js`, cache in `localStorage` e fallback statico.
+- Backend Laravel 12 minimale: serve l'SPA, 404 reale, header di sicurezza (CSP ancora in sola osservazione), `trustProxies`.
+- Test (Vitest ~370, PHPUnit), CI con lint/test/build, `npm run predeploy`, 0 vulnerabilità note.
 
-### ORA: GitHub API
+**Cosa non va bene oggi, e perché serve un backend:**
 
-```
-ProjectsModal → useGithubProjects → GitHub REST API
-                                  → projectsMeta.js (mapping locale)
-```
+1. Per cambiare una descrizione, una skill o un corso devi modificare il codice e fare un deploy (`projectsMeta.js`, `skillsData.js`, `educationData.js`, `certificationData.js`, `contactsData.js`).
+2. Il browser chiama GitHub direttamente: limite di **60 richieste/ora per IP** senza token, e ogni visitatore rifà la stessa chiamata.
+3. Non si possono caricare immagini (anteprime dei progetti: oggi è un placeholder).
 
-### FUTURO: Laravel backend
+## Obiettivo
 
-```
-ProjectsModal → useProjects → GET /api/projects → Laravel API
-                                                    ↓
-                                                 php artisan github:sync-projects (cron)
-```
-
-I due percorsi condividono la **stessa interfaccia** — il `ProjectCard` e i componenti di presentazione non sanno da dove arrivano i dati.
-
----
-
-## Struttura nuovi file
+Un pannello `/admin` (Filament) per aggiornare i contenuti senza deploy, e un'API in sola lettura che il frontend React consuma. I dati attuali restano nel bundle come **fallback**, quindi il sito funziona anche se l'API non risponde.
 
 ```
-resources/js/src/
-├── features/modals/projects/
-│   ├── projectData.js              ← ELIMINATO (sostituito)
-│   ├── services/
-│   │   ├── githubApi.js            ← Chiamata a GitHub REST API
-│   │   ├── projectsMeta.js         ← Mapping locale (descrizioni IT, type, scope, live)
-│   │   └── projectMapper.js        ← Unisce GitHub data + meta → formato card
-│   └── ProjectsModal.jsx           ← Leggermente modificato (usa useGithubProjects)
-├── hooks/
-│   ├── useGithubProjects.js         ← Hook: fetch + cache + loading/error
-│   └── useLocalStorage.js           ← Hook generico localStorage con TTL
+Pannello /admin (Filament, login)
+        │ scrive
+        ▼
+     Database ◄── php artisan github:sync-projects (scheduler, token GitHub)
+        │ legge
+        ▼
+  GET /api/projects, /api/skills, ...   (cache + throttle)
+        │
+        ▼
+  React: useProjects / useSkills ...    (se l'API fallisce → dati statici)
 ```
 
----
+## Decisioni da prendere (prima di cominciare)
 
-## Dettaglio file
+| # | Domanda | Note |
+|---|---|---|
+| 1 | Quali contenuti gestire da pannello? | Proposta: **progetti** (priorità), poi competenze, formazione, certificazioni, contatti. Si può fare a fasi. |
+| 2 | Database? | Laravel Cloud offre database gestiti (MySQL/Postgres): verificare piano e costo nel pannello. In locale con Herd/SQLite. |
+| 3 | Anteprime dei progetti? | Serve storage per le immagini (bucket di Laravel Cloud o disco locale). Se non servono subito, si rimanda. |
+| 4 | Il sync GitHub sovrascrive i campi del pannello? | Proposta: il sync aggiorna solo i campi "di GitHub" (nome, stelle, data, URL, linguaggio, topics); descrizione IT, tipo, scope, pinned, nascosto restano del pannello. |
+| 5 | Chi accede a `/admin`? | Un solo utente (tu), con 2FA. Nessuna registrazione pubblica. |
 
-### `services/projectsMeta.js`
+## Modello dati (bozza)
 
-Contiene solo ciò che GitHub **non** può fornire:
+Ogni tabella ricalca i campi dei file `*Data.js` attuali, così il seeder può importarli così come sono.
 
-- `type` (frontend/backend/fullstack)
-- `projectScope` (personal/work)
-- `description` in italiano
-- `live` URL personalizzato (se diverso dalla homepage GitHub)
-- `exclude: true` per repo da nascondere (fork, esercizi, config)
+- **projects**: `github_repo` (unico), `title`, `description_it`, `type`, `scope`, `technologies` (json), `repo_url`, `live_url`, `preview_path`, `stars`, `pushed_at`, `pinned`, `hidden`, `synced_at`.
+- **skills**: `name`, `icon_path`, `category`, `color`, `functions` (json), `related_projects` (json), `sort`.
+- **education**, **certifications**, **contacts**: campi come nei rispettivi `*Data.js`, più `sort` e `visible`.
 
-```js
-export const projectsMeta = {
-    "gods-backoffice": {
-        type: "backend",
-        projectScope: "work",
-        description: "Backend realizzato come esame finale...",
-    },
-    // ...
-};
-```
+## API (sola lettura)
 
-### `services/githubApi.js`
+- `GET /api/projects`, `/api/skills`, `/api/education`, `/api/certifications`, `/api/contacts`: JSON nello **stesso formato** che i componenti React ricevono oggi (nessun cambio ai componenti di presentazione).
+- Cache lato server (es. 10 min, invalidata a ogni salvataggio dal pannello), `throttle`, `Cache-Control` per Cloudflare.
+- Le URL `api/*` sconosciute devono rispondere **404 in JSON** (oggi il fallback serve l'SPA: va aggiunto un ramo per `api/*` in `routes/web.php`). I test `test_api` e `test_api_notFound` in `RoutesTest` sono già lì a proteggere questo comportamento.
 
-- Chiamata a `GET https://api.github.com/users/mirkobechini/repos?per_page=100&sort=pushed&direction=desc`
-- Filtra fork, repo archiviati e repo in `exclude`
-- Restituisce dati grezzi
+## Frontend
 
-### `services/projectMapper.js`
+- Nuovo hook `useProjects` con la stessa interfaccia di `useGithubProjects` (`{ projects, loading, error, refetch }`): in `ProjectsModal` cambia **una riga**. Stessa cosa per le altre sezioni.
+- Ordine di fallback: API → cache `localStorage` (anche scaduta, `getStale()`) → dati statici nel bundle.
+- Solo a questo punto ha senso introdurre un livello "repository" con più sorgenti (API, locale): prima c'è una sola implementazione e sarebbe indirezione inutile.
 
-- Prende i dati GitHub + `projectsMeta` e produce array nel formato atteso da `ProjectCard`
-- Arricchisce `technologies` con: linguaggio principale + topics (da GitHub) + eventuali extra dal meta
-- Aggiunge `stars`, `updatedAt` come nuovi campi
+## Sicurezza e infrastruttura: cose che cambiano
 
-### `hooks/useLocalStorage.js`
+- **Sessioni:** Filament richiede sessioni funzionanti. Oggi in produzione `SESSION_DRIVER=cookie`: verificare che basti, oppure passare a `database` (ora c'è un DB).
+- **CSP:** il middleware `SecurityHeaders` deve **escludere `/admin`**: Livewire e Alpine usano script inline e `eval`, la CSP del sito li bloccherebbe. Test dedicato.
+- **Cache e code:** `CACHE_STORE`/`QUEUE_CONNECTION` da rivedere (la cache API conviene su un driver condiviso).
+- **Scheduler:** `github:sync-projects` ogni ora (o meno). Su Laravel Cloud serve attivare lo scheduler.
+- **Token GitHub:** variabile `GITHUB_TOKEN` (permessi di sola lettura sui repo pubblici) per superare il limite di 60/h. Mai nel repo.
+- **Deploy:** aggiungere `php artisan migrate --force` ai comandi di deploy; il `.env.production` locale va aggiornato con le nuove variabili.
+- **Admin:** URL non standard o limitazione per IP/Cloudflare Access come difesa in più (facoltativo), 2FA obbligatoria, `APP_DEBUG=false`.
 
-Hook generico e riutilizzabile:
+## Fasi proposte
 
-- Legge/scrive da `localStorage`
-- Supporta TTL (time-to-live in millisecondi)
-- Se la cache è scaduta o assente, ritorna `null`
-- Già pronto per essere usato anche da un futuro hook Laravel
+Una branch per fase (`feat/...`), merge in `dev` con `--no-ff`, test verdi prima di ogni merge.
 
-### `hooks/useGithubProjects.js`
+1. **Fondamenta**: database locale e in produzione, migrazione e modello `Project`, seeder dai dati attuali, test dei modelli.
+2. **Filament**: installazione, utente admin, risorsa `Project` (elenco, modifica, nascondi/fissa), 2FA, esclusione di `/admin` dalla CSP + test.
+3. **Sync GitHub**: comando `github:sync-projects` (+ test con `Http::fake`), scheduler, token.
+4. **API progetti**: endpoint, cache con invalidazione, throttle, 404 JSON per `api/*`, test Feature.
+5. **Frontend progetti**: `useProjects` con fallback, test (stile `useGithubProjects.test.jsx`), rimozione della chiamata diretta a GitHub dal browser.
+6. **Altre sezioni**: skills, education, certifications, contacts, ognuna con migrazione, risorsa Filament, endpoint e hook. Se serve, upload immagini.
+7. **Pulizia**: togliere i file `*Data.js` solo se i fallback non servono più (probabilmente conviene tenerli), aggiornare README e questo documento.
 
-Custom hook che orchestra il tutto:
+## Rischi e punti di attenzione
 
-1. Controlla `localStorage` (TTL 30 minuti)
-2. Se cache valida → restituisce dati
-3. Se cache scaduta → chiama `githubApi.getRepos()`
-4. Trasforma con `projectMapper`
-5. Salva in `localStorage`
-6. Espone: `{ projects, loading, error, refetch }`
-7. Fallback: se API fallisce e c'è cache vecchia, la usa comunque
-
----
-
-## Cosa NON cambia
-
-- `ProjectCard.jsx` — invariato
-- `ProjectsGrid.jsx` — invariato
-- `FilterPanel.jsx` — invariato
-- `FilterGroup.jsx` — invariato
-- `useProjectFilters.js` — invariato (già generico, riceve array)
-- `ProjectExperienceModal.jsx` — invariato
-- `projectsModalConfig.js` — invariato
-- **TUTTI i CSS** — invariati
-- **Test esistenti** — si aggiungono solo nuovi test
-
----
-
-## Cosa cambia
-
-| File                | Modifica                                                             |
-| ------------------- | -------------------------------------------------------------------- |
-| `ProjectsModal.jsx` | 1 import diverso: `useGithubProjects` invece di `import projectData` |
-| `projectData.js`    | **Eliminato** — sostituito da `projectsMeta.js` + `githubApi.js`     |
-
----
-
-## Esclusione fork e repo indesiderati
-
-- GitHub API restituisce `fork: true/false`
-- `projectsMeta.js` supporta `exclude: true` per nascondere repo specifici
-- Sono esclusi automaticamente: fork, repo archiviati, repo in `exclude`
-
----
-
-## Cache
-
-| Storage                | TTL                 | Motivo                                  |
-| ---------------------- | ------------------- | --------------------------------------- |
-| `localStorage`         | 30 minuti           | Resilienza offline, riduce chiamate API |
-| Fallback cache scaduta | Usata se API è down | Non lasciare l'utente a secco           |
-
----
-
-## Topics GitHub
-
-- I topics vengono letti da GitHub e aggiunti a `technologies`
-- `type` (frontend/backend/fullstack) e `projectScope` (personal/work) restano in `projectsMeta.js`
-- Se in futuro si volesse, si possono spostare su GitHub come `type-frontend`, `scope-personal` etc.
-
----
-
-## Migrazione futura a Laravel
-
-Quando il backend Laravel sarà pronto:
-
-1. Creare `php artisan github:sync-projects` che importa i repo nel DB
-2. Creare rotta `GET /api/projects` che restituisce lo stesso formato
-3. Creare `hooks/useLaravelProjects.js` con la stessa interfaccia di `useGithubProjects`
-4. Cambiare **1 riga** in `ProjectsModal.jsx`: `useGithubProjects` → `useLaravelProjects`
-
-| Campo          | ORA (GitHub API + locale)   | FUTURO (Laravel)           |
-| -------------- | --------------------------- | -------------------------- |
-| `id`           | nome repo (stringa)         | DB auto-increment          |
-| `title`        | da GitHub                   | importato da GitHub (cron) |
-| `description`  | projectsMeta.js IT          | salvato su DB (importato)  |
-| `type`         | projectsMeta.js             | colonna DB                 |
-| `projectScope` | projectsMeta.js             | colonna DB                 |
-| `technologies` | GitHub lang + topics + meta | colonna JSON DB            |
-| `stars`        | da GitHub                   | importato da GitHub (cron) |
-| `updatedAt`    | da GitHub                   | importato da GitHub (cron) |
-| `preview`      | placeholder                 | upload immagine futuro     |
-
----
-
-## Predeploy Check
-
-Prima di ogni deploy, eseguire lo script automatico che verifica:
-
-| Step | Comando                                       | Blocca?                                            |
-| ---- | --------------------------------------------- | -------------------------------------------------- |
-| 1    | `vitest run` (JS tests)                       | ❌ Se fallisce → STOP                              |
-| 2    | `php artisan test` (PHP tests)                | ❌ Se fallisce → STOP                              |
-| 3    | `npm audit` + `npm audit fix`                 | ⚠️ Se HIGH/CRITICAL non fixabili → chiede conferma |
-| 4    | `composer audit` + `composer update --no-dev` | ⚠️ Se HIGH/CRITICAL non fixabili → chiede conferma |
-
-### Come eseguire
-
-```bash
-# Bash (Git Bash / macOS / Linux)
-bash scripts/predeploy.sh
-
-# PowerShell (Windows)
-.\scripts\predeploy.ps1
-
-# Oppure via npm (usa bash)
-npm run predeploy
-```
-
-### Comportamento
-
-- **Test JS/PHP falliti** → deploy bloccato, devi fixare prima
-- **Vulnerabilità moderate/basse** → non bloccano, procede
-- **Vulnerabilità HIGH/CRITICAL fixabili** → `npm audit fix` / `composer update` le risolve automaticamente
-- **Vulnerabilità HIGH/CRITICAL non fixabili** → lo script chiede: procedere, vedere dettagli o fermare
-
----
-
-## Completato il piano ✅
+- **Dipendere dall'API per il primo caricamento** rallenta la home se l'API è lenta: il fallback statico e la cache devono coprire, e le chiamate partono solo all'apertura della modal (come ora).
+- **Doppia fonte di verità** (file `*Data.js` e DB): decidere subito che il DB è la fonte e i file sono solo fallback, e prevedere un modo per tenerli allineati (es. un comando che esporta il DB nei file).
+- **Costi e limiti** di database e storage su Laravel Cloud: da verificare prima di scegliere il piano.
+- **Aggiornamenti di Filament** a versioni major: seguire le note di rilascio, non aggiornare alla cieca.
