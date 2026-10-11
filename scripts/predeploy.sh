@@ -7,6 +7,7 @@
 #   2. php artisan test (PHP tests) → STOP se fallisce
 #   3. npm audit + auto-fix         → chiede se high/critical non fixabili
 #   4. composer audit + auto-fix    → chiede se high/critical non fixabili
+#   5. Controllo configurazione produzione (.env.production)
 # ============================================================
 set -euo pipefail
 
@@ -81,7 +82,7 @@ prompt_continue() {
 # STEP 1: JS Tests (vitest)
 # ============================================================
 step=1
-total_steps=4
+total_steps=5
 print_step $step $total_steps "Test JavaScript (vitest)"
 
 if npx vitest run 2>&1; then
@@ -112,17 +113,17 @@ fi
 step=3
 print_step $step $total_steps "npm audit — controllo vulnerabilità JS"
 
-if npm audit 2>&1; then
+if npm audit --omit=dev 2>&1; then
     print_result $PASS "Nessuna vulnerabilità npm trovata"
 else
     echo -e "${YELLOW}🔍 Vulnerabilità npm trovate. Provo a fixare...${NC}"
     
     # Prova auto-fix
-    if npm audit fix 2>&1; then
+    if npm audit fix --omit=dev 2>&1; then
         print_result $PASS "npm audit fix completato con successo"
     else
         # Estrai severità massima non fixabile
-        npm_audit_output=$(npm audit 2>&1 || true)
+        npm_audit_output=$(npm audit --omit=dev 2>&1 || true)
         
         if echo "$npm_audit_output" | grep -qi "high\|critical"; then
             print_result $WARN "Vulnerabilità HIGH/CRITICAL in npm non fixabili automaticamente"
@@ -217,6 +218,37 @@ else
         else
             print_result $WARN "Vulnerabilità composer moderate/basse — non bloccanti"
         fi
+    fi
+fi
+
+# ============================================================
+# STEP 5: Controllo configurazione produzione
+# ============================================================
+step=5
+print_step $step $total_steps "Configurazione produzione (.env.production)"
+
+PROD_ENV_FILE="$ROOT_DIR/.env.production"
+
+if [ ! -f "$PROD_ENV_FILE" ]; then
+    print_result $WARN ".env.production non trovato — controlla a mano le variabili su Laravel Cloud"
+else
+    env_ok=true
+
+    if grep -qiE '^APP_DEBUG=true' "$PROD_ENV_FILE"; then
+        print_result $FAIL "APP_DEBUG=true in .env.production"
+        env_ok=false
+    fi
+
+    if ! grep -qE '^APP_ENV=production' "$PROD_ENV_FILE"; then
+        print_result $FAIL "APP_ENV non è 'production' in .env.production"
+        env_ok=false
+    fi
+
+    if [ "$env_ok" = true ]; then
+        print_result $PASS "Configurazione produzione corretta"
+    else
+        overall_status=$FAIL
+        exit 1
     fi
 fi
 
