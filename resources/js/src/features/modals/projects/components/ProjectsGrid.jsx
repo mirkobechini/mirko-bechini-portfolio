@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import styles from '../ProjectsModal.module.css';
+import styles from './ProjectsGrid.module.css';
 import ProjectCard from './ProjectCard';
 
 const ProjectsGrid = memo(function ProjectsGrid({ projects }) {
