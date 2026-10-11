@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import NotFoundPage from '../pages/NotFoundPage';
 
 function renderPage() {
@@ -40,5 +40,21 @@ describe('NotFoundPage', () => {
         expect(screen.getByText(/PAGINA NON ESISTE/i)).toBeInTheDocument();
         expect(screen.getByText(/LINK È SBAGLIATO/i)).toBeInTheDocument();
         expect(screen.getByText(/PAGINA.*SPOSTATA/i)).toBeInTheDocument();
+    });
+
+    it('il pulsante riporta alla home', async () => {
+        const user = userEvent.setup();
+        render(
+            <MemoryRouter initialEntries={['/pagina-inesistente']}>
+                <Routes>
+                    <Route path="/" element={<div>HOME DI PROVA</div>} />
+                    <Route path="*" element={<NotFoundPage />} />
+                </Routes>
+            </MemoryRouter>
+        );
+
+        await user.click(screen.getByRole('button', { name: /torna alla home/i }));
+
+        expect(screen.getByText('HOME DI PROVA')).toBeInTheDocument();
     });
 });

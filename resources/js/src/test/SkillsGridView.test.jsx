@@ -2,6 +2,9 @@ import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import SkillsGridView from '../features/modals/library/SkillsGridView';
+import playBookFlip from '../utils/playBookFlip';
+
+vi.mock('../utils/playBookFlip', () => ({ default: vi.fn() }));
 
 const skillsData = [
     { id: 1, skill: 'HTML', icon: '/html.webp', color: '#E34F26' },
@@ -110,5 +113,26 @@ describe('SkillsGridView', () => {
             />
         );
         expect(screen.getByText('‹ Formazione')).toBeInTheDocument();
+    });
+
+    it('il pulsante "Formazione" torna indietro e suona il rumore della pagina', async () => {
+        const user = userEvent.setup();
+        const onBackToFormation = vi.fn();
+        render(
+            <SkillsGridView
+                skillsData={skillsData}
+                currentSkill={null}
+                skillCardRefs={{ current: [] }}
+                onSkillClick={vi.fn()}
+                title="Competenze"
+                onBackToFormation={onBackToFormation}
+                returnToEducation={{ id: 1 }}
+            />
+        );
+
+        await user.click(screen.getByRole('button', { name: 'Torna alla formazione' }));
+
+        expect(onBackToFormation).toHaveBeenCalledTimes(1);
+        expect(playBookFlip).toHaveBeenCalledTimes(1);
     });
 });

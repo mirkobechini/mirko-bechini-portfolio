@@ -79,4 +79,41 @@ describe('useLocalStorage', () => {
         expect(result.current.get()).toBeNull();
         expect(localStorage.getItem(KEY)).toBeNull();
     });
+
+    it('con JSON corrotto e removeItem che lancia non va in crash', () => {
+        localStorage.setItem(KEY, '{non-json');
+        vi.spyOn(Storage.prototype, 'removeItem').mockImplementation(() => {
+            throw new Error('storage non disponibile');
+        });
+
+        const { result } = renderHook(() => useLocalStorage(KEY));
+
+        expect(result.current.get()).toBeNull();
+    });
+
+    it('remove() non va in crash se removeItem lancia e azzera comunque i dati in memoria', () => {
+        const { result } = renderHook(() => useLocalStorage(KEY));
+        act(() => {
+            result.current.set({ a: 1 });
+        });
+        vi.spyOn(Storage.prototype, 'removeItem').mockImplementation(() => {
+            throw new Error('storage non disponibile');
+        });
+
+        expect(() => {
+            act(() => {
+                result.current.remove();
+            });
+        }).not.toThrow();
+
+        expect(result.current.get()).toBeNull();
+    });
+
+    it('un dato senza scadenza non risulta mai scaduto', () => {
+        localStorage.setItem(KEY, JSON.stringify({ data: { a: 1 } }));
+
+        const { result } = renderHook(() => useLocalStorage(KEY));
+
+        expect(result.current.get()).toEqual({ a: 1 });
+    });
 });

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 vi.mock('../utils/assets', () => ({ getAssetPath: (path) => `/assets${path}` }));
@@ -13,7 +13,14 @@ vi.mock('../hooks/useDragScroll', () => ({
     }),
 }));
 vi.mock('../features/modals/shared/BaseModal', () => ({
-    default: function MockBaseModal({ variant }) { return <div data-testid="base-modal">{variant.title}</div>; },
+    default: function MockBaseModal({ variant, closeModal }) {
+        return (
+            <div data-testid="base-modal">
+                {variant.title}
+                <button aria-label="chiudi-mock" onClick={closeModal} />
+            </div>
+        );
+    },
 }));
 vi.mock('../components/ui/ScrollGuideIndicators', () => ({
     default: () => <div data-testid="scroll-guide" />,
@@ -107,5 +114,41 @@ describe('HomePage', () => {
         renderHomePage();
         await user.hover(screen.getByLabelText('Sezione Chi Sono'));
         expect(playMonkeyHover).toHaveBeenCalled();
+    });
+
+    it('precarica lo sprite anche quando il pulsante riceve il focus', async () => {
+        const { preloadImages } = await import('../utils/preloadImages');
+        preloadImages.mockClear();
+        renderHomePage();
+
+        fireEvent.focus(screen.getByLabelText('Sezione Formazione'));
+
+        expect(preloadImages).toHaveBeenCalledWith(['/book.webp']);
+    });
+
+    it('al tocco precarica lo sprite e suona il verso del pappagallo', async () => {
+        const { preloadImages } = await import('../utils/preloadImages');
+        const { playParrotHover } = await import('../utils/playParrotSound');
+        preloadImages.mockClear();
+        playParrotHover.mockClear();
+        renderHomePage();
+
+        fireEvent.touchStart(screen.getByLabelText('Sezione Formazione'));
+        expect(preloadImages).toHaveBeenCalled();
+        expect(playParrotHover).not.toHaveBeenCalled();
+
+        fireEvent.touchStart(screen.getByLabelText('Sezione Contatti'));
+        expect(playParrotHover).toHaveBeenCalledTimes(1);
+    });
+
+    it('chiude la modal con closeModal', async () => {
+        const user = userEvent.setup();
+        renderHomePage();
+
+        await user.click(screen.getByLabelText('Sezione Chi Sono'));
+        expect(screen.getByTestId('base-modal')).toBeInTheDocument();
+
+        await user.click(screen.getByLabelText('chiudi-mock'));
+        expect(screen.queryByTestId('base-modal')).not.toBeInTheDocument();
     });
 });

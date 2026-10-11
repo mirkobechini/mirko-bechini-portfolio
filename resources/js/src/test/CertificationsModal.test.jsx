@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import CertificationsModal from '../features/modals/certifications/CertificationsModal';
@@ -6,6 +6,10 @@ import CertificationsModal from '../features/modals/certifications/Certification
 const mockOpenModal = vi.fn();
 
 describe('CertificationsModal', () => {
+    beforeEach(() => {
+        mockOpenModal.mockClear();
+    });
+
     it('renders certification items', () => {
         render(<CertificationsModal openModal={mockOpenModal} />);
         // Viene dal certificationData
@@ -34,5 +38,29 @@ describe('CertificationsModal', () => {
         await user.click(frames[0]);
 
         expect(mockOpenModal).toHaveBeenCalledWith(2, { preselectEducation: 1 });
+    });
+
+    it('Invio e Spazio sul riquadro aprono la formazione, gli altri tasti no', async () => {
+        const user = userEvent.setup();
+        render(<CertificationsModal openModal={mockOpenModal} />);
+        const frame = screen.getAllByRole('button')[0];
+
+        frame.focus();
+        await user.keyboard('a');
+        expect(mockOpenModal).not.toHaveBeenCalled();
+
+        await user.keyboard('{Enter}');
+        await user.keyboard(' ');
+        expect(mockOpenModal).toHaveBeenCalledTimes(2);
+        expect(mockOpenModal).toHaveBeenCalledWith(2, { preselectEducation: 1 });
+    });
+
+    it('i link alle organizzazioni si aprono in una nuova scheda in sicurezza', () => {
+        render(<CertificationsModal openModal={mockOpenModal} />);
+        const link = screen.getByText('Boolean').closest('a');
+
+        expect(link).toHaveAttribute('href', 'https://boolean.careers');
+        expect(link).toHaveAttribute('target', '_blank');
+        expect(link).toHaveAttribute('rel', 'noopener noreferrer');
     });
 });
