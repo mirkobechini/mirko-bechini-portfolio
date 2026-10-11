@@ -48,7 +48,13 @@ jobs:
           args: --verbose --no-progress --offline "resources/views/*.blade.php"
 
   php-tests:
+    name: php-tests (PHP ${{ matrix.php }})
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # 8.4 = minimo supportato (composer.json), 8.5 = versione di produzione
+        php: ["8.4", "8.5"]
 
     steps:
       - name: Download code
@@ -57,7 +63,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.2"
+          php-version: ${{ matrix.php }}
           tools: composer:v2
 
       - name: Setup Node.js
@@ -69,7 +75,7 @@ jobs:
         uses: actions/cache@v5
         with:
           path: vendor
-          key: composer-${{ hashFiles('composer.lock') }}
+          key: composer-${{ matrix.php }}-${{ hashFiles('composer.lock') }}
 
       - name: Install PHP dependencies
         run: composer install --no-interaction --prefer-dist
@@ -109,7 +115,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.2"
+          php-version: "8.5"
           tools: composer:v2
 
       - name: Setup Node.js
@@ -121,7 +127,7 @@ jobs:
         uses: actions/cache@v5
         with:
           path: vendor
-          key: composer-${{ hashFiles('composer.lock') }}
+          key: composer-8.5-prod-${{ hashFiles('composer.lock') }}
 
       - name: Cache Node dependencies
         uses: actions/cache@v5
