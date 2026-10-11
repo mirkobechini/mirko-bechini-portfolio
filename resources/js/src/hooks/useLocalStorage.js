@@ -7,31 +7,34 @@ import { useState, useCallback } from "react";
  *
  * @param {string} key - Chiave localStorage
  * @param {number} ttlMs - Durata validità in millisecondi (default: 30 minuti)
- * @returns {Object} { get: () => data|null, set: (data) => void, remove: () => void }
+ * @returns {Object} { get: () => data|null, getStale: () => data|null, set: (data) => void, remove: () => void }
  */
 export default function useLocalStorage(key, ttlMs = 30 * 60 * 1000) {
     const [cachedData, setCachedData] = useState(() => {
         try {
             const raw = localStorage.getItem(key);
-            if (!raw) return null;
+            if (!raw) return { data: null, expired: false };
 
             const parsed = JSON.parse(raw);
             const now = Date.now();
 
             if (parsed.expiry && now > parsed.expiry) {
-                localStorage.removeItem(key);
-                return null;
+                return { data: parsed.data, expired: true };
             }
 
-            return parsed.data;
+            return { data: parsed.data, expired: false };
         } catch {
-            localStorage.removeItem(key);
-            return null;
+            try {
+                localStorage.removeItem(key);
+            } catch {
+                console.error("Errore durante la rimozione della chiave localStorage:", key);
+            }
+            return { data: null, expired: false };
         }
     });
 
     const get = useCallback(() => {
-        return cachedData;
+        return cachedData.expired ? null : cachedData.data;
     }, [cachedData]);
 
     const set = useCallback(
@@ -40,16 +43,29 @@ export default function useLocalStorage(key, ttlMs = 30 * 60 * 1000) {
                 data,
                 expiry: Date.now() + ttlMs,
             });
-            localStorage.setItem(key, payload);
-            setCachedData(data);
+            try{
+                localStorage.setItem(key, payload);
+
+            } catch (error) {
+                console.error("Errore durante il salvataggio in localStorage:", error);
+            }
+            setCachedData({ data, expired: false });
         },
         [key, ttlMs]
     );
 
     const remove = useCallback(() => {
-        localStorage.removeItem(key);
-        setCachedData(null);
+        try{
+            localStorage.removeItem(key);
+        } catch (error) {
+            console.error("Errore durante la rimozione dalla localStorage:", error);
+        }
+        setCachedData({ data: null, expired: false });
     }, [key]);
 
-    return { get, set, remove };
+    const getStale = useCallback(() => {
+        return cachedData.data;
+    }, [cachedData]);
+
+    return { get, getStale, set, remove };
 }
