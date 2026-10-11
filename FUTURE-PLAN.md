@@ -40,7 +40,7 @@ Pannello /admin (Filament, login)
 | 1 | Quali contenuti gestire da pannello? | **Tutti e quattro**, a fasi: **progetti** per primi, poi competenze, formazione e certificazioni, contatti. |
 | 2 | Database | **MySQL** in produzione su Laravel Cloud (come `CV_Backoffice`; da verificare nel pannello se si può riusare lo stesso cluster con un database separato). **SQLite** in locale. Le migrazioni restano portabili. In produzione SQLite non va bene: il disco di Cloud si azzera a ogni deploy. |
 | 3 | Anteprime dei progetti | **Rimandate**: resta il segnaposto di oggi. Niente upload né storage per ora. |
-| 4 | Sync GitHub | Il sync aggiorna **solo i campi di GitHub** (nome, stelle, data, URL, linguaggio, topics). Descrizione in italiano, tipo, scope, in evidenza e nascosto restano sempre quelli del pannello. |
+| 4 | Sync GitHub | Il sync aggiorna **solo i campi di GitHub** (stelle, data dell'ultimo push, URL, linguaggio e topics in `technologies`). Titolo, descrizione in italiano, tipo, scope, sito online, tecnologie aggiuntive, in evidenza e nascosto restano sempre quelli del pannello: il sync imposta il titolo (dal nome del repo) solo quando crea un progetto nuovo, altrimenti si perderebbero titoli come "Gods Backoffice". Il pannello non permette di eliminare i progetti (il sync li ricreerebbe): per toglierne uno dal sito si usa "Nascosto". |
 | 5 | Accesso e indirizzo | **Un solo utente (tu), con 2FA obbligatoria**, creato da comando: nessuna registrazione pubblica. Pannello su **`/admin`**. |
 
 Riferimento: `portfolio-chicca` usa già **Filament 5** (5.10 al 2026-10-11) con Laravel 13 e PHP 8.4: per questo progetto vale Filament 5, non la 4.
