@@ -1,11 +1,12 @@
 import { memo } from 'react';
-import styles from './SkillsModal.module.css';
+import layout from './BookLayout.module.css';
+import styles from './SkillsGridView.module.css';
 import sharedStyles from '../shared/SharedModal.module.css';
 import playBookFlip from '../../../utils/playBookFlip';
 
 const SkillsGridView = memo(function SkillsGridView({ skillsData, currentSkill, skillCardRefs, onSkillClick, title, onBackToFormation, returnToEducation }) {
     return (
-        <section className={styles.page}>
+        <section className={layout.page}>
             <h3 className={styles['skills-h3-wrap']}>
                 <span>{title}</span>
                 {returnToEducation && onBackToFormation && (
@@ -19,7 +20,7 @@ const SkillsGridView = memo(function SkillsGridView({ skillsData, currentSkill, 
                     </button>
                 )}
             </h3>
-            <div className={`${styles['page-content']} ${sharedStyles['scroll-y-contain']}`} style={{ paddingRight: 0 }}>
+            <div className={`${layout['page-content']} ${sharedStyles['scroll-y-contain']}`} style={{ paddingRight: 0 }}>
                 <div className={`${styles['skills-list']} ${sharedStyles['scroll-y-contain']}`}>
                     {skillsData.map((skill, index) => (
                         <button

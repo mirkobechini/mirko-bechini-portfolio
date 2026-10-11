@@ -1,11 +1,12 @@
 import { memo } from 'react';
-import styles from './SkillsModal.module.css';
+import layout from './BookLayout.module.css';
+import styles from './SkillDetailView.module.css';
 import sharedStyles from '../shared/SharedModal.module.css';
 
 const SkillDetailView = memo(function SkillDetailView({ currentSkill, detailsTitle }) {
     if (!currentSkill) {
         return (
-            <section className={styles.page}>
+            <section className={layout.page}>
                 <h3>{detailsTitle ?? 'Dettagli skill'}</h3>
                 <p>Seleziona una skill per visualizzare dettagli e contenuti correlati.</p>
                 <p>Utilizza ← ↑ → ↓ per selezionare/cambiare skill.</p>
@@ -14,9 +15,9 @@ const SkillDetailView = memo(function SkillDetailView({ currentSkill, detailsTit
     }
 
     return (
-        <section className={`${styles.page} ${styles['skills-page']}`}>
+        <section className={`${layout.page} ${styles['skills-page']}`}>
             <h3>{currentSkill.skill}</h3>
-            <div className={`${styles['page-content']} ${sharedStyles['scroll-y-contain']}`}>
+            <div className={`${layout['page-content']} ${sharedStyles['scroll-y-contain']}`}>
                 <section className={styles.functionality}>
                     <h4>Funzionalita conosciute:</h4>
                     <ul className={styles['functionality-list']}>
