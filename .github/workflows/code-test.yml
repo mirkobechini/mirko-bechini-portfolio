@@ -4,7 +4,8 @@ on:
   push:
     branches: ["main"]
   pull_request:
-    branches: ["main"]
+    # anche verso dev: le PR di Dependabot puntano a dev e devono avere i controlli
+    branches: ["main", "dev"]
 
 permissions:
   contents: read
