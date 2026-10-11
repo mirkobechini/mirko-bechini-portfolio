@@ -1,7 +1,7 @@
 # 🚀 MirkoBechini-Portfolio
 
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white&style=flat-square)](https://react.dev)
-[![Laravel](https://img.shields.io/badge/Laravel-12-FB2E1D?logo=laravel&logoColor=white&style=flat-square)](https://laravel.com)
+[![Laravel](https://img.shields.io/badge/Laravel-13-FB2E1D?logo=laravel&logoColor=white&style=flat-square)](https://laravel.com)
 [![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white&style=flat-square)](https://vitejs.dev)
 [![GitHub Actions](https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white&style=flat-square)](https://github.com/mirkobechini/mirko-bechini-portfolio/actions)
 
@@ -44,7 +44,7 @@
 - **Navigazione da tastiera e accessibilità**: hook `useKeyboardNavigation`, focus trap e ripristino del focus nelle modali, messaggi di stato con `role="status"`.
 - **Stato globale con Context API**: apertura/chiusura modali e stato dell'app gestiti centralmente.
 - **CSS modulare**: ogni componente ha il proprio CSS module (nessun file sopra le 400 righe).
-- **Backend Laravel 12**: serve l'SPA React, risponde con un vero **404** alle URL sconosciute e aggiunge gli [header di sicurezza](#-sicurezza). Pronto per future API.
+- **Backend Laravel 13**: serve l'SPA React, risponde con un vero **404** alle URL sconosciute e aggiunge gli [header di sicurezza](#-sicurezza). Pronto per future API.
 - **Ottimizzazione asset**: `nes-core` al posto del bundle completo di NES.css, preload di font e immagini critiche, PWA con service worker per caching intelligente.
 - **Test**: oltre 370 test Vitest (copertura righe ~92%) e test PHPUnit sulle rotte e sugli header.
 - **CI/CD completo**: GitHub Actions con ESLint, build Vite, test PHP e audit Lighthouse.
@@ -64,7 +64,7 @@
 
 | Frontend                                                   | Backend                              |
 | :--------------------------------------------------------- | :----------------------------------- |
-| [React](https://react.dev) ^19.2.7                         | [Laravel](https://laravel.com) ^12.0 |
+| [React](https://react.dev) ^19.2.7                         | [Laravel](https://laravel.com) ^13.0 |
 | [React Router](https://reactrouter.com) ^7.18              | [PHP](https://php.net) ^8.4          |
 | [Vite](https://vitejs.dev) ^8.0                            |                                      |
 | [NES.css](https://nostalgic-css.github.io/NES.css/) ^2.2.1 |                                      |
