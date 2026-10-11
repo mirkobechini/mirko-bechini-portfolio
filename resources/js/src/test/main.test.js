@@ -1,7 +1,8 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
 // CSS mocks
-vi.mock('nes.css/css/nes.min.css', () => ({}));
+vi.mock('nes.css/css/nes-core.min.css', () => ({}));
+vi.mock('../styles/nes-icon.css', () => ({}));
 vi.mock('../styles/global.css', () => ({}));
 vi.mock('../styles/home.css', () => ({}));
 vi.mock('../styles/responsive.css', () => ({}));
