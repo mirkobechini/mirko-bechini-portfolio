@@ -11,7 +11,7 @@ class RoutesTest extends TestCase
         $this->get('/api/')->assertNotFound();
     }
 
-    public function test_api_notFound(): void
+    public function test_api_not_found(): void
     {
         $this->get('/api/pagina-che-non-esiste')->assertNotFound();
     }
