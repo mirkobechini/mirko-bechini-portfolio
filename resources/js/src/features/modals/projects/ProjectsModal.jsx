@@ -35,6 +35,7 @@ const ProjectsModal = memo(function ProjectsModal({ onBackToProjectsHome }) {
     } = useProjectFilters(githubProjects);
 
     const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+    const hasProjects = githubProjects.length > 0;
 
     const typeFilterOptions = useMemo(() => {
         return typeOptions.map(option => {
@@ -110,19 +111,24 @@ const ProjectsModal = memo(function ProjectsModal({ onBackToProjectsHome }) {
             </FilterPanel>
 
             <div className={`${styles['projects-view']} ${sharedStyles['scroll-y-contain']}`}>
-                {loading ? (
+                {loading && !hasProjects ? (
                     <div className={styles['no-projects']}>
                         <p>Caricamento progetti...</p>
                     </div>
-                ) : error ? (
+                ) : error && !hasProjects ? (
                     <div className={styles['no-projects']}>
                         <p>{error}</p>
-                        {filteredProjects.length === 0 && (
-                            <p>Riprova più tardi o ricarica la pagina.</p>
-                        )}
+                        <p>Riprova più tardi o ricarica la pagina.</p>
                     </div>
                 ) : (
-                    <ProjectsGrid projects={filteredProjects} />
+                    <>
+                        {error && (
+                            <p role="status" className={styles['no-projects']}>
+                                Impossibile aggiornare i progetti: i dati mostrati potrebbero non essere aggiornati.
+                            </p>
+                        )}
+                        <ProjectsGrid projects={filteredProjects} />
+                    </>
                 )}
             </div>
         </div>
