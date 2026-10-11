@@ -78,7 +78,7 @@
         0 0 3.125rem rgb(0 0 0 / 80%),
         inset 0 0 1.25rem rgb(0 0 0 / 50%);
 
-    animation: galleryZoom 0.4s ease-out forwards;
+    animation: gallery-zoom 0.4s ease-out forwards;
 }
 
 :global([data-modal-theme="painting"] [data-modal-slot="sprite"]) {
