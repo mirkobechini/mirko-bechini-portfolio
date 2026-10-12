@@ -102,16 +102,17 @@ Niente di questo è stato ancora fatto in produzione: `main` e Laravel Cloud son
 
 1. **Database**: creare il database MySQL su Laravel Cloud e collegarlo all'app (variabili `DB_*`).
 2. **Migrazioni**: aggiungere `php artisan migrate --force` ai comandi di deploy.
-3. **Cache condivisa**: impostare `CACHE_STORE=database` (o redis). Con la cache su file e più istanze, l'API pubblica può restare vecchia fino a 10 minuti dopo una modifica dal pannello, perché ogni istanza svuota solo la propria cache. Serve anche la tabella `cache` (migrazione già presente).
-4. **Sessioni**: decidere `SESSION_DRIVER` (oggi `cookie`; Filament funziona meglio con `database`).
-5. **Scheduler**: attivare lo scheduler di Laravel Cloud (esegue `github:sync-projects` ogni ora; il comando parte solo se la frequenza scelta lo richiede).
-6. **Token GitHub**: creare il token fine-grained (sola lettura, repo pubblici) e impostare `GITHUB_TOKEN` solo nelle variabili d'ambiente di Laravel Cloud e nel `.env` locale. Mai in chat o nel repo.
-7. **Utente admin**: crearlo con i Cloud Commands (`php artisan make:filament-user`, poi `is_admin = 1`) e configurare subito la 2FA e salvare i codici di recupero.
-8. **Primo popolamento**: lanciare `php artisan db:seed --class=ProjectSeeder` e poi "Sincronizza ora" dal pannello; controllare `/api/projects`.
-9. **Variabili**: aggiornare `.env.production` locale con le nuove variabili (`CACHE_STORE`, `SESSION_DRIVER`, `GITHUB_USERNAME`, `GITHUB_TOKEN`); `APP_DEBUG=false`; PHP 8.5 è già impostato.
-10. **CSP**: dopo qualche giorno senza violazioni nei report, passare `Content-Security-Policy-Report-Only` a `Content-Security-Policy`.
-11. **Cloudflare**: verificare che `/api/*` non venga messo in cache oltre i `Cache-Control` inviati e che `/admin` non sia in cache.
-12. **Merge su main**: solo con il via esplicito (PR #41 dev → main), poi controllare `/`, `/admin`, `/api/projects` e il login con 2FA.
+3. **Disco per le icone caricate**: il filesystem di Laravel Cloud non è persistente (si azzera a ogni deploy), quindi creare un bucket di Object Storage, collegarlo all'app e impostare `UPLOADS_DISK` sul nome del suo disco (verificare i passaggi nella documentazione di Laravel Cloud). Con `UPLOADS_DISK=public` le icone andrebbero perse al deploy successivo. Le icone predefinite (percorsi in `public/assets`) non sono interessate.
+4. **Cache condivisa**: impostare `CACHE_STORE=database` (o redis). Con la cache su file e più istanze, l'API pubblica può restare vecchia fino a 10 minuti dopo una modifica dal pannello, perché ogni istanza svuota solo la propria cache. Serve anche la tabella `cache` (migrazione già presente).
+5. **Sessioni**: decidere `SESSION_DRIVER` (oggi `cookie`; Filament funziona meglio con `database`).
+6. **Scheduler**: attivare lo scheduler di Laravel Cloud (esegue `github:sync-projects` ogni ora; il comando parte solo se la frequenza scelta lo richiede).
+7. **Token GitHub**: creare il token fine-grained (sola lettura, repo pubblici) e impostare `GITHUB_TOKEN` solo nelle variabili d'ambiente di Laravel Cloud e nel `.env` locale. Mai in chat o nel repo.
+8. **Utente admin**: crearlo con i Cloud Commands (`php artisan make:filament-user`, poi `is_admin = 1`) e configurare subito la 2FA e salvare i codici di recupero.
+9. **Primo popolamento**: lanciare `php artisan db:seed` (progetti, competenze, corsi, certificazioni, contatti) e poi "Sincronizza ora" dal pannello; controllare `/api/projects`.
+10. **Variabili**: aggiornare `.env.production` locale con le nuove variabili (`CACHE_STORE`, `SESSION_DRIVER`, `GITHUB_USERNAME`, `GITHUB_TOKEN`); `APP_DEBUG=false`; PHP 8.5 è già impostato.
+11. **CSP**: dopo qualche giorno senza violazioni nei report, passare `Content-Security-Policy-Report-Only` a `Content-Security-Policy`.
+12. **Cloudflare**: verificare che `/api/*` non venga messo in cache oltre i `Cache-Control` inviati e che `/admin` non sia in cache.
+13. **Merge su main**: solo con il via esplicito (PR #41 dev → main), poi controllare `/`, `/admin`, `/api/projects` e il login con 2FA.
 
 ## Rischi e punti di attenzione
 

@@ -255,6 +255,7 @@ php artisan github:sync-projects --force    # sincronizza subito
 
 - Ordine: prima i progetti in evidenza, poi i più recenti.
 - `GET /api/skills` restituisce le competenze visibili (`id`, `skill`, `icon`, `category`, `color`, `functions`, `relatedProjects`) con le stesse regole di cache, ETag e limite. I progetti collegati sono i titoli dei progetti non nascosti più l'eventuale testo libero.
+  L'icona di una skill si carica dal pannello (PNG, WebP o JPG, max 512 KB): il file va sul disco `UPLOADS_DISK` (`public` in locale, dopo `php artisan storage:link`; in produzione un disco persistente) e ha la precedenza sul percorso predefinito in `public/assets`.
 - `GET /api/education` restituisce i corsi visibili (`id`, `course`, `description`, `certificate`, `organization`, `organizationUrl`, `period`, `skills`, `highlights`, `modules`, `projects`). Ogni progetto può essere collegato a un corso dal pannello (campo `course` in `/api/projects`).
 - `GET /api/certifications` restituisce gli attestati visibili (`id`, `title`, `preview`, `previewWidth`, `previewHeight`, `link`, `organization`, `organizationUrl`, `skills`, `courseId`). `courseId` è il corso che il sito apre cliccando l'attestato.
 - `GET /api/contacts` restituisce i contatti visibili (`id`, `href`, `icon`, `label`, `variantClass`, `ariaLabel`). Il pannello accetta solo indirizzi `https://`, `http://`, `mailto:` e `tel:`, e il sito scarta comunque gli altri schemi.

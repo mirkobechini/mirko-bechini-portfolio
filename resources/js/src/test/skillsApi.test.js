@@ -47,6 +47,16 @@ describe('mapApiSkill', () => {
         expect(result).toMatchObject({ id: 1, skill: 'HTML', category: 'Mark-up', color: '#E34F26' });
     });
 
+    it("un'icona caricata (URL completo) non riceve il prefisso degli asset", () => {
+        const url = 'https://sito.example.com/storage/skills/icons/mia.png';
+
+        expect(mapApiSkill(apiSkill({ icon: url })).icon).toBe(url);
+    });
+
+    it("un'icona del disco pubblico (/storage/...) non riceve il prefisso degli asset", () => {
+        expect(mapApiSkill(apiSkill({ icon: '/storage/skills/icons/mia.png' })).icon).toBe('/storage/skills/icons/mia.png');
+    });
+
     it('senza icona resta null, senza liste diventano vuote', () => {
         const result = mapApiSkill(apiSkill({ icon: null, functions: null, relatedProjects: undefined }));
 

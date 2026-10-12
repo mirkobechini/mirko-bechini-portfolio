@@ -22,7 +22,7 @@ class PublicSkillResource extends JsonResource
         return [
             'id' => $this->id,
             'skill' => $this->name,
-            'icon' => $this->icon,
+            'icon' => $this->iconUrl(),
             'category' => $this->category,
             'color' => $this->color,
             'functions' => $this->functions ?? [],

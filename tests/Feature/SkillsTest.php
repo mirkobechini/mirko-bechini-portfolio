@@ -13,8 +13,10 @@ use Database\Seeders\ProjectSeeder;
 use Database\Seeders\SkillSeeder;
 use Filament\Facades\Filament;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -264,5 +266,118 @@ class SkillsTest extends TestCase
     public function test_the_skills_page_requires_an_admin(): void
     {
         $this->get('/admin/skills')->assertRedirect();
+    }
+
+    // ---------- icone caricate ----------
+
+    public function test_an_uploaded_icon_wins_over_the_default_path_in_the_api(): void
+    {
+        Storage::fake('public');
+        Skill::factory()->create(['icon' => '/modals/skills/icons/html.webp', 'icon_upload' => 'skills/icons/mia.png']);
+
+        $icon = $this->skills()[0]['icon'];
+
+        $this->assertStringEndsWith('/storage/skills/icons/mia.png', $icon);
+    }
+
+    public function test_without_an_upload_the_api_keeps_the_default_path(): void
+    {
+        Skill::factory()->create(['icon' => '/modals/skills/icons/html.webp', 'icon_upload' => null]);
+
+        $this->assertSame('/modals/skills/icons/html.webp', $this->skills()[0]['icon']);
+    }
+
+    public function test_the_admin_can_upload_an_icon(): void
+    {
+        Storage::fake('public');
+        $this->actAsAdmin();
+
+        Livewire::test(CreateSkill::class)
+            ->fillForm([
+                'name' => 'Svelte',
+                'category' => 'Framework',
+                'color' => '#ff3e00',
+                'icon_upload' => UploadedFile::fake()->image('svelte.png', 64, 64),
+            ])
+            ->call('create')
+            ->assertHasNoFormErrors();
+
+        $path = Skill::where('name', 'Svelte')->value('icon_upload');
+        $this->assertNotNull($path);
+        $this->assertStringStartsWith('skills/icons/', $path);
+        Storage::disk('public')->assertExists($path);
+    }
+
+    public function test_only_small_png_webp_or_jpeg_images_are_accepted(): void
+    {
+        Storage::fake('public');
+        $this->actAsAdmin();
+        $base = ['name' => 'X', 'category' => 'Y', 'color' => '#000000'];
+
+        $rejected = [
+            UploadedFile::fake()->create('script.svg', 5, 'image/svg+xml'),
+            UploadedFile::fake()->create('doc.pdf', 5, 'application/pdf'),
+            UploadedFile::fake()->create('pagina.html', 5, 'text/html'),
+            UploadedFile::fake()->image('enorme.png')->size(600),
+        ];
+
+        foreach ($rejected as $file) {
+            Livewire::test(CreateSkill::class)
+                ->fillForm($base + ['icon_upload' => $file])
+                ->call('create')
+                ->assertHasFormErrors(['icon_upload']);
+        }
+
+        $this->assertSame(0, Skill::count());
+    }
+
+    public function test_replacing_the_icon_deletes_the_old_file_and_deleting_the_skill_deletes_the_current_one(): void
+    {
+        Storage::fake('public');
+        Storage::disk('public')->put('skills/icons/vecchia.png', 'x');
+        Storage::disk('public')->put('skills/icons/nuova.png', 'y');
+        $skill = Skill::factory()->create(['icon_upload' => 'skills/icons/vecchia.png']);
+
+        $skill->update(['icon_upload' => 'skills/icons/nuova.png']);
+
+        Storage::disk('public')->assertMissing('skills/icons/vecchia.png');
+        Storage::disk('public')->assertExists('skills/icons/nuova.png');
+
+        $skill->delete();
+
+        Storage::disk('public')->assertMissing('skills/icons/nuova.png');
+    }
+
+    public function test_changing_other_fields_keeps_the_uploaded_file(): void
+    {
+        Storage::fake('public');
+        Storage::disk('public')->put('skills/icons/resta.png', 'x');
+        $skill = Skill::factory()->create(['icon_upload' => 'skills/icons/resta.png']);
+
+        $skill->update(['category' => 'Cambiata']);
+
+        Storage::disk('public')->assertExists('skills/icons/resta.png');
+    }
+
+    public function test_saving_a_skill_with_a_default_icon_does_not_lose_it(): void
+    {
+        $this->actAsAdmin();
+        $skill = Skill::factory()->create(['icon' => '/modals/skills/icons/html.webp', 'icon_upload' => null]);
+
+        Livewire::test(EditSkill::class, ['record' => $skill->getKey()])
+            ->fillForm(['category' => 'Altra'])
+            ->call('save')
+            ->assertHasNoFormErrors();
+
+        $this->assertSame('/modals/skills/icons/html.webp', $skill->fresh()->icon);
+    }
+
+    public function test_the_uploads_disk_is_configurable(): void
+    {
+        config(['filesystems.uploads_disk' => 'local']);
+        Storage::fake('local');
+        Skill::factory()->create(['icon_upload' => 'skills/icons/x.png']);
+
+        $this->assertStringContainsString('skills/icons/x.png', $this->skills()[0]['icon']);
     }
 }

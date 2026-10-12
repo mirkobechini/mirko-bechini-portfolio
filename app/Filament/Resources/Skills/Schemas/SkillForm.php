@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Skills\Schemas;
 
 use App\Models\Skill;
 use Filament\Forms\Components\ColorPicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
@@ -31,9 +32,18 @@ class SkillForm
                             ->required()
                             ->maxLength(255)
                             ->datalist(fn (): array => Skill::query()->distinct()->orderBy('category')->pluck('category')->all()),
+                        FileUpload::make('icon_upload')
+                            ->label('Icona (carica un file)')
+                            ->helperText('PNG, WebP o JPG, al massimo 512 KB, meglio quadrata (sul sito è mostrata a 32 px). Ha la precedenza sull\'icona predefinita.')
+                            ->image()
+                            ->acceptedFileTypes(['image/png', 'image/webp', 'image/jpeg'])
+                            ->maxSize(512)
+                            ->disk(config('filesystems.uploads_disk'))
+                            ->directory('skills/icons')
+                            ->visibility('public'),
                         TextInput::make('icon')
-                            ->label('Icona')
-                            ->helperText('Percorso del file in public/assets, per esempio /modals/skills/icons/html.webp. Il caricamento dal pannello arriverà più avanti.')
+                            ->label('Icona predefinita (percorso)')
+                            ->helperText('Percorso in public/assets, per esempio /modals/skills/icons/html.webp. Usata se non carichi un file.')
                             ->maxLength(255),
                         ColorPicker::make('color')
                             ->label('Colore')
@@ -47,6 +57,7 @@ class SkillForm
                         Repeater::make('functions')
                             ->label('Cosa so fare')
                             ->simple(TextInput::make('value')->required()->maxLength(255))
+                            ->defaultItems(0)
                             ->addActionLabel('Aggiungi voce')
                             ->reorderable(),
                         Select::make('projects')
