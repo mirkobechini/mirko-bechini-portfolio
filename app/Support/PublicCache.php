@@ -14,5 +14,6 @@ class PublicCache
         PublicSkills::forget();
         PublicCourses::forget();
         PublicCertifications::forget();
+        PublicContacts::forget();
     }
 }
