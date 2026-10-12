@@ -22,6 +22,7 @@
 - [Test](#-test)
 - [Sicurezza](#-sicurezza)
 - [Pannello di amministrazione](#️-pannello-di-amministrazione)
+- [Sincronizzazione con GitHub](#-sincronizzazione-con-github)
 - [Deploy](#-deploy)
 - [Struttura del progetto](#-struttura-del-progetto)
 - [GitHub Actions](#-github-actions)
@@ -225,6 +226,24 @@ php artisan tinker --execute="App\Models\User::where('email', 'LA-TUA-EMAIL')->u
 Poi apri `/admin`, accedi e configura il 2FA; cambia la password dal profilo. Su Laravel Cloud i due comandi si lanciano dalla scheda **Commands** dell'ambiente (accettano solo comandi non interattivi, per questo si passano `--name`, `--email` e `--password`).
 
 Gli asset di Filament (`public/css|js|fonts/filament`) **non sono nel repo**: si pubblicano da soli a ogni `composer install` (script `filament:upgrade`).
+
+---
+
+## 🔄 Sincronizzazione con GitHub
+
+Il comando `php artisan github:sync-projects` legge i repository **pubblici** di GitHub e aggiorna i progetti nel database. Si gestisce dal pannello, alla pagina **Sincronizzazione GitHub** (frequenza, stato dell'ultima esecuzione e pulsante **Sincronizza ora**).
+
+- **Cosa aggiorna:** solo i dati di GitHub, cioè stelle, data dell'ultimo push, indirizzo del repository e tecnologie (linguaggio + topics). Titolo, descrizione, categoria, ambito, sito online, tecnologie aggiuntive, raggruppamento, "in evidenza" e "nascosto" sono **solo del pannello**: il sync non li tocca mai.
+- **Repository nuovi:** vengono creati **nascosti**. Vanno rivisti nei Progetti (descrizione in italiano, categoria, ambito) e poi si toglie "Nascosto".
+- **Repository spariti** (cancellati, privati, archiviati): il progetto non viene toccato, restano gli ultimi dati noti. Fork e repository archiviati non si importano.
+- **Frequenza:** Solo manuale / ogni giorno / **ogni settimana (predefinita)** / ogni 2 settimane / ogni mese, modificabile dal pannello senza deploy. Lo scheduler lancia il comando ogni ora e il comando parte davvero solo se la frequenza scelta lo richiede. Se una sincronizzazione fallisce, al controllo orario successivo riprova.
+- **Token GitHub (facoltativo, consigliato):** senza, il limite è di 60 richieste all'ora per IP; con il token sono 5000. Va creato come *fine-grained token* con **Repository access: Public repositories (read-only)** e nessun altro permesso, e messo **solo** in `.env` e nelle variabili d'ambiente di Laravel Cloud come `GITHUB_TOKEN` (mai nel repository). Scade dopo al massimo 1 anno: se scade, il pannello lo segnala e il sync continua senza token.
+- **Su Laravel Cloud** serve attivare lo **scheduler** dell'ambiente (impostazioni del cluster dell'app), altrimenti la sincronizzazione automatica non parte (resta il pulsante "Sincronizza ora").
+
+```bash
+php artisan github:sync-projects            # rispetta la frequenza scelta
+php artisan github:sync-projects --force    # sincronizza subito
+```
 
 ---
 

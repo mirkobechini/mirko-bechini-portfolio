@@ -14,6 +14,15 @@ return [
     |
     */
 
+    // Sincronizzazione dei progetti con GitHub (php artisan github:sync-projects).
+    // Il token è facoltativo (fine-grained, sola lettura sui repository pubblici): senza, il limite è
+    // di 60 richieste/ora per IP. Va messo solo in .env / nelle variabili di Laravel Cloud, mai nel repo.
+    'github' => [
+        'username' => env('GITHUB_USERNAME', 'mirkobechini'),
+        'token' => env('GITHUB_TOKEN'),
+        'api_url' => 'https://api.github.com',
+    ],
+
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
     ],
