@@ -6,7 +6,7 @@ import FilterGroup from './components/FilterGroup';
 import ProjectsGrid from './components/ProjectsGrid';
 import ProjectsMessage from './components/ProjectsMessage';
 import useProjectFilters from './hooks/useProjectFilters';
-import useGithubProjects from '../../../hooks/useGithubProjects';
+import useProjects from '../../../hooks/useProjects';
 import { getAssetPath } from '../../../utils/assets';
 
 const frontendIcon = getAssetPath('/modals/projects/frontend-icon.webp');
@@ -23,7 +23,7 @@ const iconConfig = {
 };
 
 const ProjectsModal = memo(function ProjectsModal({ onBackToProjectsHome }) {
-    const { projects: githubProjects, loading, error } = useGithubProjects();
+    const { projects, loading, error } = useProjects();
     const {
         filteredProjects,
         selectedTypeFilter,
@@ -33,10 +33,10 @@ const ProjectsModal = memo(function ProjectsModal({ onBackToProjectsHome }) {
         resetFilters,
         typeOptions,
         scopeOptions,
-    } = useProjectFilters(githubProjects);
+    } = useProjectFilters(projects);
 
     const [isFiltersOpen, setIsFiltersOpen] = useState(false);
-    const hasProjects = githubProjects.length > 0;
+    const hasProjects = projects.length > 0;
 
     const typeFilterOptions = useMemo(() => {
         return typeOptions.map(option => {

@@ -155,20 +155,20 @@ npm run build
 
 ## 🐙 Dati dei progetti
 
-L'elenco progetti non è scritto a mano: viene composto a runtime da più fonti.
+L'elenco progetti viene dal backend: il browser non chiama più GitHub.
 
 ```
-GitHub REST API ──► projectMapper ──► ProjectsModal
-                        ▲
-        projectsMeta.js (descrizione IT, tipo, scope, pinned, exclude)
+GitHub ──(sync, scheduler)──► database ──► /api/projects ──► useProjects ──► ProjectsModal
+                                  ▲
+                     pannello /admin (descrizione, tipo, scope, nascosto, in evidenza)
 ```
 
-- **`services/githubApi.js`** legge i repo pubblici di `mirkobechini` ed esclude fork e repo archiviati.
-- **`services/projectsMeta.js`** contiene solo ciò che GitHub non sa: descrizione in italiano, `type` (frontend/backend/fullstack), `projectScope`, `pinned`, `exclude`, tecnologie extra e URL `live`. La chiave è il nome del repo. Un repo nuovo senza voce nel meta compare comunque (con i valori di default).
-- **`hooks/useGithubProjects.js`** usa una cache in `localStorage` (30 min). Se la rete o l'API (limite di 60 richieste/ora per IP) falliscono, mostra i dati scaduti; se non ci sono, l'elenco statico `fallbackProjects.js`. In quei casi la modal mostra un avviso.
-- Se cambi il **formato** dei dati in cache, incrementa `CACHE_KEY` in `useGithubProjects.js` (oggi `github_projects_cache_v2`).
+- **`services/projectsApi.js`** chiama `GET /api/projects` (vedi "API pubblica").
+- **`services/projectMapper.js`** aggiunge ciò che l'API non manda: l'anteprima segnaposto e i valori di default.
+- **`hooks/useProjects.js`** segue questa catena: cache in `localStorage` valida (10 min) → API → cache scaduta → elenco statico `fallbackProjects.js`. Se l'API non risponde o restituisce una lista vuota, la modal mostra un avviso.
+- Se cambi il **formato** dei dati in cache, incrementa `CACHE_KEY` in `useProjects.js` (oggi `projects_api_cache_v1`).
 
-Per aggiungere o nascondere un progetto basta aggiornare `projectsMeta.js`.
+Per aggiungere, nascondere o modificare un progetto usa il pannello `/admin` (vedi "Pannello di amministrazione"); nessun deploy necessario.
 
 ---
 

@@ -6,7 +6,7 @@ use App\Models\Project;
 use Illuminate\Database\Seeder;
 
 /**
- * Importa i progetti di partenza (quelli che oggi stanno in projectsMeta.js e fallbackProjects.js).
+ * Importa i progetti di partenza (quelli che stavano in projectsMeta.js (ora rimosso) e fallbackProjects.js).
  *
  * Usa firstOrCreate: crea solo i progetti che mancano e NON sovrascrive mai quello che è già nel
  * database. Così rilanciarlo non cancella le modifiche fatte dal pannello.

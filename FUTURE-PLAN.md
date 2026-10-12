@@ -6,7 +6,7 @@ Documento di pianificazione. Aggiornalo man mano che le decisioni vengono prese 
 
 Già fatto e in produzione (o pronto nel branch `dev`):
 
-- Progetti letti dalla GitHub REST API (`githubApi.js` → `projectMapper.js` → `ProjectsModal`), con descrizioni, tipo, scope e `pinned` in `projectsMeta.js`, cache in `localStorage` e fallback statico.
+- Progetti letti da `/api/projects` (`projectsApi.js` → `projectMapper.js` → `useProjects` → `ProjectsModal`), con cache in `localStorage` e fallback statico. Il backend li sincronizza da GitHub.
 - Backend Laravel 13 minimale (aggiornato da 12 il 2026-10-11): serve l'SPA, 404 reale, header di sicurezza (CSP ancora in sola osservazione), `trustProxies`.
 - Test (Vitest ~370, PHPUnit), CI con lint/test/build, `npm run predeploy`, 0 vulnerabilità note.
 
