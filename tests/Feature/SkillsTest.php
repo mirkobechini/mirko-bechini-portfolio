@@ -119,6 +119,22 @@ class SkillsTest extends TestCase
         $this->assertCount(2, DB::getQueryLog()); // skills + progetti collegati (con la tabella ponte), niente N+1
     }
 
+    /**
+     * La libreria legge questi campi (stessa forma di skillsData.js, che fa anche da fallback).
+     */
+    public function test_the_fields_match_the_static_skills_data(): void
+    {
+        $js = file_get_contents(base_path('resources/js/src/features/modals/library/skillsData.js'));
+        preg_match('/const skillsData = \[\s*\{(.*?)
+    \},/s', $js, $block);
+        preg_match_all('/^\s{8}([a-zA-Z]+):/m', $block[1] ?? '', $keys);
+
+        Skill::factory()->create();
+
+        $this->assertNotEmpty($keys[1], 'Non riesco a leggere i campi di skillsData.js');
+        $this->assertEqualsCanonicalizing($keys[1], array_keys($this->skills()[0]));
+    }
+
     // ---------- cache ----------
 
     public function test_editing_a_skill_refreshes_the_api(): void

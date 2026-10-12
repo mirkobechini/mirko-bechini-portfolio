@@ -165,6 +165,7 @@ GitHub ──(sync, scheduler)──► database ──► /api/projects ──�
 
 - **`services/projectsApi.js`** chiama `GET /api/projects` (vedi "API pubblica").
 - **`services/projectMapper.js`** aggiunge ciò che l'API non manda: l'anteprima segnaposto e i valori di default.
+- **`hooks/useApiList.js`** è la logica comune (usata da `useProjects` e `useSkills`); ciascun hook indica solo chiave di cache, funzione di lettura, mapper e dati statici di riserva.
 - **`hooks/useProjects.js`** segue questa catena: cache in `localStorage` valida (10 min) → API → cache scaduta → elenco statico `fallbackProjects.js`. Se l'API non risponde o restituisce una lista vuota, la modal mostra un avviso.
 - Se cambi il **formato** dei dati in cache, incrementa `CACHE_KEY` in `useProjects.js` (oggi `projects_api_cache_v1`).
 

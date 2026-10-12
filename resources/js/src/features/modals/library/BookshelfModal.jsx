@@ -1,8 +1,9 @@
-import { memo, useEffect, useState, lazy, Suspense } from 'react';
+import { memo, useEffect, useMemo, useState, lazy, Suspense } from 'react';
 import styles from './BookshelfModal.module.css';
 import sharedStyles from '../shared/SharedModal.module.css';
 import { BOOKSHELF_PROFILES } from './bookshelfProfiles';
 import educationData from './educationData';
+import useSkills from '../../../hooks/useSkills';
 import { getAssetPath } from '../../../utils/assets';
 import playBookFlip from '../../../utils/playBookFlip';
 
@@ -16,6 +17,7 @@ const BookshelfModal = memo(function BookshelfModal({ setModalSprite, defaultMod
     const [selectedProfile, setSelectedProfile] = useState(null);
     const [preselectSkill, setPreselectSkill] = useState(null);
     const [returnToEducation, setReturnToEducation] = useState(null);
+    const { skills } = useSkills();
 
     /* Auto-open "Formazione" book and select matching education when coming from a certification */
     useEffect(() => {
@@ -55,7 +57,12 @@ const BookshelfModal = memo(function BookshelfModal({ setModalSprite, defaultMod
         playBookFlip();
     }
 
-    const activeProfile = selectedProfile == null ? null : BOOKSHELF_PROFILES[selectedProfile];
+    // Le competenze arrivano dalla API (con fallback statico); il resto del profilo è fisso
+    const activeProfile = useMemo(() => {
+        if (selectedProfile == null) return null;
+        const profile = BOOKSHELF_PROFILES[selectedProfile];
+        return selectedProfile === 'skills' ? { ...profile, skillsData: skills } : profile;
+    }, [selectedProfile, skills]);
 
     useEffect(() => {
         if (selectedProfile == null) {
