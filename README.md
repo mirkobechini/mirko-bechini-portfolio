@@ -247,6 +247,18 @@ php artisan github:sync-projects --force    # sincronizza subito
 
 ---
 
+## 🔌 API pubblica
+
+`GET /api/projects` restituisce i progetti visibili (non nascosti) in JSON, nella forma che usa il sito:
+`id`, `title`, `description`, `projectScope`, `type`, `technologies`, `repo`, `live`, `stars`, `updatedAt`, `pinned`, `group` (solo nome).
+
+- Ordine: prima i progetti in evidenza, poi i più recenti.
+- Cache lato server di 10 minuti (`api.projects.v1`), svuotata a ogni modifica di progetti o raggruppamenti.
+- `ETag` + `Cache-Control` pubblico: se nulla è cambiato risponde `304`.
+- Limite di 60 richieste al minuto per IP (`429` in JSON).
+- Sotto `/api` gli errori sono sempre JSON; nessun header CORS (il sito usa la stessa origine).
+- In produzione usare una `CACHE_STORE` condivisa (es. `database`), altrimenti con più istanze i dati possono restare vecchi fino a 10 minuti.
+
 ## 🚢 Deploy
 
 Il sito è su **Laravel Cloud** dietro **Cloudflare**; il deploy parte dal branch `main`. Flusso di lavoro: un branch per ogni modifica, merge in `dev` con `git merge --no-ff` (niente squash, per tenere traccia dei branch), `dev` → `main` solo quando si vuole pubblicare.
