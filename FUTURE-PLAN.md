@@ -42,6 +42,9 @@ Pannello /admin (Filament, login)
 | 3 | Anteprime dei progetti | **Rimandate**: resta il segnaposto di oggi. Niente upload né storage per ora. |
 | 4 | Sync GitHub | Il sync aggiorna **solo i campi di GitHub** (stelle, data dell'ultimo push, URL, linguaggio e topics in `technologies`). Titolo, descrizione in italiano, tipo, scope, sito online, tecnologie aggiuntive, in evidenza e nascosto restano sempre quelli del pannello: il sync imposta il titolo (dal nome del repo) solo quando crea un progetto nuovo, altrimenti si perderebbero titoli come "Gods Backoffice". Il pannello non permette di eliminare i progetti (il sync li ricreerebbe): per toglierne uno dal sito si usa "Nascosto". |
 | 5 | Accesso e indirizzo | **Un solo utente (tu), con 2FA obbligatoria**, creato da comando: nessuna registrazione pubblica. Pannello su **`/admin`**. |
+| 6 | Categorie e ambiti dei progetti | **Valori fissi, come enum nel codice** (`ProjectType`: frontend/backend/fullstack, `ProjectScope`: personal/work), non tabelle: il sito React ha un'icona e un'etichetta per ciascuno. Un test confronta gli enum con `useProjectFilters.js`. |
+| 7 | Raggruppamenti | Tabella **`project_groups`** (es. "Cliente A", "Azienda B"): un progetto appartiene a un solo raggruppamento (opzionale), creabile dal pannello. Il sito React userà i raggruppamenti nella fase 5. |
+| 8 | Collegamento progetto → corso | **Fase 6**, non prima: oggi nei dati non esiste (il corso ha solo una lista di competenze in testo e `skillsData.relatedProjects` sono nomi scritti a mano che non coincidono con i titoli). Con le tabelle `educations` e `skills`: `projects.education_id` (un progetto è nato per un corso) e relazione progetti ↔ competenze al posto di `relatedProjects`, con una migrazione che mappa i nomi attuali sui progetti veri. |
 
 Riferimento: `portfolio-chicca` usa già **Filament 5** (5.10 al 2026-10-11) con Laravel 13 e PHP 8.4: per questo progetto vale Filament 5, non la 4.
 
