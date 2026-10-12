@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Enums\ProjectScope;
 use App\Enums\ProjectType;
+use App\Models\Course;
 use App\Models\Project;
 use App\Models\ProjectGroup;
 use App\Support\PublicProjects;
@@ -63,7 +64,7 @@ class ApiProjectsTest extends TestCase
         $project = $this->projects()[0];
 
         $this->assertEqualsCanonicalizing(
-            ['id', 'title', 'description', 'projectScope', 'type', 'technologies', 'repo', 'live', 'stars', 'updatedAt', 'pinned', 'group'],
+            ['id', 'title', 'description', 'projectScope', 'type', 'technologies', 'repo', 'live', 'stars', 'updatedAt', 'pinned', 'course', 'group'],
             array_keys($project)
         );
         $this->assertSame('gods-backoffice', $project['id']);
@@ -208,14 +209,15 @@ class ApiProjectsTest extends TestCase
     public function test_a_cold_request_uses_two_queries_regardless_of_the_number_of_projects(): void
     {
         $group = ProjectGroup::factory()->create();
-        Project::factory()->count(15)->create(['project_group_id' => $group->id]);
+        $course = Course::factory()->create();
+        Project::factory()->count(15)->create(['project_group_id' => $group->id, 'course_id' => $course->id]);
         Cache::forget(PublicProjects::CACHE_KEY);
 
         DB::flushQueryLog();
         DB::enableQueryLog();
         $this->getJson('/api/projects')->assertOk();
 
-        $this->assertCount(2, DB::getQueryLog()); // i progetti + i loro raggruppamenti, niente N+1
+        $this->assertCount(3, DB::getQueryLog()); // progetti + raggruppamenti + corsi, niente N+1
     }
 
     public function test_saving_a_project_refreshes_the_api(): void

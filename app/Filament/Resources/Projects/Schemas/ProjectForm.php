@@ -63,6 +63,14 @@ class ProjectForm
                                     ->rows(2),
                             ])
                             ->columnSpanFull(),
+                        Select::make('course_id')
+                            ->label('Corso')
+                            ->relationship('course', 'course')
+                            ->searchable()
+                            ->preload()
+                            ->placeholder('Nessuno')
+                            ->helperText('Il corso per cui hai fatto il progetto, se c\'è.')
+                            ->columnSpanFull(),
                         TagsInput::make('extra_technologies')
                             ->label('Tecnologie aggiuntive')
                             ->helperText('Solo quelle che GitHub non conosce (AI, Figma...). Quelle di GitHub si aggiungono da sole.')

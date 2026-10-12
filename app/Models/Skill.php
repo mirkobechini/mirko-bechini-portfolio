@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Support\PublicSkills;
+use App\Support\PublicCache;
 use Database\Factories\SkillFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -32,8 +32,8 @@ class Skill extends Model
 
     protected static function booted(): void
     {
-        static::saved(fn () => PublicSkills::forget());
-        static::deleted(fn () => PublicSkills::forget());
+        static::saved(fn () => PublicCache::forgetAll());
+        static::deleted(fn () => PublicCache::forgetAll());
     }
 
     /**
