@@ -49,7 +49,7 @@ class SecurityHeaders
             "font-src 'self' data: https://fonts.gstatic.com",
             "img-src 'self' data: https:",
             "media-src 'self'",
-            "connect-src 'self' https://api.github.com {$iubenda}{$viteHttp}{$viteWs}",
+            "connect-src 'self' {$iubenda}{$viteHttp}{$viteWs}",
             "frame-src {$iubenda}",
             "worker-src 'self'",
             "manifest-src 'self'",

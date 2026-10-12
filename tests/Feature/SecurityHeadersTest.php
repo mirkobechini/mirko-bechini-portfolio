@@ -33,7 +33,8 @@ class SecurityHeadersTest extends TestCase
         $this->assertStringContainsString('https://fonts.googleapis.com', $csp);
         $this->assertStringContainsString('https://fonts.gstatic.com', $csp);
         $this->assertStringContainsString('https://*.iubenda.com', $csp);
-        $this->assertStringContainsString('https://api.github.com', $csp);
+        // Il browser non parla più con GitHub: ci pensa il backend
+        $this->assertStringNotContainsString('api.github.com', $csp);
         $this->assertStringContainsString("object-src 'none'", $csp);
 
         // Report-Only: non deve esistere ancora la versione che blocca

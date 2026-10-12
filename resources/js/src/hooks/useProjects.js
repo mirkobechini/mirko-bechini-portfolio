@@ -1,19 +1,19 @@
 import { useState, useEffect, useCallback } from "react";
-import { getRepos } from "../features/modals/projects/services/githubApi";
-import { transformRepos } from "../features/modals/projects/services/projectMapper";
+import { getProjects } from "../features/modals/projects/services/projectsApi";
+import { mapApiProjects } from "../features/modals/projects/services/projectMapper";
 import useLocalStorage from "./useLocalStorage";
 
-// Bump della versione quando cambia il formato dei dati (es. aggiunta campo pinned)
-const CACHE_KEY = "github_projects_cache_v2";
-const CACHE_TTL_MS = 30 * 60 * 1000; // 30 minuti
+// Bump della versione quando cambia il formato dei dati
+const CACHE_KEY = "projects_api_cache_v1";
+const CACHE_TTL_MS = 10 * 60 * 1000; // 10 minuti, come la cache del server
 
 /**
- * Hook che carica i progetti dalla GitHub REST API.
- * Con cache in localStorage (TTL 30 min) e fallback su cache scaduta se API è down.
+ * Carica i progetti dalla API del sito. Catena di fallback:
+ * cache valida → API → cache scaduta → dati statici (fallbackProjects).
  *
  * @returns {{ projects: Array, loading: boolean, error: string|null, refetch: () => void }}
  */
-export default function useGithubProjects() {
+export default function useProjects() {
     const { get, getStale, set } = useLocalStorage(CACHE_KEY, CACHE_TTL_MS);
 
     // Cache valida, altrimenti dati scaduti (meglio che niente mentre il fetch parte)
@@ -23,13 +23,16 @@ export default function useGithubProjects() {
 
     const load = useCallback(async () => {
         try {
-            const repos = await getRepos();
-            const mapped = transformRepos(repos);
+            const data = await getProjects();
+            // Una lista vuota non è credibile per un portfolio: meglio i dati di riserva
+            if (data.length === 0) throw new Error("API error: nessun progetto");
+
+            const mapped = mapApiProjects(data);
             setProjects(mapped);
             set(mapped);
         } catch (err) {
-            console.error("GitHub API error:", err);
-            setError("Impossibile caricare i progetti da GitHub.");
+            console.error("Projects API error:", err);
+            setError("Impossibile caricare i progetti.");
 
             const stale = getStale();
             if (stale && stale.length > 0) {

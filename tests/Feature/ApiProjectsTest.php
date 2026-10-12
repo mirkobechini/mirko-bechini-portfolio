@@ -312,20 +312,20 @@ class ApiProjectsTest extends TestCase
     // ---------- contratto con il sito React ----------
 
     /**
-     * Le card e i filtri leggono questi campi (projectMapper.js): se l'API ne cambia il nome, i progetti
-     * si vedrebbero vuoti. Il campo `preview` lo aggiunge il frontend (segnaposto).
+     * Le card e i filtri leggono questi campi (stessa forma di fallbackProjects.js): se l'API ne cambia il
+     * nome, i progetti si vedrebbero vuoti. Il campo `preview` lo aggiunge il frontend (segnaposto).
      */
     public function test_the_fields_match_what_the_react_mapper_produces(): void
     {
-        $js = file_get_contents(base_path('resources/js/src/features/modals/projects/services/projectMapper.js'));
-        preg_match('/return \{(.*?)\n    \};/s', $js, $block);
-        preg_match_all('/^\s{8}([a-zA-Z]+)[:,]/m', $block[1] ?? '', $keys);
+        $js = file_get_contents(base_path('resources/js/src/features/modals/projects/services/fallbackProjects.js'));
+        preg_match('/const fallbackProjects = \[\s*\{(.*?)\n    \},/s', $js, $block);
+        preg_match_all('/^\s{8}([a-zA-Z]+):/m', $block[1] ?? '', $keys);
 
         $frontendFields = array_diff($keys[1], ['preview']);
         Project::factory()->create();
         $apiFields = array_keys($this->projects()[0]);
 
-        $this->assertNotEmpty($frontendFields, 'Non riesco a leggere i campi di projectMapper.js');
+        $this->assertNotEmpty($frontendFields, 'Non riesco a leggere i campi di fallbackProjects.js');
         $this->assertSame([], array_values(array_diff($frontendFields, $apiFields)), 'Campi che il sito usa e l\'API non ha');
     }
 }

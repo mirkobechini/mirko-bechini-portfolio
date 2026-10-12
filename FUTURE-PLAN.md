@@ -6,7 +6,7 @@ Documento di pianificazione. Aggiornalo man mano che le decisioni vengono prese 
 
 Già fatto e in produzione (o pronto nel branch `dev`):
 
-- Progetti letti dalla GitHub REST API (`githubApi.js` → `projectMapper.js` → `ProjectsModal`), con descrizioni, tipo, scope e `pinned` in `projectsMeta.js`, cache in `localStorage` e fallback statico.
+- Progetti letti da `/api/projects` (`projectsApi.js` → `projectMapper.js` → `useProjects` → `ProjectsModal`), con cache in `localStorage` e fallback statico. Il backend li sincronizza da GitHub.
 - Backend Laravel 13 minimale (aggiornato da 12 il 2026-10-11): serve l'SPA, 404 reale, header di sicurezza (CSP ancora in sola osservazione), `trustProxies`.
 - Test (Vitest ~370, PHPUnit), CI con lint/test/build, `npm run predeploy`, 0 vulnerabilità note.
 
@@ -91,6 +91,23 @@ Una branch per fase (`feat/...`), merge in `dev` con `--no-ff`, test verdi prima
 5. **Frontend progetti**: `useProjects` con fallback, test (stile `useGithubProjects.test.jsx`), rimozione della chiamata diretta a GitHub dal browser.
 6. **Altre sezioni**: skills, education, certifications, contacts, ognuna con migrazione, risorsa Filament, endpoint e hook (una fase per sezione). L'upload delle immagini resta fuori finché non viene ripreso.
 7. **Pulizia**: togliere i file `*Data.js` solo se i fallback non servono più (probabilmente conviene tenerli), aggiornare README e questo documento.
+
+## Checklist di deploy (da fare UNA volta, quando il backend è finito)
+
+Niente di questo è stato ancora fatto in produzione: `main` e Laravel Cloud sono fermi alla versione senza backend.
+
+1. **Database**: creare il database MySQL su Laravel Cloud e collegarlo all'app (variabili `DB_*`).
+2. **Migrazioni**: aggiungere `php artisan migrate --force` ai comandi di deploy.
+3. **Cache condivisa**: impostare `CACHE_STORE=database` (o redis). Con la cache su file e più istanze, l'API pubblica può restare vecchia fino a 10 minuti dopo una modifica dal pannello, perché ogni istanza svuota solo la propria cache. Serve anche la tabella `cache` (migrazione già presente).
+4. **Sessioni**: decidere `SESSION_DRIVER` (oggi `cookie`; Filament funziona meglio con `database`).
+5. **Scheduler**: attivare lo scheduler di Laravel Cloud (esegue `github:sync-projects` ogni ora; il comando parte solo se la frequenza scelta lo richiede).
+6. **Token GitHub**: creare il token fine-grained (sola lettura, repo pubblici) e impostare `GITHUB_TOKEN` solo nelle variabili d'ambiente di Laravel Cloud e nel `.env` locale. Mai in chat o nel repo.
+7. **Utente admin**: crearlo con i Cloud Commands (`php artisan make:filament-user`, poi `is_admin = 1`) e configurare subito la 2FA e salvare i codici di recupero.
+8. **Primo popolamento**: lanciare `php artisan db:seed --class=ProjectSeeder` e poi "Sincronizza ora" dal pannello; controllare `/api/projects`.
+9. **Variabili**: aggiornare `.env.production` locale con le nuove variabili (`CACHE_STORE`, `SESSION_DRIVER`, `GITHUB_USERNAME`, `GITHUB_TOKEN`); `APP_DEBUG=false`; PHP 8.5 è già impostato.
+10. **CSP**: dopo qualche giorno senza violazioni nei report, passare `Content-Security-Policy-Report-Only` a `Content-Security-Policy`.
+11. **Cloudflare**: verificare che `/api/*` non venga messo in cache oltre i `Cache-Control` inviati e che `/admin` non sia in cache.
+12. **Merge su main**: solo con il via esplicito (PR #41 dev → main), poi controllare `/`, `/admin`, `/api/projects` e il login con 2FA.
 
 ## Rischi e punti di attenzione
 
