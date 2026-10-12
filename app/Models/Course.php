@@ -58,6 +58,14 @@ class Course extends Model
     }
 
     /**
+     * @return HasMany<Certification, $this>
+     */
+    public function certifications(): HasMany
+    {
+        return $this->hasMany(Certification::class);
+    }
+
+    /**
      * @param  Builder<Course>  $query
      */
     public function scopeVisible(Builder $query): void

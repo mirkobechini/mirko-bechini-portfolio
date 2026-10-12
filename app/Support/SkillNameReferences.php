@@ -2,13 +2,14 @@
 
 namespace App\Support;
 
+use App\Models\Certification;
 use App\Models\Course;
 
 /**
- * I corsi citano le skill per nome (nell'elenco del corso e in ogni modulo). Quando una skill viene
- * rinominata o eliminata, i corsi devono seguirla, altrimenti il sito mostrerebbe un nome che non esiste più.
+ * Corsi (elenco e moduli) e certificazioni citano le skill per nome. Quando una skill viene rinominata o
+ * eliminata devono seguirla, altrimenti il sito mostrerebbe un nome che non esiste più.
  */
-class SkillNameInCourses
+class SkillNameReferences
 {
     /**
      * Sostituisce il vecchio nome con il nuovo (senza creare doppioni).
@@ -21,7 +22,7 @@ class SkillNameInCourses
     }
 
     /**
-     * Toglie il nome dai corsi.
+     * Toglie il nome da corsi e certificazioni.
      */
     public static function remove(string $name): void
     {
@@ -42,6 +43,14 @@ class SkillNameInCourses
 
             if ($skills !== ($course->skills ?? []) || $modules !== ($course->modules ?? [])) {
                 $course->update(['skills' => $skills, 'modules' => $modules]);
+            }
+        });
+
+        Certification::query()->each(function (Certification $certification) use ($transform): void {
+            $skills = $transform($certification->skills ?? []);
+
+            if ($skills !== ($certification->skills ?? [])) {
+                $certification->update(['skills' => $skills]);
             }
         });
     }
