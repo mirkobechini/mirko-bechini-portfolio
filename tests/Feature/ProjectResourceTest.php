@@ -90,6 +90,67 @@ class ProjectResourceTest extends TestCase
             ->assertActionDoesNotExist('delete');
     }
 
+    // ---------- modifica veloce dall'elenco ----------
+
+    public function test_hidden_and_pinned_can_be_toggled_from_the_list_row(): void
+    {
+        $project = Project::factory()->create(['hidden' => false, 'pinned' => false]);
+
+        Livewire::test(ListProjects::class)
+            ->call('updateTableColumnState', 'hidden', $project->getKey(), true)
+            ->call('updateTableColumnState', 'pinned', $project->getKey(), true);
+
+        $project = $project->fresh();
+        $this->assertTrue($project->hidden);
+        $this->assertTrue($project->pinned);
+    }
+
+    public function test_bulk_hide_and_show_only_touch_the_selected_projects(): void
+    {
+        $selected = Project::factory()->count(2)->create(['hidden' => false]);
+        $untouched = Project::factory()->create(['hidden' => false]);
+
+        Livewire::test(ListProjects::class)->callTableBulkAction('hide', $selected);
+
+        $this->assertSame(2, Project::where('hidden', true)->count());
+        $this->assertFalse($untouched->fresh()->hidden);
+
+        Livewire::test(ListProjects::class)->callTableBulkAction('show', $selected);
+
+        $this->assertSame(0, Project::where('hidden', true)->count());
+    }
+
+    public function test_bulk_pin_and_unpin_only_touch_the_selected_projects(): void
+    {
+        $selected = Project::factory()->count(2)->create(['pinned' => false]);
+        $untouched = Project::factory()->create(['pinned' => false]);
+
+        Livewire::test(ListProjects::class)->callTableBulkAction('pin', $selected);
+
+        $this->assertSame(2, Project::where('pinned', true)->count());
+        $this->assertFalse($untouched->fresh()->pinned);
+
+        Livewire::test(ListProjects::class)->callTableBulkAction('unpin', $selected);
+
+        $this->assertSame(0, Project::where('pinned', true)->count());
+    }
+
+    public function test_the_bulk_actions_do_not_change_anything_else(): void
+    {
+        $project = Project::factory()->create([
+            'title' => 'Intatto',
+            'description_it' => 'Non toccare',
+            'extra_technologies' => ['AI'],
+        ]);
+
+        Livewire::test(ListProjects::class)->callTableBulkAction('hide', [$project]);
+
+        $project = $project->fresh();
+        $this->assertSame('Intatto', $project->title);
+        $this->assertSame('Non toccare', $project->description_it);
+        $this->assertSame(['AI'], $project->extra_technologies);
+    }
+
     // ---------- modifica ----------
 
     public function test_the_edit_form_is_filled_with_the_project_data(): void

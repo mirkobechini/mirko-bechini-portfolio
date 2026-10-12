@@ -33,7 +33,7 @@ class ProjectForm
                             ->rows(4)
                             ->columnSpanFull(),
                         Select::make('type')
-                            ->label('Tipo')
+                            ->label('Categoria')
                             ->options([
                                 'frontend' => 'Frontend',
                                 'backend' => 'Backend',
