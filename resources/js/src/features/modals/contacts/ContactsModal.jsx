@@ -1,11 +1,12 @@
 import styles from './ContactsModal.module.css';
 import { memo, useCallback, useRef, useState } from 'react';
-import contacts from './contactsData';
+import useContacts from '../../../hooks/useContacts';
 import { isExternalWebLink } from '../../../utils/links';
 import { useKeyboardNavigation } from '../../../hooks/useKeyboardNavigation';
 
 const ContactsModal = memo(function ContactsModal() {
 
+    const { contacts } = useContacts();
     const [currentIndex, setCurrentIndex] = useState(-1);
     const contactRefs = useRef([]);
 
@@ -35,7 +36,7 @@ const ContactsModal = memo(function ContactsModal() {
                         href={contact.href}
                         target={isExternalWebLink(contact.href) ? '_blank' : undefined}
                         rel={isExternalWebLink(contact.href) ? 'noopener noreferrer' : undefined}
-                        className={`${styles['contact-card']} ${styles[contact.variantClass]} ${currentIndex === index ? styles['selected-contact'] : ''}`}
+                        className={`${styles['contact-card']} ${styles[contact.variantClass] ?? ''} ${currentIndex === index ? styles['selected-contact'] : ''}`}
                         aria-label={contact.ariaLabel}
                     >
                         <span className={styles.icon}>{contact.icon}</span>
