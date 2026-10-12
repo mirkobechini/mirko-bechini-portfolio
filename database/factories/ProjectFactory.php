@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\ProjectScope;
+use App\Enums\ProjectType;
 use App\Models\Project;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -24,8 +26,8 @@ class ProjectFactory extends Factory
             'github_repo' => $repo,
             'title' => Str::headline($repo),
             'description_it' => fake()->sentence(),
-            'type' => fake()->randomElement(['frontend', 'backend', 'fullstack']),
-            'scope' => fake()->randomElement(['personal', 'work']),
+            'type' => fake()->randomElement(ProjectType::cases()),
+            'scope' => fake()->randomElement(ProjectScope::cases()),
             'technologies' => ['PHP', 'Laravel'],
             'extra_technologies' => [],
             'repo_url' => "https://github.com/mirkobechini/{$repo}",

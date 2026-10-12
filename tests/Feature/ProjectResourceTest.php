@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Enums\ProjectScope;
+use App\Enums\ProjectType;
 use App\Filament\Resources\Projects\Pages\CreateProject;
 use App\Filament\Resources\Projects\Pages\EditProject;
 use App\Filament\Resources\Projects\Pages\ListProjects;
@@ -166,7 +168,7 @@ class ProjectResourceTest extends TestCase
             ->assertFormSet([
                 'title' => 'Titolo',
                 'description_it' => 'Descrizione',
-                'type' => 'backend',
+                'type' => ProjectType::Backend,
                 'extra_technologies' => ['AI'],
             ]);
     }
@@ -192,8 +194,8 @@ class ProjectResourceTest extends TestCase
         $project = $project->fresh();
         $this->assertSame('Nuovo titolo', $project->title);
         $this->assertSame('Nuova descrizione', $project->description_it);
-        $this->assertSame('frontend', $project->type);
-        $this->assertSame('work', $project->scope);
+        $this->assertSame(ProjectType::Frontend, $project->type);
+        $this->assertSame(ProjectScope::Work, $project->scope);
         $this->assertSame('https://example.com', $project->live_url);
         $this->assertSame(['AI', 'Figma'], $project->extra_technologies);
         $this->assertTrue($project->pinned);
@@ -272,8 +274,8 @@ class ProjectResourceTest extends TestCase
 
         $project = Project::where('github_repo', 'nuovo-progetto')->firstOrFail();
         $this->assertSame('Nuovo progetto', $project->title);
-        $this->assertSame('fullstack', $project->type);
-        $this->assertSame('personal', $project->scope);
+        $this->assertSame(ProjectType::Fullstack, $project->type);
+        $this->assertSame(ProjectScope::Personal, $project->scope);
         $this->assertFalse($project->pinned);
         $this->assertFalse($project->hidden);
         $this->assertSame(0, $project->stars);
