@@ -5,11 +5,13 @@ namespace App\Models;
 use App\Enums\ProjectScope;
 use App\Enums\ProjectType;
 use App\Support\PublicProjects;
+use App\Support\PublicSkills;
 use Database\Factories\ProjectFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Project extends Model
 {
@@ -37,8 +39,15 @@ class Project extends Model
     protected static function booted(): void
     {
         // Ogni modifica (anche quella del sync o dei pulsanti del pannello) svuota la cache dell'API pubblica.
-        static::saved(fn () => PublicProjects::forget());
-        static::deleted(fn () => PublicProjects::forget());
+        // I titoli dei progetti compaiono anche nelle skill collegate.
+        static::saved(function () {
+            PublicProjects::forget();
+            PublicSkills::forget();
+        });
+        static::deleted(function () {
+            PublicProjects::forget();
+            PublicSkills::forget();
+        });
     }
 
     /**
@@ -62,6 +71,16 @@ class Project extends Model
             ->orderByRaw('pushed_at IS NULL')
             ->orderByDesc('pushed_at')
             ->orderBy('title');
+    }
+
+    /**
+     * Le competenze usate in questo progetto.
+     *
+     * @return BelongsToMany<Skill, $this>
+     */
+    public function skills(): BelongsToMany
+    {
+        return $this->belongsToMany(Skill::class);
     }
 
     /**

@@ -253,6 +253,7 @@ php artisan github:sync-projects --force    # sincronizza subito
 `id`, `title`, `description`, `projectScope`, `type`, `technologies`, `repo`, `live`, `stars`, `updatedAt`, `pinned`, `group` (solo nome).
 
 - Ordine: prima i progetti in evidenza, poi i più recenti.
+- `GET /api/skills` restituisce le competenze visibili (`id`, `skill`, `icon`, `category`, `color`, `functions`, `relatedProjects`) con le stesse regole di cache, ETag e limite. I progetti collegati sono i titoli dei progetti non nascosti più l'eventuale testo libero.
 - Cache lato server di 10 minuti (`api.projects.v1`), svuotata a ogni modifica di progetti o raggruppamenti.
 - `ETag` + `Cache-Control` pubblico: se nulla è cambiato risponde `304`.
 - Limite di 60 richieste al minuto per IP (`429` in JSON).

@@ -1,0 +1,62 @@
+<?php
+
+namespace App\Models;
+
+use App\Support\PublicSkills;
+use Database\Factories\SkillFactory;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
+/**
+ * Una competenza mostrata nella libreria del sito. I progetti collegati sono quelli della tabella
+ * projects (relazione) più eventuale testo libero in extra_projects (es. "Tutti i progetti").
+ */
+class Skill extends Model
+{
+    /** @use HasFactory<SkillFactory> */
+    use HasFactory;
+
+    protected $fillable = ['name', 'icon', 'category', 'color', 'functions', 'extra_projects', 'position', 'hidden'];
+
+    protected function casts(): array
+    {
+        return [
+            'functions' => 'array',
+            'extra_projects' => 'array',
+            'position' => 'integer',
+            'hidden' => 'boolean',
+        ];
+    }
+
+    protected static function booted(): void
+    {
+        static::saved(fn () => PublicSkills::forget());
+        static::deleted(fn () => PublicSkills::forget());
+    }
+
+    /**
+     * @return BelongsToMany<Project, $this>
+     */
+    public function projects(): BelongsToMany
+    {
+        return $this->belongsToMany(Project::class);
+    }
+
+    /**
+     * @param  Builder<Skill>  $query
+     */
+    public function scopeVisible(Builder $query): void
+    {
+        $query->where('hidden', false);
+    }
+
+    /**
+     * @param  Builder<Skill>  $query
+     */
+    public function scopeInDisplayOrder(Builder $query): void
+    {
+        $query->orderBy('position')->orderBy('name');
+    }
+}
