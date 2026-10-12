@@ -3,6 +3,7 @@ import { getAssetPath } from '../../../utils/assets';
 const certificationData = [
     {
         id: 1,
+        courseId: 1, // id del corso in educationData.js
         title: 'Master web development part-time specializzazione PHP e Laravel',
         preview: 'https://cdn.certifier.io/fa42c19f-1139-4574-ac7a-83b13341a48e/credentials/01kjpz4adz63kdjmb8dvkkvqkp/designs/01kecgnrmxpmnwpapcy6fqm34w/EaIJLLzwYX.png',
         previewWidth: 2385,
@@ -14,6 +15,7 @@ const certificationData = [
     },
     {
         id: 2,
+        courseId: 2,
         title: 'Certificato di completamento corso LEARN REACT',
         preview: getAssetPath('/modals/certifications/certificato-react-scrimba.webp'),
         previewWidth: 1320,
