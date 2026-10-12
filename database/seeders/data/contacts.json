@@ -1,0 +1,26 @@
+[
+    {
+        "label": "Email",
+        "href": "mailto:mirkobechini@gmail.com",
+        "icon": "✉️",
+        "aria_label": "Contatta via email",
+        "variant": "mail",
+        "position": 1
+    },
+    {
+        "label": "LinkedIn",
+        "href": "https://www.linkedin.com/in/mirko-bechini-892202252/",
+        "icon": "🔗",
+        "aria_label": "Apri profilo LinkedIn",
+        "variant": "linkedin",
+        "position": 2
+    },
+    {
+        "label": "GitHub",
+        "href": "https://github.com/mirkobechini",
+        "icon": "💻",
+        "aria_label": "Apri profilo GitHub",
+        "variant": "github",
+        "position": 3
+    }
+]
