@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\PublicProjects;
 use Database\Factories\ProjectGroupFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,6 +18,13 @@ class ProjectGroup extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'description'];
+
+    protected static function booted(): void
+    {
+        // Il nome del raggruppamento compare nell'API dei progetti.
+        static::saved(fn () => PublicProjects::forget());
+        static::deleted(fn () => PublicProjects::forget());
+    }
 
     /**
      * @return HasMany<Project, $this>

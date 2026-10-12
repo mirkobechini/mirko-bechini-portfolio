@@ -8,12 +8,12 @@ class RoutesTest extends TestCase
 {
     public function test_api(): void
     {
-        $this->get('/api/')->assertNotFound();
+        $this->get('/api/')->assertNotFound()->assertJson(['message' => 'Risorsa non trovata.']);
     }
 
     public function test_api_not_found(): void
     {
-        $this->get('/api/pagina-che-non-esiste')->assertNotFound();
+        $this->get('/api/pagina-che-non-esiste')->assertNotFound()->assertJson(['message' => 'Risorsa non trovata.']);
     }
 
     public function test_home_serves_the_spa(): void

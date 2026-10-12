@@ -3,6 +3,7 @@
 namespace App\GithubSync;
 
 use App\Models\Project;
+use App\Support\TechnologyList;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -77,19 +78,7 @@ class ProjectSyncer
      */
     private function technologies(array $repo): array
     {
-        $seen = [];
-        $list = [];
-
-        foreach (array_filter([$repo['language'] ?? null, ...($repo['topics'] ?? [])]) as $technology) {
-            $key = mb_strtolower($technology);
-
-            if (! isset($seen[$key])) {
-                $seen[$key] = true;
-                $list[] = $technology;
-            }
-        }
-
-        return $list;
+        return TechnologyList::merge([$repo['language'] ?? null], $repo['topics'] ?? []);
     }
 
     private function validUrl(mixed $url): ?string
