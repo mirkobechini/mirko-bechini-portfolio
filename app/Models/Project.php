@@ -4,8 +4,7 @@ namespace App\Models;
 
 use App\Enums\ProjectScope;
 use App\Enums\ProjectType;
-use App\Support\PublicProjects;
-use App\Support\PublicSkills;
+use App\Support\PublicCache;
 use Database\Factories\ProjectFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -34,20 +33,15 @@ class Project extends Model
         'hidden',
         'synced_at',
         'project_group_id',
+        'course_id',
     ];
 
     protected static function booted(): void
     {
         // Ogni modifica (anche quella del sync o dei pulsanti del pannello) svuota la cache dell'API pubblica.
-        // I titoli dei progetti compaiono anche nelle skill collegate.
-        static::saved(function () {
-            PublicProjects::forget();
-            PublicSkills::forget();
-        });
-        static::deleted(function () {
-            PublicProjects::forget();
-            PublicSkills::forget();
-        });
+        // I progetti compaiono anche in skill e corsi: si svuota tutta la cache pubblica.
+        static::saved(fn () => PublicCache::forgetAll());
+        static::deleted(fn () => PublicCache::forgetAll());
     }
 
     /**
@@ -81,6 +75,16 @@ class Project extends Model
     public function skills(): BelongsToMany
     {
         return $this->belongsToMany(Skill::class);
+    }
+
+    /**
+     * Il corso per cui è stato fatto il progetto (facoltativo).
+     *
+     * @return BelongsTo<Course, $this>
+     */
+    public function course(): BelongsTo
+    {
+        return $this->belongsTo(Course::class);
     }
 
     /**

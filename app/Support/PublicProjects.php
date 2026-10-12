@@ -25,7 +25,7 @@ class PublicProjects
     public static function payload(): array
     {
         return Cache::remember(self::CACHE_KEY, self::TTL_SECONDS, function (): array {
-            $projects = Project::query()->visible()->inDisplayOrder()->with('group:id,name')->get();
+            $projects = Project::query()->visible()->inDisplayOrder()->with(['group:id,name', 'course:id,course'])->get();
 
             return ['data' => PublicProjectResource::collection($projects)->resolve()];
         });

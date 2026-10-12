@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Support\PublicProjects;
+use App\Support\PublicCache;
 use Database\Factories\ProjectGroupFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -22,8 +22,8 @@ class ProjectGroup extends Model
     protected static function booted(): void
     {
         // Il nome del raggruppamento compare nell'API dei progetti.
-        static::saved(fn () => PublicProjects::forget());
-        static::deleted(fn () => PublicProjects::forget());
+        static::saved(fn () => PublicCache::forgetAll());
+        static::deleted(fn () => PublicCache::forgetAll());
     }
 
     /**

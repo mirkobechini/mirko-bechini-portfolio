@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\SkillController;
 use Illuminate\Support\Facades\Route;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('throttle:60,1')->group(function () {
     Route::get('/projects', [ProjectController::class, 'index'])->name('api.projects.index');
     Route::get('/skills', [SkillController::class, 'index'])->name('api.skills.index');
+    Route::get('/education', [CourseController::class, 'index'])->name('api.education.index');
 });
 
 // Qualsiasi altro GET sotto /api (compreso /api da solo): 404 in JSON, altrimenti lo prenderebbe la

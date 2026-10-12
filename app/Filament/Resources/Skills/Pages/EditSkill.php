@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\Skills\Pages;
 
 use App\Filament\Resources\Skills\SkillResource;
-use App\Support\PublicSkills;
+use App\Support\PublicCache;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 
@@ -21,6 +21,6 @@ class EditSkill extends EditRecord
     // I progetti collegati si salvano dopo la skill, senza passare dagli eventi del modello: aggiorna la cache.
     protected function afterSave(): void
     {
-        PublicSkills::forget();
+        PublicCache::forgetAll();
     }
 }

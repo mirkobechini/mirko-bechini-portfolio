@@ -35,6 +35,7 @@ class PublicProjectResource extends JsonResource
             'stars' => $this->stars,
             'updatedAt' => $this->pushed_at?->toIso8601String(),
             'pinned' => $this->pinned,
+            'course' => $this->course?->course,
             'group' => $this->group === null ? null : [
                 'id' => $this->group->id,
                 'name' => $this->group->name,
