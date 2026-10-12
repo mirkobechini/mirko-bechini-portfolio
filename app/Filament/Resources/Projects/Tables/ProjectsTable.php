@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\Projects\Tables;
 
+use App\Enums\ProjectScope;
+use App\Enums\ProjectType;
 use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\EditAction;
@@ -27,12 +29,10 @@ class ProjectsTable
                 TextColumn::make('type')
                     ->label('Categoria')
                     ->badge()
-                    ->formatStateUsing(fn (string $state): string => ucfirst($state))
                     ->sortable(),
                 TextColumn::make('scope')
                     ->label('Ambito')
                     ->badge()
-                    ->formatStateUsing(fn (string $state): string => $state === 'work' ? 'Lavoro' : 'Personale')
                     ->sortable(),
                 // Interruttori direttamente nella riga: un clic, senza aprire il progetto.
                 ToggleColumn::make('pinned')
@@ -52,10 +52,10 @@ class ProjectsTable
             ->filters([
                 SelectFilter::make('type')
                     ->label('Categoria')
-                    ->options(['frontend' => 'Frontend', 'backend' => 'Backend', 'fullstack' => 'Fullstack']),
+                    ->options(ProjectType::class),
                 SelectFilter::make('scope')
                     ->label('Ambito')
-                    ->options(['personal' => 'Personale', 'work' => 'Lavoro']),
+                    ->options(ProjectScope::class),
                 TernaryFilter::make('pinned')
                     ->label('In evidenza'),
                 TernaryFilter::make('hidden')

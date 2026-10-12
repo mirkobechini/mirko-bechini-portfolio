@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\ProjectScope;
+use App\Enums\ProjectType;
 use Database\Factories\ProjectFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -31,6 +33,8 @@ class Project extends Model
     protected function casts(): array
     {
         return [
+            'type' => ProjectType::class,
+            'scope' => ProjectScope::class,
             'technologies' => 'array',
             'extra_technologies' => 'array',
             'pinned' => 'boolean',

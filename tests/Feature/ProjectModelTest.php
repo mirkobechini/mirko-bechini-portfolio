@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Enums\ProjectScope;
+use App\Enums\ProjectType;
 use App\Models\Project;
 use Carbon\CarbonInterface;
 use Illuminate\Database\QueryException;
@@ -17,8 +19,8 @@ class ProjectModelTest extends TestCase
         $project = Project::create(['github_repo' => 'x', 'title' => 'X', 'repo_url' => 'https://github.com/u/x']);
         $project = $project->fresh();
 
-        $this->assertSame('fullstack', $project->type);
-        $this->assertSame('personal', $project->scope);
+        $this->assertSame(ProjectType::Fullstack, $project->type);
+        $this->assertSame(ProjectScope::Personal, $project->scope);
         $this->assertSame(0, $project->stars);
         $this->assertFalse($project->pinned);
         $this->assertFalse($project->hidden);
@@ -84,8 +86,8 @@ class ProjectModelTest extends TestCase
     {
         $project = Project::factory()->create();
 
-        $this->assertContains($project->type, ['frontend', 'backend', 'fullstack']);
-        $this->assertContains($project->scope, ['personal', 'work']);
+        $this->assertContains($project->type, ProjectType::cases());
+        $this->assertContains($project->scope, ProjectScope::cases());
         $this->assertStringContainsString($project->github_repo, $project->repo_url);
         $this->assertFalse($project->pinned);
         $this->assertFalse($project->hidden);

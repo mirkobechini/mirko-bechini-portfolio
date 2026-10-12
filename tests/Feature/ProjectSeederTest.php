@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Enums\ProjectScope;
+use App\Enums\ProjectType;
 use App\Models\Project;
 use App\Models\User;
 use Database\Seeders\DatabaseSeeder;
@@ -27,8 +29,8 @@ class ProjectSeederTest extends TestCase
         $this->seed(ProjectSeeder::class);
 
         foreach (Project::all() as $project) {
-            $this->assertContains($project->type, ['frontend', 'backend', 'fullstack'], $project->github_repo);
-            $this->assertContains($project->scope, ['personal', 'work'], $project->github_repo);
+            $this->assertContains($project->type, ProjectType::cases(), $project->github_repo);
+            $this->assertContains($project->scope, ProjectScope::cases(), $project->github_repo);
             $this->assertNotEmpty($project->title, $project->github_repo);
             $this->assertNotEmpty($project->description_it, $project->github_repo);
             $this->assertStringStartsWith('https://github.com/mirkobechini/', $project->repo_url);

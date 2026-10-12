@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\Projects\Schemas;
 
+use App\Enums\ProjectScope;
+use App\Enums\ProjectType;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
@@ -34,20 +36,13 @@ class ProjectForm
                             ->columnSpanFull(),
                         Select::make('type')
                             ->label('Categoria')
-                            ->options([
-                                'frontend' => 'Frontend',
-                                'backend' => 'Backend',
-                                'fullstack' => 'Fullstack',
-                            ])
-                            ->default('fullstack')
+                            ->options(ProjectType::class)
+                            ->default(ProjectType::Fullstack)
                             ->required(),
                         Select::make('scope')
                             ->label('Ambito')
-                            ->options([
-                                'personal' => 'Personale',
-                                'work' => 'Lavoro',
-                            ])
-                            ->default('personal')
+                            ->options(ProjectScope::class)
+                            ->default(ProjectScope::Personal)
                             ->required(),
                         TagsInput::make('extra_technologies')
                             ->label('Tecnologie aggiuntive')
