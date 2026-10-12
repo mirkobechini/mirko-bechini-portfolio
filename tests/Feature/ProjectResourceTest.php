@@ -8,7 +8,9 @@ use App\Filament\Resources\Projects\Pages\CreateProject;
 use App\Filament\Resources\Projects\Pages\EditProject;
 use App\Filament\Resources\Projects\Pages\ListProjects;
 use App\Models\Project;
+use App\Models\ProjectGroup;
 use App\Models\User;
+use Filament\Actions\Testing\TestAction;
 use Filament\Facades\Filament;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
@@ -151,6 +153,111 @@ class ProjectResourceTest extends TestCase
         $this->assertSame('Intatto', $project->title);
         $this->assertSame('Non toccare', $project->description_it);
         $this->assertSame(['AI'], $project->extra_technologies);
+    }
+
+    // ---------- raggruppamenti ----------
+
+    public function test_a_project_can_be_assigned_to_a_group_from_the_edit_form(): void
+    {
+        $group = ProjectGroup::factory()->create(['name' => 'Cliente A']);
+        $project = Project::factory()->create();
+
+        Livewire::test(EditProject::class, ['record' => $project->getRouteKey()])
+            ->fillForm(['project_group_id' => $group->id])
+            ->call('save')
+            ->assertHasNoFormErrors();
+
+        $this->assertSame($group->id, $project->fresh()->project_group_id);
+    }
+
+    public function test_the_group_can_be_removed_from_a_project(): void
+    {
+        $group = ProjectGroup::factory()->create();
+        $project = Project::factory()->create(['project_group_id' => $group->id]);
+
+        Livewire::test(EditProject::class, ['record' => $project->getRouteKey()])
+            ->fillForm(['project_group_id' => null])
+            ->call('save')
+            ->assertHasNoFormErrors();
+
+        $this->assertNull($project->fresh()->project_group_id);
+    }
+
+    public function test_a_new_group_can_be_created_from_the_project_form(): void
+    {
+        $project = Project::factory()->create();
+
+        Livewire::test(EditProject::class, ['record' => $project->getRouteKey()])
+            ->callAction(TestAction::make('createOption')->schemaComponent('project_group_id', schema: 'form'), data: [
+                'name' => 'Azienda B',
+            ]);
+
+        $group = ProjectGroup::where('name', 'Azienda B')->first();
+        $this->assertNotNull($group);
+    }
+
+    public function test_the_group_created_from_the_form_is_selected_and_saved_with_the_project(): void
+    {
+        $project = Project::factory()->create();
+
+        $page = Livewire::test(EditProject::class, ['record' => $project->getRouteKey()])
+            ->callAction(TestAction::make('createOption')->schemaComponent('project_group_id', schema: 'form'), data: [
+                'name' => 'Azienda B',
+            ]);
+
+        $group = ProjectGroup::where('name', 'Azienda B')->firstOrFail();
+        $page->assertFormSet(['project_group_id' => $group->id])
+            ->call('save')
+            ->assertHasNoFormErrors();
+
+        $this->assertSame($group->id, $project->fresh()->project_group_id);
+    }
+
+    public function test_the_list_shows_the_group_and_can_be_filtered_by_it(): void
+    {
+        $group = ProjectGroup::factory()->create(['name' => 'Cliente A']);
+        $inside = Project::factory()->create(['project_group_id' => $group->id]);
+        $outside = Project::factory()->create();
+
+        Livewire::test(ListProjects::class)
+            ->assertTableColumnStateSet('group.name', 'Cliente A', $inside)
+            ->filterTable('project_group_id', $group->id)
+            ->assertCanSeeTableRecords([$inside])
+            ->assertCanNotSeeTableRecords([$outside]);
+    }
+
+    public function test_the_bulk_assign_action_only_touches_the_selected_projects(): void
+    {
+        $group = ProjectGroup::factory()->create();
+        $selected = Project::factory()->count(2)->create();
+        $untouched = Project::factory()->create();
+
+        Livewire::test(ListProjects::class)
+            ->callTableBulkAction('assignGroup', $selected, data: ['project_group_id' => $group->id]);
+
+        $this->assertSame(2, Project::where('project_group_id', $group->id)->count());
+        $this->assertNull($untouched->fresh()->project_group_id);
+    }
+
+    public function test_the_bulk_assign_action_requires_a_group(): void
+    {
+        $projects = Project::factory()->count(2)->create();
+
+        Livewire::test(ListProjects::class)
+            ->callTableBulkAction('assignGroup', $projects, data: [])
+            ->assertHasTableBulkActionErrors(['project_group_id' => 'required']);
+    }
+
+    public function test_the_bulk_clear_action_removes_the_group_only_from_the_selected_projects(): void
+    {
+        $group = ProjectGroup::factory()->create();
+        $selected = Project::factory()->count(2)->create(['project_group_id' => $group->id]);
+        $kept = Project::factory()->create(['project_group_id' => $group->id]);
+
+        Livewire::test(ListProjects::class)->callTableBulkAction('clearGroup', $selected);
+
+        $this->assertSame(1, Project::where('project_group_id', $group->id)->count());
+        $this->assertSame($group->id, $kept->fresh()->project_group_id);
     }
 
     // ---------- modifica ----------

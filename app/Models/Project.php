@@ -7,6 +7,7 @@ use App\Enums\ProjectType;
 use Database\Factories\ProjectFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Project extends Model
 {
@@ -28,7 +29,18 @@ class Project extends Model
         'pinned',
         'hidden',
         'synced_at',
+        'project_group_id',
     ];
+
+    /**
+     * Il raggruppamento scelto nel pannello (cliente, azienda...), se c'è.
+     *
+     * @return BelongsTo<ProjectGroup, $this>
+     */
+    public function group(): BelongsTo
+    {
+        return $this->belongsTo(ProjectGroup::class, 'project_group_id');
+    }
 
     protected function casts(): array
     {

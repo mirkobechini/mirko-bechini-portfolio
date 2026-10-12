@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Projects\Schemas;
 
 use App\Enums\ProjectScope;
 use App\Enums\ProjectType;
+use App\Models\ProjectGroup;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
@@ -44,6 +45,24 @@ class ProjectForm
                             ->options(ProjectScope::class)
                             ->default(ProjectScope::Personal)
                             ->required(),
+                        Select::make('project_group_id')
+                            ->label('Raggruppamento')
+                            ->relationship('group', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->placeholder('Nessuno')
+                            ->helperText('Per esempio il cliente o l\'azienda per cui è stato fatto. Se manca, crealo con il "+".')
+                            ->createOptionForm([
+                                TextInput::make('name')
+                                    ->label('Nome')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->unique(ProjectGroup::class, 'name'),
+                                Textarea::make('description')
+                                    ->label('Appunti')
+                                    ->rows(2),
+                            ])
+                            ->columnSpanFull(),
                         TagsInput::make('extra_technologies')
                             ->label('Tecnologie aggiuntive')
                             ->helperText('Solo quelle che GitHub non conosce (AI, Figma...). Quelle di GitHub si aggiungono da sole.')

@@ -77,7 +77,7 @@ class ProjectModelTest extends TestCase
     public function test_every_column_is_mass_assignable(): void
     {
         $columns = ['github_repo', 'title', 'description_it', 'type', 'scope', 'technologies',
-            'extra_technologies', 'repo_url', 'live_url', 'stars', 'pushed_at', 'pinned', 'hidden', 'synced_at'];
+            'extra_technologies', 'repo_url', 'live_url', 'stars', 'pushed_at', 'pinned', 'hidden', 'synced_at', 'project_group_id'];
 
         $this->assertEqualsCanonicalizing($columns, (new Project)->getFillable());
     }
