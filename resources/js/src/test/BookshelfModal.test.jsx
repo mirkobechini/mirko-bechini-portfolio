@@ -9,12 +9,18 @@ vi.mock('../utils/assets', () => ({
     getAssetPath: (path) => `/assets${path}`,
 }));
 
+// Le competenze vere arrivano dalla API: qui un elenco finto
+vi.mock('../hooks/useSkills', () => ({
+    default: () => ({ skills: [{ id: 1, skill: 'PHP' }, { id: 2, skill: 'React' }], loading: false, error: null }),
+}));
+
 // Mock SkillsModal (lazy loaded)
 vi.mock('../features/modals/library/SkillsModal', () => ({
     default: function MockSkillsModal({ profile, onBackToBookshelf, onSwitchToSkill, onBackToFormation }) {
         return (
             <div data-testid="skills-modal">
                 <p>SkillsModal: {profile?.id}</p>
+                <p data-testid="skills-count">{profile?.skillsData?.length ?? 'nessuna'}</p>
                 <button data-testid="back-to-bookshelf" onClick={onBackToBookshelf}>Home</button>
                 {onBackToFormation && (
                     <button data-testid="back-to-formation" onClick={onBackToFormation}>‹ Formazione</button>
@@ -52,6 +58,24 @@ describe('BookshelfModal', () => {
         render(<BookshelfModal {...defaultProps} />);
         expect(screen.getByText('Formazione')).toBeInTheDocument();
         expect(screen.getByText('Competenze')).toBeInTheDocument();
+    });
+
+    it('passa al libro delle competenze le skill arrivate dalla API, non quelle del profilo statico', async () => {
+        const user = userEvent.setup();
+        render(<BookshelfModal {...defaultProps} />);
+
+        await user.click(screen.getByText('Competenze'));
+
+        expect(await screen.findByTestId('skills-count')).toHaveTextContent('2');
+    });
+
+    it('non aggiunge skillsData al profilo della formazione', async () => {
+        const user = userEvent.setup();
+        render(<BookshelfModal {...defaultProps} />);
+
+        await user.click(screen.getByText('Formazione'));
+
+        expect(await screen.findByTestId('skills-count')).toHaveTextContent('nessuna');
     });
 
     it('opens formation profile when clicking Formazione button', async () => {
