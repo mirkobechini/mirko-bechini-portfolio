@@ -8,6 +8,9 @@ const ProjectCard = memo(function ProjectCard({ project, isAlternate }) {
             <div className={styles['blueprint-header']}></div>
             <h4 className={styles['project-title']}>{project.title}</h4>
             <p className={styles['project-description']} title={project.description}>{project.description}</p>
+            {project.course && (
+                <p className={styles['project-course']}>Corso: {project.course}</p>
+            )}
             <div className={styles['tech-stack']}>
                 {project.technologies.length > 0 ? `#${project.technologies.join(' #')}` : ''}
             </div>

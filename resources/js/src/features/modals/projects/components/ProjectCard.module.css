@@ -68,6 +68,14 @@
     line-height: 1.2;
 }
 
+.project-course {
+    margin: var(--space-xs) 0 0;
+
+    font-size: var(--text-2xs);
+    font-style: italic;
+    color: #444;
+}
+
 .tech-stack {
     margin-top: var(--space-xs);
     margin-bottom: var(--space-sm);

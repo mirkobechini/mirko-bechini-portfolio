@@ -191,6 +191,65 @@ class CoursesTest extends TestCase
         $this->assertSame([], $this->courses());
     }
 
+    // ---------- coerenza con le skill ----------
+
+    public function test_renaming_a_skill_renames_it_in_courses_and_modules(): void
+    {
+        $skill = Skill::factory()->create(['name' => 'Node.js']);
+        $course = Course::factory()->create([
+            'skills' => ['HTML', 'Node.js'],
+            'modules' => [
+                ['title' => 'Backend', 'description' => '', 'skills' => ['Node.js', 'Express']],
+                ['title' => 'Altro', 'description' => '', 'skills' => ['HTML']],
+            ],
+        ]);
+
+        $skill->update(['name' => 'NodeJS']);
+
+        $course->refresh();
+        $this->assertSame(['HTML', 'NodeJS'], $course->skills);
+        $this->assertSame(['NodeJS', 'Express'], $course->modules[0]['skills']);
+        $this->assertSame(['HTML'], $course->modules[1]['skills']);
+        $this->assertSame(['HTML', 'NodeJS'], $this->courses()[0]['skills']);
+    }
+
+    public function test_changing_other_skill_fields_leaves_courses_alone(): void
+    {
+        $skill = Skill::factory()->create(['name' => 'PHP']);
+        $course = Course::factory()->create(['skills' => ['PHP']]);
+        $before = $course->fresh()->updated_at;
+
+        $skill->update(['category' => 'Backend']);
+
+        $this->assertSame(['PHP'], $course->fresh()->skills);
+        $this->assertEquals($before, $course->fresh()->updated_at);
+    }
+
+    public function test_renaming_a_skill_to_a_name_already_in_the_course_does_not_duplicate_it(): void
+    {
+        $skill = Skill::factory()->create(['name' => 'JS']);
+        $course = Course::factory()->create(['skills' => ['JavaScript', 'JS']]);
+
+        $skill->update(['name' => 'JavaScript']);
+
+        $this->assertSame(['JavaScript'], $course->fresh()->skills);
+    }
+
+    public function test_deleting_a_skill_removes_it_from_courses_and_modules(): void
+    {
+        $skill = Skill::factory()->create(['name' => 'Vecchia']);
+        $course = Course::factory()->create([
+            'skills' => ['Vecchia', 'Resta'],
+            'modules' => [['title' => 'M', 'description' => '', 'skills' => ['Vecchia']]],
+        ]);
+
+        $skill->delete();
+
+        $course->refresh();
+        $this->assertSame(['Resta'], $course->skills);
+        $this->assertSame([], $course->modules[0]['skills']);
+    }
+
     // ---------- seeder ----------
 
     public function test_the_seeder_imports_the_courses_and_is_repeatable(): void
