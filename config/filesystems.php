@@ -15,6 +15,10 @@ return [
 
     'default' => env('FILESYSTEM_DISK', 'local'),
 
+    // Disco dove il pannello salva i file caricati (icone...). In locale 'public' (serve `php artisan storage:link`);
+    // in produzione deve essere un disco persistente, per esempio il bucket di Laravel Cloud.
+    'uploads_disk' => env('UPLOADS_DISK', 'public'),
+
     /*
     |--------------------------------------------------------------------------
     | Filesystem Disks

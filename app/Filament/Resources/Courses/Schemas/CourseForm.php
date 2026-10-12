@@ -72,6 +72,7 @@ class CourseForm
                         Repeater::make('highlights')
                             ->label('Punti salienti')
                             ->simple(TextInput::make('value')->required()->maxLength(255))
+                            ->defaultItems(0)
                             ->addActionLabel('Aggiungi punto')
                             ->reorderable(),
                         Repeater::make('modules')
@@ -87,6 +88,7 @@ class CourseForm
                             ])
                             ->itemLabel(fn (array $state): ?string => $state['title'] ?? null)
                             ->collapsed()
+                            ->defaultItems(0)
                             ->addActionLabel('Aggiungi modulo')
                             ->reorderable(),
                     ]),
