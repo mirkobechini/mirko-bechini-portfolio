@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Support\PublicCache;
+use App\Support\SkillNameInCourses;
 use Database\Factories\SkillFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -32,6 +33,13 @@ class Skill extends Model
 
     protected static function booted(): void
     {
+        // I corsi citano le skill per nome: un rinomino o un'eliminazione li aggiorna.
+        static::updated(function (Skill $skill) {
+            if ($skill->wasChanged('name')) {
+                SkillNameInCourses::rename($skill->getOriginal('name'), $skill->name);
+            }
+        });
+        static::deleted(fn (Skill $skill) => SkillNameInCourses::remove($skill->name));
         static::saved(fn () => PublicCache::forgetAll());
         static::deleted(fn () => PublicCache::forgetAll());
     }
