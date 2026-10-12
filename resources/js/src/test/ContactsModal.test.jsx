@@ -8,6 +8,12 @@ vi.mock('../hooks/useKeyboardNavigation', () => ({
     useKeyboardNavigation: vi.fn(),
 }));
 
+// I dati arrivano dalla API: qui gli stessi dati statici
+vi.mock('../hooks/useContacts', async () => {
+    const { default: contactsData } = await import('../features/modals/contacts/contactsData');
+    return { default: () => ({ contacts: contactsData }) };
+});
+
 describe('ContactsModal', () => {
     it('renders intro text', () => {
         render(<ContactsModal />);
