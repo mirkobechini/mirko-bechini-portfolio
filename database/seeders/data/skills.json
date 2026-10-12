@@ -1,0 +1,302 @@
+[
+    {
+        "name": "HTML",
+        "icon": "/modals/skills/icons/html.webp",
+        "category": "Mark-up",
+        "color": "#E34F26",
+        "functions": [
+            "Strutturazione di pagine web semantiche",
+            "Utilizzo di tag HTML5 per migliorare l’accessibilità",
+            "Integrazione di media come immagini e video"
+        ],
+        "related_projects": [
+            "Portfolio personale",
+            "Gods Guest Site"
+        ],
+        "position": 1
+    },
+    {
+        "name": "CSS",
+        "icon": "/modals/skills/icons/css.webp",
+        "category": "Mark-up",
+        "color": "#1572B6",
+        "functions": [
+            "Stilizzazione di pagine web",
+            "Utilizzo di CSS3 per layout responsive",
+            "Animazioni e transizioni"
+        ],
+        "related_projects": [
+            "Portfolio personale",
+            "Gods Guest Site"
+        ],
+        "position": 2
+    },
+    {
+        "name": "JavaScript",
+        "icon": "/modals/skills/icons/javascript.webp",
+        "category": "Frontend",
+        "color": "#F7DF1E",
+        "functions": [
+            "Manipolazione del DOM",
+            "Gestione di eventi",
+            "Creazione di interattività",
+            "Utilizzo di ES6+ per migliorare la leggibilità del codice"
+        ],
+        "related_projects": [
+            "Portfolio personale",
+            "Gods Guest Site"
+        ],
+        "position": 3
+    },
+    {
+        "name": "React",
+        "icon": "/modals/skills/icons/react.webp",
+        "category": "Library",
+        "color": "#61DAFB",
+        "functions": [
+            "Creazione di componenti riutilizzabili",
+            "Gestione dello stato con useState e useReducer",
+            "Effetti collaterali con useEffect",
+            "Routing con React Router",
+            "Integrazione con API esterne"
+        ],
+        "related_projects": [
+            "Portfolio personale",
+            "Gods Guest Site"
+        ],
+        "position": 4
+    },
+    {
+        "name": "Node.js",
+        "icon": "/modals/skills/icons/node.webp",
+        "category": "Backend",
+        "color": "#339933",
+        "position": 5
+    },
+    {
+        "name": "Express",
+        "icon": "/modals/skills/icons/express.webp",
+        "category": "Framework",
+        "color": "#000",
+        "position": 6
+    },
+    {
+        "name": "MySQL",
+        "icon": "/modals/skills/icons/mysql.webp",
+        "category": "Database",
+        "color": "#4479A1",
+        "functions": [
+            "Progettazione di database relazionali",
+            "Creazione di tabelle e relazioni",
+            "Scrittura di query SQL per CRUD"
+        ],
+        "related_projects": [
+            "Gods Backoffice",
+            "CV Backoffice"
+        ],
+        "position": 7
+    },
+    {
+        "name": "PHP",
+        "icon": "/modals/skills/icons/php.webp",
+        "category": "Backend",
+        "color": "#777BB4",
+        "functions": [
+            "Sviluppo di logica server-side",
+            "Integrazione con database MySQL",
+            "Creazione di API RESTful"
+        ],
+        "related_projects": [
+            "Gods Backoffice",
+            "CV Backoffice"
+        ],
+        "position": 8
+    },
+    {
+        "name": "Laravel",
+        "icon": "/modals/skills/icons/laravel.webp",
+        "category": "Framework",
+        "color": "#FF2D20",
+        "functions": [
+            "Sviluppo di applicazioni web MVC",
+            "Gestione di routing e middleware",
+            "Integrazione con database e ORM Eloquent",
+            "Livewire per interattività senza JavaScript",
+            "Utilizzo di Blade per templating",
+            "Sicurezza con autenticazione e autorizzazione (Breeze)",
+            "Testing con PHPUnit",
+            "Observer per eventi del modello",
+            "Form request per validazione"
+        ],
+        "related_projects": [
+            "Gods Backoffice",
+            "CV Backoffice",
+            "Portfolio personale"
+        ],
+        "position": 9
+    },
+    {
+        "name": "Git",
+        "icon": "/modals/skills/icons/git.webp",
+        "category": "Version Control",
+        "color": "#F05032",
+        "functions": [
+            "Controllo delle versioni del codice",
+            "Gestione di branch e merge"
+        ],
+        "related_projects": [
+            "Tutti i progetti"
+        ],
+        "position": 10
+    },
+    {
+        "name": "GitHub",
+        "icon": "/modals/skills/icons/github.webp",
+        "category": "Version Control",
+        "color": "#181717",
+        "functions": [
+            "Hosting di repository Git",
+            "Collaborazione con pull request e issues",
+            "Integrazione con CI/CD e GitHub Actions",
+            "Utilizzo di GitHub Pages per il deploy di siti statici",
+            "Gestione di progetti con GitHub Projects"
+        ],
+        "related_projects": [
+            "Tutti i progetti"
+        ],
+        "position": 11
+    },
+    {
+        "name": "VS Code",
+        "icon": "/modals/skills/icons/vscode.webp",
+        "category": "IDE",
+        "color": "#007ACC",
+        "functions": [
+            "Editing and debugging code",
+            "Using extensions for productivity"
+        ],
+        "related_projects": [
+            "Tutti i progetti"
+        ],
+        "position": 12
+    },
+    {
+        "name": "Vite",
+        "icon": "/modals/skills/icons/vite.webp",
+        "category": "Build Tool",
+        "color": "#646CFF",
+        "functions": [
+            "Development server con hot module replacement",
+            "Build ottimizzato per produzione"
+        ],
+        "related_projects": [
+            "Portfolio personale",
+            "Gods Guest Site"
+        ],
+        "position": 13
+    },
+    {
+        "name": "Postman",
+        "icon": "/modals/skills/icons/postman.webp",
+        "category": "API Testing",
+        "color": "#FF6C37",
+        "functions": [
+            "Testing di API RESTful",
+            "Creazione di collezioni di test"
+        ],
+        "related_projects": [
+            "Gods Backoffice"
+        ],
+        "position": 14
+    },
+    {
+        "name": "Copilot",
+        "icon": "/modals/skills/icons/copilot.webp",
+        "category": "AI Tool",
+        "color": "#00BFFF",
+        "functions": [
+            "Generazione di codice basata su AI",
+            "Suggerimenti intelligenti durante la scrittura del codice"
+        ],
+        "related_projects": [
+            "CV Backoffice",
+            "Portfolio personale"
+        ],
+        "position": 15
+    },
+    {
+        "name": "Gemini",
+        "icon": "/modals/skills/icons/gemini.webp",
+        "category": "AI Tool",
+        "color": "#FFD700",
+        "functions": [
+            "Generazione di codice basata su AI",
+            "Generazione di contenuti e assistenza alla scrittura"
+        ],
+        "related_projects": [
+            "Gods Backoffice",
+            "Gods Guest Site",
+            "CV Backoffice",
+            "Portfolio personale"
+        ],
+        "position": 16
+    },
+    {
+        "name": "TypeScript",
+        "icon": "/modals/skills/icons/typescript.webp",
+        "category": "Programming Language",
+        "color": "#3178C6",
+        "functions": [
+            "Still learning"
+        ],
+        "position": 17
+    },
+    {
+        "name": "AI",
+        "icon": "/modals/skills/icons/ai.webp",
+        "category": "AI Tool",
+        "color": "#FFD700",
+        "functions": [
+            "Creazione di Brief, ADR e Skills per AI",
+            "System Thinking e problem-solving con AI",
+            "Utilizzo di AI per generare codice, contenuti e assistenza alla scrittura",
+            "Integrazione di AI in progetti web e applicazioni"
+        ],
+        "related_projects": [
+            "PdfEditor",
+            "Nasa - NEAM",
+            "AI Agent Skills"
+        ],
+        "position": 18
+    },
+    {
+        "name": "Figma",
+        "icon": "/modals/skills/icons/figma.webp",
+        "category": "Design Tool",
+        "color": "#F24E1E",
+        "functions": [
+            "Seguire progetti di design e prototipazione"
+        ],
+        "related_projects": [
+            "Digital Business Card",
+            "Tenzies",
+            "Assembly Endgame",
+            "Quizzical"
+        ],
+        "position": 19
+    },
+    {
+        "name": "Notion",
+        "icon": "/modals/skills/icons/notion.webp",
+        "category": "Productivity Tool",
+        "color": "#000000",
+        "functions": [
+            "Organizzazione di progetti e appunti",
+            "Creazione di database e tabelle"
+        ],
+        "related_projects": [
+            "Tutti i progetti"
+        ],
+        "position": 20
+    }
+]
