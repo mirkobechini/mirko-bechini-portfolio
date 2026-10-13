@@ -40,6 +40,23 @@ describe('mapApiProject', () => {
     });
 });
 
+describe('anteprima del progetto', () => {
+    it('senza anteprima caricata usa il segnaposto e lo segnala', () => {
+        const result = mapApiProject(apiProject({ preview: null }));
+
+        expect(result.preview).toBe('/assets/modals/placeholder/project-placeholder.webp');
+        expect(result.hasCustomPreview).toBe(false);
+    });
+
+    it("con un'anteprima caricata (URL completo o /storage/...) la usa com'è", () => {
+        const url = 'https://sito.example.com/storage/projects/previews/a.png';
+
+        expect(mapApiProject(apiProject({ preview: url })).preview).toBe(url);
+        expect(mapApiProject(apiProject({ preview: '/storage/projects/previews/a.png' })).preview).toBe('/storage/projects/previews/a.png');
+        expect(mapApiProject(apiProject({ preview: url })).hasCustomPreview).toBe(true);
+    });
+});
+
 describe('mapApiProjects', () => {
     it("conserva l'ordine deciso dal backend", () => {
         const result = mapApiProjects([apiProject({ id: 'b' }), apiProject({ id: 'a' })]);

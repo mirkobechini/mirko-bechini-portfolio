@@ -21,7 +21,7 @@ class PublicCertificationResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'preview' => $this->preview,
+            'preview' => $this->previewUrl(),
             'previewWidth' => $this->preview_width,
             'previewHeight' => $this->preview_height,
             'link' => $this->link,

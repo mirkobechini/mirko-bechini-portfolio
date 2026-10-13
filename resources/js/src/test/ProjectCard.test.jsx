@@ -22,6 +22,14 @@ describe('ProjectCard', () => {
         expect(screen.getByText('A test project description')).toBeInTheDocument();
     });
 
+    it("mostra l'anteprima solo se è stata caricata", () => {
+        const { rerender } = render(<ProjectCard project={{ ...baseProject, preview: '/p.png', hasCustomPreview: false }} />);
+        expect(screen.queryByAltText('Anteprima di Test Project')).not.toBeInTheDocument();
+
+        rerender(<ProjectCard project={{ ...baseProject, preview: '/storage/p.png', hasCustomPreview: true }} />);
+        expect(screen.getByAltText('Anteprima di Test Project')).toHaveAttribute('src', '/storage/p.png');
+    });
+
     it('mostra il corso se il progetto ne ha uno', () => {
         render(<ProjectCard project={{ ...baseProject, course: 'Master Laravel' }} />);
         expect(screen.getByText('Corso: Master Laravel')).toBeInTheDocument();

@@ -4,7 +4,9 @@ namespace App\Models;
 
 use App\Enums\ProjectScope;
 use App\Enums\ProjectType;
+use App\Models\Concerns\CleansUpUploads;
 use App\Support\PublicCache;
+use App\Support\Uploads;
 use Database\Factories\ProjectFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,6 +17,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Project extends Model
 {
     /** @use HasFactory<ProjectFactory> */
+    use CleansUpUploads;
+
     use HasFactory;
 
     protected $fillable = [
@@ -34,6 +38,7 @@ class Project extends Model
         'synced_at',
         'project_group_id',
         'course_id',
+        'preview_upload',
     ];
 
     protected static function booted(): void
@@ -65,6 +70,22 @@ class Project extends Model
             ->orderByRaw('pushed_at IS NULL')
             ->orderByDesc('pushed_at')
             ->orderBy('title');
+    }
+
+    /**
+     * Indirizzo dell'anteprima caricata dal pannello, se c'è (altrimenti il sito usa il segnaposto).
+     */
+    public function previewUrl(): ?string
+    {
+        return Uploads::url($this->preview_upload);
+    }
+
+    /**
+     * @return list<string>
+     */
+    protected function uploadColumns(): array
+    {
+        return ['preview_upload'];
     }
 
     /**

@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\CleansUpUploads;
 use App\Support\PublicCache;
 use App\Support\SkillNameReferences;
+use App\Support\Uploads;
 use Database\Factories\SkillFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Support\Facades\Storage;
 
 /**
  * Una competenza mostrata nella libreria del sito. I progetti collegati sono quelli della tabella
@@ -18,6 +19,8 @@ use Illuminate\Support\Facades\Storage;
 class Skill extends Model
 {
     /** @use HasFactory<SkillFactory> */
+    use CleansUpUploads;
+
     use HasFactory;
 
     protected $fillable = ['name', 'icon', 'icon_upload', 'category', 'color', 'functions', 'extra_projects', 'position', 'hidden'];
@@ -41,17 +44,6 @@ class Skill extends Model
             }
         });
         static::deleted(fn (Skill $skill) => SkillNameReferences::remove($skill->name));
-        // Un file sostituito o orfano non deve restare sul disco.
-        static::updated(function (Skill $skill) {
-            if ($skill->wasChanged('icon_upload') && $skill->getOriginal('icon_upload')) {
-                Storage::disk(config('filesystems.uploads_disk'))->delete($skill->getOriginal('icon_upload'));
-            }
-        });
-        static::deleted(function (Skill $skill) {
-            if ($skill->icon_upload) {
-                Storage::disk(config('filesystems.uploads_disk'))->delete($skill->icon_upload);
-            }
-        });
         static::saved(fn () => PublicCache::forgetAll());
         static::deleted(fn () => PublicCache::forgetAll());
     }
@@ -62,11 +54,15 @@ class Skill extends Model
      */
     public function iconUrl(): ?string
     {
-        if ($this->icon_upload) {
-            return Storage::disk(config('filesystems.uploads_disk'))->url($this->icon_upload);
-        }
+        return Uploads::url($this->icon_upload) ?? $this->icon;
+    }
 
-        return $this->icon;
+    /**
+     * @return list<string>
+     */
+    protected function uploadColumns(): array
+    {
+        return ['icon_upload'];
     }
 
     /**
