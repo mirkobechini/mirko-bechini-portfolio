@@ -216,6 +216,7 @@ Il pannello (Filament 5) è su **`/admin`** e serve ad aggiornare i contenuti de
 - **2FA obbligatoria** con app autenticatrice (al primo accesso il pannello obbliga a configurarla e mostra i codici di recupero: vanno conservati).
 - **Nessuna registrazione pubblica:** gli utenti si creano solo da comando.
 - Il pannello è escluso dalla CSP, dal service worker della PWA e dall'indicizzazione (`robots.txt`).
+- **Revisione veloce dei progetti** (`/admin/projects`): categoria, ambito e corso si cambiano con un menu direttamente nella riga; selezionando più righe (anche tutte, 50 per pagina di default) le azioni di gruppo cambiano categoria, ambito, corso, raggruppamento, visibilità ed evidenza. Il filtro "Da rivedere (senza descrizione)" mostra i progetti arrivati dalla sincronizzazione e mai descritti, "Senza corso" quelli da assegnare.
 
 **Creare l'amministratore** (in locale e, una volta, in produzione):
 
