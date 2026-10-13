@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\CourseStatus;
 use App\Models\Course;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,6 +23,7 @@ class CourseFactory extends Factory
             'organization' => fake()->company(),
             'organization_url' => fake()->url(),
             'period' => '01/2026 - 02/2026',
+            'status' => CourseStatus::Completed,
             'skills' => [],
             'highlights' => [],
             'modules' => [],
