@@ -24,16 +24,17 @@ class CoursesTable
                     ->label('Ente')
                     ->searchable(),
                 TextColumn::make('period')
-                    ->label('Periodo'),
+                    ->label('Periodo')
+                    ->sortable(['started_at']),
                 TextColumn::make('projects_count')
                     ->label('Progetti')
                     ->counts('projects'),
                 ToggleColumn::make('hidden')
                     ->label('Nascosto'),
             ])
-            // Trascina le righe per cambiare l'ordine in cui compaiono sul sito.
-            ->reorderable('position')
-            ->defaultSort('position')
+            // Stesso ordine del sito: dal più recente al più vecchio, secondo l'inizio del periodo.
+            ->modifyQueryUsing(fn ($query) => $query->inDisplayOrder())
+            ->defaultSort(null)
             ->recordActions([
                 EditAction::make(),
                 // Eliminare un corso NON cancella i progetti: restano, senza corso.

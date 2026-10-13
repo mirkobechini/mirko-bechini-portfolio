@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Concerns\CleansUpUploads;
 use App\Support\PublicCache;
 use App\Support\Uploads;
+use Carbon\CarbonImmutable;
 use Database\Factories\CourseFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -30,6 +31,7 @@ class Course extends Model
         'organization',
         'organization_url',
         'period',
+        'started_at',
         'skills',
         'highlights',
         'modules',
@@ -43,6 +45,7 @@ class Course extends Model
             'skills' => 'array',
             'highlights' => 'array',
             'modules' => 'array',
+            'started_at' => 'date',
             'position' => 'integer',
             'hidden' => 'boolean',
         ];
@@ -50,6 +53,11 @@ class Course extends Model
 
     protected static function booted(): void
     {
+        // L'inizio si legge sempre dal testo del periodo: per ordinare i corsi basta scrivere bene il periodo.
+        static::saving(function (Course $course) {
+            $course->started_at = self::startOfPeriod($course->period);
+        });
+
         static::saved(fn () => PublicCache::forgetAll());
         static::deleted(fn () => PublicCache::forgetAll());
     }
@@ -95,10 +103,28 @@ class Course extends Model
     }
 
     /**
+     * Primo mese indicato nel periodo ("05/2025 - 02/2026" → maggio 2025; solo l'anno → gennaio).
+     * Null se nel testo non c'è un anno leggibile.
+     */
+    public static function startOfPeriod(?string $period): ?CarbonImmutable
+    {
+        if ($period === null || preg_match('/(?:(\d{1,2})\/)?(\d{4})/', $period, $matches) !== 1) {
+            return null;
+        }
+
+        $month = $matches[1] === '' ? 1 : (int) $matches[1];
+
+        return $month >= 1 && $month <= 12 ? CarbonImmutable::create((int) $matches[2], $month, 1)->startOfDay() : null;
+    }
+
+    /**
+     * Ordine di visualizzazione: dal corso iniziato più di recente al più vecchio (senza data in fondo).
+     * A parità di inizio, quello inserito dopo viene prima.
+     *
      * @param  Builder<Course>  $query
      */
     public function scopeInDisplayOrder(Builder $query): void
     {
-        $query->orderBy('position')->orderBy('id');
+        $query->orderByRaw('started_at IS NULL')->orderByDesc('started_at')->orderByDesc('id');
     }
 }

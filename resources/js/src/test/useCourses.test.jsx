@@ -3,6 +3,7 @@ import { renderHook, waitFor } from '@testing-library/react';
 import useCourses from '../hooks/useCourses';
 import { getCourses } from '../features/modals/library/coursesApi';
 import educationData from '../features/modals/library/educationData';
+import { sortCoursesByRecency } from '../features/modals/library/coursesApi';
 
 vi.mock('../features/modals/library/coursesApi', async (importOriginal) => ({
     ...(await importOriginal()),
@@ -52,7 +53,7 @@ describe('useCourses', () => {
         const { result } = renderHook(() => useCourses());
 
         await waitFor(() => expect(result.current.loading).toBe(false));
-        expect(result.current.courses).toEqual(educationData);
+        expect(result.current.courses).toEqual(sortCoursesByRecency(educationData));
         expect(result.current.error).toBe('Impossibile caricare la formazione.');
     });
 });

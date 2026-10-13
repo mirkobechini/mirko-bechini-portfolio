@@ -33,3 +33,38 @@ export function mapApiCourse(course) {
 }
 
 export const mapApiCourses = (courses) => courses.map(mapApiCourse);
+
+/**
+ * Primo mese indicato nel periodo ("05/2025 - 02/2026" → maggio 2025; solo l'anno → gennaio).
+ * Stessa lettura del backend (Course::startOfPeriod); null se non c'è un anno leggibile.
+ * @param {string} period
+ * @returns {number|null} mese contato come anno * 12 + mese
+ */
+function periodStart(period) {
+    const match = /(?:(\d{1,2})\/)?(\d{4})/.exec(period ?? "");
+    if (!match) return null;
+
+    const month = match[1] === undefined ? 1 : Number(match[1]);
+    if (month < 1 || month > 12) return null;
+
+    return Number(match[2]) * 12 + month;
+}
+
+/**
+ * Dal corso iniziato più di recente al più vecchio, come fa il backend: a parità di inizio viene prima
+ * quello con id maggiore, quelli senza data in fondo. Serve ai dati statici di riserva.
+ * @param {Array} courses
+ * @returns {Array} una copia ordinata
+ */
+export function sortCoursesByRecency(courses) {
+    return [...courses].sort((a, b) => {
+        const startA = periodStart(a.period);
+        const startB = periodStart(b.period);
+
+        if (startA === null && startB !== null) return 1;
+        if (startA !== null && startB === null) return -1;
+        if (startA !== startB) return startB - startA;
+
+        return b.id - a.id;
+    });
+}
