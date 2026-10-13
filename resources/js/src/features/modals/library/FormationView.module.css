@@ -186,6 +186,11 @@
     background-color: #cfe2ff;
 }
 
+.status-done {
+    color: #0f5132;
+    background-color: #d1e7dd;
+}
+
 .formation-badge {
     display: block;
     max-width: fit-content;

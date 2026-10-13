@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CourseSeeder::class);
         $this->call(CertificationSeeder::class);
         $this->call(ContactSeeder::class);
+        $this->call(FormationStepSeeder::class);
     }
 }

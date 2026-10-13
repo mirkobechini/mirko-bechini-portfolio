@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\CertificationController;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\CourseController;
+use App\Http\Controllers\Api\FormationStepController;
 use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\SkillController;
 use Illuminate\Support\Facades\Route;
@@ -14,6 +15,7 @@ Route::middleware('throttle:60,1')->group(function () {
     Route::get('/skills', [SkillController::class, 'index'])->name('api.skills.index');
     Route::get('/education', [CourseController::class, 'index'])->name('api.education.index');
     Route::get('/certifications', [CertificationController::class, 'index'])->name('api.certifications.index');
+    Route::get('/formation-steps', [FormationStepController::class, 'index'])->name('api.formation-steps.index');
     Route::get('/contacts', [ContactController::class, 'index'])->name('api.contacts.index');
 });
 

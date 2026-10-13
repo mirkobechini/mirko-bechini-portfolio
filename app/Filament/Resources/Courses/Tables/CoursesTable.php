@@ -2,10 +2,12 @@
 
 namespace App\Filament\Resources\Courses\Tables;
 
+use App\Enums\CourseStatus;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
@@ -24,16 +26,22 @@ class CoursesTable
                     ->label('Ente')
                     ->searchable(),
                 TextColumn::make('period')
-                    ->label('Periodo'),
+                    ->label('Periodo')
+                    ->sortable(['started_at']),
+                // Menu nella riga: un clic quando finisci o metti in pausa un corso.
+                SelectColumn::make('status')
+                    ->label('Stato')
+                    ->options(CourseStatus::class)
+                    ->selectablePlaceholder(false),
                 TextColumn::make('projects_count')
                     ->label('Progetti')
                     ->counts('projects'),
                 ToggleColumn::make('hidden')
                     ->label('Nascosto'),
             ])
-            // Trascina le righe per cambiare l'ordine in cui compaiono sul sito.
-            ->reorderable('position')
-            ->defaultSort('position')
+            // Stesso ordine del sito: dal più recente al più vecchio, secondo l'inizio del periodo.
+            ->modifyQueryUsing(fn ($query) => $query->inDisplayOrder())
+            ->defaultSort(null)
             ->recordActions([
                 EditAction::make(),
                 // Eliminare un corso NON cancella i progetti: restano, senza corso.

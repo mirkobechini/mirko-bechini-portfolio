@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Courses\Schemas;
 
+use App\Enums\CourseStatus;
 use App\Models\Skill;
 use App\Support\Uploads;
 use Filament\Forms\Components\FileUpload;
@@ -47,9 +48,15 @@ class CourseForm
                             ->maxLength(255),
                         TextInput::make('period')
                             ->label('Periodo')
-                            ->helperText('Testo libero, per esempio "05/2025 - 02/2026" oppure "03/2026 - current".')
+                            ->helperText('Testo libero, per esempio "05/2025 - 02/2026" oppure "03/2026 - current". Il primo mese indicato decide l\'ordine sul sito: dal corso più recente al più vecchio.')
                             ->required()
                             ->maxLength(255),
+                        Select::make('status')
+                            ->label('Stato')
+                            ->options(CourseStatus::class)
+                            ->default(CourseStatus::InProgress)
+                            ->required()
+                            ->helperText('I corsi "In corso" e "In sospeso" compaiono da soli in "Focus attuale"; quando lo segni "Completato" esce da solo.'),
                         FileUpload::make('certificate_upload')
                             ->label('Attestato (carica un file)')
                             ->helperText('PNG, WebP o JPG, al massimo 2 MB. Ha la precedenza sull\'indirizzo qui sotto.')

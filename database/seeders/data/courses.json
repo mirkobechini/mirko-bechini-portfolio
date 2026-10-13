@@ -57,7 +57,8 @@
                 ]
             }
         ],
-        "position": 1
+        "position": 1,
+        "status": "done"
     },
     {
         "course": "LEARN REACT",
@@ -97,7 +98,8 @@
                 ]
             }
         ],
-        "position": 2
+        "position": 2,
+        "status": "done"
     },
     {
         "course": "LEARN TYPESCRIPT",
@@ -137,7 +139,8 @@
                 ]
             }
         ],
-        "position": 3
+        "position": 3,
+        "status": "onHold"
     },
     {
         "course": "Multistack AI Developer",
@@ -237,7 +240,8 @@
                 ]
             }
         ],
-        "position": 4
+        "position": 4,
+        "status": "inProgress"
     },
     {
         "course": "CS50’s Introduction to Programming with Python",
@@ -327,6 +331,7 @@
                 ]
             }
         ],
-        "position": 5
+        "position": 5,
+        "status": "inProgress"
     }
 ]

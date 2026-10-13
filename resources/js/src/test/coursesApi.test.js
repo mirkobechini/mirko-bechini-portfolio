@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { getCourses, mapApiCourse, mapApiCourses } from '../features/modals/library/coursesApi';
+import { getCourses, mapApiCourse, mapApiCourses, sortCoursesByRecency } from '../features/modals/library/coursesApi';
 
 vi.mock('../utils/assets', () => ({ getAssetPath: (path) => `/assets${path}` }));
 
@@ -68,5 +68,38 @@ describe('mapApiCourse', () => {
 
         expect(result.map((c) => c.id)).toEqual([2, 1]);
         expect(result[0]).toMatchObject({ course: 'LEARN REACT', organization: 'Scrimba', projects: ['Tenzies'] });
+    });
+});
+
+describe('sortCoursesByRecency', () => {
+    const course = (id, period) => ({ id, period });
+
+    it('mette prima il corso iniziato più di recente', () => {
+        const sorted = sortCoursesByRecency([
+            course(1, '05/2025 - 02/2026'),
+            course(2, '03/2026 - 03/2026'),
+            course(4, '05/2026 - current'),
+            course(3, '03/2026 - current'),
+        ]);
+
+        expect(sorted.map((c) => c.id)).toEqual([4, 3, 2, 1]);
+    });
+
+    it('a parità di inizio viene prima quello con id maggiore', () => {
+        expect(sortCoursesByRecency([course(2, '03/2026'), course(3, '03/2026')]).map((c) => c.id)).toEqual([3, 2]);
+    });
+
+    it('legge anche il solo anno, e i periodi illeggibili vanno in fondo', () => {
+        const sorted = sortCoursesByRecency([course(1, 'da definire'), course(2, '2024'), course(3, '13/2030'), course(4, '06/2024')]);
+
+        expect(sorted.map((c) => c.id)).toEqual([4, 2, 3, 1]);
+    });
+
+    it('non modifica l\'array originale', () => {
+        const original = [course(1, '01/2020'), course(2, '01/2021')];
+
+        sortCoursesByRecency(original);
+
+        expect(original.map((c) => c.id)).toEqual([1, 2]);
     });
 });

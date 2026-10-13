@@ -22,6 +22,8 @@ vi.mock('../features/modals/library/SkillsModal', () => ({
                 <p>SkillsModal: {profile?.id}</p>
                 <p data-testid="skills-count">{profile?.skillsData?.length ?? 'nessuna'}</p>
                 <p data-testid="courses-count">{profile?.educationData?.length ?? 'nessuno'}</p>
+                <p data-testid="focus-count">{profile?.formationFocus?.length ?? 'nessuno'}</p>
+                <p data-testid="roadmap-count">{profile?.formationRoadmap?.length ?? 'nessuno'}</p>
                 <button data-testid="back-to-bookshelf" onClick={onBackToBookshelf}>Home</button>
                 {onBackToFormation && (
                     <button data-testid="back-to-formation" onClick={onBackToFormation}>‹ Formazione</button>
@@ -40,6 +42,19 @@ vi.mock('../features/modals/library/bookshelfProfiles', () => ({
         skills: { id: 'skills', title: 'Competenze', modalSprite: '/skills-sprite.webp' },
         formation: { id: 'formation', title: 'Formazione', modalSprite: '/formation-sprite.webp' },
     },
+}));
+
+// I passi del percorso arrivano dalla API: qui un elenco finto
+vi.mock('../hooks/useFormationSteps', () => ({
+    default: () => ({
+        focus: [{ id: 1, kind: 'focus', title: 'F1', description: 'd', status: 'inProgress', badge: '' }],
+        roadmap: [
+            { id: 2, kind: 'roadmap', title: 'R1', description: 'd', status: 'next', badge: '' },
+            { id: 3, kind: 'roadmap', title: 'R2', description: 'd', status: 'next', badge: '' },
+        ],
+        loading: false,
+        error: null,
+    }),
 }));
 
 // I corsi arrivano dalla API: qui un elenco finto
@@ -80,6 +95,16 @@ describe('BookshelfModal', () => {
         await user.click(screen.getByText('Formazione'));
 
         expect(await screen.findByTestId('courses-count')).toHaveTextContent('1');
+    });
+
+    it('passa al libro della formazione le due colonne del percorso arrivate dalla API', async () => {
+        const user = userEvent.setup();
+        render(<BookshelfModal {...defaultProps} />);
+
+        await user.click(screen.getByText('Formazione'));
+
+        expect(await screen.findByTestId('focus-count')).toHaveTextContent('1');
+        expect(screen.getByTestId('roadmap-count')).toHaveTextContent('2');
     });
 
     it('non aggiunge i corsi al profilo delle competenze', async () => {

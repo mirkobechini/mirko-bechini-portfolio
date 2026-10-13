@@ -63,6 +63,7 @@ class CoursesTest extends TestCase
             'organization' => 'Scrimba',
             'organizationUrl' => 'https://scrimba.com',
             'period' => '03/2026 - 03/2026',
+            'status' => 'done',
             'skills' => ['React'],
             'highlights' => ['Hooks'],
             'modules' => [['title' => 'Basics', 'description' => 'JSX', 'skillsModules' => ['React']]],
@@ -97,13 +98,52 @@ class CoursesTest extends TestCase
         $this->assertSame(['Pubblico'], $courses[0]['projects']);
     }
 
-    public function test_courses_follow_the_position(): void
+    public function test_courses_are_shown_from_the_most_recent_to_the_oldest(): void
     {
-        Course::factory()->create(['course' => 'Terzo', 'position' => 3]);
-        Course::factory()->create(['course' => 'Primo', 'position' => 1]);
-        Course::factory()->create(['course' => 'Secondo', 'position' => 2]);
+        Course::factory()->create(['course' => 'Vecchio', 'period' => '05/2025 - 02/2026']);
+        Course::factory()->create(['course' => 'Recente', 'period' => '08/2026 - in corso']);
+        Course::factory()->create(['course' => 'Medio', 'period' => '03/2026 - current']);
 
-        $this->assertSame(['Primo', 'Secondo', 'Terzo'], array_column($this->courses(), 'course'));
+        $this->assertSame(['Recente', 'Medio', 'Vecchio'], array_column($this->courses(), 'course'));
+    }
+
+    public function test_courses_starting_in_the_same_month_show_the_one_added_later_first(): void
+    {
+        Course::factory()->create(['course' => 'Primo inserito', 'period' => '03/2026 - 03/2026']);
+        Course::factory()->create(['course' => 'Secondo inserito', 'period' => '03/2026 - current']);
+
+        $this->assertSame(['Secondo inserito', 'Primo inserito'], array_column($this->courses(), 'course'));
+    }
+
+    public function test_courses_without_a_readable_year_go_last(): void
+    {
+        Course::factory()->create(['course' => 'Senza data', 'period' => 'da definire']);
+        Course::factory()->create(['course' => 'Con data', 'period' => '01/2020 - 02/2020']);
+
+        $this->assertSame(['Con data', 'Senza data'], array_column($this->courses(), 'course'));
+    }
+
+    public function test_the_start_is_read_from_the_period_text(): void
+    {
+        $this->assertSame('2025-05-01', Course::startOfPeriod('05/2025 - 02/2026')->toDateString());
+        $this->assertSame('2026-03-01', Course::startOfPeriod('3/2026 - current')->toDateString());
+        $this->assertSame('2024-01-01', Course::startOfPeriod('2024')->toDateString()); // solo l'anno
+        $this->assertSame('2026-08-01', Course::startOfPeriod('08/2026 - in corso')->toDateString());
+        $this->assertNull(Course::startOfPeriod('da definire'));
+        $this->assertNull(Course::startOfPeriod('13/2026')); // mese impossibile
+        $this->assertNull(Course::startOfPeriod(null));
+    }
+
+    public function test_changing_the_period_reorders_the_courses(): void
+    {
+        $a = Course::factory()->create(['course' => 'A', 'period' => '01/2024 - 02/2024']);
+        Course::factory()->create(['course' => 'B', 'period' => '01/2025 - 02/2025']);
+        $this->assertSame(['B', 'A'], array_column($this->courses(), 'course'));
+
+        $a->update(['period' => '01/2027 - current']);
+
+        $this->assertSame(['A', 'B'], array_column($this->courses(), 'course'));
+        $this->assertSame('2027-01-01', $a->fresh()->started_at->toDateString());
     }
 
     public function test_the_response_is_cacheable_and_supports_304(): void
@@ -262,6 +302,7 @@ class CoursesTest extends TestCase
         $this->assertSame('Modificato', Course::where('course', 'LEARN REACT')->value('period'));
         $modules = Course::where('course', 'LEARN REACT')->firstOrFail()->modules;
         $this->assertSame('React Basics', $modules[0]['title']);
+        $this->assertSame(['done', 'done', 'onHold', 'inProgress', 'inProgress'], Course::orderBy('id')->get()->map(fn (Course $c) => $c->status->value)->all());
         $this->assertSame(['React'], $modules[0]['skills']);
     }
 
