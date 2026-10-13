@@ -4,6 +4,7 @@ import sharedStyles from '../shared/SharedModal.module.css';
 import { BOOKSHELF_PROFILES } from './bookshelfProfiles';
 import useSkills from '../../../hooks/useSkills';
 import useCourses from '../../../hooks/useCourses';
+import useFormationSteps from '../../../hooks/useFormationSteps';
 import { getAssetPath } from '../../../utils/assets';
 import playBookFlip from '../../../utils/playBookFlip';
 
@@ -19,6 +20,7 @@ const BookshelfModal = memo(function BookshelfModal({ setModalSprite, defaultMod
     const [returnToEducation, setReturnToEducation] = useState(null);
     const { skills } = useSkills();
     const { courses } = useCourses();
+    const { focus: formationFocus, roadmap: formationRoadmap } = useFormationSteps();
     const preselectDone = useRef(false);
 
     /* Auto-open "Formazione" book and select matching education when coming from a certification.
@@ -66,9 +68,9 @@ const BookshelfModal = memo(function BookshelfModal({ setModalSprite, defaultMod
         if (selectedProfile == null) return null;
         const profile = BOOKSHELF_PROFILES[selectedProfile];
         if (selectedProfile === 'skills') return { ...profile, skillsData: skills };
-        if (selectedProfile === 'formation') return { ...profile, educationData: courses };
+        if (selectedProfile === 'formation') return { ...profile, educationData: courses, formationFocus, formationRoadmap };
         return profile;
-    }, [selectedProfile, skills, courses]);
+    }, [selectedProfile, skills, courses, formationFocus, formationRoadmap]);
 
     useEffect(() => {
         if (selectedProfile == null) {
