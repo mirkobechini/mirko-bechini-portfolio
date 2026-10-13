@@ -4,17 +4,21 @@ namespace App\Filament\Resources\Projects\Tables;
 
 use App\Enums\ProjectScope;
 use App\Enums\ProjectType;
+use App\Models\Course;
 use App\Models\ProjectGroup;
 use Filament\Actions\BulkAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\Select;
 use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
 class ProjectsTable
@@ -28,13 +32,21 @@ class ProjectsTable
                     ->description(fn ($record): string => $record->github_repo)
                     ->searchable(['title', 'github_repo'])
                     ->sortable(),
-                TextColumn::make('type')
+                // Menu direttamente nella riga: si cambia categoria, ambito e corso senza aprire il progetto.
+                SelectColumn::make('type')
                     ->label('Categoria')
-                    ->badge()
+                    ->options(ProjectType::class)
+                    ->selectablePlaceholder(false)
                     ->sortable(),
-                TextColumn::make('scope')
+                SelectColumn::make('scope')
                     ->label('Ambito')
-                    ->badge()
+                    ->options(ProjectScope::class)
+                    ->selectablePlaceholder(false)
+                    ->sortable(),
+                SelectColumn::make('course_id')
+                    ->label('Corso')
+                    ->options(fn (): array => Course::orderBy('position')->pluck('course', 'id')->all())
+                    ->placeholder('Nessuno')
                     ->sortable(),
                 TextColumn::make('group.name')
                     ->label('Raggruppamento')
@@ -55,6 +67,8 @@ class ProjectsTable
                     ->sortable(),
             ])
             ->defaultSort('pushed_at', 'desc')
+            ->paginated([25, 50, 100])
+            ->defaultPaginationPageOption(50)
             ->filters([
                 SelectFilter::make('type')
                     ->label('Categoria')
@@ -65,6 +79,18 @@ class ProjectsTable
                 SelectFilter::make('project_group_id')
                     ->label('Raggruppamento')
                     ->relationship('group', 'name'),
+                SelectFilter::make('course_id')
+                    ->label('Corso')
+                    ->relationship('course', 'course'),
+                // Per la revisione: i progetti arrivati dalla sincronizzazione e mai descritti.
+                Filter::make('to_review')
+                    ->label('Da rivedere (senza descrizione)')
+                    ->query(fn (Builder $query): Builder => $query->where(
+                        fn (Builder $q) => $q->whereNull('description_it')->orWhere('description_it', '')
+                    )),
+                Filter::make('without_course')
+                    ->label('Senza corso')
+                    ->query(fn (Builder $query): Builder => $query->whereNull('course_id')),
                 TernaryFilter::make('pinned')
                     ->label('In evidenza'),
                 TernaryFilter::make('hidden')
@@ -92,6 +118,44 @@ class ProjectsTable
                         ->label('Togli dal raggruppamento')
                         ->icon(Heroicon::OutlinedXMark)
                         ->action(fn (Collection $records) => $records->each->update(['project_group_id' => null]))
+                        ->deselectRecordsAfterCompletion(),
+                    BulkAction::make('setType')
+                        ->label('Cambia categoria')
+                        ->icon(Heroicon::OutlinedTag)
+                        ->schema([
+                            Select::make('type')
+                                ->label('Categoria')
+                                ->options(ProjectType::class)
+                                ->required(),
+                        ])
+                        ->action(fn (Collection $records, array $data) => $records->each->update(['type' => $data['type']]))
+                        ->deselectRecordsAfterCompletion(),
+                    BulkAction::make('setScope')
+                        ->label('Cambia ambito')
+                        ->icon(Heroicon::OutlinedBriefcase)
+                        ->schema([
+                            Select::make('scope')
+                                ->label('Ambito')
+                                ->options(ProjectScope::class)
+                                ->required(),
+                        ])
+                        ->action(fn (Collection $records, array $data) => $records->each->update(['scope' => $data['scope']]))
+                        ->deselectRecordsAfterCompletion(),
+                    BulkAction::make('assignCourse')
+                        ->label('Assegna a un corso')
+                        ->icon(Heroicon::OutlinedAcademicCap)
+                        ->schema([
+                            Select::make('course_id')
+                                ->label('Corso')
+                                ->options(fn (): array => Course::orderBy('position')->pluck('course', 'id')->all())
+                                ->required(),
+                        ])
+                        ->action(fn (Collection $records, array $data) => $records->each->update(['course_id' => $data['course_id']]))
+                        ->deselectRecordsAfterCompletion(),
+                    BulkAction::make('clearCourse')
+                        ->label('Togli dal corso')
+                        ->icon(Heroicon::OutlinedXMark)
+                        ->action(fn (Collection $records) => $records->each->update(['course_id' => null]))
                         ->deselectRecordsAfterCompletion(),
                     BulkAction::make('hide')
                         ->label('Nascondi dal sito')
