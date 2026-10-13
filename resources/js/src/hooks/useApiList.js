@@ -1,20 +1,24 @@
 import { useState, useEffect, useCallback } from "react";
 import useLocalStorage from "./useLocalStorage";
 
+// Quanto il sito tiene i dati nella memoria del browser prima di richiederli di nuovo. Breve di proposito:
+// le modifiche fatte dal pannello devono comparire in fretta (la API risponde con 304 se nulla è cambiato).
+export const API_CACHE_TTL_MS = 2 * 60 * 1000; // 2 minuti
+
 /**
  * Carica un elenco dalla API del sito con questa catena di fallback:
  * cache valida → API → cache scaduta → dati statici.
  *
  * @param {Object} options
  * @param {string} options.cacheKey - chiave localStorage (incrementa la versione se cambia il formato)
- * @param {number} options.ttlMs - validità della cache
+ * @param {number} [options.ttlMs] - validità della cache (predefinito: API_CACHE_TTL_MS)
  * @param {(signal?: AbortSignal) => Promise<Array>} options.fetcher - legge l'elenco grezzo dalla API
  * @param {(items: Array) => Array} options.mapper - dalla forma dell'API a quella dei componenti
  * @param {() => Promise<Array>} options.loadFallback - dati statici di riserva (import dinamico)
  * @param {string} options.errorMessage - testo mostrato se la API non risponde
  * @returns {{ items: Array, loading: boolean, error: string|null, refetch: () => void }}
  */
-export default function useApiList({ cacheKey, ttlMs, fetcher, mapper, loadFallback, errorMessage }) {
+export default function useApiList({ cacheKey, ttlMs = API_CACHE_TTL_MS, fetcher, mapper, loadFallback, errorMessage }) {
     const { get, getStale, set } = useLocalStorage(cacheKey, ttlMs);
 
     // Cache valida, altrimenti dati scaduti (meglio che niente mentre il fetch parte)

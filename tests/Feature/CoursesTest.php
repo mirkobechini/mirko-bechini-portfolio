@@ -151,7 +151,7 @@ class CoursesTest extends TestCase
         Course::factory()->create();
         $first = $this->getJson('/api/education')->assertOk();
 
-        $this->assertStringContainsString('s-maxage=600', $first->headers->get('Cache-Control'));
+        $this->assertMatchesRegularExpression('/s-maxage=60(,|$)/', $first->headers->get('Cache-Control'));
         $this->getJson('/api/education', ['If-None-Match' => $first->headers->get('ETag')])->assertStatus(304);
         $this->assertCount(0, $first->headers->getCookies());
     }

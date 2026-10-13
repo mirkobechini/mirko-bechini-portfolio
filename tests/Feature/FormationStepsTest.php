@@ -84,7 +84,7 @@ class FormationStepsTest extends TestCase
         FormationStep::factory()->create();
         $first = $this->getJson('/api/formation-steps')->assertOk();
 
-        $this->assertStringContainsString('s-maxage=600', $first->headers->get('Cache-Control'));
+        $this->assertMatchesRegularExpression('/s-maxage=60(,|$)/', $first->headers->get('Cache-Control'));
         $this->getJson('/api/formation-steps', ['If-None-Match' => $first->headers->get('ETag')])->assertStatus(304);
     }
 

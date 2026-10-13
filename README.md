@@ -263,11 +263,11 @@ php artisan github:sync-projects --force    # sincronizza subito
   **Il "Focus attuale" si compila da solo con i corsi** il cui stato è "In corso" o "In sospeso" (campo `status` del corso, modificabile con un menu nella lista), dal più recente; seguono i passi del Focus scritti a mano (uno con lo stesso titolo di un corso non si ripete). La descrizione dei corsi nel Focus è accorciata a 140 caratteri. Segnando un corso "Completato" esce da solo dal Focus. La Roadmap è fatta solo di passi scritti a mano. **I passi segnati "Completato" non compaiono sul sito**, né nel Focus né nella Roadmap.
 - `GET /api/certifications` restituisce gli attestati visibili (`id`, `title`, `preview`, `previewWidth`, `previewHeight`, `link`, `organization`, `organizationUrl`, `skills`, `courseId`). `courseId` è il corso che il sito apre cliccando l'attestato.
 - `GET /api/contacts` restituisce i contatti visibili (`id`, `href`, `icon`, `label`, `variantClass`, `ariaLabel`). Il pannello accetta solo indirizzi `https://`, `http://`, `mailto:` e `tel:`, e il sito scarta comunque gli altri schemi.
-- Cache lato server di 10 minuti (`api.projects.v1`), svuotata a ogni modifica di progetti o raggruppamenti.
-- `ETag` + `Cache-Control` pubblico: se nulla è cambiato risponde `304`.
+- Cache lato server di 10 minuti (`api.projects.v1`), svuotata a ogni modifica.
+- `ETag` + `Cache-Control` pubblico di **60 secondi** (`max-age` e `s-maxage`): davanti al sito c'è la cache di rete di Laravel Cloud, che rispetta `s-maxage`, e le modifiche dal pannello devono comparire in fretta. Se nulla è cambiato risponde `304`. Il sito tiene i dati nella memoria del browser per 2 minuti (`API_CACHE_TTL_MS` in `useApiList.js`).
 - Limite di 60 richieste al minuto per IP (`429` in JSON).
 - Sotto `/api` gli errori sono sempre JSON; nessun header CORS (il sito usa la stessa origine).
-- In produzione usare una `CACHE_STORE` condivisa (es. `database`), altrimenti con più istanze i dati possono restare vecchi fino a 10 minuti.
+- `CACHE_STORE`: in produzione oggi è `file` (il database del piano Dev si sospende, e la cache non deve risvegliarlo). Con più istanze dell'app una modifica dal pannello può restare invisibile sull'altra istanza fino a 10 minuti: in quel caso passare a `database` (o redis).
 
 ## 🚢 Deploy
 

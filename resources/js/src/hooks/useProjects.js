@@ -4,7 +4,6 @@ import useApiList from "./useApiList";
 
 // Bump della versione quando cambia il formato dei dati
 const CACHE_KEY = "projects_api_cache_v1";
-const CACHE_TTL_MS = 10 * 60 * 1000; // 10 minuti, come la cache del server
 const ERROR_MESSAGE = "Impossibile caricare i progetti.";
 
 const loadFallback = async () => (
@@ -19,7 +18,6 @@ const loadFallback = async () => (
 export default function useProjects() {
     const { items, loading, error, refetch } = useApiList({
         cacheKey: CACHE_KEY,
-        ttlMs: CACHE_TTL_MS,
         fetcher: getProjects,
         mapper: mapApiProjects,
         loadFallback,
