@@ -26,7 +26,8 @@ class FormationStepForm
                     ->label('Stato')
                     ->options(FormationStepStatus::class)
                     ->default(FormationStepStatus::Next)
-                    ->required(),
+                    ->required()
+                    ->helperText('Un passo "Completato" non compare più sul sito.'),
                 TextInput::make('title')
                     ->label('Titolo')
                     ->required()

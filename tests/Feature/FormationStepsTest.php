@@ -14,6 +14,7 @@ use App\Filament\Resources\FormationSteps\Pages\ListFormationSteps;
 use App\Models\Course;
 use App\Models\FormationStep;
 use App\Models\User;
+use App\Support\PublicFormationSteps;
 use Database\Seeders\FormationStepSeeder;
 use Filament\Facades\Filament;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -92,9 +93,9 @@ class FormationStepsTest extends TestCase
         $step = FormationStep::factory()->create(['title' => 'Prima', 'status' => FormationStepStatus::Next]);
         $this->assertSame('next', $this->steps()[0]['status']);
 
-        $step->update(['title' => 'Dopo', 'status' => FormationStepStatus::Done]);
+        $step->update(['title' => 'Dopo', 'status' => FormationStepStatus::InProgress]);
         $this->assertSame('Dopo', $this->steps()[0]['title']);
-        $this->assertSame('done', $this->steps()[0]['status']);
+        $this->assertSame('inProgress', $this->steps()[0]['status']);
 
         $step->delete();
         $this->assertSame([], $this->steps());
@@ -156,12 +157,53 @@ class FormationStepsTest extends TestCase
         $this->assertSame(['Corso', 'Passo mio'], array_column($this->steps(), 'title'));
     }
 
-    public function test_completed_roadmap_steps_stay_visible(): void
+    public function test_completed_steps_are_never_shown_in_either_column(): void
     {
-        FormationStep::factory()->create(['kind' => FormationStepKind::Roadmap, 'title' => 'Fatto', 'status' => FormationStepStatus::Done]);
+        FormationStep::factory()->create(['kind' => FormationStepKind::Roadmap, 'title' => 'Roadmap fatta', 'status' => FormationStepStatus::Done, 'position' => 1]);
+        FormationStep::factory()->create(['kind' => FormationStepKind::Roadmap, 'title' => 'Roadmap da fare', 'status' => FormationStepStatus::Next, 'position' => 2]);
+        FormationStep::factory()->create(['kind' => FormationStepKind::Focus, 'title' => 'Focus fatto', 'status' => FormationStepStatus::Done, 'position' => 1]);
 
-        $this->assertSame(['Fatto'], array_column($this->steps(), 'title'));
-        $this->assertSame('done', $this->steps()[0]['status']);
+        $this->assertSame(['Roadmap da fare'], array_column($this->steps(), 'title'));
+    }
+
+    public function test_marking_a_roadmap_step_completed_removes_it_and_reopening_brings_it_back(): void
+    {
+        $step = FormationStep::factory()->create(['kind' => FormationStepKind::Roadmap, 'title' => 'Passo', 'status' => FormationStepStatus::Next]);
+        $this->assertSame(['Passo'], array_column($this->steps(), 'title'));
+
+        $step->update(['status' => FormationStepStatus::Done]);
+        $this->assertSame([], $this->steps());
+
+        $step->update(['status' => FormationStepStatus::InProgress]);
+        $this->assertSame(['Passo'], array_column($this->steps(), 'title'));
+    }
+
+    public function test_a_long_course_description_is_trimmed_in_the_focus_but_not_in_the_courses_api(): void
+    {
+        $long = str_repeat('Descrizione molto lunga di un corso. ', 12);
+        Course::factory()->create(['course' => 'Corso lungo', 'description' => $long, 'status' => CourseStatus::InProgress]);
+
+        $focus = $this->steps()[0]['description'];
+
+        $this->assertLessThanOrEqual(PublicFormationSteps::COURSE_DESCRIPTION_LIMIT + 1, mb_strlen($focus));
+        $this->assertStringEndsWith('…', $focus);
+        $this->assertStringStartsWith('Descrizione molto lunga', $focus);
+        $this->assertSame($long, $this->getJson('/api/education')->json('data.0.description')); // intera altrove
+    }
+
+    public function test_a_short_course_description_is_left_as_it_is(): void
+    {
+        Course::factory()->create(['description' => 'Breve.', 'status' => CourseStatus::InProgress]);
+
+        $this->assertSame('Breve.', $this->steps()[0]['description']);
+    }
+
+    public function test_manual_step_descriptions_are_not_trimmed(): void
+    {
+        $long = str_repeat('Testo del passo scritto da me. ', 12);
+        FormationStep::factory()->create(['kind' => FormationStepKind::Roadmap, 'description' => $long]);
+
+        $this->assertSame($long, $this->steps()[0]['description']);
     }
 
     public function test_a_manual_focus_step_with_the_same_title_as_a_course_is_not_repeated(): void
