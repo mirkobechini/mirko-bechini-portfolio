@@ -1,4 +1,4 @@
-import { getCourses, mapApiCourses } from "../features/modals/library/coursesApi";
+import { getCourses, mapApiCourses, sortCoursesByRecency } from "../features/modals/library/coursesApi";
 import useApiList from "./useApiList";
 
 // Bump della versione quando cambia il formato dei dati
@@ -6,9 +6,9 @@ const CACHE_KEY = "courses_api_cache_v1";
 const CACHE_TTL_MS = 10 * 60 * 1000; // 10 minuti, come la cache del server
 const ERROR_MESSAGE = "Impossibile caricare la formazione.";
 
-const loadFallback = async () => (
-    await import("../features/modals/library/educationData")
-).default;
+const loadFallback = async () => sortCoursesByRecency(
+    (await import("../features/modals/library/educationData")).default
+);
 
 /**
  * Corsi dalla API del sito: cache valida → API → cache scaduta → educationData.js.

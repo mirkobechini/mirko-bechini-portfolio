@@ -47,7 +47,7 @@ class CourseForm
                             ->maxLength(255),
                         TextInput::make('period')
                             ->label('Periodo')
-                            ->helperText('Testo libero, per esempio "05/2025 - 02/2026" oppure "03/2026 - current".')
+                            ->helperText('Testo libero, per esempio "05/2025 - 02/2026" oppure "03/2026 - current". Il primo mese indicato decide l\'ordine sul sito: dal corso più recente al più vecchio.')
                             ->required()
                             ->maxLength(255),
                         FileUpload::make('certificate_upload')
