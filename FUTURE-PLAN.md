@@ -8,6 +8,7 @@ Già fatto e in produzione (o pronto nel branch `dev`):
 
 - Progetti letti da `/api/projects` (`projectsApi.js` → `projectMapper.js` → `useProjects` → `ProjectsModal`), con cache in `localStorage` e fallback statico. Il backend li sincronizza da GitHub.
 - **Tutte le sezioni leggono dal backend** (fasi 1-6 completate in `dev`, non ancora in `main`): progetti, competenze, formazione, certificazioni e contatti hanno tabella, risorsa Filament in `/admin`, endpoint `/api/*` (cache 10 min, ETag, throttle) e un hook del sito (`useProjects`, `useSkills`, `useCourses`, `useCertifications`, `useContacts`, tutti su `useApiList`). I file `*Data.js` restano solo come ultimo fallback e come sorgente dei seeder.
+- Anche i passi "Percorso e prossimi step" (focus attuale e roadmap del libro Formazione) stanno nel database (`formation_steps`, `/api/formation-steps`, risorsa "Percorso e prossimi step"); i corsi si mostrano dal più recente al più vecchio.
 - Collegamenti: progetto ↔ skill (tabella ponte), progetto → corso (`course_id`), certificazione → corso (`course_id`). Corsi e certificazioni citano le skill per nome e seguono rinomini ed eliminazioni (`SkillNameReferences`).
 - Upload delle immagini dal pannello fatto per icone delle skill, attestati dei corsi, immagini delle certificazioni e anteprime dei progetti (colonne `*_upload` che hanno la precedenza sul percorso/URL scritto a mano; disco `UPLOADS_DISK`). Le anteprime dei progetti compaiono sulla card solo se caricate.
 - Da fare: checklist di deploy qui sotto, poi il merge su `main` solo con il via esplicito.

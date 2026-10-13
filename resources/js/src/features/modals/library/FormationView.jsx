@@ -9,6 +9,7 @@ const STATUS_LABELS = {
     onHold: 'In sospeso',
     inProgress: 'In corso',
     next: 'Prossimo',
+    done: 'Completato',
 };
 
 const FormationView = memo(function FormationView({ currentProfile, educationData, formationFocus, formationRoadmap, onSwitchToSkill, returnToEducation }) {
