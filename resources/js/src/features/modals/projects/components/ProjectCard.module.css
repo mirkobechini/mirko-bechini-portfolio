@@ -21,6 +21,19 @@
     contain: layout paint;
 }
 
+/* Anteprima caricata dal pannello: formato 16:9, ritagliata per non deformarsi */
+.project-preview {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    margin-bottom: var(--space-sm);
+
+    object-fit: cover;
+    background: #bbdefb;
+    border: 1px solid #1565c0;
+}
+
 /* Stile per la descrizione con troncamento a 3 righe */
 .project-description {
     margin: 0;

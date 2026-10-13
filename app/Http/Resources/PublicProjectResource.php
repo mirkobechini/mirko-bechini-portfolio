@@ -27,6 +27,7 @@ class PublicProjectResource extends JsonResource
             'id' => $this->github_repo,
             'title' => $this->title,
             'description' => $this->description_it ?? '',
+            'preview' => $this->previewUrl(),
             'projectScope' => $this->scope->value,
             'type' => $this->type->value,
             'technologies' => TechnologyList::merge($this->technologies ?? [], $this->extra_technologies ?? []),

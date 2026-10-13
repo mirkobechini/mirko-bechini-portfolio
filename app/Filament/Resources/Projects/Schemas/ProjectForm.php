@@ -5,7 +5,9 @@ namespace App\Filament\Resources\Projects\Schemas;
 use App\Enums\ProjectScope;
 use App\Enums\ProjectType;
 use App\Models\ProjectGroup;
+use App\Support\Uploads;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\Textarea;
@@ -70,6 +72,16 @@ class ProjectForm
                             ->preload()
                             ->placeholder('Nessuno')
                             ->helperText('Il corso per cui hai fatto il progetto, se c\'è.')
+                            ->columnSpanFull(),
+                        FileUpload::make('preview_upload')
+                            ->label('Anteprima')
+                            ->helperText('PNG, WebP o JPG, al massimo 2 MB, meglio in formato 16:9. Se manca, il sito mostra un segnaposto.')
+                            ->image()
+                            ->acceptedFileTypes(Uploads::IMAGE_TYPES)
+                            ->maxSize(2048)
+                            ->disk(Uploads::diskName())
+                            ->directory('projects/previews')
+                            ->visibility('public')
                             ->columnSpanFull(),
                         TagsInput::make('extra_technologies')
                             ->label('Tecnologie aggiuntive')

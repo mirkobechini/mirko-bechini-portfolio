@@ -1,5 +1,5 @@
 import { fetchList } from "../../../services/apiClient";
-import { getAssetPath } from "../../../utils/assets";
+import { resolveAssetUrl } from "../../../utils/assetUrl";
 
 /**
  * GET /api/skills: competenze visibili, già ordinate dal backend.
@@ -8,13 +8,6 @@ import { getAssetPath } from "../../../utils/assets";
  */
 export function getSkills(signal) {
     return fetchList("/api/skills", signal);
-}
-
-// Un'icona caricata dal pannello arriva come URL completo; quella predefinita come percorso in public/assets
-function resolveIcon(icon) {
-    if (!icon) return null;
-    // /storage/... è il disco pubblico dei caricamenti: non sta in public/assets
-    return icon.startsWith("/") && !icon.startsWith("/storage/") ? getAssetPath(icon) : icon;
 }
 
 /**
@@ -26,7 +19,7 @@ function resolveIcon(icon) {
 export function mapApiSkill(skill) {
     return {
         ...skill,
-        icon: resolveIcon(skill.icon),
+        icon: resolveAssetUrl(skill.icon),
         functions: Array.isArray(skill.functions) ? skill.functions : [],
         relatedProjects: Array.isArray(skill.relatedProjects) ? skill.relatedProjects : [],
     };

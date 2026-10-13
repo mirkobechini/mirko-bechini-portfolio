@@ -1,5 +1,5 @@
 import { fetchList } from "../../../services/apiClient";
-import { getAssetPath } from "../../../utils/assets";
+import { resolveAssetUrl } from "../../../utils/assetUrl";
 
 /**
  * GET /api/education: corsi visibili, già ordinati dal backend.
@@ -18,11 +18,9 @@ export function getCourses(signal) {
  * @returns {Object}
  */
 export function mapApiCourse(course) {
-    const certificate = course.certificate ?? "";
-
     return {
         ...course,
-        certificate: certificate.startsWith("/") ? getAssetPath(certificate) : certificate,
+        certificate: resolveAssetUrl(course.certificate) ?? "",
         skills: Array.isArray(course.skills) ? course.skills : [],
         highlights: Array.isArray(course.highlights) ? course.highlights : [],
         modules: Array.isArray(course.modules)

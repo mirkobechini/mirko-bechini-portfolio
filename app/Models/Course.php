@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\CleansUpUploads;
 use App\Support\PublicCache;
+use App\Support\Uploads;
 use Database\Factories\CourseFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,12 +18,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Course extends Model
 {
     /** @use HasFactory<CourseFactory> */
+    use CleansUpUploads;
+
     use HasFactory;
 
     protected $fillable = [
         'course',
         'description',
         'certificate',
+        'certificate_upload',
         'organization',
         'organization_url',
         'period',
@@ -47,6 +52,22 @@ class Course extends Model
     {
         static::saved(fn () => PublicCache::forgetAll());
         static::deleted(fn () => PublicCache::forgetAll());
+    }
+
+    /**
+     * Indirizzo dell'attestato: il file caricato (URL completo) se c'è, altrimenti quello scritto a mano.
+     */
+    public function certificateUrl(): ?string
+    {
+        return Uploads::url($this->certificate_upload) ?? $this->certificate;
+    }
+
+    /**
+     * @return list<string>
+     */
+    protected function uploadColumns(): array
+    {
+        return ['certificate_upload'];
     }
 
     /**

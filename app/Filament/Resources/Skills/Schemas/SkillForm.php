@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Skills\Schemas;
 
 use App\Models\Skill;
+use App\Support\Uploads;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
@@ -36,9 +37,9 @@ class SkillForm
                             ->label('Icona (carica un file)')
                             ->helperText('PNG, WebP o JPG, al massimo 512 KB, meglio quadrata (sul sito è mostrata a 32 px). Ha la precedenza sull\'icona predefinita.')
                             ->image()
-                            ->acceptedFileTypes(['image/png', 'image/webp', 'image/jpeg'])
+                            ->acceptedFileTypes(Uploads::IMAGE_TYPES)
                             ->maxSize(512)
-                            ->disk(config('filesystems.uploads_disk'))
+                            ->disk(Uploads::diskName())
                             ->directory('skills/icons')
                             ->visibility('public'),
                         TextInput::make('icon')

@@ -64,7 +64,7 @@ class ApiProjectsTest extends TestCase
         $project = $this->projects()[0];
 
         $this->assertEqualsCanonicalizing(
-            ['id', 'title', 'description', 'projectScope', 'type', 'technologies', 'repo', 'live', 'stars', 'updatedAt', 'pinned', 'course', 'group'],
+            ['id', 'title', 'description', 'preview', 'projectScope', 'type', 'technologies', 'repo', 'live', 'stars', 'updatedAt', 'pinned', 'course', 'group'],
             array_keys($project)
         );
         $this->assertSame('gods-backoffice', $project['id']);

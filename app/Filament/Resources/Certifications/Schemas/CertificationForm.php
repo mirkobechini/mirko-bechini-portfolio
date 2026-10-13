@@ -3,10 +3,13 @@
 namespace App\Filament\Resources\Certifications\Schemas;
 
 use App\Models\Skill;
+use App\Support\Uploads;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 
 class CertificationForm
@@ -44,10 +47,21 @@ class CertificationForm
                             ->url()
                             ->maxLength(255)
                             ->columnSpanFull(),
+                        FileUpload::make('preview_upload')
+                            ->label('Immagine (carica un file)')
+                            ->helperText('PNG, WebP o JPG, al massimo 2 MB. Larghezza e altezza si leggono dal file. Ha la precedenza sull\'indirizzo qui sotto.')
+                            ->image()
+                            ->acceptedFileTypes(Uploads::IMAGE_TYPES)
+                            ->maxSize(2048)
+                            ->disk(Uploads::diskName())
+                            ->directory('certifications/previews')
+                            ->visibility('public')
+                            ->live()
+                            ->columnSpanFull(),
                         TextInput::make('preview')
-                            ->label('Immagine')
-                            ->helperText('URL dell\'immagine oppure percorso in public/assets (/modals/certifications/x.webp). Il caricamento dal pannello arriverà più avanti.')
-                            ->required()
+                            ->label('Indirizzo dell\'immagine')
+                            ->helperText('URL oppure percorso in public/assets (/modals/certifications/x.webp). Obbligatorio solo se non carichi un file.')
+                            ->required(fn (Get $get): bool => blank($get('preview_upload')))
                             ->maxLength(255)
                             ->columnSpanFull(),
                         TextInput::make('preview_width')

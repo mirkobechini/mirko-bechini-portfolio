@@ -9,7 +9,7 @@ Già fatto e in produzione (o pronto nel branch `dev`):
 - Progetti letti da `/api/projects` (`projectsApi.js` → `projectMapper.js` → `useProjects` → `ProjectsModal`), con cache in `localStorage` e fallback statico. Il backend li sincronizza da GitHub.
 - **Tutte le sezioni leggono dal backend** (fasi 1-6 completate in `dev`, non ancora in `main`): progetti, competenze, formazione, certificazioni e contatti hanno tabella, risorsa Filament in `/admin`, endpoint `/api/*` (cache 10 min, ETag, throttle) e un hook del sito (`useProjects`, `useSkills`, `useCourses`, `useCertifications`, `useContacts`, tutti su `useApiList`). I file `*Data.js` restano solo come ultimo fallback e come sorgente dei seeder.
 - Collegamenti: progetto ↔ skill (tabella ponte), progetto → corso (`course_id`), certificazione → corso (`course_id`). Corsi e certificazioni citano le skill per nome e seguono rinomini ed eliminazioni (`SkillNameReferences`).
-- Rimandato (decisione): upload delle immagini dal pannello; le icone, gli attestati e le anteprime sono ancora percorsi/URL scritti a mano.
+- Upload delle immagini dal pannello fatto per icone delle skill, attestati dei corsi, immagini delle certificazioni e anteprime dei progetti (colonne `*_upload` che hanno la precedenza sul percorso/URL scritto a mano; disco `UPLOADS_DISK`). Le anteprime dei progetti compaiono sulla card solo se caricate.
 - Da fare: checklist di deploy qui sotto, poi il merge su `main` solo con il via esplicito.
 - Backend Laravel 13 minimale (aggiornato da 12 il 2026-10-11): serve l'SPA, 404 reale, header di sicurezza (CSP ancora in sola osservazione), `trustProxies`.
 - Test (Vitest ~370, PHPUnit), CI con lint/test/build, `npm run predeploy`, 0 vulnerabilità note.

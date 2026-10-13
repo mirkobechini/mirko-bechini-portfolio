@@ -22,7 +22,7 @@ class PublicCourseResource extends JsonResource
             'id' => $this->id,
             'course' => $this->course,
             'description' => $this->description,
-            'certificate' => $this->certificate ?? '',
+            'certificate' => $this->certificateUrl() ?? '',
             'organization' => $this->organization,
             'organizationUrl' => $this->organization_url ?? '',
             'period' => $this->period,

@@ -1,5 +1,5 @@
 import { fetchList } from "../../../services/apiClient";
-import { getAssetPath } from "../../../utils/assets";
+import { resolveAssetUrl } from "../../../utils/assetUrl";
 
 /**
  * GET /api/certifications: attestati visibili, già ordinati dal backend.
@@ -18,11 +18,9 @@ export function getCertifications(signal) {
  * @returns {Object}
  */
 export function mapApiCertification(certification) {
-    const preview = certification.preview ?? "";
-
     return {
         ...certification,
-        preview: preview.startsWith("/") ? getAssetPath(preview) : preview,
+        preview: resolveAssetUrl(certification.preview) ?? "",
         skills: Array.isArray(certification.skills) ? certification.skills : [],
     };
 }
