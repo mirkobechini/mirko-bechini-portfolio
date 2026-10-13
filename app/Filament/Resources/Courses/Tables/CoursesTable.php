@@ -2,10 +2,12 @@
 
 namespace App\Filament\Resources\Courses\Tables;
 
+use App\Enums\CourseStatus;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
@@ -26,6 +28,11 @@ class CoursesTable
                 TextColumn::make('period')
                     ->label('Periodo')
                     ->sortable(['started_at']),
+                // Menu nella riga: un clic quando finisci o metti in pausa un corso.
+                SelectColumn::make('status')
+                    ->label('Stato')
+                    ->options(CourseStatus::class)
+                    ->selectablePlaceholder(false),
                 TextColumn::make('projects_count')
                     ->label('Progetti')
                     ->counts('projects'),

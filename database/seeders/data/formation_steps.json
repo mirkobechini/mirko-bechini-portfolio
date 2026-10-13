@@ -1,21 +1,5 @@
 [
     {
-        "kind": "focus",
-        "title": "Multistack AI Developer",
-        "description": "Corso avanzato di sviluppo full-stack con integrazione di modelli AI, progettazione di sistemi complessi e sviluppo multipiattaforma.",
-        "status": "inProgress",
-        "badge": "New Skills",
-        "position": 1
-    },
-    {
-        "kind": "focus",
-        "title": "Learn Typescript",
-        "description": "Corso Scrimba per imparare le basi di Typescript e tipizzazione statica.",
-        "status": "onHold",
-        "badge": "New Skill",
-        "position": 2
-    },
-    {
         "kind": "roadmap",
         "title": "Creare backend Portfolio",
         "description": "Sviluppare un progetto backend completo per il portfolio, utilizzando Laravel o Node.js, per dimostrare le competenze acquisite e avere un caso studio da mostrare ai potenziali datori di lavoro.",

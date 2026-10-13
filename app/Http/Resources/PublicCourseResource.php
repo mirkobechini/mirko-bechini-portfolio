@@ -26,6 +26,7 @@ class PublicCourseResource extends JsonResource
             'organization' => $this->organization,
             'organizationUrl' => $this->organization_url ?? '',
             'period' => $this->period,
+            'status' => $this->status->value,
             'skills' => $this->skills ?? [],
             'highlights' => $this->highlights ?? [],
             'modules' => collect($this->modules ?? [])->map(fn (array $module): array => [

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\CourseStatus;
 use App\Models\Concerns\CleansUpUploads;
 use App\Support\PublicCache;
 use App\Support\Uploads;
@@ -31,6 +32,7 @@ class Course extends Model
         'organization',
         'organization_url',
         'period',
+        'status',
         'started_at',
         'skills',
         'highlights',
@@ -45,6 +47,7 @@ class Course extends Model
             'skills' => 'array',
             'highlights' => 'array',
             'modules' => 'array',
+            'status' => CourseStatus::class,
             'started_at' => 'date',
             'position' => 'integer',
             'hidden' => 'boolean',

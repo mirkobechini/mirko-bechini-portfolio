@@ -63,6 +63,7 @@ class CoursesTest extends TestCase
             'organization' => 'Scrimba',
             'organizationUrl' => 'https://scrimba.com',
             'period' => '03/2026 - 03/2026',
+            'status' => 'done',
             'skills' => ['React'],
             'highlights' => ['Hooks'],
             'modules' => [['title' => 'Basics', 'description' => 'JSX', 'skillsModules' => ['React']]],
@@ -301,6 +302,7 @@ class CoursesTest extends TestCase
         $this->assertSame('Modificato', Course::where('course', 'LEARN REACT')->value('period'));
         $modules = Course::where('course', 'LEARN REACT')->firstOrFail()->modules;
         $this->assertSame('React Basics', $modules[0]['title']);
+        $this->assertSame(['done', 'done', 'onHold', 'inProgress', 'inProgress'], Course::orderBy('id')->get()->map(fn (Course $c) => $c->status->value)->all());
         $this->assertSame(['React'], $modules[0]['skills']);
     }
 
