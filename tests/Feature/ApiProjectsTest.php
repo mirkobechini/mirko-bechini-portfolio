@@ -163,9 +163,9 @@ class ApiProjectsTest extends TestCase
         $cacheControl = $this->getJson('/api/projects')->headers->get('Cache-Control');
 
         $this->assertStringContainsString('public', $cacheControl);
-        $this->assertStringContainsString('max-age=300', $cacheControl);
-        $this->assertStringContainsString('s-maxage=600', $cacheControl);
-        $this->assertStringContainsString('stale-while-revalidate=60', $cacheControl);
+        $this->assertMatchesRegularExpression('/(^|, )max-age=60(,|$)/', $cacheControl);
+        $this->assertMatchesRegularExpression('/s-maxage=60(,|$)/', $cacheControl);
+        $this->assertStringContainsString('stale-while-revalidate=30', $cacheControl);
     }
 
     public function test_an_unchanged_response_is_answered_with_304_and_no_body(): void

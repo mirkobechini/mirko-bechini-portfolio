@@ -103,7 +103,7 @@ class SkillsTest extends TestCase
         Skill::factory()->create();
         $first = $this->getJson('/api/skills')->assertOk();
 
-        $this->assertStringContainsString('s-maxage=600', $first->headers->get('Cache-Control'));
+        $this->assertMatchesRegularExpression('/s-maxage=60(,|$)/', $first->headers->get('Cache-Control'));
         $this->getJson('/api/skills', ['If-None-Match' => $first->headers->get('ETag')])->assertStatus(304);
         $this->assertCount(0, $first->headers->getCookies());
     }
