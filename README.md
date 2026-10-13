@@ -1,7 +1,7 @@
 # 🚀 MirkoBechini-Portfolio
 
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white&style=flat-square)](https://react.dev)
-[![Laravel](https://img.shields.io/badge/Laravel-12-FB2E1D?logo=laravel&logoColor=white&style=flat-square)](https://laravel.com)
+[![Laravel](https://img.shields.io/badge/Laravel-13-FB2E1D?logo=laravel&logoColor=white&style=flat-square)](https://laravel.com)
 [![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white&style=flat-square)](https://vitejs.dev)
 [![GitHub Actions](https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white&style=flat-square)](https://github.com/mirkobechini/mirko-bechini-portfolio/actions)
 
@@ -21,6 +21,8 @@
 - [Dati dei progetti](#-dati-dei-progetti)
 - [Test](#-test)
 - [Sicurezza](#-sicurezza)
+- [Pannello di amministrazione](#️-pannello-di-amministrazione)
+- [Sincronizzazione con GitHub](#-sincronizzazione-con-github)
 - [Deploy](#-deploy)
 - [Struttura del progetto](#-struttura-del-progetto)
 - [GitHub Actions](#-github-actions)
@@ -44,7 +46,7 @@
 - **Navigazione da tastiera e accessibilità**: hook `useKeyboardNavigation`, focus trap e ripristino del focus nelle modali, messaggi di stato con `role="status"`.
 - **Stato globale con Context API**: apertura/chiusura modali e stato dell'app gestiti centralmente.
 - **CSS modulare**: ogni componente ha il proprio CSS module (nessun file sopra le 400 righe).
-- **Backend Laravel 12**: serve l'SPA React, risponde con un vero **404** alle URL sconosciute e aggiunge gli [header di sicurezza](#-sicurezza). Pronto per future API.
+- **Backend Laravel 13**: serve l'SPA React, risponde con un vero **404** alle URL sconosciute e aggiunge gli [header di sicurezza](#-sicurezza). Pronto per future API.
 - **Ottimizzazione asset**: `nes-core` al posto del bundle completo di NES.css, preload di font e immagini critiche, PWA con service worker per caching intelligente.
 - **Test**: oltre 370 test Vitest (copertura righe ~92%) e test PHPUnit sulle rotte e sugli header.
 - **CI/CD completo**: GitHub Actions con ESLint, build Vite, test PHP e audit Lighthouse.
@@ -64,7 +66,7 @@
 
 | Frontend                                                   | Backend                              |
 | :--------------------------------------------------------- | :----------------------------------- |
-| [React](https://react.dev) ^19.2.7                         | [Laravel](https://laravel.com) ^12.0 |
+| [React](https://react.dev) ^19.2.7                         | [Laravel](https://laravel.com) ^13.0 |
 | [React Router](https://reactrouter.com) ^7.18              | [PHP](https://php.net) ^8.4          |
 | [Vite](https://vitejs.dev) ^8.0                            |                                      |
 | [NES.css](https://nostalgic-css.github.io/NES.css/) ^2.2.1 |                                      |
@@ -153,20 +155,21 @@ npm run build
 
 ## 🐙 Dati dei progetti
 
-L'elenco progetti non è scritto a mano: viene composto a runtime da più fonti.
+L'elenco progetti viene dal backend: il browser non chiama più GitHub.
 
 ```
-GitHub REST API ──► projectMapper ──► ProjectsModal
-                        ▲
-        projectsMeta.js (descrizione IT, tipo, scope, pinned, exclude)
+GitHub ──(sync, scheduler)──► database ──► /api/projects ──► useProjects ──► ProjectsModal
+                                  ▲
+                     pannello /admin (descrizione, tipo, scope, nascosto, in evidenza)
 ```
 
-- **`services/githubApi.js`** legge i repo pubblici di `mirkobechini` ed esclude fork e repo archiviati.
-- **`services/projectsMeta.js`** contiene solo ciò che GitHub non sa: descrizione in italiano, `type` (frontend/backend/fullstack), `projectScope`, `pinned`, `exclude`, tecnologie extra e URL `live`. La chiave è il nome del repo. Un repo nuovo senza voce nel meta compare comunque (con i valori di default).
-- **`hooks/useGithubProjects.js`** usa una cache in `localStorage` (30 min). Se la rete o l'API (limite di 60 richieste/ora per IP) falliscono, mostra i dati scaduti; se non ci sono, l'elenco statico `fallbackProjects.js`. In quei casi la modal mostra un avviso.
-- Se cambi il **formato** dei dati in cache, incrementa `CACHE_KEY` in `useGithubProjects.js` (oggi `github_projects_cache_v2`).
+- **`services/projectsApi.js`** chiama `GET /api/projects` (vedi "API pubblica").
+- **`services/projectMapper.js`** aggiunge ciò che l'API non manda: l'anteprima segnaposto e i valori di default.
+- **`hooks/useApiList.js`** è la logica comune (usata da `useProjects` e `useSkills`); ciascun hook indica solo chiave di cache, funzione di lettura, mapper e dati statici di riserva.
+- **`hooks/useProjects.js`** segue questa catena: cache in `localStorage` valida (10 min) → API → cache scaduta → elenco statico `fallbackProjects.js`. Se l'API non risponde o restituisce una lista vuota, la modal mostra un avviso.
+- Se cambi il **formato** dei dati in cache, incrementa `CACHE_KEY` in `useProjects.js` (oggi `projects_api_cache_v1`).
 
-Per aggiungere o nascondere un progetto basta aggiornare `projectsMeta.js`.
+Per aggiungere, nascondere o modificare un progetto usa il pannello `/admin` (vedi "Pannello di amministrazione"); nessun deploy necessario.
 
 ---
 
@@ -204,6 +207,63 @@ Il middleware `App\Http\Middleware\SecurityHeaders` (registrato in `bootstrap/ap
 - Gli URL sconosciuti rispondono **404** (con la pagina d'errore dell'SPA), non 200.
 
 ---
+
+## 🛡️ Pannello di amministrazione
+
+Il pannello (Filament 5) è su **`/admin`** e serve ad aggiornare i contenuti del sito senza fare un deploy. Oggi c'è l'accesso protetto; le risorse (progetti, competenze...) arrivano per fasi, vedi `FUTURE-PLAN.md`.
+
+- **Accesso:** solo utenti con `is_admin = true`. Un utente creato dal comando **non entra** finché non viene abilitato a mano (la colonna non è assegnabile in massa, di proposito).
+- **2FA obbligatoria** con app autenticatrice (al primo accesso il pannello obbliga a configurarla e mostra i codici di recupero: vanno conservati).
+- **Nessuna registrazione pubblica:** gli utenti si creano solo da comando.
+- Il pannello è escluso dalla CSP, dal service worker della PWA e dall'indicizzazione (`robots.txt`).
+
+**Creare l'amministratore** (in locale e, una volta, in produzione):
+
+```bash
+php artisan make:filament-user --name="Mirko" --email="LA-TUA-EMAIL" --password="PasswordTemporanea1"
+php artisan tinker --execute="App\Models\User::where('email', 'LA-TUA-EMAIL')->update(['is_admin' => true]);"
+```
+
+Poi apri `/admin`, accedi e configura il 2FA; cambia la password dal profilo. Su Laravel Cloud i due comandi si lanciano dalla scheda **Commands** dell'ambiente (accettano solo comandi non interattivi, per questo si passano `--name`, `--email` e `--password`).
+
+Gli asset di Filament (`public/css|js|fonts/filament`) **non sono nel repo**: si pubblicano da soli a ogni `composer install` (script `filament:upgrade`).
+
+---
+
+## 🔄 Sincronizzazione con GitHub
+
+Il comando `php artisan github:sync-projects` legge i repository **pubblici** di GitHub e aggiorna i progetti nel database. Si gestisce dal pannello, alla pagina **Sincronizzazione GitHub** (frequenza, stato dell'ultima esecuzione e pulsante **Sincronizza ora**).
+
+- **Cosa aggiorna:** solo i dati di GitHub, cioè stelle, data dell'ultimo push, indirizzo del repository e tecnologie (linguaggio + topics). Titolo, descrizione, categoria, ambito, sito online, tecnologie aggiuntive, raggruppamento, "in evidenza" e "nascosto" sono **solo del pannello**: il sync non li tocca mai.
+- **Repository nuovi:** vengono creati **nascosti**. Vanno rivisti nei Progetti (descrizione in italiano, categoria, ambito) e poi si toglie "Nascosto".
+- **Repository spariti** (cancellati, privati, archiviati): il progetto non viene toccato, restano gli ultimi dati noti. Fork e repository archiviati non si importano.
+- **Frequenza:** Solo manuale / ogni giorno / **ogni settimana (predefinita)** / ogni 2 settimane / ogni mese, modificabile dal pannello senza deploy. Lo scheduler lancia il comando ogni ora e il comando parte davvero solo se la frequenza scelta lo richiede. Se una sincronizzazione fallisce, al controllo orario successivo riprova.
+- **Token GitHub (facoltativo, consigliato):** senza, il limite è di 60 richieste all'ora per IP; con il token sono 5000. Va creato come *fine-grained token* con **Repository access: Public repositories (read-only)** e nessun altro permesso, e messo **solo** in `.env` e nelle variabili d'ambiente di Laravel Cloud come `GITHUB_TOKEN` (mai nel repository). Scade dopo al massimo 1 anno: se scade, il pannello lo segnala e il sync continua senza token.
+- **Su Laravel Cloud** serve attivare lo **scheduler** dell'ambiente (impostazioni del cluster dell'app), altrimenti la sincronizzazione automatica non parte (resta il pulsante "Sincronizza ora").
+
+```bash
+php artisan github:sync-projects            # rispetta la frequenza scelta
+php artisan github:sync-projects --force    # sincronizza subito
+```
+
+---
+
+## 🔌 API pubblica
+
+`GET /api/projects` restituisce i progetti visibili (non nascosti) in JSON, nella forma che usa il sito:
+`id`, `title`, `description`, `projectScope`, `type`, `technologies`, `repo`, `live`, `stars`, `updatedAt`, `pinned`, `group` (solo nome).
+
+- Ordine: prima i progetti in evidenza, poi i più recenti.
+- `GET /api/skills` restituisce le competenze visibili (`id`, `skill`, `icon`, `category`, `color`, `functions`, `relatedProjects`) con le stesse regole di cache, ETag e limite. I progetti collegati sono i titoli dei progetti non nascosti più l'eventuale testo libero.
+- **Immagini caricate dal pannello** (icona delle skill, attestato dei corsi, immagine delle certificazioni, anteprima dei progetti): PNG, WebP o JPG (niente SVG), fino a 512 KB per le icone e 2 MB per le altre. I file vanno sul disco `UPLOADS_DISK` (`public` in locale, dopo `php artisan storage:link`; in produzione un disco persistente) e hanno la precedenza sul percorso/URL scritto a mano nella colonna accanto. Un file sostituito o di un record eliminato viene cancellato dal disco. Senza anteprima il sito mostra il segnaposto.
+- `GET /api/education` restituisce i corsi visibili (`id`, `course`, `description`, `certificate`, `organization`, `organizationUrl`, `period`, `skills`, `highlights`, `modules`, `projects`). Ogni progetto può essere collegato a un corso dal pannello (campo `course` in `/api/projects`).
+- `GET /api/certifications` restituisce gli attestati visibili (`id`, `title`, `preview`, `previewWidth`, `previewHeight`, `link`, `organization`, `organizationUrl`, `skills`, `courseId`). `courseId` è il corso che il sito apre cliccando l'attestato.
+- `GET /api/contacts` restituisce i contatti visibili (`id`, `href`, `icon`, `label`, `variantClass`, `ariaLabel`). Il pannello accetta solo indirizzi `https://`, `http://`, `mailto:` e `tel:`, e il sito scarta comunque gli altri schemi.
+- Cache lato server di 10 minuti (`api.projects.v1`), svuotata a ogni modifica di progetti o raggruppamenti.
+- `ETag` + `Cache-Control` pubblico: se nulla è cambiato risponde `304`.
+- Limite di 60 richieste al minuto per IP (`429` in JSON).
+- Sotto `/api` gli errori sono sempre JSON; nessun header CORS (il sito usa la stessa origine).
+- In produzione usare una `CACHE_STORE` condivisa (es. `database`), altrimenti con più istanze i dati possono restare vecchi fino a 10 minuti.
 
 ## 🚢 Deploy
 

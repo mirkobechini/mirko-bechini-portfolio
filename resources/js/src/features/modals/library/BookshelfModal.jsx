@@ -1,8 +1,9 @@
-import { memo, useEffect, useState, lazy, Suspense } from 'react';
+import { memo, useEffect, useMemo, useRef, useState, lazy, Suspense } from 'react';
 import styles from './BookshelfModal.module.css';
 import sharedStyles from '../shared/SharedModal.module.css';
 import { BOOKSHELF_PROFILES } from './bookshelfProfiles';
-import educationData from './educationData';
+import useSkills from '../../../hooks/useSkills';
+import useCourses from '../../../hooks/useCourses';
 import { getAssetPath } from '../../../utils/assets';
 import playBookFlip from '../../../utils/playBookFlip';
 
@@ -16,17 +17,22 @@ const BookshelfModal = memo(function BookshelfModal({ setModalSprite, defaultMod
     const [selectedProfile, setSelectedProfile] = useState(null);
     const [preselectSkill, setPreselectSkill] = useState(null);
     const [returnToEducation, setReturnToEducation] = useState(null);
+    const { skills } = useSkills();
+    const { courses } = useCourses();
+    const preselectDone = useRef(false);
 
-    /* Auto-open "Formazione" book and select matching education when coming from a certification */
+    /* Auto-open "Formazione" book and select matching education when coming from a certification.
+       Una volta sola: quando i corsi si aggiornano dalla API non deve riportare l'utente indietro. */
     useEffect(() => {
         const preselectId = modalParams?.preselectEducation;
-        if (preselectId == null) return;
-        const found = educationData.find((e) => e.id === preselectId);
+        if (preselectId == null || preselectDone.current) return;
+        const found = courses.find((e) => e.id === preselectId);
         if (found) {
+            preselectDone.current = true;
             setSelectedProfile('formation');
             setReturnToEducation(found);
         }
-    }, [modalParams?.preselectEducation]);
+    }, [modalParams?.preselectEducation, courses]);
 
     function handleBookSelection(profileKey) {
         setSelectedProfile(profileKey);
@@ -55,7 +61,14 @@ const BookshelfModal = memo(function BookshelfModal({ setModalSprite, defaultMod
         playBookFlip();
     }
 
-    const activeProfile = selectedProfile == null ? null : BOOKSHELF_PROFILES[selectedProfile];
+    // Le competenze arrivano dalla API (con fallback statico); il resto del profilo è fisso
+    const activeProfile = useMemo(() => {
+        if (selectedProfile == null) return null;
+        const profile = BOOKSHELF_PROFILES[selectedProfile];
+        if (selectedProfile === 'skills') return { ...profile, skillsData: skills };
+        if (selectedProfile === 'formation') return { ...profile, educationData: courses };
+        return profile;
+    }, [selectedProfile, skills, courses]);
 
     useEffect(() => {
         if (selectedProfile == null) {

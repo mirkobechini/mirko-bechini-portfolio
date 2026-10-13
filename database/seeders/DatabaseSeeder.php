@@ -2,22 +2,22 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
+     *
+     * Niente utente di prova: l'amministratore si crea da comando (con 2FA), mai da un seeder,
+     * altrimenti `db:seed` in produzione lascerebbe un account noto.
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $this->call(ProjectSeeder::class);
+        $this->call(SkillSeeder::class);
+        $this->call(CourseSeeder::class);
+        $this->call(CertificationSeeder::class);
+        $this->call(ContactSeeder::class);
     }
 }

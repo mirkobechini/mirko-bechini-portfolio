@@ -71,6 +71,10 @@
 .github {
   border-color: #263238;
 }
+
+.other {
+  border-color: #6d4c41;
+}
 /* #endregion Contact variants */
 
 /* #region Contacts theme slots */

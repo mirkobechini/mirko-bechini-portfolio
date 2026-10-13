@@ -2,10 +2,10 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ProjectsModal from '../features/modals/projects/ProjectsModal';
-import useGithubProjects from '../hooks/useGithubProjects';
+import useProjects from '../hooks/useProjects';
 
 // Il hook è già testato a parte: qui lo sostituiamo per controllare cosa riceve la modal
-vi.mock('../hooks/useGithubProjects', () => ({ default: vi.fn() }));
+vi.mock('../hooks/useProjects', () => ({ default: vi.fn() }));
 vi.mock('../utils/assets', () => ({ getAssetPath: (path) => `/assets${path}` }));
 
 const makeProject = (overrides = {}) => ({
@@ -22,7 +22,7 @@ const makeProject = (overrides = {}) => ({
 
 // Imposta quello che il hook "restituisce" in un test
 function mockHook({ projects = [], loading = false, error = null } = {}) {
-    useGithubProjects.mockReturnValue({ projects, loading, error, refetch: vi.fn() });
+    useProjects.mockReturnValue({ projects, loading, error, refetch: vi.fn() });
 }
 
 beforeEach(() => {

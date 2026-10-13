@@ -93,6 +93,9 @@ export default defineConfig({
             workbox: {
                 globPatterns: ['**/*.{js,css,html,ico,png,webp,svg,ogg}'],
                 navigateFallback: '/',
+                // Il pannello Filament (/admin) è una pagina server-side: senza questa esclusione il
+                // service worker risponderebbe con la home in cache a chi ha la PWA installata.
+                navigateFallbackDenylist: [/^\/admin/],
                 runtimeCaching: [
                     {
                         urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,

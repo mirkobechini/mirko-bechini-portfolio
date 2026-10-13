@@ -34,6 +34,14 @@ class UserFactory extends Factory
     }
 
     /**
+     * Un utente abilitato al pannello (is_admin non è assegnabile in massa, ma le factory ignorano il guard).
+     */
+    public function admin(): static
+    {
+        return $this->state(['is_admin' => true]);
+    }
+
+    /**
      * Indicate that the model's email address should be unverified.
      */
     public function unverified(): static

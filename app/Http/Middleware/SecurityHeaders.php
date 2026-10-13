@@ -22,7 +22,11 @@ class SecurityHeaders
 
         // Sola osservazione: il browser segnala le violazioni in console ma non blocca nulla.
         // Quando la console è pulita si passa a 'Content-Security-Policy'.
-        $response->headers->set('Content-Security-Policy-Report-Only', $this->contentSecurityPolicy());
+        // Il pannello Filament (/admin) è escluso: Livewire e Alpine usano script inline e valutazioni
+        // dinamiche che questa policy segnalerebbe di continuo (e bloccherebbe, da enforcing).
+        if (! $request->is('admin', 'admin/*')) {
+            $response->headers->set('Content-Security-Policy-Report-Only', $this->contentSecurityPolicy());
+        }
 
         // Di solito HSTS lo imposta già Cloudflare: abilitare solo se serve (SECURITY_HSTS=true).
         if (config('security.hsts') && $request->isSecure()) {
@@ -45,7 +49,7 @@ class SecurityHeaders
             "font-src 'self' data: https://fonts.gstatic.com",
             "img-src 'self' data: https:",
             "media-src 'self'",
-            "connect-src 'self' https://api.github.com {$iubenda}{$viteHttp}{$viteWs}",
+            "connect-src 'self' {$iubenda}{$viteHttp}{$viteWs}",
             "frame-src {$iubenda}",
             "worker-src 'self'",
             "manifest-src 'self'",

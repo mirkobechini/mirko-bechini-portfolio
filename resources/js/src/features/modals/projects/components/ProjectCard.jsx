@@ -6,8 +6,22 @@ const ProjectCard = memo(function ProjectCard({ project, isAlternate }) {
     return (
         <div className={`${styles['project-blueprint']} ${isAlternate ? styles.alternate : ''}`}>
             <div className={styles['blueprint-header']}></div>
+            {project.hasCustomPreview && (
+                <img
+                    className={styles['project-preview']}
+                    src={project.preview}
+                    alt={`Anteprima di ${project.title}`}
+                    loading="lazy"
+                    decoding="async"
+                    width="320"
+                    height="180"
+                />
+            )}
             <h4 className={styles['project-title']}>{project.title}</h4>
             <p className={styles['project-description']} title={project.description}>{project.description}</p>
+            {project.course && (
+                <p className={styles['project-course']}>Corso: {project.course}</p>
+            )}
             <div className={styles['tech-stack']}>
                 {project.technologies.length > 0 ? `#${project.technologies.join(' #')}` : ''}
             </div>

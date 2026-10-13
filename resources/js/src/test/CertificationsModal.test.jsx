@@ -5,6 +5,19 @@ import CertificationsModal from '../features/modals/certifications/Certification
 
 const mockOpenModal = vi.fn();
 
+// I dati arrivano dalla API: qui gli stessi dati statici, con un attestato senza corso in più
+vi.mock('../hooks/useCertifications', async () => {
+    const { default: certificationData } = await import('../features/modals/certifications/certificationData');
+    return {
+        default: () => ({
+            certifications: [
+                ...certificationData,
+                { id: 99, courseId: null, title: 'Senza corso', preview: '/x.webp', organization: 'Altro', organizationUrl: '', skills: [] },
+            ],
+        }),
+    };
+});
+
 describe('CertificationsModal', () => {
     beforeEach(() => {
         mockOpenModal.mockClear();
@@ -38,6 +51,16 @@ describe('CertificationsModal', () => {
         await user.click(frames[0]);
 
         expect(mockOpenModal).toHaveBeenCalledWith(2, { preselectEducation: 1 });
+    });
+
+    it('un attestato senza corso collegato non apre nulla', async () => {
+        const user = userEvent.setup();
+        render(<CertificationsModal openModal={mockOpenModal} />);
+
+        const frames = screen.getAllByRole('button');
+        await user.click(frames[frames.length - 1]);
+
+        expect(mockOpenModal).not.toHaveBeenCalled();
     });
 
     it('Invio e Spazio sul riquadro aprono la formazione, gli altri tasti no', async () => {
