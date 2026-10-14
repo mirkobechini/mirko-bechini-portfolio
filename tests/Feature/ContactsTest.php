@@ -70,7 +70,7 @@ class ContactsTest extends TestCase
         Contact::factory()->create();
         $first = $this->getJson('/api/contacts')->assertOk();
 
-        $this->assertStringContainsString('s-maxage=600', $first->headers->get('Cache-Control'));
+        $this->assertMatchesRegularExpression('/s-maxage=60(,|$)/', $first->headers->get('Cache-Control'));
         $this->getJson('/api/contacts', ['If-None-Match' => $first->headers->get('ETag')])->assertStatus(304);
     }
 

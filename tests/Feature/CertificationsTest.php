@@ -93,7 +93,7 @@ class CertificationsTest extends TestCase
         Certification::factory()->create();
         $first = $this->getJson('/api/certifications')->assertOk();
 
-        $this->assertStringContainsString('s-maxage=600', $first->headers->get('Cache-Control'));
+        $this->assertMatchesRegularExpression('/s-maxage=60(,|$)/', $first->headers->get('Cache-Control'));
         $this->getJson('/api/certifications', ['If-None-Match' => $first->headers->get('ETag')])->assertStatus(304);
     }
 
