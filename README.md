@@ -166,8 +166,8 @@ GitHub ──(sync, scheduler)──► database ──► /api/projects ──�
 
 - **`services/projectsApi.js`** chiama `GET /api/projects` (vedi "API pubblica").
 - **`services/projectMapper.js`** aggiunge ciò che l'API non manda: l'anteprima segnaposto e i valori di default.
-- **`hooks/useApiList.js`** è la logica comune (usata da `useProjects` e `useSkills`); ciascun hook indica solo chiave di cache, funzione di lettura, mapper e dati statici di riserva.
-- **`hooks/useProjects.js`** segue questa catena: cache in `localStorage` valida (10 min) → API → cache scaduta → elenco statico `fallbackProjects.js`. Se l'API non risponde o restituisce una lista vuota, la modal mostra un avviso.
+- **`hooks/useApiList.js`** è la logica comune (usata da `useProjects`, `useSkills`, `useCourses`, `useCertifications`, `useContacts` e `useFormationSteps`); ciascun hook indica solo chiave di cache, funzione di lettura, mapper e dati statici di riserva. Mostra subito i dati già in `localStorage` e **a ogni apertura li ricontrolla in background** (richiesta condizionale: se nulla è cambiato il server risponde `304`): una modifica dal pannello compare entro il minuto della cache di rete. Con dati freschi un errore di rete è silenzioso; senza, si usano i dati scaduti o quelli statici di riserva con un avviso.
+- **`hooks/useProjects.js`** usa `useApiList`: dati in memoria → API → dati statici `fallbackProjects.js`. Se l'API non risponde o restituisce una lista vuota (e non ci sono dati freschi), la modal mostra un avviso.
 - Se cambi il **formato** dei dati in cache, incrementa `CACHE_KEY` in `useProjects.js` (oggi `projects_api_cache_v1`).
 
 Per aggiungere, nascondere o modificare un progetto usa il pannello `/admin` (vedi "Pannello di amministrazione"); nessun deploy necessario.
@@ -265,7 +265,7 @@ php artisan github:sync-projects --force    # sincronizza subito
 - `GET /api/certifications` restituisce gli attestati visibili (`id`, `title`, `preview`, `previewWidth`, `previewHeight`, `link`, `organization`, `organizationUrl`, `skills`, `courseId`). `courseId` è il corso che il sito apre cliccando l'attestato.
 - `GET /api/contacts` restituisce i contatti visibili (`id`, `href`, `icon`, `label`, `variantClass`, `ariaLabel`). Il pannello accetta solo indirizzi `https://`, `http://`, `mailto:` e `tel:`, e il sito scarta comunque gli altri schemi.
 - Cache lato server di 10 minuti (`api.projects.v1`), svuotata a ogni modifica.
-- `ETag` + `Cache-Control` pubblico di **60 secondi** (`max-age` e `s-maxage`): davanti al sito c'è la cache di rete di Laravel Cloud, che rispetta `s-maxage`, e le modifiche dal pannello devono comparire in fretta. Se nulla è cambiato risponde `304`. Il sito tiene i dati nella memoria del browser per 2 minuti (`API_CACHE_TTL_MS` in `useApiList.js`).
+- `ETag` + `Cache-Control` pubblico di **60 secondi** (`max-age` e `s-maxage`): davanti al sito c'è la cache di rete di Laravel Cloud, che rispetta `s-maxage`, e le modifiche dal pannello devono comparire in fretta. Se nulla è cambiato risponde `304`. Il sito chiede sempre al server se i dati sono cambiati (`cache: "no-cache"` in `apiClient.js`) e, per 2 minuti (`API_CACHE_TTL_MS` in `useApiList.js`), considera "freschi" i dati in memoria: li mostra subito senza avvisi anche se il ricontrollo fallisce.
 - Limite di 60 richieste al minuto per IP (`429` in JSON).
 - Sotto `/api` gli errori sono sempre JSON; nessun header CORS (il sito usa la stessa origine).
 - `CACHE_STORE`: in produzione oggi è `file` (il database del piano Dev si sospende, e la cache non deve risvegliarlo). Con più istanze dell'app una modifica dal pannello può restare invisibile sull'altra istanza fino a 10 minuti: in quel caso passare a `database` (o redis).

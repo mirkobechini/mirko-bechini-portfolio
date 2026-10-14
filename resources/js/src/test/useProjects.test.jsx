@@ -47,14 +47,14 @@ describe('useProjects', () => {
         expect(JSON.parse(localStorage.getItem(CACHE_KEY)).data).toHaveLength(1);
     });
 
-    it("con cache valida non chiama l'API", async () => {
+    it("con cache valida mostra subito i dati e li ricontrolla in background", async () => {
         seedCache([cachedProject], 60_000);
 
         const { result } = renderHook(() => useProjects());
 
-        await waitFor(() => expect(result.current.loading).toBe(false));
+        expect(result.current.loading).toBe(false); // nessuna attesa: i dati freschi ci sono già
         expect(result.current.projects[0].id).toBe('cached');
-        expect(getProjects).not.toHaveBeenCalled();
+        await waitFor(() => expect(getProjects).toHaveBeenCalledTimes(1)); // ricontrollo in background
     });
 
     it('con cache scaduta mostra subito i dati vecchi e poi li aggiorna', async () => {

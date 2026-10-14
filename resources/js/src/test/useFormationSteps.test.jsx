@@ -36,14 +36,14 @@ describe('useFormationSteps', () => {
         expect(JSON.parse(localStorage.getItem(CACHE_KEY)).data).toHaveLength(3);
     });
 
-    it("con cache valida non chiama l'API", async () => {
+    it("con cache valida mostra subito i dati e li ricontrolla in background", async () => {
         localStorage.setItem(CACHE_KEY, JSON.stringify({ data: [apiStep(9, 'focus')], expiry: Date.now() + 60_000 }));
 
         const { result } = renderHook(() => useFormationSteps());
 
-        await waitFor(() => expect(result.current.loading).toBe(false));
+        expect(result.current.loading).toBe(false); // nessuna attesa: i dati freschi ci sono già
         expect(result.current.focus[0].id).toBe(9);
-        expect(getFormationSteps).not.toHaveBeenCalled();
+        await waitFor(() => expect(getFormationSteps).toHaveBeenCalledTimes(1)); // ricontrollo in background
     });
 
     it("se l'API fallisce e non c'è cache usa formationStepsData.js", async () => {

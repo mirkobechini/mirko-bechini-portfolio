@@ -17,6 +17,14 @@ describe('fetchList', () => {
         expect(fetch).toHaveBeenCalledWith('/api/x', expect.objectContaining({ headers: { Accept: 'application/json' } }));
     });
 
+    it('chiede sempre al server se la risposta è cambiata (no-cache)', async () => {
+        fetch.mockResolvedValue({ ok: true, json: async () => ({ data: [] }) });
+
+        await fetchList('/api/x');
+
+        expect(fetch.mock.calls[0][1].cache).toBe('no-cache');
+    });
+
     it('lancia con stato e testo se la risposta non è ok', async () => {
         fetch.mockResolvedValue({ ok: false, status: 404, statusText: 'Not Found' });
 

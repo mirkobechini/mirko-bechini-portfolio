@@ -37,14 +37,14 @@ describe('useSkills', () => {
         expect(JSON.parse(localStorage.getItem(CACHE_KEY)).data).toHaveLength(1);
     });
 
-    it("con cache valida non chiama l'API", async () => {
+    it("con cache valida mostra subito i dati e li ricontrolla in background", async () => {
         localStorage.setItem(CACHE_KEY, JSON.stringify({ data: [{ id: 1, skill: 'Cache' }], expiry: Date.now() + 60_000 }));
 
         const { result } = renderHook(() => useSkills());
 
-        await waitFor(() => expect(result.current.loading).toBe(false));
+        expect(result.current.loading).toBe(false); // nessuna attesa: i dati freschi ci sono già
         expect(result.current.skills[0].skill).toBe('Cache');
-        expect(getSkills).not.toHaveBeenCalled();
+        await waitFor(() => expect(getSkills).toHaveBeenCalledTimes(1)); // ricontrollo in background
     });
 
     it("se l'API fallisce e non c'è cache usa skillsData.js", async () => {
