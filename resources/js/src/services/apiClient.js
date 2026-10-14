@@ -7,6 +7,9 @@
 export async function fetchList(url, signal) {
     const response = await fetch(url, {
         headers: { Accept: "application/json" },
+        // Il browser deve sempre chiedere al server se la risposta è cambiata (If-None-Match → 304 se no),
+        // invece di riusare una copia della sua cache HTTP senza controllare.
+        cache: "no-cache",
         signal,
     });
 

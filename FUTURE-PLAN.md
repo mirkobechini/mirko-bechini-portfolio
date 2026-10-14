@@ -12,7 +12,7 @@ Già fatto e in produzione (o pronto nel branch `dev`):
 - Collegamenti: progetto ↔ skill (tabella ponte), progetto → corso (`course_id`), certificazione → corso (`course_id`). Corsi e certificazioni citano le skill per nome e seguono rinomini ed eliminazioni (`SkillNameReferences`).
 - Upload delle immagini dal pannello fatto per icone delle skill, attestati dei corsi, immagini delle certificazioni e anteprime dei progetti (colonne `*_upload` che hanno la precedenza sul percorso/URL scritto a mano; disco `UPLOADS_DISK`). Le anteprime dei progetti compaiono sulla card solo se caricate.
 - Da fare: checklist di deploy qui sotto, poi il merge su `main` solo con il via esplicito.
-- Backend Laravel 13 minimale (aggiornato da 12 il 2026-10-11): serve l'SPA, 404 reale, header di sicurezza (CSP ancora in sola osservazione), `trustProxies`.
+- Backend Laravel 13 minimale (aggiornato da 12 il 2026-10-11): serve l'SPA, 404 reale, header di sicurezza (CSP attiva dal 2026-10-14), `trustProxies`.
 - Test (Vitest ~370, PHPUnit), CI con lint/test/build, `npm run predeploy`, 0 vulnerabilità note.
 
 **Cosa non va bene oggi, e perché serve un backend:**
@@ -110,8 +110,8 @@ Niente di questo è stato ancora fatto in produzione: `main` e Laravel Cloud son
 7. **Token GitHub**: creare il token fine-grained (sola lettura, repo pubblici) e impostare `GITHUB_TOKEN` solo nelle variabili d'ambiente di Laravel Cloud e nel `.env` locale. Mai in chat o nel repo.
 8. **Utente admin**: crearlo con i Cloud Commands (`php artisan make:filament-user`, poi `is_admin = 1`) e configurare subito la 2FA e salvare i codici di recupero.
 9. **Primo popolamento**: lanciare `php artisan db:seed` (progetti, competenze, corsi, certificazioni, contatti) e poi "Sincronizza ora" dal pannello; controllare `/api/projects`.
-10. **Variabili**: aggiornare `.env.production` locale con le nuove variabili (`CACHE_STORE`, `SESSION_DRIVER`, `GITHUB_USERNAME`, `GITHUB_TOKEN`); `APP_DEBUG=false`; PHP 8.5 è già impostato.
-11. **CSP**: dopo qualche giorno senza violazioni nei report, passare `Content-Security-Policy-Report-Only` a `Content-Security-Policy`.
+10. **Variabili** *(fatto: vedi `.env.production.example`, controllato da `npm run predeploy`)*: `CACHE_STORE`, `SESSION_DRIVER`, `UPLOADS_DISK`, `GITHUB_USERNAME`; il token solo su Cloud; `APP_DEBUG=false`; PHP 8.5 è già impostato.
+11. **CSP** *(fatto il 2026-10-14: verificata sul sito vero con un browser automatico, nessuna violazione; ora blocca; `SECURITY_CSP_MODE=report-only` per tornare indietro)*.
 12. **Cloudflare**: verificare che `/api/*` non venga messo in cache oltre i `Cache-Control` inviati e che `/admin` non sia in cache.
 13. **Merge su main**: solo con il via esplicito (PR #41 dev → main), poi controllare `/`, `/admin`, `/api/projects` e il login con 2FA.
 

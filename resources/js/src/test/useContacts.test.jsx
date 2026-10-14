@@ -43,14 +43,14 @@ describe('useContacts', () => {
         expect(result.current.contacts.map((c) => c.id)).toEqual([5]);
     });
 
-    it("con cache valida non chiama l'API", async () => {
+    it("con cache valida mostra subito i dati e li ricontrolla in background", async () => {
         localStorage.setItem(CACHE_KEY, JSON.stringify({ data: [{ ...apiContact, label: 'Cache' }], expiry: Date.now() + 60_000 }));
 
         const { result } = renderHook(() => useContacts());
 
-        await waitFor(() => expect(result.current.loading).toBe(false));
+        expect(result.current.loading).toBe(false); // nessuna attesa: i dati freschi ci sono già
         expect(result.current.contacts[0].label).toBe('Cache');
-        expect(getContacts).not.toHaveBeenCalled();
+        await waitFor(() => expect(getContacts).toHaveBeenCalledTimes(1)); // ricontrollo in background
     });
 
     it("se l'API fallisce e non c'è cache usa contactsData.js", async () => {
