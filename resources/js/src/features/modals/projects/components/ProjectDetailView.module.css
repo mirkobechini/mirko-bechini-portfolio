@@ -1,0 +1,135 @@
+/* Foglio di dettaglio: stessa carta "blueprint" delle card, ma a tutta larghezza */
+.sheet {
+    display: flex;
+    flex-direction: column;
+
+    max-width: 52rem;
+    margin: var(--space-sm) auto;
+    padding: var(--space-lg);
+    gap: var(--space-sm);
+
+    color: #0d47a1;
+    background: #e3f2fd;
+    border-left: 0.3125rem solid #1565c0;
+
+    box-shadow: 0.3125rem 0.3125rem 0.9375rem rgb(0 0 0 / 30%);
+}
+
+.back-btn {
+    align-self: flex-start;
+
+    padding: var(--space-2xs) var(--space-sm);
+
+    font: inherit;
+    font-size: var(--text-xs);
+    font-weight: bold;
+    color: inherit;
+
+    cursor: var(--cursor-nes-pointer);
+
+    background: rgb(255 255 255 / 55%);
+    border: 1px solid currentcolor;
+    border-radius: 0.25rem;
+}
+
+.back-btn:hover {
+    background: rgb(255 255 255 / 90%);
+}
+
+.back-btn:focus-visible,
+.link-btn:focus-visible {
+    outline: 0.125rem solid #0f59a8;
+    outline-offset: 0.125rem;
+}
+
+.title {
+    margin: 0;
+
+    font-size: var(--text-lg);
+    font-weight: bold;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+}
+
+.kind {
+    margin: 0;
+
+    font-size: var(--text-xs);
+    font-style: italic;
+    color: #444;
+}
+
+.preview {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 17rem; /* La descrizione deve restare in vista senza scorrere troppo */
+    aspect-ratio: 16 / 9;
+
+    object-fit: cover;
+    object-position: top;
+    background: #bbdefb;
+    border: 1px solid #1565c0;
+}
+
+.description {
+    margin: 0;
+
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+    white-space: pre-line;
+}
+
+.facts {
+    display: flex;
+    flex-wrap: wrap;
+
+    margin: 0;
+    gap: var(--space-xs) var(--space-lg);
+}
+
+.fact {
+    display: flex;
+    flex-direction: column;
+}
+
+.fact dt {
+    font-size: var(--text-2xs);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+
+.fact dd {
+    margin: 0;
+
+    font-size: var(--text-sm);
+    font-weight: bold;
+}
+
+.links {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: var(--space-sm);
+}
+
+.link-btn {
+    display: inline-block;
+
+    font-size: var(--text-xs);
+    font-weight: bold;
+    color: inherit;
+    text-decoration: underline;
+}
+
+.link-btn:hover {
+    color: #1565c0;
+}
+
+@media (max-width: 767px) {
+    .sheet {
+        padding: var(--space-md) var(--space-md) 4rem; /* Spazio in fondo: il disegno della scimmia copre l'angolo in basso a sinistra */
+    }
+}
