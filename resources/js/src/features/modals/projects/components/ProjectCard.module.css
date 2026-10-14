@@ -45,7 +45,9 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
 
-    flex-grow: 1; /* Spinge il suggerimento verso il basso */
+    /* Niente flex-grow: un paragrafo con line-clamp più alto delle sue righe mostrerebbe mezza riga in più
+       sotto i puntini. Il suggerimento "Apri dettagli" va in fondo con il suo margin-top: auto. */
+    flex-shrink: 0;
 }
 
 /* Variante alternata per spezzare il ritmo visivo */
