@@ -263,6 +263,25 @@ else {
         $envOk = $false
     }
 
+    if (-not (Select-String -Path $prodEnvFile -Pattern '^APP_URL=https://' -Quiet)) {
+        Print-Result "FAIL" "APP_URL non inizia con https:// in .env.production"
+        $envOk = $false
+    }
+
+    # Le immagini caricate dal pannello devono andare su un disco persistente (il filesystem di Cloud si azzera a ogni deploy)
+    if (-not (Select-String -Path $prodEnvFile -Pattern '^UPLOADS_DISK=\S' -Quiet) -or (Select-String -Path $prodEnvFile -Pattern '^UPLOADS_DISK=(public|local)\s*$' -Quiet)) {
+        Print-Result "FAIL" "UPLOADS_DISK mancante o 'public'/'local' in .env.production: le immagini caricate andrebbero perse a ogni deploy"
+        $envOk = $false
+    }
+
+    # I segreti stanno solo su Laravel Cloud, mai in un file locale
+    foreach ($secret in @('GITHUB_TOKEN', 'AWS_SECRET_ACCESS_KEY', 'DB_PASSWORD')) {
+        if (Select-String -Path $prodEnvFile -Pattern "^$secret=\S" -Quiet) {
+            Print-Result "FAIL" "$secret con un valore in .env.production: i segreti vanno solo su Laravel Cloud"
+            $envOk = $false
+        }
+    }
+
     if ($envOk) {
         Print-Result "PASS" "Configurazione produzione corretta"
     }

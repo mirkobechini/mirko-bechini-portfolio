@@ -280,7 +280,7 @@ Il sito è su **Laravel Cloud** dietro **Cloudflare**; il deploy parte dal branc
 npm run predeploy
 ```
 
-Esegue test JS e PHP, `npm audit --omit=dev` e `composer audit` (provando a correggere con `npm audit fix` / `composer update`: se cambiano i lockfile, committali) e, se esiste un `.env.production` locale, blocca il deploy con `APP_DEBUG=true` o `APP_ENV` diverso da `production`.
+Esegue test JS e PHP, `npm audit --omit=dev` e `composer audit` (provando a correggere con `npm audit fix` / `composer update`: se cambiano i lockfile, committali) e, se esiste un `.env.production` locale (copialo da `.env.production.example`), blocca il deploy con `APP_DEBUG=true`, `APP_ENV` diverso da `production`, `APP_URL` senza `https://`, `UPLOADS_DISK` mancante o `public`/`local` (le immagini caricate andrebbero perse a ogni deploy), oppure un segreto (`GITHUB_TOKEN`, `AWS_SECRET_ACCESS_KEY`, `DB_PASSWORD`) scritto nel file.
 
 **Versione di PHP:** `composer.json` richiede `^8.4` (minimo supportato) e la produzione va impostata su **PHP 8.5** nelle impostazioni dell'ambiente di Laravel Cloud. La CI testa 8.4 e 8.5. Il test `ComposerLockPhpVersionTest` fallisce se un `composer update` porta nel lock pacchetti che richiedono un PHP più recente del minimo dichiarato (è già successo: Symfony 8 richiede PHP ≥ 8.4).
 
@@ -292,9 +292,15 @@ Esegue test JS e PHP, `npm audit --omit=dev` e `composer audit` (provando a corr
 | `APP_DEBUG`      | `false`                         |
 | `APP_URL`        | `https://mirkobechini.com`      |
 | `LOG_LEVEL`      | `warning`                       |
-| `SESSION_DRIVER` | `cookie` (il sito non ha login) |
-| `CACHE_STORE`    | `file`                          |
+| `SESSION_DRIVER` | `cookie` (il sito pubblico non ha login; niente database per le sessioni) |
+| `CACHE_STORE`    | `file` (il database del piano Dev si sospende) |
+| `QUEUE_CONNECTION` | `sync`                        |
+| `UPLOADS_DISK`   | `uploads` (il disco del bucket; Cloud ha un filesystem non persistente) |
+| `LIVEWIRE_TEMPORARY_FILE_UPLOAD_DISK` | `local`    |
+| `GITHUB_USERNAME` | `mirkobechini`                 |
+| `GITHUB_TOKEN`   | il token, **solo su Cloud** (sola lettura sui repo pubblici) |
 
+Le variabili del database (`DB_*`) e del bucket (`FILESYSTEM_DISK`, `LARAVEL_CLOUD_DISK_CONFIG`) le inserisce Cloud da solo quando colleghi le risorse. L'elenco completo, con i commenti, è in `.env.production.example`.
 **Dopo il deploy:** controlla gli header su [securityheaders.com](https://securityheaders.com), la console del browser (violazioni CSP), che `/pagina-inesistente` risponda 404, gli header di cache di `/build/*` e `sw.js`, e l'aggiornamento della PWA.
 
 ---
