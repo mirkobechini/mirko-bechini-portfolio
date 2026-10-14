@@ -244,6 +244,25 @@ else
         env_ok=false
     fi
 
+    if ! grep -qE '^APP_URL=https://' "$PROD_ENV_FILE"; then
+        print_result $FAIL "APP_URL non inizia con https:// in .env.production"
+        env_ok=false
+    fi
+
+    # Le immagini caricate dal pannello devono andare su un disco persistente (il filesystem di Cloud si azzera a ogni deploy)
+    if ! grep -qE '^UPLOADS_DISK=[^[:space:]]' "$PROD_ENV_FILE" || grep -qE '^UPLOADS_DISK=(public|local)[[:space:]]*$' "$PROD_ENV_FILE"; then
+        print_result $FAIL "UPLOADS_DISK mancante o 'public'/'local' in .env.production: le immagini caricate andrebbero perse a ogni deploy"
+        env_ok=false
+    fi
+
+    # I segreti stanno solo su Laravel Cloud, mai in un file locale
+    for secret in GITHUB_TOKEN AWS_SECRET_ACCESS_KEY DB_PASSWORD; do
+        if grep -qE "^${secret}=[^[:space:]]" "$PROD_ENV_FILE"; then
+            print_result $FAIL "$secret con un valore in .env.production: i segreti vanno solo su Laravel Cloud"
+            env_ok=false
+        fi
+    done
+
     if [ "$env_ok" = true ]; then
         print_result $PASS "Configurazione produzione corretta"
     else
