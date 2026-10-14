@@ -1,13 +1,18 @@
 import { useState, useEffect, useCallback } from "react";
 import useLocalStorage from "./useLocalStorage";
 
-// Quanto il sito tiene i dati nella memoria del browser prima di richiederli di nuovo. Breve di proposito:
-// le modifiche fatte dal pannello devono comparire in fretta (la API risponde con 304 se nulla è cambiato).
+// Per quanto tempo i dati nella memoria del browser contano come "freschi" (nessuna attesa, nessun avviso).
+// Anche con dati freschi il sito li ricontrolla comunque in background a ogni apertura: la API risponde 304
+// se nulla è cambiato, quindi una modifica dal pannello compare entro il minuto della cache di rete.
 export const API_CACHE_TTL_MS = 2 * 60 * 1000; // 2 minuti
 
 /**
- * Carica un elenco dalla API del sito con questa catena di fallback:
- * cache valida → API → cache scaduta → dati statici.
+ * Carica un elenco dalla API del sito. Mostra subito i dati già in memoria (anche scaduti) e a ogni
+ * apertura li ricontrolla in background; se la API non risponde la catena è:
+ * dati in memoria → dati statici di riserva.
+ *
+ * Con dati freschi in memoria un errore di rete è silenzioso (si tengono i dati che si vedono); senza dati
+ * freschi si segnala l'errore e si usano i dati scaduti o quelli di riserva.
  *
  * @param {Object} options
  * @param {string} options.cacheKey - chiave localStorage (incrementa la versione se cambia il formato)
@@ -26,7 +31,8 @@ export default function useApiList({ cacheKey, ttlMs = API_CACHE_TTL_MS, fetcher
     const [loading, setLoading] = useState(() => !get());
     const [error, setError] = useState(null);
 
-    const load = useCallback(async () => {
+    // silent: i dati mostrati sono freschi e questo è solo un ricontrollo, un fallimento non va segnalato
+    const load = useCallback(async ({ silent = false } = {}) => {
         try {
             const data = await fetcher();
             // Una lista vuota non è credibile: meglio i dati di riserva
@@ -37,6 +43,8 @@ export default function useApiList({ cacheKey, ttlMs = API_CACHE_TTL_MS, fetcher
             set(mapped);
         } catch (err) {
             console.error(`${cacheKey}:`, err);
+            if (silent) return;
+
             setError(errorMessage);
 
             const stale = getStale();
@@ -61,10 +69,9 @@ export default function useApiList({ cacheKey, ttlMs = API_CACHE_TTL_MS, fetcher
     }, [load]);
 
     useEffect(() => {
-        if (!get()) {
-            // eslint-disable-next-line react-hooks/set-state-in-effect
-            load();
-        }
+        // A ogni apertura si ricontrolla la API, anche se in memoria ci sono dati freschi
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        load({ silent: get() !== null });
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     return { items, loading, error, refetch };
