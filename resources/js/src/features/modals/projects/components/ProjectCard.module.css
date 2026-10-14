@@ -45,7 +45,7 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
 
-    flex-grow: 1; /* Spinge i link verso il basso */
+    flex-grow: 1; /* Spinge il suggerimento verso il basso */
 }
 
 /* Variante alternata per spezzare il ritmo visivo */
@@ -81,14 +81,6 @@
     line-height: 1.2;
 }
 
-.project-course {
-    margin: var(--space-xs) 0 0;
-
-    font-size: var(--text-2xs);
-    font-style: italic;
-    color: #444;
-}
-
 .tech-stack {
     margin-top: var(--space-xs);
     margin-bottom: var(--space-sm);
@@ -97,25 +89,27 @@
     color: #444;
 }
 
-.links-group {
-    display: flex;
-    flex-wrap: wrap;
-
-    margin-top: auto; /* Assicura che i bottoni siano a fondo card */
-    gap: var(--space-xs);
-    padding-top: var(--space-sm);
+/* La card è cliccabile: apre il dettaglio */
+.clickable {
+    cursor: var(--cursor-nes-pointer);
 }
 
-.view-btn {
-    display: inline-block;
+.clickable:focus-visible {
+    z-index: 10;
+    outline: 0.1875rem solid #0f59a8;
+    outline-offset: 0.25rem;
+}
+
+.details-hint {
+    margin-top: auto; /* In fondo alla card */
+    padding-top: var(--space-sm);
 
     font-size: var(--text-xs);
     font-weight: bold;
-    color: inherit;
     text-decoration: underline;
 }
 
-.view-btn:hover {
+.clickable:hover .details-hint {
     color: #1565c0;
 }
 

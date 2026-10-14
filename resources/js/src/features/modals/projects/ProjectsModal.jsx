@@ -1,9 +1,10 @@
 import styles from './ProjectsModal.module.css';
-import { memo, useMemo, useState } from 'react';
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import sharedStyles from '../shared/SharedModal.module.css';
 import FilterPanel from './components/FilterPanel';
 import FilterGroup from './components/FilterGroup';
 import ProjectsGrid from './components/ProjectsGrid';
+import ProjectDetailView from './components/ProjectDetailView';
 import ProjectsMessage from './components/ProjectsMessage';
 import useProjectFilters from './hooks/useProjectFilters';
 import useProjects from '../../../hooks/useProjects';
@@ -37,6 +38,46 @@ const ProjectsModal = memo(function ProjectsModal({ onBackToProjectsHome }) {
 
     const [isFiltersOpen, setIsFiltersOpen] = useState(false);
     const hasProjects = projects.length > 0;
+
+    // Il dettaglio prende il posto dell'elenco; si ritrova per id, così sparisce da solo se il progetto non c'è più
+    const [selectedId, setSelectedId] = useState(null);
+    const selectedProject = useMemo(
+        () => projects.find((project) => project.id === selectedId) ?? null,
+        [projects, selectedId]
+    );
+    const viewRef = useRef(null);
+    const savedScrollRef = useRef(0);
+    const lastOpenedIdRef = useRef(null); // la card da rimettere a fuoco al ritorno
+
+    const openProject = useCallback((project) => {
+        savedScrollRef.current = viewRef.current?.scrollTop ?? 0;
+        lastOpenedIdRef.current = project.id;
+        setSelectedId(project.id);
+    }, []);
+
+    const closeProject = useCallback(() => setSelectedId(null), []);
+
+    // Cambiando i filtri si torna all'elenco: il dettaglio non c'entra più con ciò che si sta cercando
+    const changeTypeFilter = useCallback((value) => { setSelectedId(null); setTypeFilter(value); }, [setTypeFilter]);
+    const changeScopeFilter = useCallback((value) => { setSelectedId(null); setScopeFilter(value); }, [setScopeFilter]);
+    const resetAllFilters = useCallback(() => { setSelectedId(null); resetFilters(); }, [resetFilters]);
+
+    // Aprendo si parte dall'inizio del foglio; tornando indietro si ritrova la card di prima
+    const hadDetail = useRef(false);
+    useEffect(() => {
+        const view = viewRef.current;
+        if (!view) return;
+
+        if (selectedProject) {
+            view.scrollTop = 0;
+            hadDetail.current = true;
+        } else if (hadDetail.current) {
+            hadDetail.current = false;
+            view.scrollTop = savedScrollRef.current;
+            const card = [...view.querySelectorAll('[data-project-id]')].find((el) => el.dataset.projectId === String(lastOpenedIdRef.current));
+            card?.focus({ preventScroll: true });
+        }
+    }, [selectedProject]);
 
     const typeFilterOptions = useMemo(() => {
         return typeOptions.map(option => {
@@ -87,7 +128,7 @@ const ProjectsModal = memo(function ProjectsModal({ onBackToProjectsHome }) {
             <FilterPanel
                 onBack={onBackToProjectsHome}
                 backLabel="Torna indietro"
-                onReset={resetFilters}
+                onReset={resetAllFilters}
                 resetLabel="Reset"
                 resetIcon={resetButtonIcon}
                 isOpen={isFiltersOpen}
@@ -101,17 +142,17 @@ const ProjectsModal = memo(function ProjectsModal({ onBackToProjectsHome }) {
                     name="projectTypeFilter"
                     options={typeFilterOptions}
                     selectedValue={selectedTypeFilter}
-                    onChange={setTypeFilter}
+                    onChange={changeTypeFilter}
                 />
                 <FilterGroup
                     name="projectScopeFilter"
                     options={scopeFilterOptions}
                     selectedValue={selectedScopeFilter}
-                    onChange={setScopeFilter}
+                    onChange={changeScopeFilter}
                 />
             </FilterPanel>
 
-            <div className={`${styles['projects-view']} ${sharedStyles['scroll-y-contain']}`}>
+            <div ref={viewRef} className={`${styles['projects-view']} ${sharedStyles['scroll-y-contain']}`}>
                 {loading && !hasProjects ? (
                     <ProjectsMessage>
                         <p>Caricamento progetti...</p>
@@ -128,7 +169,11 @@ const ProjectsModal = memo(function ProjectsModal({ onBackToProjectsHome }) {
                                 Impossibile aggiornare i progetti: i dati mostrati potrebbero non essere aggiornati.
                             </ProjectsMessage>
                         )}
-                        <ProjectsGrid projects={filteredProjects} />
+                        {selectedProject ? (
+                            <ProjectDetailView project={selectedProject} onBack={closeProject} />
+                        ) : (
+                            <ProjectsGrid projects={filteredProjects} onSelectProject={openProject} />
+                        )}
                     </>
                 )}
             </div>
