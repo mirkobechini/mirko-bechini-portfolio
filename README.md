@@ -198,10 +198,10 @@ Il middleware `App\Http\Middleware\SecurityHeaders` (registrato in `bootstrap/ap
 | `X-Frame-Options`                     | `SAMEORIGIN`                                                          |
 | `Referrer-Policy`                     | `strict-origin-when-cross-origin`                                     |
 | `Permissions-Policy`                  | `camera=(), microphone=(), geolocation=()`                            |
-| `Content-Security-Policy-Report-Only` | policy per Google Fonts, Iubenda e GitHub API (**solo segnalazione**) |
+| `Content-Security-Policy`             | policy per Google Fonts, Iubenda e immagini https (**blocca**; `SECURITY_CSP_MODE=report-only` per solo segnalare) |
 | `Strict-Transport-Security`           | disattivato di default (`SECURITY_HSTS=true` per attivarlo)           |
 
-- La **CSP è in sola osservazione**: il browser segnala le violazioni in console ma non blocca nulla. Dopo il deploy controlla la console (soprattutto script iniettati da Cloudflare) e, quando è pulita, passa a `Content-Security-Policy` nel middleware.
+- La **CSP è attiva** (blocca ciò che non ammette). Prima di attivarla l'ho verificata sul sito vero con un browser automatico (94 clic su desktop e mobile nelle 5 sezioni, più le pagine privacy e cookie di Iubenda): nessuna violazione. **Se dopo un deploy qualcosa smette di funzionare** (un'immagine, un font, uno script di terze parti), imposta `SECURITY_CSP_MODE=report-only` su Laravel Cloud: il browser torna a segnalare in console senza bloccare, senza toccare il codice. Quando aggiungi una terza parte (un nuovo CDN, un widget), ammettila in `SecurityHeaders::contentSecurityPolicy()`.
 - In **sviluppo** vedrai violazioni per gli script e il WebSocket di Vite (`localhost:5173`): sono normali.
 - **HSTS** è già gestito da Cloudflare: non attivarlo anche in Laravel per non duplicarlo.
 - `trustProxies('*')` è attivo perché l'app sta dietro Cloudflare e Laravel Cloud.
