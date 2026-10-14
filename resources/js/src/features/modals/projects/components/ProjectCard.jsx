@@ -1,10 +1,34 @@
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import styles from './ProjectCard.module.css';
-import { isValidLink } from '../../../../utils/links';
 
-const ProjectCard = memo(function ProjectCard({ project, isAlternate }) {
+/**
+ * Card di un progetto. Se riceve `onSelect` è cliccabile (e raggiungibile da tastiera) e apre il dettaglio:
+ * link, corso, descrizione intera e così via stanno lì, la card resta leggera.
+ */
+const ProjectCard = memo(function ProjectCard({ project, isAlternate, onSelect }) {
+    const open = useCallback(() => onSelect?.(project), [onSelect, project]);
+
+    const handleKeyDown = useCallback((event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            open();
+        }
+    }, [open]);
+
+    const interactive = typeof onSelect === 'function';
+
     return (
-        <div className={`${styles['project-blueprint']} ${isAlternate ? styles.alternate : ''}`}>
+        <div
+            className={`${styles['project-blueprint']} ${isAlternate ? styles.alternate : ''} ${interactive ? styles.clickable : ''}`}
+            data-project-id={project.id}
+            {...(interactive && {
+                role: 'button',
+                tabIndex: 0,
+                'aria-label': `Apri i dettagli di ${project.title}`,
+                onClick: open,
+                onKeyDown: handleKeyDown,
+            })}
+        >
             <div className={styles['blueprint-header']}></div>
             {project.hasCustomPreview && (
                 <img
@@ -18,21 +42,11 @@ const ProjectCard = memo(function ProjectCard({ project, isAlternate }) {
                 />
             )}
             <h4 className={styles['project-title']}>{project.title}</h4>
-            <p className={styles['project-description']} title={project.description}>{project.description}</p>
-            {project.course && (
-                <p className={styles['project-course']}>Corso: {project.course}</p>
-            )}
+            <p className={styles['project-description']}>{project.description}</p>
             <div className={styles['tech-stack']}>
                 {project.technologies.length > 0 ? `#${project.technologies.join(' #')}` : ''}
             </div>
-            <div className={styles['links-group']}>
-                {isValidLink(project.repo) && (
-                    <a href={project.repo} className={styles['view-btn']} target="_blank" rel="noopener noreferrer">Apri Documentazione</a>
-                )}
-                {isValidLink(project.live) && (
-                    <a href={project.live} className={styles['view-btn']} target="_blank" rel="noopener noreferrer">Vai al sito</a>
-                )}
-            </div>
+            {interactive && <span className={styles['details-hint']} aria-hidden="true">Apri dettagli ›</span>}
         </div>
     );
 });

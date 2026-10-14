@@ -108,6 +108,87 @@ describe('ProjectsModal', () => {
         expect(screen.queryByText('API Backend')).not.toBeInTheDocument();
     });
 
+    // 6b. Dettaglio del progetto
+    it('cliccando una card si apre il dettaglio al posto dell\'elenco, con descrizione intera, link e corso', async () => {
+        const user = userEvent.setup();
+        mockHook({
+            projects: [
+                makeProject({ id: 'a', title: 'Alfa', description: 'Descrizione intera di Alfa', course: 'Master Laravel', repo: 'https://github.com/x/alfa', live: 'https://alfa.example.com', stars: 5, updatedAt: '2026-10-01T10:00:00+00:00' }),
+                makeProject({ id: 'b', title: 'Beta' }),
+            ],
+        });
+
+        render(<ProjectsModal onBackToProjectsHome={vi.fn()} />);
+        await user.click(screen.getByRole('button', { name: 'Apri i dettagli di Alfa' }));
+
+        expect(screen.getByRole('article')).toBeInTheDocument();
+        expect(screen.getByText('Descrizione intera di Alfa')).toBeInTheDocument();
+        expect(screen.getByText('Master Laravel')).toBeInTheDocument();
+        expect(screen.getByText('Apri Documentazione')).toHaveAttribute('href', 'https://github.com/x/alfa');
+        expect(screen.getByText('Vai al sito')).toHaveAttribute('href', 'https://alfa.example.com');
+        // L'elenco non c'è più: nemmeno l'altra card
+        expect(screen.queryByText('Beta')).not.toBeInTheDocument();
+    });
+
+    it('"Torna ai progetti" riporta all\'elenco', async () => {
+        const user = userEvent.setup();
+        mockHook({ projects: [makeProject({ id: 'a', title: 'Alfa' }), makeProject({ id: 'b', title: 'Beta' })] });
+
+        render(<ProjectsModal onBackToProjectsHome={vi.fn()} />);
+        await user.click(screen.getByRole('button', { name: 'Apri i dettagli di Alfa' }));
+        await user.click(screen.getByRole('button', { name: /Torna ai progetti/ }));
+
+        expect(screen.queryByRole('article')).not.toBeInTheDocument();
+        expect(screen.getByText('Alfa')).toBeInTheDocument();
+        expect(screen.getByText('Beta')).toBeInTheDocument();
+    });
+
+    it('al ritorno il focus torna sulla card che era stata aperta', async () => {
+        const user = userEvent.setup();
+        mockHook({ projects: [makeProject({ id: 'a', title: 'Alfa' }), makeProject({ id: 'b', title: 'Beta' })] });
+
+        render(<ProjectsModal onBackToProjectsHome={vi.fn()} />);
+        await user.click(screen.getByRole('button', { name: 'Apri i dettagli di Beta' }));
+        await user.click(screen.getByRole('button', { name: /Torna ai progetti/ }));
+
+        expect(screen.getByRole('button', { name: 'Apri i dettagli di Beta' })).toHaveFocus();
+    });
+
+    it('cambiare un filtro con il dettaglio aperto riporta all\'elenco', async () => {
+        const user = userEvent.setup();
+        mockHook({
+            projects: [
+                makeProject({ id: 'f', title: 'Sito Frontend', type: 'frontend' }),
+                makeProject({ id: 'b', title: 'API Backend', type: 'backend' }),
+            ],
+        });
+
+        render(<ProjectsModal onBackToProjectsHome={vi.fn()} />);
+        await user.click(screen.getByRole('button', { name: 'Apri i dettagli di API Backend' }));
+        expect(screen.getByRole('article')).toBeInTheDocument();
+
+        await user.click(screen.getByText('Frontend'));
+
+        expect(screen.queryByRole('article')).not.toBeInTheDocument();
+        expect(screen.getByText('Sito Frontend')).toBeInTheDocument();
+    });
+
+    it('se il progetto aperto sparisce dai dati (aggiornamento) si torna all\'elenco', async () => {
+        const user = userEvent.setup();
+        const projects = [makeProject({ id: 'a', title: 'Alfa' }), makeProject({ id: 'b', title: 'Beta' })];
+        mockHook({ projects });
+
+        const { rerender } = render(<ProjectsModal onBackToProjectsHome={vi.fn()} />);
+        await user.click(screen.getByRole('button', { name: 'Apri i dettagli di Alfa' }));
+        expect(screen.getByRole('article')).toBeInTheDocument();
+
+        mockHook({ projects: [projects[1]] });
+        rerender(<ProjectsModal onBackToProjectsHome={vi.fn()} />);
+
+        expect(screen.queryByRole('article')).not.toBeInTheDocument();
+        expect(screen.getByText('Beta')).toBeInTheDocument();
+    });
+
     // 7. Pulsante indietro
     it('il pulsante "Torna indietro" chiama onBackToProjectsHome', async () => {
         const user = userEvent.setup();
