@@ -149,7 +149,8 @@ npm run build
 | `php artisan test`                    | Test PHPUnit                                                                 |
 | `./vendor/bin/pint`                   | Formatta il codice PHP secondo lo stile Laravel                              |
 | `node scripts/resize-sprites.mjs`     | Ridimensiona gli sprite nella dimensione desiderata                          |
-| `node scripts/generate-pwa-icons.mjs` | Genera le icone PWA                                                          |
+| `node scripts/generate-logo-icons.mjs` | Genera favicon, icone PWA (anche maskable) e icona iOS dal logo `public/favicon.svg` |
+| `node scripts/generate-pwa-icons.mjs` | Genera segnaposto dei progetti e screenshot della PWA (non più le icone)     |
 
 ---
 
@@ -347,7 +348,8 @@ mirko-bechini-portfolio/
 ├── scripts/
 │   ├── predeploy.ps1 / .sh     # Controlli prima del deploy
 │   ├── resize-sprites.mjs      # Ridimensionamento sprite
-│   └── generate-pwa-icons.mjs  # Icone PWA
+│   ├── generate-logo-icons.mjs # Favicon e icone PWA/iOS dal logo
+│   └── generate-pwa-icons.mjs  # Segnaposto e screenshot PWA
 ├── tests/Feature/              # Test PHPUnit (rotte, header di sicurezza)
 ├── .github/workflows/
 │   └── code-test.yml           # CI: ESLint → Vitest → build → lychee → PHP test → Lighthouse

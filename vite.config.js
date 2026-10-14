@@ -13,7 +13,7 @@ export default defineConfig({
         }),
         VitePWA({
             registerType: 'autoUpdate',
-            includeAssets: ['favicon.ico'],
+            includeAssets: ['favicon.ico', 'favicon.svg', 'icons/apple-touch-icon.png'],
             manifest: {
                 name: 'Mirko Bechini - Portfolio',
                 short_name: 'Mirko Portfolio',
@@ -67,7 +67,7 @@ export default defineConfig({
                         type: 'image/png',
                     },
                     {
-                        src: '/icons/pwa-512x512.png',
+                        src: '/icons/pwa-maskable-512x512.png',
                         sizes: '512x512',
                         type: 'image/png',
                         purpose: 'maskable',
