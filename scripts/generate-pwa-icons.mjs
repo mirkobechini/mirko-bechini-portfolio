@@ -5,13 +5,9 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const assetsDir = path.resolve(__dirname, '../public/assets');
-const outputDir = path.resolve(__dirname, '../public/icons');
 const screenshotsDir = path.resolve(__dirname, '../public/screenshots');
 const placeholderDir = path.resolve(__dirname, '../public/assets/modals/placeholder');
 
-if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir, { recursive: true });
-}
 if (!fs.existsSync(screenshotsDir)) {
     fs.mkdirSync(screenshotsDir, { recursive: true });
 }
@@ -21,25 +17,8 @@ if (!fs.existsSync(placeholderDir)) {
 
 const src = path.join(assetsDir, 'sprites/monkey.webp');
 
-// ─── PWA Icons ───
-const sizes = [48, 72, 96, 128, 144, 152, 192, 512];
-const outputSizes = [];
-
-for (const size of sizes) {
-    const outPath = path.join(outputDir, `pwa-${size}x${size}.png`);
-    try {
-        await sharp(src)
-            .resize(size, size, { fit: 'contain', background: { r: 26, g: 26, b: 26, alpha: 1 } })
-            .png()
-            .toFile(outPath);
-        const stat = fs.statSync(outPath);
-        console.log(`Created: pwa-${size}x${size}.png (${stat.size} bytes)`);
-        outputSizes.push(size);
-    } catch (e) {
-        console.log(`Error generating ${size}x${size}: ${e.message}`);
-    }
-}
-
+// Le icone PWA, l'icona iOS e la favicon NON si generano più qui: partono dal logo (public/favicon.svg),
+// vedi scripts/generate-logo-icons.mjs.
 // ─── Placeholder Image for Projects ───
 const placeholderPath = path.join(placeholderDir, 'project-placeholder.webp');
 try {
@@ -114,6 +93,5 @@ try {
 }
 
 console.log('\n✅ All done!');
-console.log(`Icons: ${outputSizes.length} sizes generated`);
 console.log(`Placeholder: ${fs.existsSync(placeholderPath) ? 'OK' : 'FAILED'}`);
 console.log(`Screenshots: ${fs.existsSync(desktopScreenshotPath) && fs.existsSync(mobileScreenshotPath) ? 'OK' : 'FAILED'}`);
