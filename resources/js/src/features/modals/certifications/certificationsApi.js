@@ -25,4 +25,11 @@ export function mapApiCertification(certification) {
     };
 }
 
-export const mapApiCertifications = (certifications) => certifications.map(mapApiCertification);
+/**
+ * La galleria mostra solo gli attestati che hanno un'immagine: senza, resterebbe una tessera vuota.
+ * @param {Array} certifications - attestati dell'API
+ * @returns {Array}
+ */
+export const mapApiCertifications = (certifications) => certifications
+    .map(mapApiCertification)
+    .filter((certification) => certification.preview !== "");

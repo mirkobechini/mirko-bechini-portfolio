@@ -52,6 +52,17 @@ describe('mapApiCertification', () => {
         expect(result).toMatchObject({ courseId: 2, title: 'Attestato', previewWidth: 1320 });
     });
 
+    it('mapApiCertifications scarta gli attestati senza immagine', () => {
+        const result = mapApiCertifications([
+            apiCertification({ id: 1, preview: null }),
+            apiCertification({ id: 2, preview: '' }),
+            apiCertification({ id: 3 }),
+            apiCertification({ id: 4, preview: undefined }),
+        ]);
+
+        expect(result.map((c) => c.id)).toEqual([3]);
+    });
+
     it("mapApiCertifications conserva l'ordine", () => {
         const result = mapApiCertifications([apiCertification({ id: 2 }), apiCertification({ id: 1 })]);
 
