@@ -23,6 +23,13 @@ return [
         'api_url' => 'https://api.github.com',
     ],
 
+    // Conversione dei PDF degli attestati in immagine (pannello > Certificazioni): usa il backend di PdfEditor.
+    // Il PDF resta lì solo il tempo della conversione e viene cancellato subito. Vedi App\Support\PdfPreview.
+    'pdfeditor' => [
+        'url' => env('PDFEDITOR_API_URL', 'https://pdfeditor-api.mirkobechini.com'),
+        'timeout' => 45,
+    ],
+
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
     ],
