@@ -24,7 +24,10 @@ class PublicCertifications
     public static function payload(): array
     {
         return Cache::remember(self::CACHE_KEY, self::TTL_SECONDS, function (): array {
-            $certifications = Certification::query()->visible()->inDisplayOrder()->get();
+            // Senza immagine (né caricata né scritta a mano) una certificazione sulla galleria sarebbe una tessera vuota
+            $certifications = Certification::query()->visible()->inDisplayOrder()->get()
+                ->filter(fn (Certification $certification): bool => filled($certification->previewUrl()))
+                ->values();
 
             return ['data' => [
                 ...PublicCertificationResource::collection($certifications)->resolve(),

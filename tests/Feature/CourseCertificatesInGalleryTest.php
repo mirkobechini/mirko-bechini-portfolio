@@ -130,6 +130,27 @@ class CourseCertificatesInGalleryTest extends TestCase
         $this->assertEqualsCanonicalizing(array_keys($items[0]), array_keys($items[1]));
     }
 
+    public function test_certifications_without_an_image_are_not_sent(): void
+    {
+        Certification::factory()->create(['title' => 'Senza immagine', 'preview' => null, 'preview_upload' => null]);
+        Certification::factory()->create(['title' => 'Immagine vuota', 'preview' => '', 'preview_upload' => null]);
+        Certification::factory()->create(['title' => 'Con indirizzo', 'preview' => '/modals/certifications/x.webp', 'preview_upload' => null]);
+        Storage::disk('public')->put('certifications/previews/c.png', $this->png(10, 10));
+        Certification::factory()->create(['title' => 'Con file', 'preview' => null, 'preview_upload' => 'certifications/previews/c.png']);
+
+        $titles = array_column($this->gallery(), 'title');
+
+        $this->assertEqualsCanonicalizing(['Con indirizzo', 'Con file'], $titles);
+    }
+
+    public function test_the_typescript_course_of_the_seed_data_has_no_certificate_and_does_not_borrow_reacts(): void
+    {
+        $this->seed(CourseSeeder::class);
+
+        $this->assertNull(Course::where('course', 'LEARN TYPESCRIPT')->firstOrFail()->certificate);
+        $this->assertFileDoesNotExist(public_path('assets/modals/certifications/certificato-typescript-scrimba.webp'));
+    }
+
     // ---------- niente doppioni ----------
 
     public function test_a_course_already_covered_by_a_certification_is_not_repeated(): void
