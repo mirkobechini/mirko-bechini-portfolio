@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Certifications\Pages;
 
 use App\Filament\Concerns\ImportsPdfPreview;
 use App\Filament\Resources\Certifications\CertificationResource;
+use App\Models\Certification;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 
@@ -35,7 +36,8 @@ class EditCertification extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            DeleteAction::make(),
+            DeleteAction::make()
+                ->hidden(fn (Certification $record): bool => $record->from_course),
         ];
     }
 }
