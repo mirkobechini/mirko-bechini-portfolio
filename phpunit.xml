@@ -18,6 +18,8 @@
         </include>
     </source>
     <php>
+        <!-- La suite è cresciuta (Filament, Livewire, immagini): con i 128 MB predefiniti di PHP finiva la memoria -->
+        <ini name="memory_limit" value="512M"/>
         <env name="APP_ENV" value="testing"/>
         <env name="APP_MAINTENANCE_DRIVER" value="file"/>
         <env name="BCRYPT_ROUNDS" value="4"/>

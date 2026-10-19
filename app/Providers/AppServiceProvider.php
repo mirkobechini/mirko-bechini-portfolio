@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Support\PdfPreview\PdfEditorConverter;
+use App\Support\PdfPreview\PdfPreviewConverter;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +13,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // Chi converte i PDF in immagine: oggi PdfEditor; per cambiare strumento basta un'altra implementazione
+        $this->app->bind(PdfPreviewConverter::class, PdfEditorConverter::class);
     }
 
     /**

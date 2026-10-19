@@ -58,10 +58,18 @@ class CertificationForm
                             ->visibility('public')
                             ->live()
                             ->columnSpanFull(),
+                        FileUpload::make('pdf_import')
+                            ->label('Oppure carica un PDF')
+                            ->helperText('Si usa la prima pagina come immagine (ci vuole qualche secondo). Il PDF non viene conservato né pubblicato: sul sito resta solo l\'immagine, e nessuno può scaricare l\'originale. Se carichi anche un\'immagine qui sopra, vale quella del PDF.')
+                            ->acceptedFileTypes(['application/pdf'])
+                            ->maxSize(10240)
+                            ->storeFiles(false)
+                            ->live()
+                            ->columnSpanFull(),
                         TextInput::make('preview')
                             ->label('Indirizzo dell\'immagine')
-                            ->helperText('URL oppure percorso in public/assets (/modals/certifications/x.webp). Obbligatorio solo se non carichi un file.')
-                            ->required(fn (Get $get): bool => blank($get('preview_upload')))
+                            ->helperText('URL oppure percorso in public/assets (/modals/certifications/x.webp). Obbligatorio solo se non carichi un\'immagine o un PDF.')
+                            ->required(fn (Get $get): bool => blank($get('preview_upload')) && blank($get('pdf_import')))
                             ->maxLength(255)
                             ->columnSpanFull(),
                         TextInput::make('preview_width')
