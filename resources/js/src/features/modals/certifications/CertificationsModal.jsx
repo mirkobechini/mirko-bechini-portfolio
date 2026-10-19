@@ -1,11 +1,20 @@
 import styles from './CertificationsModal.module.css';
 import useCertifications from '../../../hooks/useCertifications';
-import { memo } from 'react';
+import { memo, useCallback, useMemo, useState } from 'react';
 import { isValidLink } from '../../../utils/links';
 
 const CertificationsModal = memo(function CertificationsModal({ openModal }) {
 
     const { certifications } = useCertifications();
+
+    // Un'immagine che non si carica (file sparito, indirizzo sbagliato) toglie la sua tessera: una tessera
+    // vuota con il titolo e nessun attestato da vedere sarebbe peggio di niente.
+    const [brokenIds, setBrokenIds] = useState(() => new Set());
+    const markBroken = useCallback((id) => setBrokenIds((current) => new Set(current).add(id)), []);
+    const visible = useMemo(
+        () => certifications.filter((cert) => cert.preview && !brokenIds.has(cert.id)),
+        [certifications, brokenIds]
+    );
 
     // Si apre il corso collegato all'attestato (courseId), non l'attestato stesso
     function handleCertClick(courseId) {
@@ -17,11 +26,11 @@ const CertificationsModal = memo(function CertificationsModal({ openModal }) {
         <div className={styles['gallery-container']}>
 
             {
-                certifications.map(cert => (
+                visible.map(cert => (
 
                     <div className={styles['certificate-item']} key={cert.id}>
                         <div className={styles.frame} onClick={() => handleCertClick(cert.courseId)} role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleCertClick(cert.courseId); }}>
-                            <img src={cert.preview} alt={cert.title} loading="lazy" decoding="async" width={cert.previewWidth ?? 1320} height={cert.previewHeight ?? 840} />
+                            <img src={cert.preview} alt={cert.title} loading="lazy" decoding="async" onError={() => markBroken(cert.id)} width={cert.previewWidth ?? 1320} height={cert.previewHeight ?? 840} />
                         </div>
                         <p>
                             {cert.title} @ {isValidLink(cert.organizationUrl)

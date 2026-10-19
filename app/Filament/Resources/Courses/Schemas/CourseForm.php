@@ -59,7 +59,7 @@ class CourseForm
                             ->helperText('I corsi "In corso" e "In sospeso" compaiono da soli in "Focus attuale"; quando lo segni "Completato" esce da solo.'),
                         FileUpload::make('certificate_upload')
                             ->label('Attestato (carica un file)')
-                            ->helperText('PNG, WebP o JPG, al massimo 2 MB. Ha la precedenza sull\'indirizzo qui sotto.')
+                            ->helperText('PNG, WebP o JPG, al massimo 2 MB. Ha la precedenza sull\'indirizzo qui sotto. Quando il corso è "Completato", l\'attestato compare anche nella galleria Certificazioni (se non hai già una certificazione collegata a questo corso).')
                             ->image()
                             ->acceptedFileTypes(Uploads::IMAGE_TYPES)
                             ->maxSize(2048)

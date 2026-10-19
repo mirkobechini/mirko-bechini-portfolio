@@ -74,7 +74,7 @@ const educationData = [
         id: 3,
         course: 'LEARN TYPESCRIPT',
         description: 'Corso completo di TypeScript con focus su tipizzazione statica e integrazione con progetti React.',
-        certificate: getAssetPath('/modals/certifications/certificato-typescript-scrimba.webp'),
+        certificate: '',
         organization: 'Scrimba',
         organizationUrl: 'https://scrimba.com/learn-typescript',
         period: '03/2026 - current',
