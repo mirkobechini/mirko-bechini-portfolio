@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Certifications\Schemas;
 
+use App\Models\Certification;
 use App\Models\Skill;
 use App\Support\Uploads;
 use Filament\Forms\Components\FileUpload;
@@ -19,6 +20,9 @@ class CertificationForm
         return $schema
             ->components([
                 Section::make('Certificazione')
+                    ->description(fn (?Certification $record): ?string => $record?->from_course
+                        ? 'Questa voce viene dal corso "'.$record->course?->course.'": l\'immagine, l\'ente e le skill si modificano nel corso e si aggiornano da sole. Qui puoi cambiare il titolo e nasconderla.'
+                        : null)
                     ->columns(2)
                     ->schema([
                         TextInput::make('title')
@@ -29,11 +33,13 @@ class CertificationForm
                         TextInput::make('organization')
                             ->label('Ente')
                             ->required()
-                            ->maxLength(255),
+                            ->maxLength(255)
+                            ->disabled(fn (?Certification $record): bool => (bool) $record?->from_course),
                         TextInput::make('organization_url')
                             ->label('Sito dell\'ente')
                             ->url()
-                            ->maxLength(255),
+                            ->maxLength(255)
+                            ->disabled(fn (?Certification $record): bool => (bool) $record?->from_course),
                         Select::make('course_id')
                             ->label('Corso')
                             ->relationship('course', 'course')
@@ -57,6 +63,7 @@ class CertificationForm
                             ->directory('certifications/previews')
                             ->visibility('public')
                             ->live()
+                            ->disabled(fn (?Certification $record): bool => (bool) $record?->from_course)
                             ->columnSpanFull(),
                         FileUpload::make('pdf_import')
                             ->label('Oppure carica un PDF')
@@ -65,26 +72,31 @@ class CertificationForm
                             ->maxSize(10240)
                             ->storeFiles(false)
                             ->live()
+                            ->disabled(fn (?Certification $record): bool => (bool) $record?->from_course)
                             ->columnSpanFull(),
                         TextInput::make('preview')
                             ->label('Indirizzo dell\'immagine')
                             ->helperText('URL oppure percorso in public/assets (/modals/certifications/x.webp). Obbligatorio solo se non carichi un\'immagine o un PDF.')
-                            ->required(fn (Get $get): bool => blank($get('preview_upload')) && blank($get('pdf_import')))
+                            ->required(fn (Get $get, ?Certification $record): bool => ! $record?->from_course && blank($get('preview_upload')) && blank($get('pdf_import')))
                             ->maxLength(255)
+                            ->disabled(fn (?Certification $record): bool => (bool) $record?->from_course)
                             ->columnSpanFull(),
                         TextInput::make('preview_width')
                             ->label('Larghezza (px)')
                             ->numeric()
-                            ->minValue(1),
+                            ->minValue(1)
+                            ->disabled(fn (?Certification $record): bool => (bool) $record?->from_course),
                         TextInput::make('preview_height')
                             ->label('Altezza (px)')
                             ->numeric()
-                            ->minValue(1),
+                            ->minValue(1)
+                            ->disabled(fn (?Certification $record): bool => (bool) $record?->from_course),
                         Select::make('skills')
                             ->label('Skill')
                             ->multiple()
                             ->options(fn (): array => Skill::query()->orderBy('name')->pluck('name', 'name')->all())
                             ->searchable()
+                            ->disabled(fn (?Certification $record): bool => (bool) $record?->from_course)
                             ->columnSpanFull(),
                         Toggle::make('hidden')
                             ->label('Nascosta')

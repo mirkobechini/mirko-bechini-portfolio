@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Concerns\CleansUpUploads;
+use App\Support\CourseCertificateSync;
 use App\Support\PublicCache;
 use App\Support\Uploads;
 use Database\Factories\CertificationFactory;
@@ -33,6 +34,7 @@ class Certification extends Model
         'organization_url',
         'skills',
         'course_id',
+        'from_course',
         'position',
         'hidden',
     ];
@@ -44,6 +46,7 @@ class Certification extends Model
             'preview_width' => 'integer',
             'preview_height' => 'integer',
             'position' => 'integer',
+            'from_course' => 'boolean',
             'hidden' => 'boolean',
         ];
     }
@@ -61,8 +64,27 @@ class Certification extends Model
             }
         });
 
-        static::saved(fn () => PublicCache::forgetAll());
-        static::deleted(fn () => PublicCache::forgetAll());
+        // Una certificazione scritta a mano per un corso prende il posto di quella automatica (e, se la si
+        // elimina o la si collega a un altro corso, quella automatica può tornare)
+        static::saved(function (Certification $certification) {
+            if (! $certification->from_course) {
+                CourseCertificateSync::forCourseId($certification->course_id);
+
+                if ($certification->wasChanged('course_id')) {
+                    CourseCertificateSync::forCourseId($certification->getOriginal('course_id'));
+                }
+            }
+
+            PublicCache::forgetAll();
+        });
+
+        static::deleted(function (Certification $certification) {
+            if (! $certification->from_course) {
+                CourseCertificateSync::forCourseId($certification->course_id);
+            }
+
+            PublicCache::forgetAll();
+        });
     }
 
     /**
