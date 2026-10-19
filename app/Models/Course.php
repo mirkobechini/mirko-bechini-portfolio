@@ -29,6 +29,8 @@ class Course extends Model
         'description',
         'certificate',
         'certificate_upload',
+        'certificate_width',
+        'certificate_height',
         'organization',
         'organization_url',
         'period',
@@ -49,6 +51,8 @@ class Course extends Model
             'modules' => 'array',
             'status' => CourseStatus::class,
             'started_at' => 'date',
+            'certificate_width' => 'integer',
+            'certificate_height' => 'integer',
             'position' => 'integer',
             'hidden' => 'boolean',
         ];
@@ -59,6 +63,15 @@ class Course extends Model
         // L'inizio si legge sempre dal testo del periodo: per ordinare i corsi basta scrivere bene il periodo.
         static::saving(function (Course $course) {
             $course->started_at = self::startOfPeriod($course->period);
+        });
+
+        // Con un attestato caricato, larghezza e altezza si leggono dal file (la galleria riserva lo spazio).
+        static::saving(function (Course $course) {
+            if ($course->isDirty('certificate_upload')) {
+                $size = Uploads::imageSize($course->certificate_upload);
+
+                [$course->certificate_width, $course->certificate_height] = $size ?? [null, null];
+            }
         });
 
         static::saved(fn () => PublicCache::forgetAll());
