@@ -18,6 +18,7 @@ use Illuminate\Http\Client\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Features\SupportFileUploads\FileUploadConfiguration;
 use Livewire\Livewire;
@@ -322,6 +323,105 @@ class PdfPreviewTest extends TestCase
         }
 
         Http::assertSent(fn (Request $request): bool => str_starts_with($request->url(), 'https://altro.example.com/auth/guest'));
+    }
+
+    // ---------- diagnosi quando dal server la conversione non riesce ----------
+
+    public function test_a_rate_limited_guest_login_says_so_in_plain_words(): void
+    {
+        Http::fake([self::API.'/auth/guest' => Http::response('Too Many Requests', 429)]);
+
+        try {
+            (new PdfEditorConverter)->convert($this->pdf());
+            $this->fail('Doveva fallire');
+        } catch (PdfConversionFailed $e) {
+            $this->assertSame("Il servizio di conversione non ha concesso l'accesso (troppe richieste, riprova tra qualche minuto).", $e->getMessage());
+        }
+    }
+
+    public function test_a_blocked_request_names_the_403(): void
+    {
+        Http::fake([self::API.'/auth/guest' => Http::response('<html><title>Attention Required</title></html>', 403, ['cf-mitigated' => 'challenge'])]);
+
+        try {
+            (new PdfEditorConverter)->convert($this->pdf());
+            $this->fail('Doveva fallire');
+        } catch (PdfConversionFailed $e) {
+            $this->assertSame("Il servizio di conversione non ha concesso l'accesso (richiesta bloccata, codice 403).", $e->getMessage());
+        }
+    }
+
+    public function test_an_upload_failure_shows_the_status_code(): void
+    {
+        Http::fake([
+            self::API.'/auth/guest' => Http::response(['access_token' => $this->jwt(3600)], 201),
+            self::API.'/pdfs/upload' => Http::response('', 503),
+        ]);
+
+        try {
+            (new PdfEditorConverter)->convert($this->pdf());
+            $this->fail('Doveva fallire');
+        } catch (PdfConversionFailed $e) {
+            $this->assertSame('Il servizio di conversione non ha accettato il PDF (codice 503).', $e->getMessage());
+        }
+    }
+
+    public function test_an_export_failure_shows_the_status_code(): void
+    {
+        Http::fake([
+            self::API.'/auth/guest' => Http::response(['access_token' => $this->jwt(3600)], 201),
+            self::API.'/pdfs/upload' => Http::response(['id' => 'abc-123'], 201),
+            self::API.'/pdfs/abc-123/export*' => Http::response('', 500),
+            self::API.'/pdfs/abc-123' => Http::response('', 204),
+        ]);
+
+        try {
+            (new PdfEditorConverter)->convert($this->pdf());
+            $this->fail('Doveva fallire');
+        } catch (PdfConversionFailed $e) {
+            $this->assertSame("Il servizio di conversione non ha restituito un'immagine (codice 500).", $e->getMessage());
+        }
+    }
+
+    public function test_answers_that_succeed_but_make_no_sense_say_the_answer_is_invalid(): void
+    {
+        Http::fake([self::API.'/auth/guest' => Http::response(['senza' => 'token'], 201)]);
+
+        try {
+            (new PdfEditorConverter)->convert($this->pdf());
+            $this->fail('Doveva fallire');
+        } catch (PdfConversionFailed $e) {
+            $this->assertSame("Il servizio di conversione non ha concesso l'accesso (risposta non valida).", $e->getMessage());
+        }
+    }
+
+    public function test_the_failure_detail_goes_to_the_log_without_leaking_secrets(): void
+    {
+        Log::spy();
+        Http::fake([self::API.'/auth/guest' => Http::response('<html>Blocked by '.str_repeat('x', 500).'</html>', 403, ['cf-mitigated' => 'challenge'])]);
+
+        try {
+            (new PdfEditorConverter)->convert($this->pdf());
+        } catch (PdfConversionFailed) {
+        }
+
+        Log::shouldHaveReceived('warning')->once()->withArgs(function (string $message, array $context): bool {
+            return str_contains($message, 'accesso ospite')
+                && $context['status'] === 403
+                && $context['cf_mitigated'] === 'challenge'
+                && mb_strlen($context['body']) <= 200            // il corpo si accorcia
+                && ! str_contains($context['body'], '<html>');     // e si ripulisce dai tag
+        });
+    }
+
+    public function test_a_successful_conversion_writes_nothing_to_the_log(): void
+    {
+        Log::spy();
+        $this->fakeApi();
+
+        (new PdfEditorConverter)->convert($this->pdf());
+
+        Log::shouldNotHaveReceived('warning');
     }
 
     // ---------- immagine pubblicata ----------
