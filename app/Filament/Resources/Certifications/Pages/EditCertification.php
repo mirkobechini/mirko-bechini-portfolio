@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources\Certifications\Pages;
 
+use App\Filament\Concerns\ImportsPdfPreview;
 use App\Filament\Resources\Certifications\CertificationResource;
-use App\Filament\Resources\Certifications\Pages\Concerns\ImportsPdfPreview;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 
@@ -20,6 +20,16 @@ class EditCertification extends EditRecord
     protected function mutateFormDataBeforeSave(array $data): array
     {
         return $this->convertPdfImport($data);
+    }
+
+    protected function pdfImportColumn(): string
+    {
+        return 'preview_upload';
+    }
+
+    protected function pdfImportDirectory(): string
+    {
+        return 'certifications/previews';
     }
 
     protected function getHeaderActions(): array

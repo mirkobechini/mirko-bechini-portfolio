@@ -7,6 +7,7 @@ use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Throwable;
 
 /**
@@ -52,10 +53,14 @@ class PdfEditorConverter implements PdfPreviewConverter
 
         $this->failIfUnauthorized($upload);
 
-        $id = $upload->successful() ? $upload->json('id') : null;
+        if (! $upload->successful()) {
+            throw $this->failure($upload, 'Il servizio di conversione non ha accettato il PDF', 'caricamento');
+        }
+
+        $id = $upload->json('id');
 
         if (! is_string($id) || $id === '') {
-            throw new PdfConversionFailed('Il servizio di conversione non ha accettato il PDF.');
+            throw new PdfConversionFailed('Il servizio di conversione non ha accettato il PDF (risposta non valida).');
         }
 
         try {
@@ -63,8 +68,12 @@ class PdfEditorConverter implements PdfPreviewConverter
 
             $this->failIfUnauthorized($export);
 
-            if (! $export->successful() || ! str_starts_with($export->body(), self::PNG_SIGNATURE)) {
-                throw new PdfConversionFailed('Il servizio di conversione non ha restituito un\'immagine.');
+            if (! $export->successful()) {
+                throw $this->failure($export, "Il servizio di conversione non ha restituito un'immagine", 'esportazione');
+            }
+
+            if (! str_starts_with($export->body(), self::PNG_SIGNATURE)) {
+                throw new PdfConversionFailed("Il servizio di conversione non ha restituito un'immagine (risposta non valida).");
             }
 
             return $export->body();
@@ -82,6 +91,28 @@ class PdfEditorConverter implements PdfPreviewConverter
             ->timeout((int) config('services.pdfeditor.timeout', 45));
 
         return $token === null ? $request : $request->withToken($token);
+    }
+
+    /**
+     * Errore con il motivo in chiaro (codice di risposta) e il dettaglio nel log: serve a capire cosa non va
+     * quando la conversione funziona dal computer di sviluppo ma non dal server di produzione
+     * (limite di richieste, protezione di Cloudflare, servizio in difficoltà).
+     */
+    private function failure(Response $response, string $what, string $step): PdfConversionFailed
+    {
+        Log::warning("PdfEditor: {$step} non riuscito", [
+            'status' => $response->status(),
+            'body' => mb_substr(trim(strip_tags($response->body())), 0, 200),
+            'cf_mitigated' => $response->header('cf-mitigated'),
+        ]);
+
+        $reason = match ($response->status()) {
+            429 => 'troppe richieste, riprova tra qualche minuto',
+            403 => 'richiesta bloccata, codice 403',
+            default => 'codice '.$response->status(),
+        };
+
+        return new PdfConversionFailed("{$what} ({$reason}).");
     }
 
     private function failIfUnauthorized(Response $response): void
@@ -103,10 +134,15 @@ class PdfEditorConverter implements PdfPreviewConverter
         }
 
         $response = $this->http()->withBody('{}', 'application/json')->post('/auth/guest');
-        $token = $response->successful() ? $response->json('access_token') : null;
+
+        if (! $response->successful()) {
+            throw $this->failure($response, "Il servizio di conversione non ha concesso l'accesso", 'accesso ospite');
+        }
+
+        $token = $response->json('access_token');
 
         if (! is_string($token) || $token === '') {
-            throw new PdfConversionFailed('Il servizio di conversione non ha concesso l\'accesso.');
+            throw new PdfConversionFailed("Il servizio di conversione non ha concesso l'accesso (risposta non valida).");
         }
 
         $ttl = $this->secondsLeft($token) - 120; // un margine, per non usare un token sul punto di scadere
