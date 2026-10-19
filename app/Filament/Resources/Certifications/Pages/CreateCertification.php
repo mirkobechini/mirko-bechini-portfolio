@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources\Certifications\Pages;
 
+use App\Filament\Concerns\ImportsPdfPreview;
 use App\Filament\Resources\Certifications\CertificationResource;
-use App\Filament\Resources\Certifications\Pages\Concerns\ImportsPdfPreview;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateCertification extends CreateRecord
@@ -19,5 +19,15 @@ class CreateCertification extends CreateRecord
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         return $this->convertPdfImport($data);
+    }
+
+    protected function pdfImportColumn(): string
+    {
+        return 'preview_upload';
+    }
+
+    protected function pdfImportDirectory(): string
+    {
+        return 'certifications/previews';
     }
 }
