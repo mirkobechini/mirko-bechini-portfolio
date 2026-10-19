@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\CourseStatus;
 use App\Models\Concerns\CleansUpUploads;
+use App\Support\CourseCertificateSync;
 use App\Support\PublicCache;
 use App\Support\Uploads;
 use Carbon\CarbonImmutable;
@@ -67,14 +68,22 @@ class Course extends Model
 
         // Con un attestato caricato, larghezza e altezza si leggono dal file (la galleria riserva lo spazio).
         static::saving(function (Course $course) {
-            if ($course->isDirty('certificate_upload')) {
+            // Anche per un attestato caricato prima che le dimensioni si salvassero: al primo salvataggio le legge
+            if ($course->isDirty('certificate_upload') || ($course->certificate_upload && $course->certificate_width === null)) {
                 $size = Uploads::imageSize($course->certificate_upload);
 
                 [$course->certificate_width, $course->certificate_height] = $size ?? [null, null];
             }
         });
 
-        static::saved(fn () => PublicCache::forgetAll());
+        static::saved(function (Course $course) {
+            // Un corso completato con un attestato ha la sua voce in /admin/certifications
+            CourseCertificateSync::sync($course);
+            PublicCache::forgetAll();
+        });
+
+        // Prima dell'eliminazione: dopo, il database avrebbe già scollegato la voce dal corso (course_id nullo)
+        static::deleting(fn (Course $course) => Certification::query()->where('course_id', $course->id)->where('from_course', true)->get()->each->delete());
         static::deleted(fn () => PublicCache::forgetAll());
     }
 
