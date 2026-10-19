@@ -4,7 +4,10 @@ namespace Tests\Feature;
 
 use App\Filament\Resources\Certifications\Pages\CreateCertification;
 use App\Filament\Resources\Certifications\Pages\EditCertification;
+use App\Filament\Resources\Courses\Pages\CreateCourse;
+use App\Filament\Resources\Courses\Pages\EditCourse;
 use App\Models\Certification;
+use App\Models\Course;
 use App\Models\User;
 use App\Support\PdfPreview\PdfConversionFailed;
 use App\Support\PdfPreview\PdfEditorConverter;
@@ -753,6 +756,7 @@ class PdfPreviewTest extends TestCase
 
         $certification->refresh();
         $this->assertNotSame('certifications/previews/vecchia.png', $certification->preview_upload);
+        $this->assertStringStartsWith('certifications/previews/', $certification->preview_upload);
         Storage::disk('public')->assertMissing('certifications/previews/vecchia.png');
         Storage::disk('public')->assertExists($certification->preview_upload);
         $this->assertSame('Da aggiornare', $certification->title);
@@ -791,5 +795,149 @@ class PdfPreviewTest extends TestCase
         $this->assertSame('Prima', $certification->title);
         $this->assertSame('certifications/previews/resta.png', $certification->preview_upload);
         Storage::disk('public')->assertExists('certifications/previews/resta.png');
+    }
+
+    // ---------- corsi: stesso campo, l'immagine finisce in "attestato" ----------
+
+    /**
+     * @return array<string, mixed>
+     */
+    private function courseData(array $extra = []): array
+    {
+        return $extra + [
+            'course' => 'Corso con attestato PDF',
+            'organization' => 'Boolean',
+            'period' => '01/2026 - 02/2026',
+            'description' => 'Descrizione del corso',
+        ];
+    }
+
+    public function test_a_course_can_be_created_from_a_pdf(): void
+    {
+        $this->actAsAdmin();
+        $this->fakeConverter($this->png());
+
+        Livewire::test(CreateCourse::class)
+            ->fillForm($this->courseData(['pdf_import' => UploadedFile::fake()->createWithContent('attestato.pdf', $this->pdf())]))
+            ->call('create')
+            ->assertHasNoFormErrors();
+
+        $course = Course::where('course', 'Corso con attestato PDF')->firstOrFail();
+
+        $this->assertStringStartsWith('courses/certificates/', $course->certificate_upload);
+        Storage::disk('public')->assertExists($course->certificate_upload);
+        $this->assertSame([$course->certificate_upload], Storage::disk('public')->allFiles()); // solo l'immagine
+        $this->assertStringEndsWith($course->certificate_upload, $this->getJson('/api/education')->json('data.0.certificate'));
+        $this->assertStringNotContainsString('.pdf', $this->getJson('/api/education')->getContent());
+    }
+
+    public function test_a_course_does_not_need_any_certificate(): void
+    {
+        $this->actAsAdmin();
+        $this->failingConverter(); // senza PDF non deve nemmeno essere chiamato
+
+        Livewire::test(CreateCourse::class)
+            ->fillForm($this->courseData())
+            ->call('create')
+            ->assertHasNoFormErrors();
+
+        $this->assertNull(Course::firstOrFail()->certificate_upload);
+    }
+
+    public function test_a_failed_conversion_does_not_save_the_course(): void
+    {
+        $this->actAsAdmin();
+        $this->failingConverter('Il servizio di conversione non risponde.');
+
+        Livewire::test(CreateCourse::class)
+            ->fillForm($this->courseData(['pdf_import' => UploadedFile::fake()->createWithContent('a.pdf', $this->pdf())]))
+            ->call('create')
+            ->assertNotified('Non sono riuscito a creare l\'immagine dal PDF');
+
+        $this->assertSame(0, Course::count());
+        $this->assertSame([], Storage::disk('public')->allFiles());
+    }
+
+    public function test_a_pdf_replaces_the_certificate_image_of_an_existing_course(): void
+    {
+        $this->actAsAdmin();
+        $this->fakeConverter($this->png());
+        Storage::disk('public')->put('courses/certificates/vecchio.png', 'x');
+        $course = Course::factory()->create(['course' => 'Da aggiornare', 'certificate_upload' => 'courses/certificates/vecchio.png']);
+
+        Livewire::test(EditCourse::class, ['record' => $course->getKey()])
+            ->fillForm(['pdf_import' => UploadedFile::fake()->createWithContent('nuovo.pdf', $this->pdf())])
+            ->call('save')
+            ->assertHasNoFormErrors();
+
+        $course->refresh();
+        $this->assertNotSame('courses/certificates/vecchio.png', $course->certificate_upload);
+        $this->assertStringStartsWith('courses/certificates/', $course->certificate_upload);
+        Storage::disk('public')->assertMissing('courses/certificates/vecchio.png');
+        Storage::disk('public')->assertExists($course->certificate_upload);
+        $this->assertSame('Da aggiornare', $course->course);
+    }
+
+    public function test_editing_a_course_without_a_pdf_leaves_the_certificate_alone(): void
+    {
+        $this->actAsAdmin();
+        $this->failingConverter();
+        Storage::disk('public')->put('courses/certificates/resta.png', 'x');
+        $course = Course::factory()->create(['certificate_upload' => 'courses/certificates/resta.png']);
+
+        Livewire::test(EditCourse::class, ['record' => $course->getKey()])
+            ->fillForm(['description' => 'Solo la descrizione'])
+            ->call('save')
+            ->assertHasNoFormErrors();
+
+        $this->assertSame('courses/certificates/resta.png', $course->fresh()->certificate_upload);
+        Storage::disk('public')->assertExists('courses/certificates/resta.png');
+    }
+
+    public function test_a_failed_conversion_on_a_course_edit_keeps_everything_as_it_was(): void
+    {
+        $this->actAsAdmin();
+        $this->failingConverter();
+        Storage::disk('public')->put('courses/certificates/resta.png', 'x');
+        $course = Course::factory()->create(['description' => 'Prima', 'certificate_upload' => 'courses/certificates/resta.png']);
+
+        Livewire::test(EditCourse::class, ['record' => $course->getKey()])
+            ->fillForm(['description' => 'Dopo', 'pdf_import' => UploadedFile::fake()->createWithContent('a.pdf', $this->pdf())])
+            ->call('save')
+            ->assertNotified('Non sono riuscito a creare l\'immagine dal PDF');
+
+        $course->refresh();
+        $this->assertSame('Prima', $course->description);
+        $this->assertSame('courses/certificates/resta.png', $course->certificate_upload);
+        Storage::disk('public')->assertExists('courses/certificates/resta.png');
+    }
+
+    public function test_the_course_pdf_field_refuses_images_and_big_files(): void
+    {
+        $this->actAsAdmin();
+        $this->fakeConverter($this->png());
+
+        foreach ([UploadedFile::fake()->image('foto.png'), UploadedFile::fake()->create('enorme.pdf', 11000, 'application/pdf')] as $file) {
+            Livewire::test(CreateCourse::class)
+                ->fillForm($this->courseData(['pdf_import' => $file]))
+                ->call('create')
+                ->assertHasFormErrors(['pdf_import']);
+        }
+
+        $this->assertSame(0, Course::count());
+    }
+
+    public function test_the_temporary_pdf_of_a_course_is_deleted_too(): void
+    {
+        $this->actAsAdmin();
+        $this->fakeConverter($this->png());
+        $before = $this->temporaryPdfFiles();
+
+        Livewire::test(CreateCourse::class)
+            ->fillForm($this->courseData(['pdf_import' => UploadedFile::fake()->createWithContent('temporaneo.pdf', $this->pdf())]))
+            ->call('create');
+
+        $this->assertSame(1, Course::count());
+        $this->assertSame($before, $this->temporaryPdfFiles(), 'Il PDF temporaneo è rimasto sul disco');
     }
 }

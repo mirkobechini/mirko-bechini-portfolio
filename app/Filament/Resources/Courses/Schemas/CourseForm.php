@@ -66,6 +66,12 @@ class CourseForm
                             ->disk(Uploads::diskName())
                             ->directory('courses/certificates')
                             ->visibility('public'),
+                        FileUpload::make('pdf_import')
+                            ->label('Oppure carica un PDF')
+                            ->helperText('Si usa la prima pagina come immagine dell\'attestato (ci vuole qualche secondo). Il PDF non viene conservato né pubblicato: sul sito resta solo l\'immagine. Se carichi anche un\'immagine qui sopra, vale quella del PDF.')
+                            ->acceptedFileTypes(['application/pdf'])
+                            ->maxSize(10240)
+                            ->storeFiles(false),
                         TextInput::make('certificate')
                             ->label('Indirizzo dell\'attestato')
                             ->helperText('URL dell\'immagine oppure percorso in public/assets (/modals/certifications/x.webp). Usato se non carichi un file.')
