@@ -1,17 +1,48 @@
-import { describe, it, expect, vi, afterEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import AboutMeModal from '../features/modals/about/AboutMeModal';
+import { getAbout } from '../features/modals/about/aboutApi';
+import aboutData from '../features/modals/about/aboutData';
+
+vi.mock('../features/modals/about/aboutApi', async (importOriginal) => ({
+    ...(await importOriginal()),
+    getAbout: vi.fn(),
+}));
+
+beforeEach(() => {
+    localStorage.clear();
+    vi.clearAllMocks();
+    getAbout.mockResolvedValue(aboutData); // l'API risponde con lo stesso testo di riserva
+});
 
 describe('AboutMeModal', () => {
-    it('renders greeting', () => {
+    it('renders greeting', async () => {
         render(<AboutMeModal />);
-        expect(screen.getByText('Ciao sono Mirko')).toBeInTheDocument();
+        expect(await screen.findByText('Ciao sono Mirko')).toBeInTheDocument();
     });
 
-    it('renders multiple paragraphs about Mirko', () => {
+    it("mostra il testo scritto dal pannello", async () => {
+        getAbout.mockResolvedValue([{ title: 'Titolo dal pannello', paragraphs: ['Primo blocco.', 'Secondo blocco.'] }]);
         render(<AboutMeModal />);
-        expect(screen.getByText(/sviluppatore web/)).toBeInTheDocument();
+
+        expect(await screen.findByText('Titolo dal pannello')).toBeInTheDocument();
+        expect(screen.getByText('Primo blocco.')).toBeInTheDocument();
+        expect(screen.getByText('Secondo blocco.')).toBeInTheDocument();
+        expect(screen.queryByText('Ciao sono Mirko')).not.toBeInTheDocument();
+    });
+
+    it("se l'API non risponde mostra il testo di riserva", async () => {
+        vi.spyOn(console, 'error').mockImplementation(() => { });
+        getAbout.mockRejectedValue(new Error('down'));
+        render(<AboutMeModal />);
+
+        expect(await screen.findByText('Ciao sono Mirko')).toBeInTheDocument();
+    });
+
+    it('renders multiple paragraphs about Mirko', async () => {
+        render(<AboutMeModal />);
+        expect(await screen.findByText(/sviluppatore web/)).toBeInTheDocument();
         expect(screen.getByText(/soft skills/)).toBeInTheDocument();
         expect(screen.getByText(/videogiochi/)).toBeInTheDocument();
         expect(screen.getByText(/manga/)).toBeInTheDocument();
@@ -29,14 +60,14 @@ describe('AboutMeModal', () => {
         expect(screen.getByAltText('top angle')).toBeInTheDocument();
     });
 
-    it('renders intro paragraph with text informatica', () => {
+    it('renders intro paragraph with text informatica', async () => {
         render(<AboutMeModal />);
-        expect(screen.getByText(/Informatica/i)).toBeInTheDocument();
+        expect(await screen.findByText(/Informatica/i)).toBeInTheDocument();
     });
 
-    it('renders hobby paragraph', () => {
+    it('renders hobby paragraph', async () => {
         render(<AboutMeModal />);
-        expect(screen.getByText(/palestra/)).toBeInTheDocument();
+        expect(await screen.findByText(/palestra/)).toBeInTheDocument();
     });
 
     describe('curriculum', () => {
