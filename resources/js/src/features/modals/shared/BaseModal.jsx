@@ -50,12 +50,14 @@ export default function BaseModal({ variant, closeModal, openModal, modalParams 
 
     // Blocca lo scroll di fondo (Stanza) per evitare conflitti di drag su Mobile
     useEffect(() => {
-        // Salviamo lo stile originale per ripristinarlo correttamente
-        const originalStyle = window.getComputedStyle(document.body).overflow;
+        // Salviamo lo stile inline originale (non quello computed: se non c'era un
+        // override inline, computed restituirebbe il default CSS 'visible' e lo
+        // smontaggio imposterebbe un inline style esplicito al posto di nessuno).
+        const originalInlineOverflow = document.body.style.overflow;
         document.body.style.overflow = 'hidden';
 
         return () => {
-            document.body.style.overflow = originalStyle;
+            document.body.style.overflow = originalInlineOverflow;
         };
     }, []);
 
