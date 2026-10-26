@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   quality-checks:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
 
     steps:
       - name: Download code
@@ -54,7 +54,7 @@ jobs:
 
   php-tests:
     name: php-tests (PHP ${{ matrix.php }})
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     strategy:
       fail-fast: false
       matrix:
@@ -111,7 +111,7 @@ jobs:
   lighthouse:
     if: github.event_name == 'push'
     needs: [quality-checks, php-tests]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
 
     steps:
       - name: Download code
